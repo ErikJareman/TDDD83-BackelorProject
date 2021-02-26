@@ -1,19 +1,19 @@
-# empty-project
-
-Empty project.
+# Client
 
 ## How to run on localhost
+
+Ladda ner Node.js
 
 First install dependencies:
 
 ```sh
-npm install
+yarn install
 ```
 
 To run in dev mode mode:
 
 ```sh
-npm start
+yarn start
 ```
 
 Then go to http://localhost:8080
@@ -21,10 +21,5 @@ Then go to http://localhost:8080
 To create a production build:
 
 ```sh
-npm run build
+yarn run build
 ```
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
-

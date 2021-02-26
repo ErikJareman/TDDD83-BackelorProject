@@ -1,9 +1,7 @@
 {
-  "mount": {
-    "dist": "/",
-    "src": "/"
-  },
-  "plugins": [
-    "@snowpack/plugin-sass"
-  ]
+    "mount": {
+        "dist": "/",
+        "src": "/"
+    },
+    "plugins": ["@snowpack/plugin-sass", "@snowpack/plugin-typescript"]
 }
