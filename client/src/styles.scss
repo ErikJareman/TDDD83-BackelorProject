@@ -1,0 +1,8 @@
+// Variabler och kommentarer, pretty cool
+$primary-color: yellow;
+$bg: black;
+
+p {
+    color: $primary-color;
+    background-color: $bg;
+}
