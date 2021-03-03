@@ -7,13 +7,13 @@ Ladda ner Node.js
 First install dependencies:
 
 ```sh
-yarn install
+npm install
 ```
 
 To run in dev mode mode:
 
 ```sh
-yarn start
+npm start
 ```
 
 Then go to http://localhost:8080
@@ -21,5 +21,5 @@ Then go to http://localhost:8080
 To create a production build:
 
 ```sh
-yarn run build
+npm run build
 ```
