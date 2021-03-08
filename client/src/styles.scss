@@ -1,10 +1,7 @@
-// Variabler och kommentarer, pretty cool
-$primary-color: yellow;
-$bg: black;
+@use 'shared/colors.scss' as colors;
 
 p {
-    color: $primary-color;
-    background-color: $bg;
+    background-color: colors.$primary1;
 }
 
 img {
