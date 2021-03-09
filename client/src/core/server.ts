@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 export enum Endpoints {
-    Cars = 'cars',
+    Rooms = 'rooms',
 }
 
 export const getRequest = async (endpoint: Endpoints, parameters?: string) => {

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { Endpoints, getRequest } from './server';
 
 export interface Room {
     id: string;
@@ -6,5 +7,5 @@ export interface Room {
 }
 
 export const getRoom = async (id: string): Promise<Room> => {
-    return $.ajax();
+    return getRequest(Endpoints.Rooms);
 };
