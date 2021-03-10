@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { Endpoints, getRequest } from './server';
 
 export interface Room {
