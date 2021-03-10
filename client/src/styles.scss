@@ -1,8 +1,34 @@
 @use 'shared/colors.scss' as colors;
 
+body {
+    background-color: colors.$primary1
+    margin 0;
+}
+
 p {
     background-color: colors.$primary1;
 }
+
+header {
+    background-color: colors.$primary1;
+    
+}
+
+div {
+    background-color: colors.$primary2;
+    color:black;
+    margin: auto;
+    width: 100px;
+}
+
+section {
+    background-color: colors.$secondary1;
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    }  
+
 
 img {
     width: 50%;
