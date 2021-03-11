@@ -17,33 +17,34 @@ const createHTML = (input: testType): string => {
 };
 
 function createUser(){
-    var name = document.getElementById("register-name").value;
-    var email = document.getElementById("register-email").value;
-    var password = document.getElementById("register-password").value;
+    var email = document.getElementById("InputEmailRegister").value;
+    var password = document.getElementById("InputPasswordRegister").value;
+    var username = document.getElementById("InputUsernameRegister").value;
     $.ajax({
         url: env.backendURL + '/sign-up',
         type: 'POST',
         dataType: "json",
         contentType: 'application/json',
         data: JSON.stringify({
-            "name": name,
+            "username": username,
             "email": email,
             "password": password
         }),
         success: function(){
-            $(".container").html($("#view-home").html());
+            console.log("hej");
+            //flippa till logga in sidan
         }
     })
 }
 
 function logIn(){
-    var email = document.getElementById("register-email").value;
-    var password = document.getElementById("register-password").value;
+    var email = document.getElementById("InputEmail").value;
+    var password = document.getElementById("InputPassword").value;
     $.ajax({
-        url: host + '/login',
+        url: env.backendURL + '/login',
         type: 'POST',
         dataType: "json",
-        contenttype: 'application/json',
+        contentType: 'application/json',
         data: JSON.stringify({
             "email": email,
             "password": password
@@ -52,6 +53,7 @@ function logIn(){
             sessionStorage.setItem('auth', JSON.stringify(result));
             window.location.reload();
             console.log(result);
+            //flippa till rummen
         }
     })
 }
