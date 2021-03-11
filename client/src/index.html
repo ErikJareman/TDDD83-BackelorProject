@@ -56,7 +56,7 @@
     </nav>
 
 
-    <script id="view-login" type="text/html">
+    <script id="view-login" type="text/html"> 
         <div class="view-login">
             <div class="card">
                 <div class="card-body">
@@ -64,22 +64,23 @@
                   <h2 class="card-title">Login</h2>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="InputEmailRegister" placeholder="AAABBBCCC@student.liu.se">
+                      <input type="email" class="form-control" id="InputEmail" placeholder="AAABBBCCC@student.liu.se">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****">
+                      <input type="password" class="form-control" id="InputPassword" placeholder="*****">
                     </div>
-                    <button type="submit" class="btn" id="SendRegister">Send</button>
+                    <button type="submit" class="btn" id="SendRegister" onclick="logIn()">Send</button>
                     <br>
                     <br>     
-                    <a href="#" class="link">Register instead</a>         
+                    <a href="#" class="link">Register instead</a>    
+                    <!--Fixa så den flippar på båda ställena-->     
                   </form>
                 </div>
               </div>
               <div>  
             </div>
-          </script>
+          </script> 
 
   <script id="view-register" type="text/html">
         <div class="view-register">
@@ -104,7 +105,7 @@
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">I accept ***</label>
                 </div>
-                <button type="submit" class="btn" id="SendRegister">Send</button>
+                <button type="submit" class="btn" id="SendRegister" onclick="register()">Send</button>
                 <br>
                 <br>     
                 <a href="#" class="link">Login instead</a>         
