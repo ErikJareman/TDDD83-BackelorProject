@@ -5,12 +5,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
+from flask_cors import CORS
 
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='/')
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'kiejfuheirgyuhvbnjmwpejn'
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
