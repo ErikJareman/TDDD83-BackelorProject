@@ -23,11 +23,13 @@ async function createUser(){
     var password = document.getElementById("InputPasswordRegister").value;
     var username = document.getElementById("InputUsernameRegister").value;
     try{
-        const result = await standardPost("/sign-up", {
+        alert("hej")
+        const result = await standardPost("/register", {
             "username": username,
             "email": email,
             "password": password
         })
+        console.log(result);
         navigateTo("/login")
     } catch(e) {
         // TODO
