@@ -10,18 +10,24 @@ interface testType {
 // Arrow function med typer för parametrar och output
 const createHTML = (input: testType): string => {
     return `
-    <p>${input.test}</p>
-    <p>Jag är ${input.age} år gammal.</p>
-    `;
+    //<p>${input.test}</p>
+    //<p>Jag är ${input.age} år gammal.</p>
+   // `;
+    
+
 };
 
 const main = () => {
-    const data: testType = {
-        test: 'Hello World!',
-        age: 12,
-    };
+   // const data: testType = {
+    //    test: 'Hello World!',
+    //    age: 12,
+    //};
 
-    $('#app').html(createHTML(data));
+    //$('#app').html(createHTML(data));
+    $('#app').html();
+
+    //$("#navbars").load(("client/src/shared/homepage.html #body"));
+
 };
 
 $(main);
