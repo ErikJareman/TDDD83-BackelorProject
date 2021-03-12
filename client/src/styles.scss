@@ -1,9 +1,286 @@
 @use 'shared/colors.scss' as colors;
 
+html, body {
+    height:100%;
+    overflow: hidden;
+}
+
+#container {
+    height: 100%;
+    overflow:hidden;
+}
+
 p {
     background-color: colors.$primary1;
 }
 
 img {
     width: 50%;
+}
+
+
+
+
+
+.navbar-top {
+    background-color: #1e2124;
+}
+.left-div {
+    height: 100%;
+    background-color: #282b30;
+    align-items: center;
+    text-align: left;
+    padding-top: 6px;
+    //min-width: 200px;
+
+}
+.center-div {
+    height: 100%;
+    background-color: #36393e;
+    align-items: center;
+    text-align: left;
+    padding-top: 6px;
+    overflow: hidden;
+}
+.right-div {
+    height: 100%;
+    background-color: #282b30;
+    align-items: center;
+    text-align: left;
+    padding-top: 15px;
+    //min-width: 200px;
+}
+h5 {
+    color: #ffffff;
+    border-bottom: 2px solid #6c757d;
+    padding-top: 10px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+}
+.left-button {
+    width: 98%;
+    margin: 4px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.extend-button {
+    width: 100%
+}
+.right-button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.navbar-brand {
+    color: #ffffff;
+}
+.btn-link {
+    color: #6c757d;
+}
+.heading2 {
+    color: #6c757d !important;
+    padding-bottom: 10px;
+}
+.special {
+    padding-bottom: 10px;
+}
+center-container {
+    text-align: center;
+    height:100%;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow-y: scroll; 
+    align-items: center;
+    padding-right: 10px; //detta täcker scrollbaren... 17px bör räcka för typ alla browsers (ikke-clean lösning)
+    padding-left: 10px;
+    box-sizing: content-box;
+    //background-color: #c44a4a;
+    
+}
+
+.primary-button {
+    color: #ffffff;
+    background-color: #3376b4;
+}
+.bad-button {
+    color: #ffffff;
+    background-color: #c44a4a;
+}
+
+
+/*first header*/
+.first_header {
+    background-color: #1e2124;
+    display:flex;
+    flex-direction: row;
+    //padding: 10px 0px 10px 10px;
+    //padding-top: 10px;
+}
+
+#first_header_title {
+    width: 83.3333333333333333%;
+    //border-right: 2px solid #868e96;
+    padding: 0px;
+    color: #b3b3b4;
+    padding: 10px;
+}
+
+#drop_down {
+    width: 16.6666666666666666%;
+    position: relative; 
+}
+
+#drop_down a {
+    text-align: left;
+    color: #868e96;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 20px;
+    display: block;
+}
+
+#drop_down ul {
+    z-index: 5000;
+    display: none;
+    //position: absolute;
+    //background-color: #6c757d;
+    //padding: 20px 20px 20px 20px;
+    width: 100%;
+}
+
+#drop_down a:hover {
+    color: white;
+}
+
+#drop_down:hover ul{
+    display: block;
+    position: absolute;
+    background-color: #1e2124;
+    padding: 10px;
+    width: 100%;
+    //border-radius: 0px 0px 5px 5px;
+    //outline-color: #868e96;
+    //outline-style: solid;
+    //border-left: 2px solid #868e96;
+    //border-bottom: 2px solid #868e96;
+    //border-right: 2px solid #868e96;
+    border-bottom: 2px solid #868e96;
+    border-top: 2px solid #868e96;
+}
+
+#drop_down ul li {
+    display: block;
+    background-color: #1e2124;
+}
+
+#drop_down ul li a {
+    text-align: left;
+    padding: 12px 14px;
+    color: #868e96;
+}
+
+#drop_down ul li a:hover {
+    padding: 12px;
+    background-color: #1e2124;
+    color: #ffffff;
+}
+
+
+//TICKET
+.ticket-ticket {
+    background-color: white;
+    //display: inline-block;
+    display: flex;
+    flex-direction: row;
+    margin:auto;
+    margin-top: 30px;
+    width: 96%;
+    border-radius: 10px 10px 10px 10px;
+    
+
+}
+
+#ticket_number{
+    padding: 10px;
+    font-size: 50px;
+    width: 10%;
+    border-right: 2px solid black;
+}
+
+#ticket_creator {
+    font-size: 30px;
+    width: 20%;
+    border-right: 2px solid black;
+    padding-top: 25px;
+}
+
+#ticket_tags{
+    width: 35%;
+    border-right: 2px solid black;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: 
+    "tags_1 tags_2" 
+    "tags_3 tags_4"
+}
+
+.tags_1{
+    
+}
+.tags_2{
+    
+}
+.tags_3{
+   
+}
+.tags_4{
+    
+}
+
+.badge{
+    padding: 10px 40% 10px 40%;
+}
+
+.tags-badge1{
+    //background-color: black
+    // top left bottom right
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+.tags-badge2{
+    //background-color: black
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+.tags-badge3{
+    //background-color: black
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+.tags-badge4{
+    //background-color: black
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+
+#ticket_meta_data{
+
 }

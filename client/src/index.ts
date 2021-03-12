@@ -16,19 +16,19 @@ const createHTML = (input: testType): string => {
 };
 
 const main = () => {
-    const data: testType = {
-        test: 'Hello World!',
-        age: 12,
-    };
+    
 
-    //$('#app').html(createHTML(data));
+    
+    injectHTML('#view-room');
 };
 
+function injectHTML(selector: any) {
+    const HTML = $(selector).html();
+    $('#container').html(HTML);
+}
 
 
-
-
-function ticketTemplate(ticket) {
+/*function ticketTemplate(ticket: any) {
     return `<div class="card car-card">
     <table>
         <tr>
@@ -57,5 +57,28 @@ function loadTickets() {
     }
     //$(".delete-car").click(clickDelete); add listeners like this...
 }
+
+
+const submitTicketForm = async (event: any) => {
+    event.preventDefault();
+    const ticket = {
+        name: $("#name-input").val(),
+        tag_1: $("#tag_1-input").val(),
+        tag_2: $("#tag_2-input").val(),
+        tag_3: $("#tag_3-input").val(),
+        tag_4: $("#tag_4-input").val(),
+        ticket_info: $("#ticket-info-input").val()
+    }
+    //inject-html kö-rum
+}
+function loadQueueRoom() {
+    //inject-html kö-rum
+    //skapa on-click-lyssnare
+
+    $("#goto-queue-up").click(function (e) {
+        injectHTML("#view-ticket-form");
+        $("#ticket-form").submit(submitTicketForm);
+    })
+}*/
 
 $(main);
