@@ -144,7 +144,6 @@ ul.features-list{
   margin-left: 2em;
   position: relative;
 
-
   li {
     font-size: 1.1em;
     margin-bottom: 1em;
@@ -233,35 +232,199 @@ nav.menu-btn {
 
 nav {
   position: fixed;
-  z-index: 999;
-  width: 66%;
-  right: 0;
-  top: 0;
+  z-index: 999 ;
+  width: 40% ;
+  right: 0 ;
+  top: 0 ;
   background: #20272E;
   height: 100vh;
-  padding: 1em;
+  padding: 0em !important;
 
   ul.primary-nav {
-    margin-top: 5em;
+    margin-top: 0em !important;
   }
 
   li{ 
-    a {
-      color: white;
+    a{
+      color: white !important;
       text-decoration: none;
       display: block;
-      padding: .5em;
+      padding: 0,5em ;
       font-size: 1.3em;
       text-align: right;
     }
-    a:hover {
+    &:hover {
       font-weight: bold;
     }
   }
 }
 
-.mobile-menu-exit {
+.mobile-menu-exit{
   float: right;
   margin: .5em;
   cursor: pointer;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .mobile-menu, .mobile-menu-exit {
+    display: none;
+  }
+
+  .navbar{
+    .container {
+    display: -mr-grid;
+    display: inline;
+    -ms-grid-columns: 180px auto;
+        grid-template-columns: 180px auto;
+    -webkit-box-pack: unset;
+        -ms-flex-pack: unset;
+            justify-content: unset;} 
+  nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background: none;
+    position: unset;
+    height: auto;
+    width: 100%;
+    padding: 0;
+
+    ul {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;}
+  a {
+    color: black;
+    font-size: 1em;
+    padding: .1em 1em;}
+  ul.primary-nav {
+    margin: 0;}
+  
+  li.current a {
+    font-weight: bold;}
+
+  li.custombutton a{
+    color: white !important;
+    border: 3px solid white;
+    font-weight: lighter;
+    border-radius: 5em;
+    margin-top: -.2em;
+
+    &:hover {
+      background: purple;
+      color: white;}
+  
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .container {
+    width: 1080px;
+    margin: 0 auto;
+  }
+  section {
+    padding: 10em 4em;
+  }
+  .hero .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    text-align: left;
+  }
+  .hero .container .left-col {
+    margin: 3em 3em 0 5em;
+  }
+  .hero .container .left-col h1 {
+    font-size: 3em;
+    width: 90%;
+  }
+  .hero-img {
+    width: 30%;
+    margin-right: 8em;
+  }
+  .hero-cta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .primary-cta {
+    margin-right: 1em;
+  }
+  ul.features-list {
+    display: block;
+    margin-left: 5em;
+  }
+  ul.features-list li {
+    font-size: 1.4em;
+  }
+  ul.features-list li:before {
+    width: 30px;
+    height: 30px;
+  }
+  .features-section {
+    position: relative;
+  }
+  .features-section img {
+    display: block;
+    position: absolute;
+    right: 12em;
+    width: 500px;
+    bottom: 8em;
+  }
+  .testimonials-section ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .testimonials-section ul li {
+    margin: 0 1em;
+  }
+  .contact-section {
+    position: relative;
+  }
+  .contact-section .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .contact-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+  }
+  .contact-right iframe {
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width: 1450px) {
+  .features-section:before {
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 20em;
+    background: colors.$accent;
+    left: 0;
+    top: -4em;
+  }
+  .features-section:after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 20em;
+    background: url("../assets/dots.svg") no-repeat;
+    left: 4.5em;
+    top: 2em;
+  }
 }
