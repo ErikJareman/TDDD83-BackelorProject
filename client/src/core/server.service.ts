@@ -33,7 +33,7 @@ const addParameters = (baseURL: string, parameters?: Record<string, Stringable>)
 
 export const getMultiple = async <T>(endpoint: EndPoints, parameters?: Record<string, Stringable>): Promise<T[]> => {
     const data = await standardGet(endpoint, parameters);
-    return data as T[];
+    return data;
 };
 
 export const getSingle = async <T>(
@@ -42,7 +42,7 @@ export const getSingle = async <T>(
     parameters?: Record<string, Stringable>,
 ): Promise<T> => {
     const data = await standardGet(`${endpoint}/${id}`, parameters);
-    return data as T;
+    return data;
 };
 
 export const standardPost = async (endpoint: EndPoints | string, data?: any) => {
