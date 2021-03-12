@@ -1,9 +1,267 @@
 @use 'shared/colors.scss' as colors;
 
-p {
-    background-color: colors.$primary1;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+
+body{
+  background: white !important;
+  margin:0em !important;
+  font-family: "Poppins" !important;
 }
 
+
+/*
+p {
+    background-color:white;
+}
 img {
-    width: 50%;
+    position: absolute;
+    width: center;
+    height: 100%
+}
+    .topnav {
+        background-color: #333;
+        overflow: hidden;}
+    /* Style the links inside the navigation bar 
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 22px;}
+    /* Change the color of links on hover 
+    .topnav a:hover {
+      background-color:#3CB371;
+      color: black;}
+    /* Add a color to the active/current link 
+    .topnav a.active {
+      background-color: #333;
+      color: white;}
+    /* Right-aligned section inside the top navigation 
+    .topnav-right {
+      float: right;}
+   /* #loginbtn{
+        background-color: #800080;
+    }*/
+ 
+ .navbar{
+    background: colors.$secondary1;
+    padding: 1em;
+
+    .logo {
+        text-decoration: none;
+        font-weight: bold;
+        color: white !important;
+        font-size: 2.2em;
+        span{
+          color: colors.$accent;
+        }
+      }
+      nav{
+        display:none;
+      }
+  
+  .container{
+    display: flex;
+    place-content: space-between;
+    
+  }
+  .mobile-menu{
+    cursor: pointer;
+
+  }
+}
+
+a{
+  color:black !important;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  padding: 6em 2em;
+}
+
+.hero {
+  text-align: center;
+}
+
+.left-col {
+  .subhead{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: gray;
+    letter-spacing: .3em;
+  }
+  h1 {
+    font-size: 2.5em;
+    line-height: 1.3em;
+    margin-top: .2em;
+  }
+  .primary-cta {
+    background: colors.$accent;
+    color: white;
+    text-decoration: none;
+    padding: .6em 1.3em;
+    font-size: 1.4em;
+    border-radius: 5em;
+    font-weight: bold;
+    display: inline-block;
+  }
+  .instructions{
+    display: block;
+    margin-top: 1em;
+  }
+}
+
+.hero-img {
+  width: 70%;
+  margin-top: 3em;
+}
+
+.features-section {
+  background: #20272E;
+  color: white;
+}
+   
+ul.features-list {
+  margin: 0;
+  padding-left: .1em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(19rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+}
+
+ul.features-list{
+  font-size: 1.1em;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  position: relative;
+
+
+  li {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    margin-left: 2em;
+    position: relative;
+  
+      &:before {
+        content: '';
+        left: -2em;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-image: url("../assets/bullet.svg");
+        background-size: contain;
+        margin-right: .5em;
+      }
+  }
+  
+}
+.features-section img{
+  display: none;
+}
+
+.testimonials-section {
+  background: colors.$secondary3;
+  color: white;
+  li {
+    background: #006BD6;
+    text-align: center;
+    padding: 2em 1em;
+    width: 80%;
+    margin: 0 auto 5em auto;
+    border-radius: 1em;
+
+    img {
+      width: 5em;
+      height: 5em;
+      border: 5px solid #006BD6;
+      border-radius: 50%;
+      margin-top: -4.5em;
+    }
+  } 
+}
+
+h2 {
+  font-size: 2em;
+}
+label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: .5em;
+}
+
+input, textarea {
+  width: 100%;
+  padding: .8em;
+  margin-bottom: 1em;
+  border-radius: .3em;
+  border: 1px solid gray;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: colors.$accent;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  margin-bottom: 5em;
+  border-radius: 5em;
+  display: inline-block;
+  padding: .8em 2em;
+  width: unset;
+  cursor: pointer;
+}
+
+iframe {
+  width: 100%;
+  height: 300px;
+}
+
+nav.menu-btn {
+  display: block;
+}
+
+nav {
+  position: fixed;
+  z-index: 999;
+  width: 66%;
+  right: 0;
+  top: 0;
+  background: #20272E;
+  height: 100vh;
+  padding: 1em;
+
+  ul.primary-nav {
+    margin-top: 5em;
+  }
+
+  li{ 
+    a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: .5em;
+      font-size: 1.3em;
+      text-align: right;
+    }
+    a:hover {
+      font-weight: bold;
+    }
+  }
+}
+
+.mobile-menu-exit {
+  float: right;
+  margin: .5em;
+  cursor: pointer;
 }
