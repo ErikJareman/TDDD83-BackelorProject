@@ -4,12 +4,14 @@ from flask import abort
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, jwt_required
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='/')
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = 'uviodskpfviokdas'
+app.config['JWT_SECRET_KEY'] = 'kiejfuheirgyuhvbnjmwpejn'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
@@ -41,7 +43,7 @@ def login():
         for user in User.query.all(): 
             if user.email==email:
                 if bcrypt.check_password_hash(user.password_hash, password):
-                     token = jwt._create_access_token(identity=email)
+                     token = create_access_token(identity=email)
                      return dict(token = token, user = user.serialize())
         else: abort(401)
 
@@ -60,14 +62,14 @@ def sign_up():
 
 
 @app.route('/users', methods=['GET'])
-@jwt_required
+#@jwt_required()
 def users():
     if request.method == 'GET':
         return jsonify([j.serialize() for j in User.query.all()]) 
 
         
 @app.route('/users/<int:user_id>', methods =['GET', 'PUT', 'DELETE'])
-@jwt_required
+@jwt_required()
 def usersid(user_id):
     if User.query.get(user_id):
         user = User.query.get(user_id) 
@@ -93,8 +95,8 @@ def usersid(user_id):
 
 
 
-@app.route('/<string:route>', methods=['GET'])
-def client(route):
+@app.route('/', methods=['GET'])
+def client():
     return app.send_static_file("index.html")
 
 if __name__ == "__main__":
