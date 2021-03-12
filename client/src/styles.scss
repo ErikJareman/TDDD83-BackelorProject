@@ -15,10 +15,17 @@ header {
 }
 
 div {
-    background-color: colors.$primary2;
+    //background-color: colors.$primary2;
     color:black;
-    margin: auto;
-    width: 100px;
+    //margin: auto;
+    //width: 100px;
+}
+
+.view-login{
+    background-color: colors.$primary1;
+}
+.view-register{
+    background-color: colors.$primary1;
 }
 
 section {
@@ -44,12 +51,6 @@ img {
 }
 
 //Dessa är för login och register
-.view-register{
-    background-color: colors.$primary1;
-}
-.view-login{
-    background-color: colors.$primary1;
-}
 .card{
     position: absolute;
     width: 532px;
