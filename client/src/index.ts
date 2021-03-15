@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import env from './shared/env';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
 
@@ -30,21 +29,20 @@ async function createUser(){
             "password": password
         })
         console.log(result);
-        navigateTo("/login")
-    } catch(e) {
+        navigateTo('/login');
+    } catch (e) {
         // TODO
     }   
 }
 
-async function logIn(){
-    console.log("hej");
-    var email = document.getElementById("InputEmail").value;
-    var password = document.getElementById("InputPassword").value;
-    try{
-        const result = await standardPost("/login", {
-            "email": email,
-            "password": password
-        })
+async function logIn() {
+    const email = $<HTMLInputElement>('#InputEmail').val();
+    const password = $<HTMLInputElement>('#InputPassword').val();
+    try {
+        const result = await standardPost('/login', {
+            email: email,
+            password: password,
+        });
         sessionStorage.setItem('auth', JSON.stringify(result));
         console.log(result);
         // TODO, navigate
@@ -56,11 +54,8 @@ async function logIn(){
 
 const main = () => {
     initiateRouter();
-    $("#SendRegister").on("click",createUser);
-    $("#SendLogin").on("click",logIn);
+    $('#SendRegister').on('click', createUser);
+    $('#SendLogin').on('click', logIn);
 };
 
 $(main);
-
-
-
