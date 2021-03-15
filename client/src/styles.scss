@@ -5,3 +5,75 @@ body {
     margin 0;
 }
 
+p {
+    background-color: colors.$primary1;
+}
+
+header {
+    background-color: colors.$primary1;
+    
+}
+
+div {
+    //background-color: colors.$primary2;
+    color:black;
+    //margin: auto;
+    //width: 100px;
+}
+
+.view-login{
+    background-color: colors.$primary1;
+}
+.view-register{
+    background-color: colors.$primary1;
+}
+
+section {
+    background-color: colors.$secondary1;
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    }  
+
+
+img {
+    width: 50%;
+}
+
+//Ändrar färg på knappar och mörkare när vi har musen över
+.btn{
+    background-color: colors.$accent !important;
+    color: white !important;
+}
+.btn:hover {
+    background-color: colors.$accenthover !important;
+}
+
+//Dessa är för login och register
+.card{
+    position: absolute;
+    width: 532px;
+    left: 454px;
+    top: 169px;
+    background: #FFFFFF;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+#form{
+   margin-top: 20px;
+   margin-left: 20px;
+   margin-right: 20px;
+}
+.link{
+    margin-left: 190px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: rgba(0, 0, 0, 0.7);
+}
