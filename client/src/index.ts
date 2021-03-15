@@ -18,35 +18,36 @@ const createHTML = (input: testType): string => {
     `;
 };
 
-async function createUser(){
-    var email = document.getElementById("InputEmailRegister").value;
-    var password = document.getElementById("InputPasswordRegister").value;
-    var username = document.getElementById("InputUsernameRegister").value;
-    var checked = document.getElementById("invalidCheck2").value;
+function createUser(){
+    const email = $<HTMLInputElement>('#InputEmailRegister').val();
+    const password = $<HTMLInputElement>('#InputPasswordRegister').val();
+    const username = $<HTMLInputElement>('#InputUsernameRegister').val();
+    const checked = $<HTMLInputElement>('#invalidCheck2').val();
     try{
-        const result = await standardPost("/register", {
+        const result = standardPost("/register", {
             "username": username,
             "email": email,
             "password": password
         })
-        console.log(result);
+      
         navigateTo("/login")
     } catch(e) {
         // TODO
     }   
 }
 
-async function logIn(){
-    console.log("hej");
-    var email = document.getElementById("InputEmail").value;
-    var password = document.getElementById("InputPassword").value;
+function logIn(){
+    const email = $<HTMLInputElement>('#InputEmail').val();
+    const password = $<HTMLInputElement>('#InputPassword').val();
     try{
-        const result = await standardPost("/login", {
+        const result = standardPost("/login", {
             "email": email,
             "password": password
         })
         sessionStorage.setItem('auth', JSON.stringify(result));
         console.log(result);
+        navigateTo("/")
+
         // TODO, navigate
     } catch(e) {
         window.location.reload();
