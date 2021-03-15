@@ -1,2 +1,5 @@
 
 .vscode
+
+# add here in case someone would create in wrong dir lul
+venv/

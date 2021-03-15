@@ -1,29 +1,51 @@
 import $ from 'jquery';
+import { initiateRouter, navigateTo } from './core/router';
+import { standardPost } from './core/server.service';
 
-// Interfaces är lite annorlunda från Java
-// Här används de ofta för att beskriva ett object {}
-interface testType {
-    test: string;
-    age: number;
+async function createUser() {
+    const email = $<HTMLInputElement>('#InputEmailRegister').val();
+    const password = $<HTMLInputElement>('#InputPasswordRegister').val();
+    const username = $<HTMLInputElement>('#InputUsernameRegister').val();
+    try {
+        const result = await standardPost('/register', {
+            username: username,
+            email: email,
+            password: password,
+        });
+        console.log(result);
+        navigateTo('/login');
+    } catch (e) {
+        // TODO
+    }
 }
 
-// Arrow function med typer för parametrar och output
-const createHTML = (input: testType): string => {
-    return `
-    <p>${input.test}</p>
-    <p>Jag är ${input.age} år gammal.</p>
-    `;
-};
+async function logIn() {
+    const email = $<HTMLInputElement>('#InputEmail').val();
+    const password = $<HTMLInputElement>('#InputPassword').val();
+    try {
+        const result = await standardPost('/login', {
+            email: email,
+            password: password,
+        });
+        sessionStorage.setItem('auth', JSON.stringify(result));
+        console.log(result);
+        // TODO, navigate
+    } catch (e) {
+        // TODO
+    }
+}
 
 const main = () => {
     loadQueueRoom();
+    initiateRouter();
+    $('#SendRegister').on('click', createUser);
+    $('#SendLogin').on('click', logIn);
 };
 
 function injectHTML(selector: any) {
     const HTML = $(selector).html();
     $('#container').html(HTML);
 }
-
 
 /*function ticketTemplate(ticket: any) {
     return `<div class="card car-card">
@@ -69,7 +91,7 @@ const submitTicketForm = async (event: any) => {
     //inject-html kö-rum
 }*/
 function onOpenEdit() {
-
+    //
 }
 
 function loadQueueRoom() {
@@ -79,10 +101,9 @@ function loadQueueRoom() {
     //skapa on-click-lyssnare
     //modal-lyssnare som öppnar ticketModal
 
-        
     //$("#goto-queue-up").click(function (e: any) {
-        injectHTML("#view-ticket-form");
-        onOpenEdit();
+    injectHTML('#view-ticket-form');
+    onOpenEdit();
     //    $("#ticket-form").submit(submitTicketForm);
     //})
 }

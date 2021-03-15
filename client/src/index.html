@@ -19,8 +19,80 @@
 
 
 <body>
-    <!--<div id="app"></div>-->
-    <!--<img src="assets/dog.jpg">-->
+
+    <header>Top-Q
+
+    </header>
+    <a href="https://www.w3schools.com/tags/tag_template.asp" class="outbound">Gå till extern sida</a>
+    <a href="/login">Logga in</a>
+    <a href="/register">Registrera dig</a>
+    <div id="router">
+
+    </div>
+
+    <template id="404">
+        Sidan hittades inte
+    </template>
+
+    <template id="login">
+      <div class="view-login">
+        <div class="card">
+            <div class="card-body">
+                <form id="form"> 
+              <h2 class="card-title">Login</h2>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="InputPassword" placeholder="*****">
+                </div>
+                <button type="button" class="btn" id="SendLogin">Send</button>
+                <br>
+                <br>     
+                <a href="/register" class="link">Register instead</a>        
+              </form>
+            </div>
+          </div>
+          <div>  
+        </div>
+    </template>
+
+    <template id="register">
+      <div class="view-register">
+        <div class="card">
+            <div class="card-body">
+                <form id="form"> 
+              <h2 class="card-title">Register</h2>
+             
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputUsername1" class="form-label">Username</label>
+                    <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****">
+                  </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">I accept ***</label>
+                </div>
+                <button type="button" class="btn" id="SendRegister">Send</button>
+                <br>
+                <br>     
+                <a href="/login" class="link">Login instead</a>         
+              </form>
+            </div>
+          </div>
+          <div>  
+        </div>
+    </template>
+
     <script type="module" src="index.js"></script>
     
     <div id="container"></div>

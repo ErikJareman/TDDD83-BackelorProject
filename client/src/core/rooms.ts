@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import { Endpoints, getRequest } from './server';
+import { EndPoints } from './endpoints';
+import { getSingle } from './server.service';
 
 export interface Room {
     id: string;
@@ -7,5 +7,5 @@ export interface Room {
 }
 
 export const getRoom = async (id: string): Promise<Room> => {
-    return getRequest(Endpoints.Rooms);
+    return getSingle<Room>(EndPoints.Rooms, id);
 };
