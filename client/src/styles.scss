@@ -14,15 +14,18 @@ header {
     
 }
 
+div {
+    //background-color: colors.$primary2;
+    color:black;
+    //margin: auto;
+    //width: 100px;
+}
 
 .view-login{
     background-color: colors.$primary1;
-    height: 1000px;
 }
 .view-register{
     background-color: colors.$primary1;
-    height: 1000px;
-
 }
 
 section {
@@ -51,7 +54,7 @@ img {
 .card{
     position: absolute;
     width: 532px;
-    left: 400px;
+    left: 454px;
     top: 169px;
     background: #FFFFFF;
     border-radius: 20px !important;
@@ -64,6 +67,7 @@ img {
    margin-right: 20px;
 }
 .link{
+    margin-left: 190px;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
