@@ -34,7 +34,8 @@ async function logIn() {
         // TODO, navigate
         navigateTo('/rooms');
     } catch (e) {
-        // TODO
+        window.location.reload();
+        alert('Felaktig email eller lösenord. Försök igen eller registrera dig.');
     }
 }
 

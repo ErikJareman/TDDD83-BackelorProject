@@ -24,9 +24,12 @@ header {
 
 .view-login{
     background-color: colors.$primary1;
+    height: 1000px;
 }
 .view-register{
     background-color: colors.$primary1;
+    height: 1000px;
+
 }
 
 
@@ -324,7 +327,7 @@ h5 {
 .card{
     position: absolute;
     width: 532px;
-    left: 454px;
+    left: 400px;
     top: 169px;
     background: #FFFFFF;
     border-radius: 20px !important;
@@ -337,7 +340,6 @@ h5 {
    margin-right: 20px;
 }
 .link{
-    margin-left: 190px;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;

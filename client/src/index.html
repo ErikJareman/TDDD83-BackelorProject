@@ -39,59 +39,65 @@
       <div class="view-login">
         <div class="card">
             <div class="card-body">
-                <form id="form"> 
+              <form class="row g-3" id="loginForm">
               <h2 class="card-title">Login</h2>
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se">
+                  <label for="InputEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se" required>
                 </div>
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPassword" placeholder="*****">
+                  <label for="InputPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
                 </div>
-                <button type="button" class="btn" id="SendLogin">Send</button>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
+                </div>
                 <br>
-                <br>     
-                <a href="/register" class="link">Register instead</a>        
+                <br>  
+                <a href="/register" class="link">Register instead</a>    
               </form>
             </div>
           </div>
           <div>  
-        </div>
     </template>
 
     <template id="register">
       <div class="view-register">
-        <div class="card">
-            <div class="card-body">
-                <form id="form"> 
-              <h2 class="card-title">Register</h2>
-             
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Username</label>
-                    <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****">
-                  </div>
-                <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">I accept ***</label>
-                </div>
-                <button type="button" class="btn" id="SendRegister">Send</button>
-                <br>
-                <br>     
-                <a href="/login" class="link">Login instead</a>         
-              </form>
-            </div>
+      <div class="card">
+        <div class="card-body">
+          <form class="row g-3" id="registerForm">
+            <h2 class="card-title">Register</h2>
+            <div class="mb-3">
+            <label for="InputEmailRegister" class="form-label">Email</label>
+            <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se" required>
           </div>
-          <div>  
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
         </div>
+        <div class="mb-3">
+          <label for="exampleInputUsername1" class="form-label">Username</label>
+          <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
+        </div>       
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+            <label class="form-check-label" for="invalidCheck2">
+              Agree to terms and conditions
+            </label>
+          </div>
+        </div>
+        <br>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
+        </div>
+        <br>
+        <br>     
+        <a href="/login" class="link">Login instead</a>   
+      </form>
+      </div>
+      </div>
+    </div>
     </template>
 
     
