@@ -16,10 +16,7 @@ const createHTML = (input: testType): string => {
 };
 
 const main = () => {
-    
-
-    
-    injectHTML('#view-room');
+    loadQueueRoom();
 };
 
 function injectHTML(selector: any) {
@@ -70,15 +67,24 @@ const submitTicketForm = async (event: any) => {
         ticket_info: $("#ticket-info-input").val()
     }
     //inject-html kö-rum
-}
-function loadQueueRoom() {
-    //inject-html kö-rum
-    //skapa on-click-lyssnare
-
-    $("#goto-queue-up").click(function (e) {
-        injectHTML("#view-ticket-form");
-        $("#ticket-form").submit(submitTicketForm);
-    })
 }*/
+function onOpenEdit() {
+
+}
+
+function loadQueueRoom() {
+    injectHTML('#view-room');
+
+    $('#editModal').on('show.bs.modal', onOpenEdit);
+    //skapa on-click-lyssnare
+    //modal-lyssnare som öppnar ticketModal
+
+        
+    //$("#goto-queue-up").click(function (e: any) {
+        injectHTML("#view-ticket-form");
+        onOpenEdit();
+    //    $("#ticket-form").submit(submitTicketForm);
+    //})
+}
 
 $(main);
