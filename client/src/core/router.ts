@@ -11,7 +11,8 @@ interface Route {
 const routes: Route[] = [
     { url: '/login', templateSelector: '#login', onLoad: () => console.log('Login laddad') },
     { url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
-    { url: '/404', templateSelector: '#404', onLoad: () => console.log('404 laddad') },
+    { url: '/404', templateSelector: '#404' },
+    { url: '/rooms', templateSelector: '#view-room' },
 ];
 
 // Programatic navigate

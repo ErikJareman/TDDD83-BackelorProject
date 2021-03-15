@@ -7,6 +7,7 @@ async function createUser() {
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
     const username = $<HTMLInputElement>('#InputUsernameRegister').val();
     try {
+        alert('hej');
         const result = await standardPost('/register', {
             username: username,
             email: email,
@@ -23,6 +24,7 @@ async function logIn() {
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
+        alert('hej');
         const result = await standardPost('/login', {
             email: email,
             password: password,
@@ -30,13 +32,14 @@ async function logIn() {
         sessionStorage.setItem('auth', JSON.stringify(result));
         console.log(result);
         // TODO, navigate
+        navigateTo('/rooms');
     } catch (e) {
         // TODO
     }
 }
 
 const main = () => {
-    loadQueueRoom();
+    //loadQueueRoom();
     initiateRouter();
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);

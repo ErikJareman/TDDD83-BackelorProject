@@ -19,12 +19,8 @@ header {
     
 }
 
-div {
-    //background-color: colors.$primary2;
-    color:black;
-    //margin: auto;
-    //width: 100px;
-}
+
+
 
 .view-login{
     background-color: colors.$primary1;
@@ -33,13 +29,7 @@ div {
     background-color: colors.$primary1;
 }
 
-section {
-    background-color: colors.$secondary1;
-    padding: 30px;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    }  
+
 
 
 img {
@@ -114,7 +104,7 @@ h5 {
 .special {
     padding-bottom: 10px;
 }
-center-container {
+#ticket-list {
     text-align: center;
     height:100%;
     position: absolute;
@@ -127,7 +117,7 @@ center-container {
     padding-right: 10px; //detta täcker scrollbaren... 17px bör räcka för typ alla browsers (ikke-clean lösning)
     padding-left: 10px;
     box-sizing: content-box;
-    //background-color: #c44a4a;
+    background-color: #c44a4a;
     
 }
 
