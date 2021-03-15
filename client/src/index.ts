@@ -22,8 +22,8 @@ async function createUser(){
     var email = document.getElementById("InputEmailRegister").value;
     var password = document.getElementById("InputPasswordRegister").value;
     var username = document.getElementById("InputUsernameRegister").value;
+    var checked = document.getElementById("invalidCheck2").value;
     try{
-        alert("hej")
         const result = await standardPost("/register", {
             "username": username,
             "email": email,
@@ -33,8 +33,7 @@ async function createUser(){
         navigateTo("/login")
     } catch(e) {
         // TODO
-    }
-    
+    }   
 }
 
 async function logIn(){
@@ -50,8 +49,9 @@ async function logIn(){
         console.log(result);
         // TODO, navigate
     } catch(e) {
-        // TODO
-    }
+        window.location.reload();
+        alert("Felaktig email eller lösenord. Försök igen eller registrera dig.");
+    }  
 }
 
 const main = () => {
