@@ -17,23 +17,20 @@
 </head>
 
 
-
 <body>
-
     <header>Top-Q
-
     </header>
     <a href="https://www.w3schools.com/tags/tag_template.asp" class="outbound">Gå till extern sida</a>
     <a href="/login">Logga in</a>
     <a href="/register">Registrera dig</a>
     <a href="/rooms">gå till rum</a>
     <div id="router">
-
     </div>
-
+    
     <template id="404">
         Sidan hittades inte
     </template>
+
 
     <template id="login">
       <div class="view-login">
@@ -61,6 +58,7 @@
           <div>  
     </template>
 
+
     <template id="register">
       <div class="view-register">
       <div class="card">
@@ -74,7 +72,6 @@
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
-<<<<<<< HEAD
         </div>
         <div class="mb-3">
           <label for="exampleInputUsername1" class="form-label">Username</label>
@@ -92,27 +89,8 @@
         <div class="col-12">
           <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
         </div>
-=======
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputUsername1" class="form-label">Username</label>
-          <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
-        </div>       
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-            <label class="form-check-label" for="invalidCheck2">
-              Agree to terms and conditions
-            </label>
-          </div>
-        </div>
         <br>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
-        </div>
->>>>>>> 283613e5f042010e2c9d22a91b57c540822746ff
         <br>
-        <br>     
         <a href="/login" class="link">Login instead</a>   
       </form>
       </div>
@@ -120,15 +98,9 @@
     </div>
     </template>
 
-<<<<<<< HEAD
-    
-=======
-
     <script type="module" src="index.js"></script>
->>>>>>> 283613e5f042010e2c9d22a91b57c540822746ff
-    
-    <div id="container"></div>
 
+    <div id="container"></div>
         <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -142,7 +114,7 @@
                     <form>
                         <div class="form-group">
                             <label for="make" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="make">
+                            <input type="text" class="form-control" id="name-ticket-ref">
                         </div>
                         <div class="form-group">
                             <label for="model" class="col-form-label">Tags:</label>
@@ -153,14 +125,13 @@
                         </div>
                         <div class="form-group">
                             <label for="customer_id" class="col-form-label">Description:</label>
-                            <input class="form-control" id="customer_id"></input>
+                            <input class="form-control" id="ticket-descp"></input>
                         </div>
                         </div>
-
                     </form>
-
                     <div class="btn-group extend-button">
-                        <button type="button" class="btn primary-button right-button" data-toggle="modal" data-target="#ticketModal" id="goto-queue-up">
+                        <!--<a href="/create_ticket">Registrera dig</a>-->
+                        <button type="button" class="btn primary-button right-button" id="skapa-ticket" data-toggle="modal" data-target="#ticketModal">
                             Queue
                         </button>
                         <button type="button" class="btn bad-button right-button">
@@ -171,13 +142,13 @@
         </div>
     </div>
 
+    
     <template id="view-room">
         <!--Top navigation bar-->
         <!--<nav class="navbar navbar-top">
             <div class="navbar-brand" href="#">
                 Top-Q
             </div>-->
-
             <header class=first_header>
                 <div id=first_header_title>
                     <h2>
@@ -192,22 +163,7 @@
                     </ul>
                 </div>
             </header>
-
-
-
-            <!--<div class="dropdown">
-                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    erik.jareman@gmail.com
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Help</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sign Out</a>
-                </div>
-            </div>-->
         </nav>
-
         <!--Container for rest of page...-->
         <!--Divided into left, center, right-->
         <div class="container-fluid d-flex h-100 flex-column flex-shrink-0">
@@ -232,12 +188,10 @@
                         
                     </left-container>
                 </div>
-
                 <div class="col-8 center-div">
                     <h5 class="special">
                         TCBB32 - Lektionspass
                     </h5>
-                    
                     <center-container id=ticket-list>
                         >
                         <!--<div class="ticket-ticket">
@@ -268,7 +222,6 @@
                         
                     </center-container>
                 </div>
-
                 <div class="col-2 right-div">
                     <div class="btn-group extend-button">
                         <button type="button" class="btn primary-button right-button" data-toggle="modal" data-target="#ticketModal" id="goto-queue-up">
@@ -294,9 +247,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
-
             <script type="module" src="index.js"></script>
     </body>
-
 </html>
