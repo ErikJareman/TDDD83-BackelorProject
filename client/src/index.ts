@@ -1,4 +1,7 @@
+const host = 'http://172.17.185.73:8080';
+
 import $ from 'jquery';
+import { createTicket } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
 
@@ -40,16 +43,11 @@ async function logIn() {
 }
 
 const main = () => {
-    //loadQueueRoom();
     initiateRouter();
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);
+    $('#skapa-ticket').on('click', createTicket);
 };
-
-function injectHTML(selector: any) {
-    const HTML = $(selector).html();
-    $('#container').html(HTML);
-}
 
 /*function ticketTemplate(ticket: any) {
     return `<div class="card car-card">
@@ -94,22 +92,5 @@ const submitTicketForm = async (event: any) => {
     }
     //inject-html kö-rum
 }*/
-function onOpenEdit() {
-    //
-}
-
-function loadQueueRoom() {
-    injectHTML('#view-room');
-
-    $('#editModal').on('show.bs.modal', onOpenEdit);
-    //skapa on-click-lyssnare
-    //modal-lyssnare som öppnar ticketModal
-
-    //$("#goto-queue-up").click(function (e: any) {
-    injectHTML('#view-ticket-form');
-    onOpenEdit();
-    //    $("#ticket-form").submit(submitTicketForm);
-    //})
-}
 
 $(main);

@@ -33,7 +33,28 @@ class User(db.Model):
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
 
+
+class Ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    tag_1 = db.Column(db.String, nullable=True)
+    tag_2 = db.Column(db.String, nullable=True)
+    tag_3 = db.Column(db.String, nullable=True)
+    tag_4 = db.Column(db.String, nullable=True)
+    ticket_info = db.Column(db.String, nullable=True)
+
+    def __repr__(self):
+        return '<Ticket {}: {} {} {} {} {} {}>'.format(self.id, self.name, self.tag_1, self.tag_2, self.tag_3, self.tag_4, self.ticket_info)
+
+    def serialize(self):
+        return dict(ticket_number=self.id, name=self.name, tag_1=self.tag_1, tag_2=self.tag_2, tag_3=self.tag_3, tag_4=self.tag_4, ticket_info=self.ticket_info)
+
+
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -98,36 +119,23 @@ def usersid(user_id):
 @app.route('/', methods=['GET'])
 def client():
     return app.send_static_file("index.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
-class Ticket(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    tag_1 = db.Column(db.String, nullable=True)
-    tag_2 = db.Column(db.String, nullable=True)
-    tag_3 = db.Column(db.String, nullable=True)
-    tag_4 = db.Column(db.String, nullable=True)
-    ticket_info = db.Column(db.String, nullable=True)
-
-    def __repr__(self):
-        return '<Ticket {}: {} {} {} {} {} {}>'.format(self.id, self.name, self.tag_1, self.tag_2, self.tag_3, self.tag_4, self.ticket_info)
-
-    def serialize(self):
-        return dict(ticket_number=self.id, name=self.name, tag_1=self.tag_1, tag_2=self.tag_2, tag_3=self.tag_3, tag_4=self.tag_4, ticket_info=self.ticket_info)
     
 
 #Skapa en kö-ticket
 @app.route('/create_ticket', methods=['POST'])
 def create_ticket():
     if request.method == 'POST':
-        email = request.get_json(force=True)["email"]
-        password = request.get_json(force = True)["password"]
-        username = request.get_json(force=True)["username"]
-        new_user = User(email=email, username=username, password_hash=password)
-        new_user.set_password(password)
-        db.session.add(new_user)
+        name = request.get_json(force=False)['name']
+        tag_1 = request.get_json(force=True)['tag_1']
+        tag_2 = request.get_json(force=True)['tag_2']
+        tag_3 = request.get_json(force=True)['tag_3']
+        tag_4 = request.get_json(force=True)['tag_4']
+        ticket_info = request.get_json(force=True)['ticket_info']
+        new_ticket = Ticket(name=name, tag_1=tag_1, tag_2=tag_2, tag_3=tag_3, tag_4=tag_4, ticket_info=ticket_info)
+        db.session.add(new_ticket)
         db.session.commit()
-        return jsonify([new_user.serialize()])
+        return jsonify([new_ticket.serialize()])
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
