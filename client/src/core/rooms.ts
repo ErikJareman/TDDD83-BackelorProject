@@ -1,29 +1,44 @@
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
-import { getMultiple, getSingle, standardPost } from './server.service';
+import { getMultiple, getSingle, standardPost, Stringable } from './server.service';
 
 export interface Room {
     id: string;
     name: string;
+    tickets: Ticket[];
+}
+
+export interface Ticket {
+    owner: Stringable;
 }
 
 export const getTickets = async () => {
     return getMultiple(EndPoints.Rooms);
 };
 
-function ticketTemplate(ticket) {
-    return `<div>Testtext</div>`;
+function ticketTemplate(ticket: Ticket) {
+    return `<div>${ticket.owner}</div>`;
 }
 
-export async function displayTickets() {
-    const tickets = await getTickets();
-    //console.log(tickets);
+const loadRoom = async () => {
+    const room = await getRoom(getRoomIDFromURL());
     const ticketListElement = $('#ticket-list');
     ticketListElement.empty();
-    for (const ticket of tickets) {
+    for (const ticket of room.tickets) {
         ticketListElement.append(ticketTemplate(ticket));
     }
-}
+};
+
+const createRoom = (room: Partial<Room>) => {
+    return standardPost(EndPoints.Rooms, room);
+};
+
+const listRooms = async () => getMultiple<Room>(EndPoints.Rooms);
+
+const getRoomIDFromURL = (): number | null => {
+    // TODO
+    return 1;
+};
 
 export async function createTicket() {
     const name = $<HTMLInputElement>('#name-ticket-ref').val();
@@ -43,11 +58,17 @@ export async function createTicket() {
             ticket_info: ticket_info,
         });
         console.log('test2');
-        navigateTo('/rooms');
-        displayTickets();
+        loadRoom();
     } catch (e) {
         console.log('test3');
         // TODO
     }
     console.log('test4');
 }
+
+const getRoom = async (id: number) => getSingle<Room>(EndPoints.Rooms, id);
+
+export const enterRoomPage = async () => {
+    $('#skapa-ticket').on('click', createTicket);
+    $('#create-room').on('click', () => createRoom({ name: 'test' }));
+};

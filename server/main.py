@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import abort
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_bcrypt import Bcrypt
@@ -53,9 +54,12 @@ class Ticket(db.Model):
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+
+    def serialize(self, populate=True):
+        d = dict(id=self.id, name=self.name)
+
+        return d
     
-
-
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
@@ -64,7 +68,7 @@ def login():
         for user in User.query.all(): 
             if user.email==email:
                 if bcrypt.check_password_hash(user.password_hash, password):
-                     token = create_access_token(identity=email)
+                     token = create_access_token({'user': user.id})
                      return dict(token = token, user = user.serialize())
         else: abort(401)
 
@@ -112,10 +116,6 @@ def usersid(user_id):
 
 
 
-
-
-
-
 @app.route('/', methods=['GET'])
 def client():
     return app.send_static_file("index.html")
@@ -135,6 +135,32 @@ def create_ticket():
         db.session.add(new_ticket)
         db.session.commit()
         return jsonify([new_ticket.serialize()])
+
+
+def create_room(data: dict):
+    to_create = Room(name=data['name'])
+    db.session.add(to_create)
+    db.session.commit()
+    return jsonify(to_create.serialize())
+
+@app.route('/rooms', methods=['GET', 'POST'])
+def rooms():
+    user_id = get_jwt_identity()['user']
+    # TODO add filter for user_id
+    if request.method == 'POST':
+        return create_room(request.get_json())
+
+    elif request.method == 'GET':
+        return jsonify([room.serialize() for room in Room.query.all()])
+
+@app.route('/rooms/<int:room_id>', methods=['GET'])
+def room(room_id: int):
+    targetRoom = Room.query.get(room_id)
+    if targetRoom is None:
+        abort(404)
+    
+    return jsonify(targetRoom.serialize())
+
 
 
 if __name__ == "__main__":

@@ -1,5 +1,3 @@
-const host = 'http://172.17.185.73:8080';
-
 import $ from 'jquery';
 import { createTicket } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
@@ -46,7 +44,6 @@ const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);
-    $('#skapa-ticket').on('click', createTicket);
 };
 
 /*function ticketTemplate(ticket: any) {
