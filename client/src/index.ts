@@ -25,6 +25,7 @@ async function logIn() {
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
         alert('hej');
+        console.log('hej');
         const result = await standardPost('/login', {
             email: email,
             password: password,
@@ -50,6 +51,37 @@ function injectHTML(selector: any) {
     const HTML = $(selector).html();
     $('#container').html(HTML);
 }
+
+//Function for creating ticket
+async function createTicket() {
+    const name = $<HTMLInputElement>('#ticket-name').val();
+    const tag1 = $<HTMLInputElement>('#modal-tag-1').val();
+    const tag2 = $<HTMLInputElement>('#modal-tag-2').val();
+    const tag3 = $<HTMLInputElement>('#modal-tag-3').val();
+    const tag4 = $<HTMLInputElement>('#modal-tag-4').val();
+    const description = $<HTMLInputElement>('#description').val();
+
+    try {
+        alert('hej');
+        const result = await standardPost('/create_ticket', {
+            name: name,
+            tag1: tag1,
+            tag2: tag2,
+            tag3: tag3,
+            tag4: tag4,
+            description: description,
+        });
+        console.log(result);
+        navigateTo('/rooms');
+    } catch (e) {
+        // TODO
+    }
+}/*
+
+
+
+
+
 
 /*function ticketTemplate(ticket: any) {
     return `<div class="card car-card">
