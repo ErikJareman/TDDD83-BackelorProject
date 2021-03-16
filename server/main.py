@@ -143,7 +143,7 @@ def create_room(data: dict):
 
 @app.route('/rooms', methods=['GET', 'POST'])
 def rooms():
-    user_id = get_jwt_identity()['user']
+    # user_id = get_jwt_identity()['user']
     # TODO add filter for user_id
     if request.method == 'POST':
         return create_room(request.get_json())

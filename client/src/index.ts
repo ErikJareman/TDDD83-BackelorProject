@@ -1,8 +1,8 @@
 import $ from 'jquery';
-import { createTicket } from './core/rooms';
+import { createRoom, createTicket } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
-
+import { getRoom } from './core/rooms';
 async function createUser() {
     const email = $<HTMLInputElement>('#InputEmailRegister').val();
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
@@ -45,6 +45,8 @@ const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);
+    $('#skapa-ticket').on('click', createTicket);
+    $('#create-room').on('click', async () => console.log(createRoom({ name: 'frans' })));
 };
 
 /*function ticketTemplate(ticket: any) {
