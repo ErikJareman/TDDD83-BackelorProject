@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import abort
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_bcrypt import Bcrypt
@@ -33,7 +34,7 @@ class User(db.Model):
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
 
-#TICKET CLASS
+
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -50,7 +51,15 @@ class Ticket(db.Model):
         return dict(ticket_number=self.id, name=self.name, tag_1=self.tag_1, tag_2=self.tag_2, tag_3=self.tag_3, tag_4=self.tag_4, ticket_info=self.ticket_info)
 
 
-#functions for User database
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+
+    def serialize(self, populate=True):
+        d = dict(id=self.id, name=self.name)
+
+        return d
+    
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
@@ -59,7 +68,7 @@ def login():
         for user in User.query.all(): 
             if user.email==email:
                 if bcrypt.check_password_hash(user.password_hash, password):
-                     token = create_access_token(identity=email)
+                     token = create_access_token({'user': user.id})
                      return dict(token = token, user = user.serialize())
         else: abort(401)
 
@@ -106,27 +115,51 @@ def usersid(user_id):
         return resp
 
 
+
 @app.route('/', methods=['GET'])
 def client():
     return app.send_static_file("index.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
-#FUNCTIONS FÖR TICKET KLASS
-
+    
 
 def create_ticket():
     if request.method == 'POST':
-        name = request.get_json(force=True)["email"]
-        tag1 = request.get_json(force = False)["password"]
-        tag2 = request.get_json(force=False)["username"]
-        tag3 = request.get_json(force=False)["username"]
-        tag4 = request.get_json(force=False)["username"]
-        description = request.get_json(force=False)["username"]
-        new_ticket = User(email=email, username=username, password_hash=password)
-        new_user.set_password(password)
-        db.session.add(new_user)
+        name = request.get_json(force=False)['name']
+        tag_1 = request.get_json(force=True)['tag_1']
+        tag_2 = request.get_json(force=True)['tag_2']
+        tag_3 = request.get_json(force=True)['tag_3']
+        tag_4 = request.get_json(force=True)['tag_4']
+        ticket_info = request.get_json(force=True)['ticket_info']
+        new_ticket = Ticket(name=name, tag_1=tag_1, tag_2=tag_2, tag_3=tag_3, tag_4=tag_4, ticket_info=ticket_info)
+        db.session.add(new_ticket)
         db.session.commit()
-        return jsonify([new_user.serialize()])
+        return jsonify([new_ticket.serialize()])
+
+
+def create_room(data: dict):
+    to_create = Room(name=data['name'])
+    db.session.add(to_create)
+    db.session.commit()
+    return jsonify(to_create.serialize())
+
+@app.route('/rooms', methods=['GET', 'POST'])
+def rooms():
+    user_id = get_jwt_identity()['user']
+    # TODO add filter for user_id
+    if request.method == 'POST':
+        return create_room(request.get_json())
+
+    elif request.method == 'GET':
+        return jsonify([room.serialize() for room in Room.query.all()])
+
+@app.route('/rooms/<int:room_id>', methods=['GET'])
+def room(room_id: int):
+    targetRoom = Room.query.get(room_id)
+    if targetRoom is None:
+        abort(404)
+    
+    return jsonify(targetRoom.serialize())
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

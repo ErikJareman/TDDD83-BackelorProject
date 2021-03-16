@@ -6,105 +6,108 @@
     <meta charset="utf-8">
 
 
-        <!-- Required meta tags -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!--Flyttade referensen under bootstrap för override -->
-            <link rel="stylesheet" href="styles.css">
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--Flyttade referensen under bootstrap för override -->
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 
 
-
 <body>
-
     <header>Top-Q
-
     </header>
     <a href="https://www.w3schools.com/tags/tag_template.asp" class="outbound">Gå till extern sida</a>
     <a href="/login">Logga in</a>
     <a href="/register">Registrera dig</a>
     <a href="/rooms">gå till rum</a>
-    <div id="router">
+    <button id="create-room">Skapa rum</button>
 
+    <div id="router">
     </div>
 
     <template id="404">
         Sidan hittades inte
     </template>
 
+
     <template id="login">
-      <div class="view-login">
-        <div class="card">
-            <div class="card-body">
-              <form class="row g-3" id="loginForm">
-              <h2 class="card-title">Login</h2>
-                <div class="mb-3">
-                  <label for="InputEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se" required>
+        <div class="view-login">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3" id="loginForm">
+                        <h2 class="card-title">Login</h2>
+                        <div class="mb-3">
+                            <label for="InputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="InputEmail"
+                                placeholder="abcde123@student.liu.se" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
+                        </div>
+                        <br>
+                        <br>
+                        <a href="/register" class="link">Register instead</a>
+                    </form>
                 </div>
-                <div class="mb-3">
-                  <label for="InputPassword" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
-                </div>
-                <br>
-                <br>  
-                <a href="/register" class="link">Register instead</a>    
-              </form>
             </div>
-          </div>
-          <div>  
+            <div>
     </template>
+
 
     <template id="register">
-      <div class="view-register">
-      <div class="card">
-        <div class="card-body">
-          <form class="row g-3" id="registerForm">
-            <h2 class="card-title">Register</h2>
-            <div class="mb-3">
-            <label for="InputEmailRegister" class="form-label">Email</label>
-            <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se" required>
-          </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
+        <div class="view-register">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3" id="registerForm">
+                        <h2 class="card-title">Register</h2>
+                        <div class="mb-3">
+                            <label for="InputEmailRegister" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="InputEmailRegister"
+                                placeholder="abcde123@student.liu.se" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputUsername1" class="form-label">Username</label>
+                            <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****"
+                                required>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                <label class="form-check-label" for="invalidCheck2">
+                                    Agree to terms and conditions
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
+                        </div>
+                        <br>
+                        <br>
+                        <a href="/login" class="link">Login instead</a>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputUsername1" class="form-label">Username</label>
-          <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
-        </div>       
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-            <label class="form-check-label" for="invalidCheck2">
-              Agree to terms and conditions
-            </label>
-          </div>
-        </div>
-        <br>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
-        </div>
-        <br>
-        <br>     
-        <a href="/login" class="link">Login instead</a>   
-      </form>
-      </div>
-      </div>
-    </div>
     </template>
 
-    
-    
-    <div id="container"></div>
+    <script type="module" src="index.js"></script>
 
-        <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="container"></div>
+    <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <!--<div class="modal-header">
@@ -116,8 +119,8 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="ticket-name">
+                            <label for="make" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name-ticket-ref">
                         </div>
                         <div class="form-group">
                             <label for="model" class="col-form-label">Tags:</label>
@@ -127,24 +130,25 @@
                             <input class="form-control tag-modal" id="modal-tag-4"></input>
                         </div>
                         <div class="form-group">
-                            <label for="description" class="col-form-label">Description:</label>
-                            <input class="form-control" id="description"></input>
+                            <label for="customer_id" class="col-form-label">Description:</label>
+                            <input class="form-control" id="ticket-descp"></input>
                         </div>
-                        </div>
-
-                    </form>
-
-                    <div class="btn-group extend-button">
-                        <button type="button" class="btn primary-button right-button" data-toggle="modal" data-target="#ticketModal" id="goto-queue-up">
-                            Queue
-                        </button>
-                        <button type="button" class="btn bad-button right-button">
-                            Close
-                        </button>
-                    </div>
+                </div>
+                </form>
+                <div class="btn-group extend-button">
+                    <!--<a href="/create_ticket">Registrera dig</a>-->
+                    <button type="button" class="btn primary-button right-button" id="skapa-ticket" data-toggle="modal"
+                        data-target="#ticketModal">
+                        Queue
+                    </button>
+                    <button type="button" class="btn bad-button right-button">
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
 
     <template id="view-room">
         <!--Top navigation bar-->
@@ -152,37 +156,21 @@
             <div class="navbar-brand" href="#">
                 Top-Q
             </div>-->
-
-            <header class=first_header>
-                <div id=first_header_title>
-                    <h2>
-                         Top-Q
-                    </h2>
-                </div>
-                <div id=drop_down ><a href="#">frans.nyrfors@outlook.com</a>
-                    <ul>
-                        <li><a href="">Change pw</a></li>
-                        <li><a href="">Leave que</a></li> 
-                        <li><a href="">Sign out</a></li>  
-                    </ul>
-                </div>
-            </header>
-
-
-
-            <!--<div class="dropdown">
-                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    erik.jareman@gmail.com
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Help</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Sign Out</a>
-                </div>
-            </div>-->
+        <header class=first_header>
+            <div id=first_header_title>
+                <h2>
+                    Top-Q
+                </h2>
+            </div>
+            <div id=drop_down><a href="#">frans.nyrfors@outlook.com</a>
+                <ul>
+                    <li><a href="">Change pw</a></li>
+                    <li><a href="">Leave que</a></li>
+                    <li><a href="">Sign out</a></li>
+                </ul>
+            </div>
+        </header>
         </nav>
-
         <!--Container for rest of page...-->
         <!--Divided into left, center, right-->
         <div class="container-fluid d-flex h-100 flex-column flex-shrink-0">
@@ -204,15 +192,14 @@
                         <button type="button" class="btn btn-outline-secondary left-button">
                             TNDB40 - Lektionspass
                         </button>
-                        
-                    </left-container>
-                </div>
 
+                    </left-container>
+
+                </div>
                 <div class="col-8 center-div">
                     <h5 class="special">
                         TCBB32 - Lektionspass
                     </h5>
-                    
                     <center-container id=ticket-list>
                         >
                         <div class="ticket-ticket">
@@ -240,13 +227,13 @@
                                 dattaaaaaaa
                             </div>
                         </div>
-                        
+
                     </center-container>
                 </div>
-
                 <div class="col-2 right-div">
                     <div class="btn-group extend-button">
-                        <button type="button" class="btn primary-button right-button" data-toggle="modal" data-target="#ticketModal" id="goto-queue-up">
+                        <button type="button" class="btn primary-button right-button" data-toggle="modal"
+                            data-target="#ticketModal" id="goto-queue-up">
                             Queue up
                         </button>
                         <button type="button" class="btn bad-button right-button">
@@ -255,23 +242,21 @@
                     </div>
                     <right-container></right-container>
                 </div>
-        </div>
+            </div>
     </template>
 
     <!--Tillagt för bootstrap mm-->
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-
-
-            <script type="module" src="index.js"></script>
-    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script type="module" src="index.js"></script>
+</body>
 
 </html>

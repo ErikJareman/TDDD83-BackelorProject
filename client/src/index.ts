@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { createTicket } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
 
@@ -41,47 +42,10 @@ async function logIn() {
 }
 
 const main = () => {
-    //loadQueueRoom();
     initiateRouter();
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);
 };
-
-function injectHTML(selector: any) {
-    const HTML = $(selector).html();
-    $('#container').html(HTML);
-}
-
-//Function for creating ticket
-async function createTicket() {
-    const name = $<HTMLInputElement>('#ticket-name').val();
-    const tag1 = $<HTMLInputElement>('#modal-tag-1').val();
-    const tag2 = $<HTMLInputElement>('#modal-tag-2').val();
-    const tag3 = $<HTMLInputElement>('#modal-tag-3').val();
-    const tag4 = $<HTMLInputElement>('#modal-tag-4').val();
-    const description = $<HTMLInputElement>('#description').val();
-
-    try {
-        alert('hej');
-        const result = await standardPost('/create_ticket', {
-            name: name,
-            tag1: tag1,
-            tag2: tag2,
-            tag3: tag3,
-            tag4: tag4,
-            description: description,
-        });
-        console.log(result);
-        navigateTo('/rooms');
-    } catch (e) {
-        // TODO
-    }
-}/*
-
-
-
-
-
 
 /*function ticketTemplate(ticket: any) {
     return `<div class="card car-card">
@@ -126,22 +90,5 @@ const submitTicketForm = async (event: any) => {
     }
     //inject-html kö-rum
 }*/
-function onOpenEdit() {
-    //
-}
-
-function loadQueueRoom() {
-    injectHTML('#view-room');
-
-    $('#editModal').on('show.bs.modal', onOpenEdit);
-    //skapa on-click-lyssnare
-    //modal-lyssnare som öppnar ticketModal
-
-    //$("#goto-queue-up").click(function (e: any) {
-    injectHTML('#view-ticket-form');
-    onOpenEdit();
-    //    $("#ticket-form").submit(submitTicketForm);
-    //})
-}
 
 $(main);
