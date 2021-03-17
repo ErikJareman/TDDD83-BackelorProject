@@ -24,7 +24,7 @@
     <a href="/login">Logga in</a>
     <a href="/register">Registrera dig</a>
     <a href="/rooms">gå till rum</a>
-    <button id="create-room">Skapa rum</button>
+
 
     <div id="router">
     </div>
@@ -104,9 +104,35 @@
         </div>
     </template>
 
-    <script type="module" src="index.js"></script>
 
-    <div id="container"></div>
+    <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <h4>Create Room</h4>
+                    <form>
+                        <div class="form-group">
+                            <label for="make" class="col-form-label">Name</label>
+                            <input type="text" class="form-control" id="room-name-input">
+                        </div>
+
+                        <div class="btn-group extend-button">
+                            <!--<a href="/create_ticket">Registrera dig</a>-->
+                            <button type="button" class="btn primary-button right-button" id="create-room"
+                                data-dismiss="modal">
+                                Create
+                            </button>
+                            <button type="button" class="btn bad-button right-button" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -137,17 +163,21 @@
                 </form>
                 <div class="btn-group extend-button">
                     <!--<a href="/create_ticket">Registrera dig</a>-->
-                    <button type="button" class="btn primary-button right-button" id="skapa-ticket" data-toggle="modal"
-                        data-target="#ticketModal">
+                    <button type="button" class="btn primary-button right-button" id="skapa-ticket"
+                        data-dismiss="modal">
                         Queue
                     </button>
-                    <button type="button" class="btn bad-button right-button">
+                    <button type="button" class="btn bad-button right-button" data-dismiss="modal">
                         Close
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
 
 
     <template id="view-room">
@@ -176,32 +206,24 @@
         <div class="container-fluid d-flex h-100 flex-column flex-shrink-0">
             <div class="row h-100">
                 <div class="col-2 left-div">
-                    <h5 class="heading2">
-                        Rooms
-                    </h5>
-                    <left-container class="test" id='roomList'>
-                        <button type="button" class="btn btn-outline-secondary left-button">
-                            TDDD83 - Kandidatlab
-                        </button>
-                        <button type="button" class="btn primary-button left-button">
-                            TCBB32 - Lektionspass
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary left-button">
-                            TXPC90 - Datorlab
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary left-button">
-                            TNDB40 - Lektionspass
-                        </button>
-
-                    </left-container>
-
+                    <div>
+                        <h5 class="heading2">
+                            Rooms
+                        </h5>
+                        <left-container class="test overflow-auto" id='roomList'>
+                        </left-container>
+                    </div>
+                    <div>
+                        <button class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create
+                            room</button>
+                    </div>
                 </div>
                 <div class="col-8 center-div">
                     <h5 class="special">
                         TCBB32 - Lektionspass
                     </h5>
                     <center-container id=ticket-list>
-                        
+
 
 
                     </center-container>
@@ -212,7 +234,7 @@
                             data-target="#ticketModal" id="goto-queue-up">
                             Queue up
                         </button>
-                        <button type="button" class="btn bad-button right-button">
+                        <button type="button" class="btn bad-button right-button" id="delete-room">
                             Leave room
                         </button>
                     </div>

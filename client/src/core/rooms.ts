@@ -1,6 +1,6 @@
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
-import { getMultiple, getSingle, standardPost, Stringable } from './server.service';
+import { getMultiple, getSingle, standardDelete, standardPost, Stringable } from './server.service';
 import { User } from './User';
 
 export interface Room {
@@ -59,6 +59,15 @@ const loadRoom = async (id: number) => {
     } else {
         location.hash = hash;
     }
+    const buttons = $('button.left-button');
+    buttons.removeClass('btn-secondary').addClass('btn-outline-secondary');
+
+    buttons
+        .filter(function () {
+            return $(this).data('id') == id;
+        })
+        .addClass('btn-secondary')
+        .removeClass('btn-outline-secondary');
     const room = await getRoom(id);
     $('h5.special').text(room.name);
     // Add tickets
@@ -66,7 +75,8 @@ const loadRoom = async (id: number) => {
     ticketListElement.empty();
     room.tickets.forEach((ticket, index) => ticketListElement.append(ticketTemplate(ticket, index + 1)));
 };
-const loadRoomPage = async () => {
+
+const loadRoomList = async () => {
     const roomList = await listRooms();
     const list = $('#roomList').first();
 
@@ -79,7 +89,9 @@ const loadRoomPage = async () => {
     const buttons = $<HTMLButtonElement>('button.left-button');
     buttons.off();
     buttons.on('click', clickLeftButton);
-
+};
+const loadRoomPage = async () => {
+    loadRoomList();
     const selectedRoom = getRoomIDFromURL();
     if (!selectedRoom) {
         noRoomSelected();
@@ -88,7 +100,15 @@ const loadRoomPage = async () => {
     }
 };
 
-export const createRoom = (room: Partial<Room>) => {
+export const submitCreateRoom = async (event: JQuery.ClickEvent) => {
+    const name = $<HTMLInputElement>('#room-name-input').val() as string;
+
+    const res = await createRoom({ name });
+    loadRoom(res.id);
+    loadRoomList();
+};
+
+export const createRoom = (room: Partial<Room>): Promise<Room> => {
     return standardPost(EndPoints.Rooms, room);
 };
 
@@ -130,3 +150,9 @@ export function clickLeftButton(event: JQuery.ClickEvent<HTMLButtonElement>) {
     const id = $(this).data('id');
     loadRoom(id);
 }
+
+export const clickDeleteRoom = async () => {
+    await standardDelete(EndPoints.Rooms, getRoomIDFromURL());
+    noRoomSelected();
+    loadRoomList();
+};

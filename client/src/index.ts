@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { clickLeftButton, createRoom, createTicket } from './core/rooms';
+import { clickDeleteRoom, clickLeftButton, createRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
 import { getRoom } from './core/rooms';
@@ -45,7 +45,8 @@ const main = () => {
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);
     $('#skapa-ticket').on('click', createTicket);
-    $('#create-room').on('click', async () => console.log(createRoom({ name: 'frans' })));
+    $('#create-room').on('click', submitCreateRoom);
+    $('#delete-room').on('click', clickDeleteRoom);
 };
 
 /*function ticketTemplate(ticket: any) {

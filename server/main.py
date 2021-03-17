@@ -56,6 +56,8 @@ class Ticket(db.Model):
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    tickets = db.relationship('Ticket', backref=db.backref(
+        "Room"))
 
     def serialize(self, populate=True):
         d = dict(id=self.id, name=self.name)
@@ -149,13 +151,23 @@ def rooms():
     elif request.method == 'GET':
         return jsonify([room.serialize() for room in Room.query.all()])
 
-@app.route('/rooms/<int:room_id>', methods=['GET'])
+@app.route('/rooms/<int:room_id>', methods=['GET', 'DELETE'])
 def room(room_id: int):
     targetRoom = Room.query.get(room_id)
     if targetRoom is None:
         abort(404)
     
-    return jsonify(targetRoom.serialize())
+    if request.method == 'GET':
+        return jsonify(targetRoom.serialize())
+
+    elif request.method == 'DELETE':
+        db.session.delete(targetRoom)
+        delete_q = Ticket.__table__.delete().where(Ticket.room == room_id)
+        db.session.execute(delete_q)
+        
+        db.session.commit()
+        return ''
+    
 
 
 
