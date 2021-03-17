@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { createRoom, createTicket } from './core/rooms';
+import { clickLeftButton, createRoom, createTicket } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
 import { getRoom } from './core/rooms';
@@ -25,7 +25,6 @@ async function logIn() {
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
-        alert('hej');
         console.log('hej');
         const result = await standardPost('/login', {
             email: email,

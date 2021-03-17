@@ -37,18 +37,20 @@ class User(db.Model):
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    tag_1 = db.Column(db.String, nullable=True)
-    tag_2 = db.Column(db.String, nullable=True)
-    tag_3 = db.Column(db.String, nullable=True)
-    tag_4 = db.Column(db.String, nullable=True)
+    room = db.Column(db.Integer, db.ForeignKey(
+        'room.id'), nullable=False)
+    creator = db.Column(db.Integer, db.ForeignKey(
+        'user.id'), nullable=False)
+
     ticket_info = db.Column(db.String, nullable=True)
 
     def __repr__(self):
-        return '<Ticket {}: {} {} {} {} {} {}>'.format(self.id, self.name, self.tag_1, self.tag_2, self.tag_3, self.tag_4, self.ticket_info)
+        return f'<Ticket {self.id}: {self.room} {self.creator} {self.ticket_info}>'
 
     def serialize(self):
-        return dict(ticket_number=self.id, name=self.name, tag_1=self.tag_1, tag_2=self.tag_2, tag_3=self.tag_3, tag_4=self.tag_4, ticket_info=self.ticket_info)
+        d = dict(id=self.id, ticket_info=self.ticket_info, room=self.room)
+        d['creator'] = User.query.get(self.creator).serialize()
+        return d
 
 
 class Room(db.Model):
@@ -57,6 +59,7 @@ class Room(db.Model):
 
     def serialize(self, populate=True):
         d = dict(id=self.id, name=self.name)
+        d['tickets'] = [ ticket.serialize() for ticket in Ticket.query.filter_by(room=self.id)]
 
         return d
     
@@ -114,25 +117,20 @@ def usersid(user_id):
         resp = jsonify(Sucess=True)
         return resp
 
+ 
+def add_ticket(data: dict, userID: int):
+    print(data)
+    to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'])
+    db.session.add(to_create)
+    db.session.commit()
+    return jsonify(to_create.serialize())
 
-
-@app.route('/', methods=['GET'])
-def client():
-    return app.send_static_file("index.html")
-    
-
+# @jwt_required()
+@app.route('/tickets', methods=['POST'])
 def create_ticket():
+    userID = 1 # get_jwt_identity()['user']
     if request.method == 'POST':
-        name = request.get_json(force=False)['name']
-        tag_1 = request.get_json(force=True)['tag_1']
-        tag_2 = request.get_json(force=True)['tag_2']
-        tag_3 = request.get_json(force=True)['tag_3']
-        tag_4 = request.get_json(force=True)['tag_4']
-        ticket_info = request.get_json(force=True)['ticket_info']
-        new_ticket = Ticket(name=name, tag_1=tag_1, tag_2=tag_2, tag_3=tag_3, tag_4=tag_4, ticket_info=ticket_info)
-        db.session.add(new_ticket)
-        db.session.commit()
-        return jsonify([new_ticket.serialize()])
+       return add_ticket(request.get_json(), userID) 
 
 
 def create_room(data: dict):
@@ -160,6 +158,11 @@ def room(room_id: int):
     return jsonify(targetRoom.serialize())
 
 
+
+
+@app.route('/', methods=['GET'])
+def client():
+    return app.send_static_file("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
