@@ -50,7 +50,7 @@ async function logIn(event) {
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
         console.log(result);
-        navigateTo('/');
+        navigateTo('/r');
 
         // TODO, navigate
     } catch (e) {
