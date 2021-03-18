@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import env from './shared/env';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
 
