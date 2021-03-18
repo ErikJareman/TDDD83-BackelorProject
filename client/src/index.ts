@@ -9,15 +9,7 @@ interface testType {
     age: number;
 }
 
-// Arrow function med typer för parametrar och output
-const createHTML = (input: testType): string => {
-    return `
-    <p>${input.test}</p>
-    <p>Jag är ${input.age} år gammal.</p>
-    `;
-};
-
-async function createUser(event){
+async function createUser(event) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmailRegister').val();
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
@@ -36,12 +28,12 @@ async function createUser(event){
     }
 }
 
-function isSignedIn(){
+function isSignedIn() {
     const signedIn = sessionStorage.getItem('auth');
     return signedIn != null;
 }
 
-function logOut(event){
+function logOut(event) {
     event.preventDefault();
     sessionStorage.removeItem('auth');
     navigateTo('/');

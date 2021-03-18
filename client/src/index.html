@@ -2,103 +2,236 @@
 <html>
 
 <head>
-    <title>Top-Q</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
+  <title>TopQ</title>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-    <header>Top-Q
+  <div class="navbar">
+    <div class="container">
+      <a class="logo" href="index.html">Top<span>Q</span></a>
+      <img id="mobile-cta" class="mobile-menu" src="assets/menu.svg" alt="Open navigation">
+      <nav>
+        <img id="mobile-exit" class="mobile-menu-exit" src="assets/exit.svg" alt="">
+        <ul class="primary-nav">
+          <li class="current"><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+        </ul>
+        <ul class="secondary-nav">
+          <li class="custombutton"><a href="#">Login</a></li>
+          <li class="custombutton"><a href="#">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 
-    </header>
-    <a href="https://www.w3schools.com/tags/tag_template.asp" class="outbound">Gå till extern sida</a>
-    <a href="/login">Logga in</a>
-    <a href="/register">Registrera dig</a>
-    <div id="router">
+  <div id="router"></div>
+
+  <!--footer -->
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h1 class="logo-text">Top<span>Q</span></h1>
+        <p>
+          TopQ is a queueing application made by students for students! And also tutors. Please buy!
+        </p>
+        <div class="contact">
+          <span><i class="fas fa-phone"></i> &#9742; &nbsp; 123-456</span>
+          <span><i class="fas fa-envelope"></i>&#128231; &nbsp; TopQ@mail.com</span>
+        </div>
+
+      </div>
+      <div class="footer-section links">
+        <h2>Quick Links</h2>
+        <br>
+        <ul>
+          <a href="#">
+            <li>Home</li>
+          </a>
+          <a href="#">
+            <li>Buy TopQ</li>
+          </a>
+          <a href="#">
+            <li>Terms and conditions</li>
+          </a>
+          <a href="#">
+            <li>More about TopQ</li>
+          </a>
+        </ul>
+      </div>
 
     </div>
 
-    <template id="404">
-        Sidan hittades inte
-    </template>
+    <div class="footer-bottom">
+      &copy; TopQ | Designed & developed by kandidatgrupp 3
+    </div>
+  </div>
 
-    <template id="login">
-      <div class="w3-container" id="view-login">
-        <div class="d-flex justify-content-center" id="cardBox">
-            <div class="card">
-                <div class="card-body">
-                  <form class="row g-3" id="loginForm">
-                  <h2 class="card-title">Login</h2>
-                    <div class="mb-3">
-                      <label for="InputEmail" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="InputPassword" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
-                    </div>
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
-                    </div>
-                    <br>
-                    <br>  
-                    <a href="/register" class="link">Register instead</a>    
-                  </form>
+
+  <template id="home">
+    <section class="hero">
+      <div class="container">
+        <div class="left-col">
+          <p class="subhead">Time waits for no one</p>
+          <h1>Hold the line!</h1>
+          <h2>Don't wait, buy TopQ now!</h2>
+          <div class="hero-cta">
+            <a href="#" class="primary-cta">LET´S GO!</a>
+            <!--<a href="#" class="instructions">MyQueue</a>-->
+          </div>
+          </p>
+        </div>
+        <img src="assets/vector.svg" class="hero-img" alt="illustration">
+      </div>
+
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <ul class="features-list">
+          <li>Online queueing application</li>
+          <li>Developed for labs and lectures</li>
+          <li>Compatible on multiple platforms</li>
+          <li>For students and tutors</li>
+          <li>Easy to navigate</li>
+        </ul>
+        <img src="assets/trappa.svg" alt="trappa">
+      </div>
+    </section>
+
+    <section class="testimonials-section">
+      <div class="container">
+        <ul>
+          <li>
+            <p>TopQ is a web-based queuing application for lab and tutor sessions. Designed to offer an easy-to-navigate
+              user interface to help the users, both students and tutors, on how to use it for their own purposes</p>
+          </li>
+          <li>
+            <p>TopQ focuses on education on a higher level. Universities can sign a monthly subscription which gives
+              access
+              to the application. <br><br> </p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-left">
+          <h2>Contact</h2>
+
+          <form action="">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name">
+
+            <label for="message">Message</label>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+
+            <input type="submit" class="send-message-cta" value="Send message">
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </template>
+
+  <template id="login">
+    <div class="w3-container" id="view-login">
+      <div class="d-flex justify-content-center" id="cardBox">
+        <div class="card">
+          <div class="card-body">
+            <form class="row g-3" id="loginForm">
+              <h2 class="card-title">Login</h2>
+              <div class="mb-3">
+                <label for="InputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
+              </div>
+              <br>
+              <br>
+              <a href="/register" class="link">Register instead</a>
+            </form>
+          </div>
+        </div>
+        <div>
+        </div>
+  </template>
+
+  <template id="register">
+    <div class="w3-container" id="view-register">
+      <div class="d-flex justify-content-center" id="cardBox_register">
+        <div class="card">
+          <div class="card-body">
+            <form class="row g-3" id="registerForm">
+              <h2 class="card-title">Register</h2>
+              <div class="mb-3">
+                <label for="InputEmailRegister" class="form-label">Email</label>
+                <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="InputPasswordRegister" class="form-label">Password</label>
+                <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputUsernameRegister" class="form-label">Username</label>
+                <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                  <label class="form-check-label" for="invalidCheck2">
+                    Agree to terms and conditions
+                  </label>
                 </div>
               </div>
-            <div>  
-        </div>
-    </template>
-
-    <template id="register">
-      <div class="w3-container" id="view-register">
-        <div class="d-flex justify-content-center" id="cardBox_register">
-          <div class="card">
-            <div class="card-body">
-              <form class="row g-3" id="registerForm">
-                <h2 class="card-title">Register</h2>
-                <div class="mb-3">
-                  <label for="InputEmailRegister" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se" required>
-                </div>
-                <div class="mb-3">
-                  <label for="InputPasswordRegister" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
-                </div>
-                <div class="mb-3">
-                  <label for="InputUsernameRegister" class="form-label">Username</label>
-                  <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
-                </div>       
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">
-                      Agree to terms and conditions
-                    </label>
-                  </div>
-                </div>
               <br>
               <div class="col-12">
                 <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
               </div>
               <br>
-              <br>     
-              <a href="/login" class="link">Login instead</a>   
-              </form>
-            </div>
+              <br>
+              <a href="/login" class="link">Login instead</a>
+            </form>
           </div>
         </div>
       </div>
-    </template>
+    </div>
+  </template>
 
 
-    <script type="module" src="index.js"></script>
+  <script type="module" src="index.js"></script>
 </body>
+
+
+<script>
+  const mobileBtn = document.getElementById('mobile-cta')
+  nav = document.querySelector('nav')
+  mobileBtnExit = document.getElementById('mobile-exit');
+
+  mobileBtn.addEventListener('click', () => {
+    nav.classList.add('menu-btn');
+  });
+
+  mobileBtnExit.addEventListener('click', () => {
+    nav.classList.remove('menu-btn');
+  });
+</script>
+
 
 </html>
