@@ -17,25 +17,38 @@ const createHTML = (input: testType): string => {
     `;
 };
 
-async function createUser(){
-    var email = document.getElementById("InputEmailRegister").value;
-    var password = document.getElementById("InputPasswordRegister").value;
-    var username = document.getElementById("InputUsernameRegister").value;
-    var checked = document.getElementById("invalidCheck2").value;
-    try{
-        const result = await standardPost("/register", {
-            "username": username,
-            "email": email,
-            "password": password
-        })
-        console.log(result);
+async function createUser(event){
+    event.preventDefault();
+    const email = $<HTMLInputElement>('#InputEmailRegister').val();
+    const password = $<HTMLInputElement>('#InputPasswordRegister').val();
+    const username = $<HTMLInputElement>('#InputUsernameRegister').val();
+    const checked = $<HTMLInputElement>('#invalidCheck2').val();
+    try {
+        const result = await standardPost('/register', {
+            username: username,
+            email: email,
+            password: password,
+        });
         navigateTo('/login');
     } catch (e) {
         // TODO
-    }   
+        // Kan det skapas en med samma mail?
+    }
 }
 
-async function logIn() {
+function isSignedIn(){
+    const signedIn = sessionStorage.getItem('auth');
+    return signedIn != null;
+}
+
+function logOut(event){
+    event.preventDefault();
+    sessionStorage.removeItem('auth');
+    navigateTo('/');
+}
+
+async function logIn(event) {
+    event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
@@ -45,11 +58,12 @@ async function logIn() {
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
         console.log(result);
+        navigateTo('/');
+
         // TODO, navigate
-    } catch(e) {
-        window.location.reload();
-        alert("Felaktig email eller lösenord. Försök igen eller registrera dig.");
-    }  
+    } catch (e) {
+        alert('Felaktig email eller lösenord. Försök igen eller registrera dig.');
+    }
 }
 
 const main = () => {
