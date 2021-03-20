@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import abort
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_bcrypt import Bcrypt
@@ -16,7 +17,7 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-
+#USER CLASS
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False)
@@ -33,8 +34,37 @@ class User(db.Model):
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
 
-    
 
+class Ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    room = db.Column(db.Integer, db.ForeignKey(
+        'room.id'), nullable=False)
+    creator = db.Column(db.Integer, db.ForeignKey(
+        'user.id'), nullable=False)
+
+    ticket_info = db.Column(db.String, nullable=True)
+
+    def __repr__(self):
+        return f'<Ticket {self.id}: {self.room} {self.creator} {self.ticket_info}>'
+
+    def serialize(self):
+        d = dict(id=self.id, ticket_info=self.ticket_info, room=self.room)
+        d['creator'] = User.query.get(self.creator).serialize()
+        return d
+
+
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    tickets = db.relationship('Ticket', backref=db.backref(
+        "Room"))
+
+    def serialize(self, populate=True):
+        d = dict(id=self.id, name=self.name)
+        d['tickets'] = [ ticket.serialize() for ticket in Ticket.query.filter_by(room=self.id)]
+
+        return d
+    
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
@@ -43,7 +73,7 @@ def login():
         for user in User.query.all(): 
             if user.email==email:
                 if bcrypt.check_password_hash(user.password_hash, password):
-                     token = create_access_token(identity=email)
+                     token = create_access_token({'user': user.id})
                      return dict(token = token, user = user.serialize())
         else: abort(401)
 
@@ -89,8 +119,55 @@ def usersid(user_id):
         resp = jsonify(Sucess=True)
         return resp
 
+ 
+def add_ticket(data: dict, userID: int):
+    print(data)
+    to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'])
+    db.session.add(to_create)
+    db.session.commit()
+    return jsonify(to_create.serialize())
+
+# @jwt_required()
+@app.route('/tickets', methods=['POST'])
+def create_ticket():
+    userID = 1 # get_jwt_identity()['user']
+    if request.method == 'POST':
+       return add_ticket(request.get_json(), userID) 
 
 
+def create_room(data: dict):
+    to_create = Room(name=data['name'])
+    db.session.add(to_create)
+    db.session.commit()
+    return jsonify(to_create.serialize())
+
+@app.route('/rooms', methods=['GET', 'POST'])
+def rooms():
+    # user_id = get_jwt_identity()['user']
+    # TODO add filter for user_id
+    if request.method == 'POST':
+        return create_room(request.get_json())
+
+    elif request.method == 'GET':
+        return jsonify([room.serialize() for room in Room.query.all()])
+
+@app.route('/rooms/<int:room_id>', methods=['GET', 'DELETE'])
+def room(room_id: int):
+    targetRoom = Room.query.get(room_id)
+    if targetRoom is None:
+        abort(404)
+    
+    if request.method == 'GET':
+        return jsonify(targetRoom.serialize())
+
+    elif request.method == 'DELETE':
+        db.session.delete(targetRoom)
+        delete_q = Ticket.__table__.delete().where(Ticket.room == room_id)
+        db.session.execute(delete_q)
+        
+        db.session.commit()
+        return ''
+    
 
 
 

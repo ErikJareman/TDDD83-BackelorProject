@@ -1,13 +1,7 @@
 import $ from 'jquery';
+import { clickDeleteRoom, clickLeftButton, createRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { standardPost } from './core/server.service';
-
-// Interfaces är lite annorlunda från Java
-// Här används de ofta för att beskriva ett object {}
-interface testType {
-    test: string;
-    age: number;
-}
 
 async function createUser(event) {
     event.preventDefault();
@@ -17,9 +11,9 @@ async function createUser(event) {
     const checked = $<HTMLInputElement>('#invalidCheck2').val();
     try {
         const result = await standardPost('/register', {
-            username: username,
-            email: email,
-            password: password,
+            username,
+            email,
+            password,
         });
         navigateTo('/login');
     } catch (e) {
@@ -44,6 +38,7 @@ async function logIn(event) {
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
+        console.log('hej');
         const result = await standardPost('/login', {
             email: email,
             password: password,
@@ -62,6 +57,53 @@ const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
     $('#SendLogin').on('click', logIn);
+    $('#skapa-ticket').on('click', createTicket);
+    $('#create-room').on('click', submitCreateRoom);
+    $('#delete-room').on('click', clickDeleteRoom);
 };
+
+/*function ticketTemplate(ticket: any) {
+    return `<div class="card car-card">
+    <table>
+        <tr>
+            <td>Märke:</td><td>${car.make}</td>
+        </tr>
+        <tr>
+            <td>Modell:</td><td>${car.model}</td>
+        </tr>
+        <tr>
+            <td>Kund:</td><td>${car.customer ? car.customer.name: 'Kund saknas'}</td>
+        </tr>
+    </table>
+    <br>
+    <span>
+        <button data-id=${car.id} class="btn btn-primary edit-car" data-toggle="modal" data-target="#editModal">Redigera</button>
+        <button data-id=${car.id} class="btn btn-danger delete-car">Ta bort</button>
+    </span>
+</div>`;
+}
+function loadTickets() {
+    const tickets = server.getTickets();
+    const ticketListElement = $("#ticket-list")
+    ticketListElement.empty();
+    for (ticket of tickets) {
+        ticketListElement.append(ticketTemplate(ticket));
+    }
+    //$(".delete-car").click(clickDelete); add listeners like this...
+}
+
+
+const submitTicketForm = async (event: any) => {
+    event.preventDefault();
+    const ticket = {
+        name: $("#name-input").val(),
+        tag_1: $("#tag_1-input").val(),
+        tag_2: $("#tag_2-input").val(),
+        tag_3: $("#tag_3-input").val(),
+        tag_4: $("#tag_4-input").val(),
+        ticket_info: $("#ticket-info-input").val()
+    }
+    //inject-html kö-rum
+}*/
 
 $(main);

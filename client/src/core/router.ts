@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { enterRoomPage } from './rooms';
 
 interface Route {
     url: string;
@@ -13,6 +14,7 @@ const routes: Route[] = [
     { url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
     { url: '/404', templateSelector: '#404' },
     { url: '/', templateSelector: '#home' },
+    { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
 ];
 
 // Programatic navigate
