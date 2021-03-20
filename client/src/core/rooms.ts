@@ -1,3 +1,4 @@
+import { getUser, getUserID } from './auth.service';
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
 import { getMultiple, getSingle, standardDelete, standardPost } from './server.service';
@@ -8,6 +9,7 @@ export interface Room {
     name: string;
     tickets: Ticket[];
     members: User[];
+    admins: User[];
 }
 
 export interface Ticket {
@@ -56,6 +58,16 @@ const noRoomSelected = async () => {
     }
 };
 
+const memberTemplate = (member: User) => `<div class="card ">${member.username}</div>`;
+
+const ifIsAdmin = () => {
+    $('#delete-room').removeClass('d-none');
+};
+
+const ifNotAdmin = () => {
+    $('#delete-room').addClass('d-none');
+};
+
 const loadRoom = async (id: number) => {
     const hash = `#${id}`;
     if (history.pushState) {
@@ -90,7 +102,19 @@ const loadRoom = async (id: number) => {
 
     const memberListElement = $('#member-list');
     memberListElement.empty();
-    room.members.forEach((member) => memberListElement.append(`<p>${member.username}</p>`));
+    room.members.forEach((member) => memberListElement.append(memberTemplate(member)));
+
+    const adminMemberListElement = $('#admin-list');
+    adminMemberListElement.empty();
+    room.admins.forEach((member) => adminMemberListElement.append(memberTemplate(member)));
+
+    const userID = getUserID();
+    const selfAdmin = room.admins.findIndex((member) => member.id === userID);
+    if (selfAdmin !== -1) {
+        ifIsAdmin();
+    } else {
+        ifNotAdmin();
+    }
 };
 
 const loadRoomList = async () => {

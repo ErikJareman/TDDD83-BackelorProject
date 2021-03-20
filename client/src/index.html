@@ -151,7 +151,7 @@
     <template id="login">
       <div class="w3-container" id="view-login">
         <div class="d-flex justify-content-center" id="cardBox">
-          <div class="card">
+          <div class="card card-reg">
             <div class="card-body">
               <form class="row g-3" id="loginForm">
                 <h2 class="card-title">Login</h2>
@@ -180,7 +180,7 @@
     <template id="register">
       <div class="w3-container" id="view-register">
         <div class="d-flex justify-content-center" id="cardBox_register">
-          <div class="card">
+          <div class="card card-reg">
             <div class="card-body">
               <form class="row g-3" id="registerForm">
                 <h2 class="card-title">Register</h2>
@@ -251,7 +251,7 @@
 
     <template id="register">
       <div class="view-register">
-        <div class="card">
+        <div class="card card-reg">
           <div class="card-body">
             <form class="row g-3" id="registerForm">
               <h2 class="card-title">Register</h2>
@@ -417,18 +417,27 @@
                 data-target="#ticketModal" id="goto-queue-up">
                 Queue up
               </button>
-              <button type="button" class="btn bad-button right-button" id="delete-room">
+              <button type="button" class="btn bad-button right-button" id="leave-room">
                 Leave room
               </button>
             </div>
+            <h5 class="heading2">
+              Admins
+            </h5>
+            <right-container id="admin-list">
+
+
+            </right-container>
             <h5 class="heading2">
               Members
             </h5>
             <right-container id="member-list">
 
 
-
             </right-container>
+            <button type="button" class="btn bad-button right-button d-none" id="delete-room">
+              Delete room
+            </button>
           </div>
         </div>
     </template>

@@ -81,7 +81,8 @@ class Room(db.Model):
     def serialize(self, populate=True):
         d = dict(id=self.id, name=self.name)
         d['tickets'] = [ ticket.serialize() for ticket in Ticket.query.filter_by(room=self.id)]
-        d['members'] = [ user.serialize() for user in db.session.query(User).join(RoomMembers).filter(RoomMembers.user == User.id).filter(RoomMembers.room == self.id).all()]
+        d['members'] = [ user.serialize() for user in db.session.query(User).join(RoomMembers).filter(RoomMembers.user == User.id).filter(RoomMembers.room == self.id).filter(RoomMembers.role == Roles.Regular.name).all()]
+        d['admins'] = [ user.serialize() for user in db.session.query(User).join(RoomMembers).filter(RoomMembers.user == User.id).filter(RoomMembers.room == self.id).filter(RoomMembers.role == Roles.Admin.name).all()]
 
         return d
     

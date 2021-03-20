@@ -1,5 +1,19 @@
 import { navigateTo } from './router';
 import { standardPost } from './server.service';
+import jwt_decode from 'jwt-decode';
+
+export interface JWTData {
+    fresh: boolean;
+    iat: number;
+    jti: string;
+    nbf: number;
+    type: string;
+    sub: Identity;
+}
+
+export interface Identity {
+    user: number;
+}
 
 const tokenName = 'auth';
 
@@ -14,6 +28,8 @@ export const getToken = () => JSON.parse(sessionStorage.getItem(tokenName))?.tok
 export const getUser = () => {
     // TODO
 };
+
+export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;
 
 export const hasToken = () => !!getToken();
 

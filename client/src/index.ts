@@ -9,7 +9,7 @@ const main = () => {
     $('#SendLogin').on('click', logIn);
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
-    $('#delete-room').on('click', clickLeaveRoom);
+    $('#leave-room').on('click', clickLeaveRoom);
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
     const mobileBtnExit = document.getElementById('mobile-exit');
