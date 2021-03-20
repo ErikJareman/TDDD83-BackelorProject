@@ -7,6 +7,7 @@ export interface Room {
     id: number;
     name: string;
     tickets: Ticket[];
+    members: User[];
 }
 
 export interface Ticket {
@@ -68,12 +69,25 @@ const loadRoom = async (id: number) => {
         })
         .addClass('btn-secondary')
         .removeClass('btn-outline-secondary');
-    const room = await getRoom(id);
+
+    const res = await getRoom(id);
+
+    const room = res.room;
+
+    if (res.joined) {
+        loadRoomList();
+    }
+
+    console.log({ room });
     $('h5.special').text(room.name);
     // Add tickets
     const ticketListElement = $('#ticket-list');
     ticketListElement.empty();
     room.tickets.forEach((ticket, index) => ticketListElement.append(ticketTemplate(ticket, index + 1)));
+
+    const memberListElement = $('#member-list');
+    memberListElement.empty();
+    room.members.forEach((member) => memberListElement.append(`<p>${member.username}</p>`));
 };
 
 const loadRoomList = async () => {
@@ -139,7 +153,7 @@ export async function createTicket() {
     loadRoom(roomID);
 }
 
-export const getRoom = async (id: number) => getSingle<Room>(EndPoints.Rooms, id);
+export const getRoom = async (id: number): Promise<{ room: Room; joined: boolean }> => getSingle(EndPoints.Rooms, id);
 
 export const enterRoomPage = async () => {
     loadRoomPage();

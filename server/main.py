@@ -7,6 +7,9 @@ from flask import request
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 from flask_cors import CORS
+from enum import Enum
+
+from sqlalchemy.orm.session import Session
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='/')
 CORS(app)
@@ -16,6 +19,9 @@ app.config['JWT_SECRET_KEY'] = 'kiejfuheirgyuhvbnjmwpejn'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
+
+
+Roles = Enum('Roles', 'Admin Regular')
 
 #USER CLASS
 class User(db.Model):
@@ -33,6 +39,9 @@ class User(db.Model):
 
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
+    
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password_hash, password)
 
 
 class Ticket(db.Model):
@@ -52,6 +61,16 @@ class Ticket(db.Model):
         d['creator'] = User.query.get(self.creator).serialize()
         return d
 
+class RoomMembers(db.Model):
+    user = db.Column(db.Integer, db.ForeignKey(
+        'user.id'), primary_key=True, nullable=False)
+    room = db.Column(db.Integer, db.ForeignKey(
+        'room.id'), primary_key=True, nullable=False)
+    role = db.Column(db.String, nullable=False)
+    
+    def __repr__(self):
+        return f'<RoomMembers {self.user} {self.room} {self.role}>'
+
 
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -62,20 +81,27 @@ class Room(db.Model):
     def serialize(self, populate=True):
         d = dict(id=self.id, name=self.name)
         d['tickets'] = [ ticket.serialize() for ticket in Ticket.query.filter_by(room=self.id)]
+        d['members'] = [ user.serialize() for user in db.session.query(User).join(RoomMembers).filter(RoomMembers.user == User.id).filter(RoomMembers.room == self.id).all()]
 
         return d
     
 @app.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        email = request.get_json(force=True)["email"]
-        password = request.get_json(force = True)["password"]
-        for user in User.query.all(): 
-            if user.email==email:
-                if bcrypt.check_password_hash(user.password_hash, password):
-                     token = create_access_token({'user': user.id})
-                     return dict(token = token, user = user.serialize())
-        else: abort(401)
+    data = request.get_json()
+    if not 'email' in data or not 'password' in data:
+        abort(401)
+
+    email = data['email']
+    password = data['password']
+
+    user = User.query.filter_by(email=email).first()
+
+    if user is None or not user.check_password(password):
+        abort(401)
+
+    # TODO, make token expire
+    token = create_access_token({'user': user.id}, expires_delta=False)
+    return jsonify({"token": token, "user": user.serialize()})
 
 
 @app.route('/register', methods=['POST'])
@@ -121,44 +147,66 @@ def usersid(user_id):
 
  
 def add_ticket(data: dict, userID: int):
-    print(data)
     to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'])
     db.session.add(to_create)
     db.session.commit()
     return jsonify(to_create.serialize())
 
-# @jwt_required()
+
 @app.route('/tickets', methods=['POST'])
+@jwt_required()
 def create_ticket():
-    userID = 1 # get_jwt_identity()['user']
+    userID = get_jwt_identity()['user']
     if request.method == 'POST':
        return add_ticket(request.get_json(), userID) 
 
 
-def create_room(data: dict):
-    to_create = Room(name=data['name'])
-    db.session.add(to_create)
+def join_room(room_id: int, user_id: int, role: Roles):
+    new_member = RoomMembers(room=room_id, user=user_id, role=role.name)
+    db.session.add(new_member)
     db.session.commit()
-    return jsonify(to_create.serialize())
+
+def create_room(data: dict, creator: int):
+    new_room = Room(name=data['name'])
+    db.session.add(new_room)
+    db.session.commit()
+
+    join_room(new_room.id, creator, Roles.Admin)
+    
+    return jsonify(new_room.serialize())
+
 
 @app.route('/rooms', methods=['GET', 'POST'])
+@jwt_required()
 def rooms():
-    # user_id = get_jwt_identity()['user']
+    user_id = get_jwt_identity()['user']
     # TODO add filter for user_id
     if request.method == 'POST':
-        return create_room(request.get_json())
+        return create_room(request.get_json(), user_id)
 
     elif request.method == 'GET':
-        return jsonify([room.serialize() for room in Room.query.all()])
+
+        target_rooms = db.session.query(Room).join(RoomMembers).filter(RoomMembers.user == user_id).filter(Room.id == RoomMembers.room).all()
+        return jsonify([room.serialize() for room in target_rooms])
+
+
+
 
 @app.route('/rooms/<int:room_id>', methods=['GET', 'DELETE'])
+@jwt_required()
 def room(room_id: int):
     targetRoom = Room.query.get(room_id)
+    user_id = get_jwt_identity()['user']
     if targetRoom is None:
         abort(404)
     
     if request.method == 'GET':
-        return jsonify(targetRoom.serialize())
+        member = db.session.query(RoomMembers).filter(RoomMembers.user == user_id).filter(RoomMembers.room == room_id).first()
+        joined = False
+        if member is None:
+            join_room(room_id, user_id, Roles.Regular)
+            joined = True
+        return jsonify({'room': targetRoom.serialize(), 'joined': joined})
 
     elif request.method == 'DELETE':
         db.session.delete(targetRoom)
