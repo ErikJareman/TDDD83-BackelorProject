@@ -180,7 +180,6 @@ def create_room(data: dict, creator: int):
 @jwt_required()
 def rooms():
     user_id = get_jwt_identity()['user']
-    # TODO add filter for user_id
     if request.method == 'POST':
         return create_room(request.get_json(), user_id)
 
@@ -190,6 +189,8 @@ def rooms():
         return jsonify([room.serialize() for room in target_rooms])
 
 
+def member_of_room(room: int, user: int):
+    return db.session.query(RoomMembers).filter(RoomMembers.user == user).filter(RoomMembers.room == room).first()
 
 
 @app.route('/rooms/<int:room_id>', methods=['GET', 'DELETE'])
@@ -201,7 +202,7 @@ def room(room_id: int):
         abort(404)
     
     if request.method == 'GET':
-        member = db.session.query(RoomMembers).filter(RoomMembers.user == user_id).filter(RoomMembers.room == room_id).first()
+        member = member_of_room(room_id, user_id)
         joined = False
         if member is None:
             join_room(room_id, user_id, Roles.Regular)
@@ -217,6 +218,18 @@ def room(room_id: int):
         return ''
     
 
+
+@app.route('/leave-room/<int:room_id>', methods=['POST'])
+@jwt_required()
+def leave_room(room_id: int):
+    user_id = get_jwt_identity()['user']
+    if request.method == 'POST':
+        member = member_of_room(room_id, user_id)
+        if member is not None:
+            db.session.delete(member)
+            db.session.commit()
+            return 'left room'
+        return 'not member'
 
 
 

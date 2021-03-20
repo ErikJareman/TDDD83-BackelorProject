@@ -1,6 +1,6 @@
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
-import { getMultiple, getSingle, standardDelete, standardPost, Stringable } from './server.service';
+import { getMultiple, getSingle, standardDelete, standardPost } from './server.service';
 import { User } from './User';
 
 export interface Room {
@@ -49,8 +49,11 @@ function ticketTemplate(ticket: Ticket, position: number) {
 </div>`;
 }
 
-const noRoomSelected = () => {
-    // TODO
+const noRoomSelected = async () => {
+    const roomList = await listRooms();
+    if (roomList.length !== 0) {
+        loadRoom(roomList[0].id);
+    }
 };
 
 const loadRoom = async (id: number) => {
@@ -104,6 +107,7 @@ const loadRoomList = async () => {
     buttons.off();
     buttons.on('click', clickLeftButton);
 };
+
 const loadRoomPage = async () => {
     loadRoomList();
     const selectedRoom = getRoomIDFromURL();
@@ -167,6 +171,12 @@ export function clickLeftButton(event: JQuery.ClickEvent<HTMLButtonElement>) {
 
 export const clickDeleteRoom = async () => {
     await standardDelete(EndPoints.Rooms, getRoomIDFromURL());
+    noRoomSelected();
+    loadRoomList();
+};
+
+export const clickLeaveRoom = async () => {
+    await standardPost(`${EndPoints.LeaveRoom}/${getRoomIDFromURL()}`);
     noRoomSelected();
     loadRoomList();
 };

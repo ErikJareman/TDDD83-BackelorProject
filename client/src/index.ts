@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { createUser, logIn } from './core/auth.service';
-import { clickDeleteRoom, createTicket, submitCreateRoom } from './core/rooms';
+import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter } from './core/router';
 
 const main = () => {
@@ -9,7 +9,7 @@ const main = () => {
     $('#SendLogin').on('click', logIn);
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
-    $('#delete-room').on('click', clickDeleteRoom);
+    $('#delete-room').on('click', clickLeaveRoom);
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
     const mobileBtnExit = document.getElementById('mobile-exit');
