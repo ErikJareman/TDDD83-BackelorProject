@@ -822,6 +822,8 @@ h5 {
     transition: all 0.3s;
 }
 .footer .footer-content .links ul a {
+    color: colors.$primary1;
+    text-decoration: underline;
     display: block;
     margin-bottom: 10px;
     font-size: 1.2em;
