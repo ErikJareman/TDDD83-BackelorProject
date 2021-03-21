@@ -55,12 +55,14 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15%;
 }
 #view-register {
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15%;
 }
 
 #SendLogin {
@@ -769,31 +771,41 @@ h5 {
 .card-reg {
     position: absolute;
     align-items: center;
-    width: 532px;
-    left: 400px;
-    top: 169px;
     background: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    width: 40%;
 }
 
 #cardBox {
     margin-top: 5%;
     margin-bottom: 15%;
-    width: 40%;
+    width: 40% !important;
 }
 #cardBox_register {
     margin-top: 5%;
-    margin-bottom: 15%;
+    margin-bottom: 25%;
     width: 40%;
 }
 
-#form {
+
+#login_reg_link{
+    margin-left: 45% !important;
+}
+
+#loginForm {
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 20px;
 }
+
+#registerForm {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
 .link {
     font-family: Inter;
     font-style: normal;
