@@ -15,6 +15,13 @@ body {
     font-family: 'Poppins';
 }
 
+#router {
+    margin-bottom: 400px;
+    min-height: 700px;
+    
+
+}
+
 .navbar {
     background: colors.$secondary1;
     padding: 1em;
@@ -538,7 +545,7 @@ img {
 }
 .left-div {
     height: auto;
-    background-color: colors.$secondary3;
+    background-color: colors.$primary2;
     padding-top: 6px;
     padding-bottom: 2rem;
     display: flex;
@@ -548,14 +555,14 @@ img {
 }
 .center-div {
     height: 1000px;
-    background-color: colors.$secondary2;
+    background-color: colors.$primary3;
     align-items: center;
     text-align: left;
     padding-top: 6px;
 }
 .right-div {
     height: 1000px;
-    background-color: colors.$secondary3;
+    background-color: colors.$primary2;
     align-items: center;
     text-align: left;
     padding-top: 15px;
@@ -568,7 +575,7 @@ h5 {
     padding-bottom: 4px;
     padding-left: 6px;
 }
-.left-button {
+.left-button { // VAD ÄR DETTA!?
     width: 98%;
     margin: 4px 2px;
     white-space: nowrap;
@@ -596,6 +603,7 @@ h5 {
 }
 .special {
     padding-bottom: 10px;
+    color: #6c757d;
 }
 #ticket-list {
     text-align: center;
@@ -630,13 +638,6 @@ h5 {
     //padding-top: 10px;
 }
 
-#first_header_title {
-    width: 83.3333333333333333%;
-    //border-right: 2px solid #868e96;
-    padding: 0px;
-    color: #b3b3b4;
-    padding: 10px;
-}
 
 #drop_down {
     width: 16.6666666666666666%;
