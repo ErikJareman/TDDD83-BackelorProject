@@ -2,18 +2,28 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-html,
+html{
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     /* html och height för att få till footern */
     height: 100%;
-    background: white !important;
-    margin: 0 !important;
-    font-family: 'Poppins' !important;
+    background: white;
+    margin: 0;
+    font-family: 'Poppins';
 }
 
 .navbar {
     background: colors.$secondary1;
     padding: 1em;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 
     .container {
         display: -webkit-box;
@@ -31,22 +41,22 @@ body {
             color: colors.$accent;
         }
     }
+    .mobile-menu {
+        cursor: pointer;
+        height: 15px;
+    }
     nav {
         display: none;
-
-        .mobile-menu {
-            cursor: pointer;
-        }
     }
+
 }
 
-#container {
-    height: 100%;
-    overflow: hidden;
-}
+//.container {
+//    height: 100%;
+    //overflow: hidden;}
 
 //-------HERO--------------------------
-a {
+.hero a {
     color: black;
 }
 
@@ -81,11 +91,6 @@ a {
     margin-top: -0.2em;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0 !important;
-    padding: 0;
-}
 
 section {
     padding: 5em 2em;
@@ -95,7 +100,7 @@ section {
     text-align: center;
 }
 
-.left-col {
+.hero .left-col {
     .subhead {
         text-transform: uppercase;
         font-weight: bold;
@@ -131,9 +136,14 @@ section {
 //--------FEATURE-----------------------------
 
 .features-section {
-    min-height: 100%; /* Testar detta för att få till footern */
-    background: #20272e;
+    
+    background: colors.$secondary1;
     color: white;
+    ul { 
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 ul.features-list {
@@ -150,6 +160,8 @@ ul.features-list {
     margin-bottom: 1em;
     margin-left: 2em;
     position: relative;
+
+
 
     li {
         font-size: 1.1em;
@@ -177,6 +189,12 @@ ul.features-list {
 .testimonials-section {
     background: colors.$secondary3;
     color: white;
+    ul { 
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
     li {
         background: #006bd6;
         text-align: center;
@@ -244,11 +262,19 @@ nav {
     padding: 1em !important;
 
     ul.primary-nav {
-        margin-top: 4em !important;
+        margin: 0;
+    }
+    .mobile-menu-exit {
+        margin-top: 0;
+        float: right;
+        margin: 0,5em;
+        cursor: pointer;
+        height: 20px;
     }
     li {
         a {
-            color: white !important;
+            
+            color: white;
             text-decoration: none;
             display: block;
             padding: 0, 5em;
@@ -261,11 +287,7 @@ nav {
     }
 }
 
-.mobile-menu-exit {
-    float: right;
-    margin: 0.5em;
-    cursor: pointer;
-}
+
 
 //-------------768px-----------------------------
 @media only screen and (min-width: 768px) {
@@ -303,13 +325,13 @@ nav {
                 display: flex;
             }
             a {
-                color: black;
+                color: white;
                 font-size: 1.2em;
                 padding: 0.1em 1em;
             }
 
             ul.primary-nav {
-                margin: 0 !important;
+              //  margin: 0 !important;
             }
 
             li.current a {
@@ -324,7 +346,7 @@ nav {
                 margin-top: -0.2em;
 
                 &:hover {
-                    background: purple;
+                    background: colors.$accent;
                     color: white;
                 }
             }
@@ -385,7 +407,7 @@ nav {
     .features-section img {
         display: block;
         position: absolute;
-        right: 12em;
+        right: 1em;
         width: 500px;
         bottom: 8em;
     }
@@ -404,6 +426,7 @@ nav {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        height: fixed;
     }
 }
 
@@ -431,10 +454,20 @@ nav {
 /* Footer */
 
 .footer {
-    background: #303036;
+    background: colors.$secondary1;
     color: #d3d3d3;
     height: 400px;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .footer .footer-content {
@@ -501,11 +534,11 @@ img {
 }
 
 .navbar-top {
-    background-color: #1e2124;
+    background-color: colors.$secondary1;
 }
 .left-div {
     height: auto;
-    background-color: #282b30;
+    background-color: colors.$secondary3;
     padding-top: 6px;
     padding-bottom: 2rem;
     display: flex;
@@ -515,14 +548,14 @@ img {
 }
 .center-div {
     height: 1000px;
-    background-color: #36393e;
+    background-color: colors.$secondary2;
     align-items: center;
     text-align: left;
     padding-top: 6px;
 }
 .right-div {
     height: 1000px;
-    background-color: #282b30;
+    background-color: colors.$secondary3;
     align-items: center;
     text-align: left;
     padding-top: 15px;
@@ -581,7 +614,7 @@ h5 {
 
 .primary-button {
     color: #ffffff;
-    background-color: #3376b4;
+    background-color:colors.$accent;
 }
 .bad-button {
     color: #ffffff;
@@ -590,7 +623,7 @@ h5 {
 
 /*first header*/
 .first_header {
-    background-color: #1e2124;
+    background-color: colors.$secondary1;
     display: flex;
     flex-direction: row;
     //padding: 10px 0px 10px 10px;
@@ -822,7 +855,7 @@ h5 {
     transition: all 0.3s;
 }
 .footer .footer-content .links ul a {
-    color: colors.$primary1;
+    color: colors.$accent;
     text-decoration: underline;
     display: block;
     margin-bottom: 10px;
