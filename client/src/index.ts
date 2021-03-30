@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { createUser, logIn } from './core/auth.service';
+import { createUser, logIn, createSchool, loginSchool } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
@@ -37,11 +37,14 @@ async function checkOut() {
 const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
+    $('#schoolReg').on('click', createSchool);
+    $('#schoolLogin').on('click', loginSchool);
     $('#SendLogin').on('click', logIn);
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
     $('#checkout-button').on('click', checkOut);
+
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
     const mobileBtnExit = document.getElementById('mobile-exit');

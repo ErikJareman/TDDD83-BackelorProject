@@ -80,6 +80,40 @@ class User(db.Model):
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
 
+#SCHOOL CLASS
+class School(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    password_hash = db.Column(db.String, nullable=False)
+    sub_id = db.Column(db.Integer, nullable=True)
+    
+    def __repr__(self):
+        return '<School {}: {} {} >'.format(self.id, self.name, self.email, self.password_hash, self.sub_id)
+
+    def serialize(self):
+        sub_id=self.sub_id if self.sub_id else None
+        return dict(id=self.id, name=self.name, email=self.email, sub_id=sub_id)
+
+    def set_password(self, password):
+        self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
+    
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password_hash, password)
+
+#SCHOOL/ADMIN RELATIONSHIP CLASS
+class School_Admin(db.Model):
+    school_id = db.Column(db.Integer, db.ForeignKey(
+        'school.id'), primary_key=True, nullable=False)
+    admin_email = db.Column(db.String, db.ForeignKey(
+        'user.email'), primary_key=True, nullable=False)
+
+    def __repr__(self):
+        return '<School_Admin{}: {} >'.format(self.school_id, self.admin_email)
+    
+    def serialize(self):
+        return dict(school_id=self.school_id, admin_email=self.admin_email)
+
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -122,7 +156,8 @@ class Room(db.Model):
         d['admins'] = [ user.serialize() for user in db.session.query(User).join(RoomMembers).filter(RoomMembers.user == User.id).filter(RoomMembers.room == self.id).filter(RoomMembers.role == Roles.Admin.name).all()]
 
         return d
-    
+
+#login/register student and tutor  
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -141,7 +176,6 @@ def login():
     token = create_access_token({'user': user.id}, expires_delta=False)
     return jsonify({"token": token, "user": user.serialize()})
 
-
 @app.route('/register', methods=['POST'])
 def sign_up():
     if request.method == 'POST':
@@ -153,6 +187,58 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
         return jsonify([new_user.serialize()])
+
+
+#login/register schools
+@app.route('/loginschool', methods=['POST'])
+def login_school():
+    data = request.get_json()
+    if not 'email' in data or not 'password' in data:
+        abort(401)
+
+    email = data['email']
+    password = data['password']
+
+    school = School.query.filter_by(email=email).first()
+
+    if school is None or not school.check_password(password):
+        abort(401)
+
+    # TODO, make token expire
+    token = create_access_token({'school': school.id}, expires_delta=False)
+    return jsonify({"token": token, "school": school.serialize()})
+
+@app.route('/registerschool', methods=['POST', 'GET'])
+def sign_up_school():
+    if request.method == 'POST':
+        name = request.get_json(force=True)["name"]
+        email = request.get_json(force = True)["email"]
+        password = request.get_json(force=True)["password"]
+        new_school = School(name=name, email=email, password_hash=password)
+        new_school.set_password(password)
+        db.session.add(new_school)
+        db.session.commit()
+        return jsonify([new_school.serialize()])
+    elif request.method == 'GET':
+        return jsonify([j.serialize() for j in School.query.all()])
+
+#set or delete admin
+@app.route('/school_admin', methods =['POST', 'DELETE'])
+def school_admin():
+    school_id = request.get_json(force=True)["school_id"]
+    admin_email = request.get_json(force = True)["admin_email"]
+    if request.method == 'POST':
+        if User.query.get(admin_email):
+            new_admin = School_Admin(school_id=school_id, admin_email=admin_email) 
+            db.session.add(new_admin)
+            return jsonify([new_admin.serialize()])
+        else: abort(404)
+    elif request.method == 'DELETE': #Denna funkar inte än.
+        if School_Admin.query.get(school_id, admin_email):
+            admin = School_Admin.query.get(school_id, admin_email)
+            db.session.delete(admin)
+            db.session.commit()
+
 
 
 @app.route('/users', methods=['GET'])

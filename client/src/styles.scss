@@ -50,6 +50,157 @@ a {
     color: black;
 }
 
+#login_instead_button {
+    color: white;
+    font-size: 20px;
+    background-color: colors.$accent;
+    font-weight: lighter;
+    border-radius: 5em;
+    margin-top: 4%;
+    &:hover {
+        background: colors.$accenthover;
+        color: white;
+    }
+}
+
+.login-section {
+    background: colors.$secondary3;
+    color: white;
+    text-align: center;
+    li {
+        h2{
+            color: colors.$secondary3;
+        }
+        background: colors.$secondary2;
+        color: colors.$secondary1;
+        text-align: center;
+        padding: 2em 2em;
+        width: 60%;
+        margin: 0 auto 3em auto;
+        border-radius:50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+    form{
+        text-align: left;
+        font-size: 14px;
+        margin: 3%;
+        ::placeholder{
+            color:rgb(192, 187, 187);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .btn{
+                color: white;
+                background-color: colors.$accent;
+                font-weight: lighter;
+                border-radius: 5em;
+                &:hover {
+                    background: colors.$accenthover;
+                    color: white;
+                }
+        }
+        a{
+            margin-left: 20%;
+            color: colors.$secondary3;
+            text-decoration: underline;
+            
+            &:hover {
+                color: colors.$accent;
+            }
+        }
+    }
+
+}
+
+.subscription-section {
+    background: colors.$secondary3;
+    color: white;
+    text-align: center;
+    h2{
+        font-size: 30px;
+    }
+    li {
+        h2{
+            color: colors.$secondary3;
+            font-size: 24px;
+        }
+        background: colors.$secondary2;
+        color: colors.$secondary1;
+        text-align: center;
+        padding: 2em 2em;
+        width: 90%;
+        margin: 0 auto 3em auto;
+        border-radius:50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+    #admin-info{
+        width:100%;
+        font-size: 14px;
+    }
+
+    p {
+        text-decoration: underline;
+        font-weight: 600;
+    }
+
+    form{
+        text-align: left;
+        font-size: 14px;
+        margin: 3%;
+        ::placeholder{
+            color:rgb(192, 187, 187);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .btn{
+                color: white;
+                background-color: colors.$accent;
+                font-weight: lighter;
+                border-radius: 5em;
+                &:hover {
+                    background: colors.$accenthover;
+                    color: white;
+                }
+        }
+        a{
+            margin-left:15%;
+            color: colors.$secondary3;
+            text-decoration: underline;
+            &:hover {
+                color: colors.$accent;
+            }
+        }
+    }
+     .form-check-input{
+        margin-left: -53%;
+    }
+}
+
+.subs_img{
+    width: 100%;
+    margin-bottom: 2%;
+
+}
+
+.admins_img{
+    width: 40px;
+    margin-bottom: 2%;
+
+}
+
+.buy_home_img{
+    width: 250px;
+}
+
+#buy_home{
+    font-size:20px;
+    color: rgb(78, 78, 78);
+}
+
 #view-login {
     background-color: white;
     display: flex;
@@ -324,7 +475,7 @@ nav {
                 margin-top: -0.2em;
 
                 &:hover {
-                    background: purple;
+                    background: colors.$accenthover;
                     color: white;
                 }
             }

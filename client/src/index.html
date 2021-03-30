@@ -57,7 +57,7 @@
         <ul>
 
           <li class="footer-links"><a href="/">Home</a></li>
-          <li class="footer-links"><a href="/">Buy TopQ</a></li>
+          <li class="footer-links"><a href="/buy">Buy TopQ</a></li>
           <li class="footer-links"><a href="/login">Login</a></li>
           <li class="footer-links"><a href="/register">Register</a></li>
           <li class="footer-links"><a href="/">About TopQ</a></li>
@@ -82,7 +82,7 @@
             <h1>Hold the line!</h1>
             <h2>Don't wait, buy TopQ now!</h2>
             <div class="hero-cta">
-              <a href="#" class="primary-cta">LET´S GO!</a>
+              <a href="/buy" class="primary-cta">LET´S GO!</a>
               <!--<a href="#" class="instructions">MyQueue</a>-->
             </div>
             </p>
@@ -184,6 +184,107 @@
         </section>
     </template>
 
+    <template id="school-login">
+      <section class="hero">
+        <div class="container">
+          <div class="col-sm-12 col-md-12 col-lg-9">
+            <h1>TopQ for Schools and Universites!</h1>
+            <br>
+            <br>
+            <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
+            <div>
+              <a href='/login' class="btn btn-primary" id='login_instead_button'>Login as student or tutor</a>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <img src="assets/school.png" class="buy_home_img" alt="illustration">
+          </div>
+        </div>
+      </section>
+      <section class=login-section>
+        <li>
+          <form>
+              <h2>School-login:</h2>
+              <label for="contactEmailLogin">Contact-email:</label>
+              <input type="email" class="form-control" id="contactEmailLogin" aria-describedby="emailHelp" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+              <label for="schoolLoginP">Password:</label>
+              <input type="password" class="form-control" id="schoolLoginP" placeholder="Enter password" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id='schoolLogin'>Login</button>
+            <br>
+            <br>
+            <a href='/buy'>Do not have an account yet? Register instead</a>
+          </form>
+        </li>
+      </section>
+
+    </template>
+
+    <template id="buy-topq-home">
+      <section class="hero">
+        <div class="container">
+          <div class="col-sm-12 col-md-12 col-lg-9">
+            <h1>TopQ for Schools and Universites!</h1>
+            <br>
+            <br>
+            <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
+            <div>
+              <a href='/login' class="btn btn-primary" id='login_instead_button'>Login as student or tutor</a>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <img src="assets/school.png" class="buy_home_img" alt="illustration">
+          </div>
+        </div>
+      </section>
+      <section class=subscription-section>
+        <div class=row>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h2>Our subscription-plans: </h2>
+            <br>
+            <img src="assets/subs.png" class="subs_img" alt="illustration">
+            <li id='admin-info'>
+              <img src="assets/admins.png" class="admins_img" alt="illustration">
+              <b>Admin-accounts:</b><br>
+              The admin-accounts are meant for the teachers and tutors. Having an admin-account gives the possibilty to create and manage the rooms. 
+                Furthermore the admins can manage and change the queue. The number of using students is unlimited.</li>
+          </div>  
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h2>Register and start using Top-Q: </h2>
+            <br>
+            <li>
+              <form>
+                <div class="form-group">
+                  <h2>School-registration:</h2>
+                  <label for="schoolName">Name:</label>
+                  <input type="text" class="form-control" id="schoolName" placeholder="Enter name of school" required>
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Contact-email:</label>
+                  <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                  <label for="schoolPassword">Password:</label>
+                  <input type="password" class="form-control" id="schoolPassword" placeholder="Enter password" required>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                  <label class="form-check-label" for="exampleCheck1">Agree to terms and conditions.</label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" id='schoolReg'>Register</button>
+                <br>
+                <br>
+                <a href='/loginschool'>Aldready have an account? Login instead</a>
+              </form>
+            </li>
+          </div>  
+        </div>
+      </section>
+    </template>
 
 
     <template id="login">

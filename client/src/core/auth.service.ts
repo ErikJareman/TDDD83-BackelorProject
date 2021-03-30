@@ -82,3 +82,37 @@ export async function logIn(event) {
         alert('Felaktig email eller lösenord. Försök igen eller registrera dig.');
     }
 }
+
+export async function createSchool(event) {
+    event.preventDefault();
+    const name = $<HTMLInputElement>('#schoolName').val();
+    const email = $<HTMLInputElement>('#contactEmail').val();
+    const password = $<HTMLInputElement>('#schoolPassword').val();
+    try {
+        const result = await standardPost('/registerschool', {
+            name,
+            email,
+            password,
+        });
+        navigateTo('/loginschool');
+    } catch (e) {
+        // TODO
+        // Kan det skapas en med samma mail?
+    }
+}
+
+export async function loginSchool(event) {
+    event.preventDefault();
+    const email = $<HTMLInputElement>('#contactEmailLogin').val();
+    const password = $<HTMLInputElement>('#schoolLoginP').val();
+    try {
+        const result = await standardPost('/loginschool', {
+            email,
+            password,
+        });
+        sessionStorage.setItem('auth', JSON.stringify(result));
+        navigateTo('/');
+    } catch (e) {
+        alert('Something went wrong. Try again!');
+    }
+}

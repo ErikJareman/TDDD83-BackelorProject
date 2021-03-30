@@ -18,6 +18,8 @@ const routes: Route[] = [
     { url: '/cancel', templateSelector: '#view-cancel' },
     { url: '/checkout', templateSelector: '#checkout' },
     { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
+    { url: '/buy', templateSelector: '#buy-topq-home' },
+    { url: '/loginschool', templateSelector: '#school-login' },
 ];
 
 // Programatic navigate
