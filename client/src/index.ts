@@ -1,7 +1,8 @@
 import $ from 'jquery';
-import { createUser, logIn } from './core/auth.service';
+import { createUser, logIn, logOut, isSignedIn, toggleNavbar } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter } from './core/router';
+
 
 const main = () => {
     initiateRouter();
@@ -10,6 +11,10 @@ const main = () => {
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
+
+    $('#logout-button').on('click', logOut);
+    toggleNavbar();
+
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
     const mobileBtnExit = document.getElementById('mobile-exit');

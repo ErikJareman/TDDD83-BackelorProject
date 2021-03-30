@@ -28,8 +28,10 @@
           <li><a href="#">About us</a></li>
         </ul>
         <ul class="secondary-nav">
-          <li class="custombutton"><a href="/login">Login</a></li>
-          <li class="custombutton"><a href="/register">Register</a></li>
+          <li id="login-button" class="custombutton"><a href="/login">Login</a></li>
+          <li id="register-button" class="custombutton"><a href="/register">Register</a></li>
+          <li id="logout-button" class="custombutton"><a href="/">Logout</a></li>
+          <li id="room-button" class="custombutton"><a href="/r">Room</a></li>
         </ul>
       </nav>
     </div>
@@ -287,26 +289,8 @@
       </div>
     </div>
 
-
-
-
-
-
     <template id="view-room">
-      <!--Top navigation bar-->
-      <!--<nav class="navbar navbar-top">
-            <div class="navbar-brand" href="#">
-                Top-Q
-            </div>-->
-      <header class=first_header>
-        
-        <div id=drop_down><a href="#">frans.nyrfors@outlook.com</a>
-          <ul>
-            <li><a href="">Sign out</a></li>
-          </ul>
-        </div>
-      </header>
-      </nav>
+      
       <!--Container for rest of page...-->
       <!--Divided into left, center, right-->
       <div class="container-fluid d-flex h-100 flex-column flex-shrink-0">
