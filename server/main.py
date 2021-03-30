@@ -52,6 +52,12 @@ def customer_portal():
     checkout_session_id = school.sub_id
     checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
 
+    subscription = stripe.Subscription.retrieve(checkout_session.subscription)
+    print(subscription.plan.id)
+    
+   # subcription = stripe.SubscriptionItem.retrieve(checkout_session.subscription)
+    
+
     return_url = YOUR_DOMAIN
 
     session = stripe.billing_portal.Session.create(

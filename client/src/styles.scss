@@ -2,11 +2,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+.my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
 #standard,
 #standard_plus,
 #premium,
 #premium_plus,
-#customer_portal {
+#customer_portal,
+#modify-admin {
     color: white !important;
     border: 3px solid white;
     font-weight: lighter;
@@ -56,12 +67,6 @@
     -moz-transition: all 0.3s ease-in;
 }
 
-#price-plan :hover {
-    background: rgba(240, 240, 240, 255);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    //   transition: 0.3s;
-}
 .card-img-top {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -137,7 +142,7 @@ a {
     color: white;
     text-align: center;
     li {
-        h2{
+        h2 {
             color: colors.$secondary3;
         }
         background: colors.$secondary2;
@@ -146,52 +151,51 @@ a {
         padding: 2em 2em;
         width: 60%;
         margin: 0 auto 3em auto;
-        border-radius:50px;
+        border-radius: 50px;
         box-shadow: 3px 3px;
         list-style-type: none;
     }
 
-    form{
+    form {
         text-align: left;
         font-size: 14px;
         margin: 3%;
-        ::placeholder{
-            color:rgb(192, 187, 187);
+        ::placeholder {
+            color: rgb(192, 187, 187);
             font-style: italic;
             font-size: 14px;
         }
-        .btn{
+        .btn {
+            color: white;
+            background-color: colors.$accent;
+            font-weight: lighter;
+            border-radius: 5em;
+            &:hover {
+                background: colors.$accenthover;
                 color: white;
-                background-color: colors.$accent;
-                font-weight: lighter;
-                border-radius: 5em;
-                &:hover {
-                    background: colors.$accenthover;
-                    color: white;
-                }
+            }
         }
-        a{
+        a {
             margin-left: 20%;
             color: colors.$secondary3;
             text-decoration: underline;
-            
+
             &:hover {
                 color: colors.$accent;
             }
         }
     }
-
 }
 
 .subscription-section {
     background: colors.$secondary3;
     color: white;
     text-align: center;
-    h2{
+    h2 {
         font-size: 30px;
     }
     li {
-        h2{
+        h2 {
             color: colors.$secondary3;
             font-size: 24px;
         }
@@ -201,13 +205,13 @@ a {
         padding: 2em 2em;
         width: 90%;
         margin: 0 auto 3em auto;
-        border-radius:50px;
+        border-radius: 50px;
         box-shadow: 3px 3px;
         list-style-type: none;
     }
 
-    #admin-info{
-        width:100%;
+    #admin-info {
+        width: 100%;
         font-size: 14px;
     }
 
@@ -216,27 +220,27 @@ a {
         font-weight: 600;
     }
 
-    form{
+    form {
         text-align: left;
         font-size: 14px;
         margin: 3%;
-        ::placeholder{
-            color:rgb(192, 187, 187);
+        ::placeholder {
+            color: rgb(192, 187, 187);
             font-style: italic;
             font-size: 14px;
         }
-        .btn{
+        .btn {
+            color: white;
+            background-color: colors.$accent;
+            font-weight: lighter;
+            border-radius: 5em;
+            &:hover {
+                background: colors.$accenthover;
                 color: white;
-                background-color: colors.$accent;
-                font-weight: lighter;
-                border-radius: 5em;
-                &:hover {
-                    background: colors.$accenthover;
-                    color: white;
-                }
+            }
         }
-        a{
-            margin-left:15%;
+        a {
+            margin-left: 15%;
             color: colors.$secondary3;
             text-decoration: underline;
             &:hover {
@@ -244,29 +248,27 @@ a {
             }
         }
     }
-     .form-check-input{
+    .form-check-input {
         margin-left: -53%;
     }
 }
 
-.subs_img{
+.subs_img {
     width: 100%;
     margin-bottom: 2%;
-
 }
 
-.admins_img{
+.admins_img {
     width: 40px;
     margin-bottom: 2%;
-
 }
 
-.buy_home_img{
+.buy_home_img {
     width: 250px;
 }
 
-#buy_home{
-    font-size:20px;
+#buy_home {
+    font-size: 20px;
     color: rgb(78, 78, 78);
 }
 
