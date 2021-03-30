@@ -58,9 +58,7 @@ body {
 
 }
 
-//.container {
-//    height: 100%;
-    //overflow: hidden;}
+
 
 //-------HERO--------------------------
 
@@ -100,6 +98,11 @@ body {
 .hero {
 
     text-align: center;
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+    }
 
     a {
         color: black;
@@ -154,6 +157,12 @@ body {
     
     background: colors.$secondary1;
     color: white;
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+        
+    }
     ul { 
         list-style-type: none;
         margin: 0;
@@ -174,6 +183,7 @@ ul.features-list {
     font-size: 1.1em;
     margin-bottom: 1em;
     margin-left: 2em;
+    margin-top: 20px;
     position: relative;
 
 
@@ -204,6 +214,12 @@ ul.features-list {
 .testimonials-section {
     background: colors.$secondary3;
     color: white;
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+    }
+    
     ul { 
         list-style-type: none;
         margin: 0;
@@ -213,18 +229,13 @@ ul.features-list {
     li {
         background: #006bd6;
         text-align: center;
-        padding: 2em 1em;
+        padding: 3em 2em;
         width: 80%;
         margin: 0 auto 5em auto;
         border-radius: 1em;
+        margin-top: 20px;
+        font-size: 1.2em;
 
-        img {
-            width: 5em;
-            height: 5em;
-            border: 5px solid #006bd6;
-            border-radius: 50%;
-            margin-top: -4.5em;
-        }
     }
 }
 
@@ -285,10 +296,13 @@ nav {
         margin: 0,5em;
         cursor: pointer;
         height: 20px;
+        
+        
     }
     li {
+        
         a {
-            
+        
             color: white;
             text-decoration: none;
             display: block;
@@ -299,6 +313,9 @@ nav {
         &:hover {
             font-weight: bold;
         }
+    }
+    .current {
+        margin-top: 30px;
     }
 }
 
@@ -312,6 +329,7 @@ nav {
     }
 
     .navbar {
+
         .container {
             display: -ms-grid;
             display: grid;
@@ -334,6 +352,9 @@ nav {
             width: 100%;
             padding: 0;
 
+            .current {
+                margin-top: 0px;
+            }
             ul {
                 display: -webkit-box;
                 display: -ms-flexbox;
