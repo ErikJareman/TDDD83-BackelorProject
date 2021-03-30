@@ -44,15 +44,14 @@ configuration = stripe.billing_portal.Configuration.create(
 )
 
 @app.route('/customer-portal', methods=['POST'])
+@jwt_required()
 def customer_portal():
     data = json.loads(request.data)
-    # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-    # Typically this is stored alongside the authenticated user in your database.
-    checkout_session_id = data['sessionId']
+    school_id = get_jwt_identity()['school']
+    school = School.query.get(school_id)
+    checkout_session_id = school.sub_id
     checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
 
-    # This is the URL to which the customer will be redirected after they are
-    # done managing their billing with the portal.
     return_url = YOUR_DOMAIN
 
     session = stripe.billing_portal.Session.create(
@@ -61,14 +60,10 @@ def customer_portal():
     return jsonify({'url': session.url})
 
 @app.route('/create-checkout-session', methods=['POST'])
+@jwt_required()
 def create_checkout_session():
     data = json.loads(request.data)
     try:
-        # See https://stripe.com/docs/api/checkout/sessions/create
-        # for additional parameters to pass.
-        # {CHECKOUT_SESSION_ID} is a string literal; do not change it!
-        # the actual Session ID is returned in the query parameter when your customer
-        # is redirected to the success page.
         checkout_session = stripe.checkout.Session.create(
             success_url=YOUR_DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
 
@@ -82,6 +77,10 @@ def create_checkout_session():
                 }
             ],
         )
+        school_id = get_jwt_identity()['school']
+        school = School.query.get(school_id)
+        setattr(school, 'sub_id', checkout_session['id'])
+        db.session.commit()
         return jsonify({'sessionId': checkout_session['id']})
     except Exception as e:
         print(str(e))
@@ -120,7 +119,7 @@ class School(db.Model):
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
-    sub_id = db.Column(db.Integer, nullable=True)
+    sub_id = db.Column(db.String, nullable=True)
     
     def __repr__(self):
         return '<School {}: {} {} >'.format(self.id, self.name, self.email, self.password_hash, self.sub_id)

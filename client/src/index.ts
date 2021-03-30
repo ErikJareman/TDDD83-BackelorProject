@@ -20,16 +20,18 @@ async function createCheckoutSession(priceId: string) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
         },
         body: JSON.stringify({
             priceId: priceId,
         }),
     })
         .then(function (response) {
+            console.log(response);
             return response.json();
         })
         .then(function (session) {
-            console.log(session.sessionId);
+            console.log(session.session_id);
             return stripe.redirectToCheckout({ sessionId: session.sessionId });
         })
         .then(function (result) {
@@ -48,30 +50,7 @@ async function createCheckoutSession(priceId: string) {
 function customerPortal(e) {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('session_id');
-    // let customerId;
-
-    // if (sessionId) {
-    //   fetch(env.backendURL + "checkout-session?sessionId=" + sessionId)
-    //     .then(function(result){
-    //       return result.json()
-    //     })
-    //     .then(function(session){
-    //       // We store the customer ID here so that we can pass to the
-    //       // server and redirect to customer portal. Note that, in practice
-    //       // this ID should be stored in your database when you receive
-    //       // the checkout.session.completed event. This demo does not have
-    //       // a database, so this is the workaround. This is *not* secure.
-    //       // You should use the Stripe Customer ID from the authenticated
-    //       // user on the server.
-    //       customerId = session.customer;
-
-    //       const sessionJSON = JSON.stringify(session, null, 2);
-    //       document.querySelector("pre").textContent = sessionJSON;
-    //     })
-    //     .catch(function(err){
-    //       console.log('Error when fetching Checkout session', err);
-    //     });
-    // }
+ 
 
     // In production, this should check CSRF, and not pass the session ID.
     // The customer ID for the portal should be pulled from the
@@ -82,6 +61,7 @@ function customerPortal(e) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
         },
         body: JSON.stringify({
             sessionId: sessionId,
