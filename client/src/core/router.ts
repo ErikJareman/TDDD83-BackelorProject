@@ -14,8 +14,8 @@ const routes: Route[] = [
     { url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
     { url: '/404', templateSelector: '#404' },
     { url: '/', templateSelector: '#home' },
-    { url: '/success', templateSelector: '#view-success' },
-    { url: '/cancel', templateSelector: '#view-cancel' },
+    { url: '/success', templateSelector: '#success' },
+    { url: '/cancel', templateSelector: '#cancel' },
     { url: '/checkout', templateSelector: '#checkout' },
     { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
 ];

@@ -2,6 +2,75 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+#standard,
+#standard_plus,
+#premium,
+#premium_plus,
+#customer_portal {
+    color: white !important;
+    border: 3px solid white;
+    font-weight: lighter;
+    border-radius: 5em;
+    margin-top: -0.2em;
+}
+
+#pricing {
+    text-align: center;
+    margin-top: -70px;
+    margin-bottom: 20px;
+}
+
+.price-name {
+    color: #7f7f7f;
+    font-size: large;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.price-price {
+    color: #000000;
+    font-size: x-large;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.price-duration {
+    color: #969696;
+    font-size: smaller;
+    text-align: center;
+}
+
+.price-text {
+    color: #000000;
+    font-size: x-small;
+    text-align: center;
+}
+
+#price-plan {
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+}
+
+#price-plan :hover {
+    background: rgba(240, 240, 240, 255);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    //   transition: 0.3s;
+}
+.card-img-top {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.center_buttons {
+    text-align: center;
+}
+
 html,
 body {
     /* html och height för att få till footern */
@@ -50,29 +119,16 @@ a {
     color: black;
 }
 
-#view-login {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15%;
-}
+#view-login,
 #view-register {
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15%;
+    margin-bottom: 30%;
 }
 
-#SendLogin {
-    color: white !important;
-    border: 3px solid white;
-    font-weight: lighter;
-    border-radius: 5em;
-    margin-top: -0.2em;
-}
-
+#SendLogin,
 #SendRegister {
     color: white !important;
     border: 3px solid white;
@@ -131,7 +187,7 @@ section {
 //--------FEATURE-----------------------------
 
 .features-section {
-    min-height: 100%; /* Testar detta för att få till footern */
+    // min-height: 100%; /* Testar detta för att få till footern */
     background: #20272e;
     color: white;
 }
@@ -487,15 +543,10 @@ header {
     background-color: colors.$primary1;
 }
 
-.view-login {
-    background-color: colors.$primary1;
-    height: 1000px;
-}
+.view-login,
 .view-register {
     background-color: colors.$primary1;
-    height: 1000px;
 }
-
 img {
     width: 50%;
 }
@@ -757,16 +808,6 @@ h5 {
     color: #1e2124;
 }
 
-// //#868e96
-// //Ändrar färg på knappar och mörkare när vi har musen över
-// .btn{
-//     background-color: colors.$accent !important;
-//     color: white !important;
-// }
-// .btn:hover {
-//     background-color: colors.$accenthover !important;
-// }
-
 //Dessa är för login och register
 .card-reg {
     position: absolute;
@@ -778,32 +819,22 @@ h5 {
     width: 40%;
 }
 
-#cardBox {
+#cardBox,
+#cardBox_register {
     margin-top: 5%;
     margin-bottom: 15%;
     width: 40% !important;
 }
-#cardBox_register {
-    margin-top: 5%;
-    margin-bottom: 25%;
-    width: 40%;
-}
 
-
-#login_reg_link{
+#login_reg_link {
     margin-left: 45% !important;
 }
 
-#loginForm {
+#loginForm,
+#registerForm {
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 20px;
-}
-
-#registerForm {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 20px;
 }
 
 .link {

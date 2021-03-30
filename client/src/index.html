@@ -144,44 +144,120 @@
     </template>
 
     <template id="success">
-      <div class="w3-container" id="view-success">
-      <title>Thanks for your order!</title>
-      <link rel="stylesheet" href="style.css">
+      <section>
+        <h2 id="pricing">Thanks for your order!</h2>
         <p>
           We appreciate your business! If you have any questions, please email
-          <a href="mailto:orders@example.com">orders@example.com</a>.
+          <a href="info.contact.TopQ@gmail.com">info.contact.TopQ@gmail.com</a>.
         </p>
+        <br>
+        <br>
+        <br>
+        <h6 id="pricing">Want to see your previous subscriptions?</h6>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
+      </div>
       </div>
     </template>
 
     <template id="cancel">
-      <div class="w3-container" id="view-cancel">
-        <title>Checkout canceled</title>
-        <link rel="stylesheet" href="style.css">
+      <section>
+        <h2 id="pricing">Checkout canceled</h2>
           <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
       </div>
     </template>
 
 
     <template id="checkout">
-      <div class="w3-container" id="checkout">
-        <section>
-
-          <title>Buy cool new product</title>
-    
-          <div class="product">
-            <img
-              src="https://i.imgur.com/EHyR2nP.png"
-              alt="The cover of Stubborn Attachments"
-            />
-            <div class="description">
-              <h3>Stubborn Attachments</h3>
-              <h5>$20.00</h5>
+      <section>
+        <h2 id="pricing">Choose a collaboration plan</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img
+                src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body" id=>
+                <div class="price-name">Standard</div>
+                <div class="price-price">499.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 50 active admin accounts</div>
+                <br>    
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="standard">Select</button></div>
+              </div>
             </div>
           </div>
-          <button type="button" id="checkout-button">Checkout</button>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814050_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <div class="price-name">Standard+</div>
+                <div class="price-price">1,499.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 200 active admin accounts</div>
+                <br>    
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="standard_plus">Select</button></div>
+              </div>
+            </div>
           </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935521_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <div class="price-name">Premium</div>
+                <div class="price-price">1,999.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 500 active admin accounts</div>
+                <br>
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="premium">Select</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img
+              src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935518_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+                <div class="card-body">
+              <div class="price-name">Premium+</div>
+              <div class="price-price">2,499.00 SEK</div>
+              <div class="price-duration">per month</div>
+              <br>
+              <div class="price-text">Up to 1000 active admin accounts</div>
+              <br>
+              <div class="center_buttons">
+              <button type="submit" class="btn btn-primary " id="premium_plus">Select</button></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    
+        <section>
+          <h6 id="pricing">Want to see your previous subscriptions?</h6>
+          <div class="center_buttons">
+            <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
+        </div>
+   
         </section>
+
     </template>
 
 

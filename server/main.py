@@ -11,6 +11,7 @@ from flask_cors import CORS
 from enum import Enum
 import os
 import stripe
+import json
 from sqlalchemy.orm.session import Session
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='/')
@@ -23,37 +24,70 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
 
-# This is a sample test API key. Sign in to see examples pre-filled with your key.
-stripe.api_key = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
-
 YOUR_DOMAIN = 'http://localhost:8080'
+# Set your secret key. Remember to switch to your live secret key in production.
+# See your keys here: https://dashboard.stripe.com/account/apikeys
+stripe.api_key = 'sk_test_51IZucCC7I9l3XQtcbsm4nCGHg8byGU3YitOj6xxVY80wqxeJHNQHAzPx1w9wH9w2cNeLUk98dAEjYQPsZCkqekrv00lBBCQd9r'
+
+
+
+configuration = stripe.billing_portal.Configuration.create(
+  business_profile={
+    'privacy_policy_url': YOUR_DOMAIN,
+    'terms_of_service_url': YOUR_DOMAIN,
+  },
+  features={
+    'invoice_history': {
+      'enabled': True,
+    },
+  },
+)
+
+@app.route('/customer-portal', methods=['POST'])
+def customer_portal():
+    data = json.loads(request.data)
+    # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
+    # Typically this is stored alongside the authenticated user in your database.
+    checkout_session_id = data['sessionId']
+    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
+
+    # This is the URL to which the customer will be redirected after they are
+    # done managing their billing with the portal.
+    return_url = YOUR_DOMAIN
+
+    session = stripe.billing_portal.Session.create(
+        customer=checkout_session.customer,
+        return_url=return_url)
+    return jsonify({'url': session.url})
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
+    data = json.loads(request.data)
     try:
+        # See https://stripe.com/docs/api/checkout/sessions/create
+        # for additional parameters to pass.
+        # {CHECKOUT_SESSION_ID} is a string literal; do not change it!
+        # the actual Session ID is returned in the query parameter when your customer
+        # is redirected to the success page.
         checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
+            success_url=YOUR_DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
+
+            cancel_url=YOUR_DOMAIN + '/cancel',
+            payment_method_types=["card"],
+            mode="subscription",
             line_items=[
                 {
-                    'price_data': {
-                        'currency': 'sek',
-                        'unit_amount': 2000,
-                        'product_data': {
-                            'name': 'Stubborn Attachments',
-                            'images': ['https://i.imgur.com/EHyR2nP.png'],
-                        },
-                    },
-                    'quantity': 1,
-                },
+                    "price": data['priceId'],
+                    "quantity": 1
+                }
             ],
-            mode='payment',
-            success_url=YOUR_DOMAIN + '/success',
-            cancel_url=YOUR_DOMAIN + '/cancel',
         )
-        return jsonify({'id': checkout_session.id})
-
+        return jsonify({'sessionId': checkout_session['id']})
     except Exception as e:
-        return jsonify(error=str(e)), 403
+        print(str(e))
+        return jsonify({'error': {'message': str(e)}}), 400
+
+
 
 
 
