@@ -12,6 +12,24 @@
     display: block;
 }
 
+#add-modal {
+    .modal-title {
+        color: black;
+    }
+    .form-group {
+        color: #7f7f7f;
+        font-size: small;
+    }
+    #close-modal {
+        color: white !important;
+        border: 3px solid white;
+        font-weight: lighter;
+        background: red;
+        border-radius: 5em;
+        margin-top: -0.2em;
+    }
+}
+
 #standard,
 #standard_plus,
 #premium,
@@ -22,15 +40,6 @@
     color: white !important;
     border: 3px solid white;
     font-weight: lighter;
-    border-radius: 5em;
-    margin-top: -0.2em;
-}
-
-#close-modal {
-    color: white !important;
-    border: 3px solid white;
-    font-weight: lighter;
-    background: red;
     border-radius: 5em;
     margin-top: -0.2em;
 }

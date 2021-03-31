@@ -80,6 +80,7 @@ function customerPortal(e) {
 }
 
 
+
 function addAdmin(){
     const email = $<HTMLInputElement>('#inputemail').val();
     const course = $<HTMLInputElement>('#inputcourse').val();
