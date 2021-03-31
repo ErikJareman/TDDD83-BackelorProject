@@ -17,10 +17,20 @@
 #premium,
 #premium_plus,
 #customer_portal,
-#modify-admin {
+#modify-admin,
+#add-admin-modal {
     color: white !important;
     border: 3px solid white;
     font-weight: lighter;
+    border-radius: 5em;
+    margin-top: -0.2em;
+}
+
+#close-modal {
+    color: white !important;
+    border: 3px solid white;
+    font-weight: lighter;
+    background: red;
     border-radius: 5em;
     margin-top: -0.2em;
 }

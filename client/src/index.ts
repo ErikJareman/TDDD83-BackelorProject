@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
+import * as bootstrap from 'bootstrap'; 
 import { createUser, logIn, createSchool, loginSchool } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
 import env from './shared/env';
+
 
 const price_p_plus = 'price_1IZul8C7I9l3XQtcLw7OrDIH';
 const price_p = 'price_1IZujvC7I9l3XQtc72Uq6LU0';
@@ -77,6 +79,27 @@ function customerPortal(e) {
         });
 }
 
+
+function addAdmin(){
+    const email = $<HTMLInputElement>('#inputemail').val();
+    const course = $<HTMLInputElement>('#inputcourse').val();
+
+    fetch(env.backendURL + 'school_admin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
+        },
+        body: JSON.stringify({
+            admin_email: email,
+            admin_course: course
+        }),
+    })
+}
+
+
+
+
 const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
@@ -99,6 +122,8 @@ const main = () => {
         createCheckoutSession(price_s);
     });
     $('#customer_portal').on('click', customerPortal);
+    $('#add-admin-modal').on('click', addAdmin);
+   
 
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');

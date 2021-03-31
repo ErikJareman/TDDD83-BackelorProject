@@ -68,7 +68,6 @@ export async function logIn(event) {
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
-        console.log('hej');
         const result = await standardPost('/login', {
             email: email,
             password: password,
@@ -112,6 +111,14 @@ export async function loginSchool(event) {
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
         if (result.school.sub_id != null) {
+            fetch('http://127.0.0.1:5000/update-school', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
+                },
+            });
+
             navigateTo('/customer-page'); //om subscription
         } else {
             navigateTo('/checkout'); //om subscription

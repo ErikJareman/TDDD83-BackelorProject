@@ -65,6 +65,29 @@ def customer_portal():
         return_url=return_url)
     return jsonify({'url': session.url})
 
+
+@app.route('/update-school', methods=['POST'])
+@jwt_required()
+def update_school():
+    school_id = get_jwt_identity()['school']
+    school = School.query.get(school_id)
+    checkout_session_id = school.sub_id
+    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
+    subscription = stripe.Subscription.retrieve(checkout_session.subscription)
+
+    if subscription.plan.id=='price_1IZuh5C7I9l3XQtcrkJwn759':
+        setattr(school, 'max_admin', 50)
+    elif subscription.plan.id=='price_1IZuj4C7I9l3XQtctx3PtUWs':
+        setattr(school, 'max_admin', 200)
+    elif subscription.plan.id=='price_1IZujvC7I9l3XQtc72Uq6LU0':
+        setattr(school, 'max_admin', 500)
+    elif subscription.plan.id=='price_1IZul8C7I9l3XQtcLw7OrDIH':
+        setattr(school, 'max_admin', 1000)
+    print(school.max_admin)
+    db.session.commit()
+    resp = jsonify(Sucess=True)
+    return resp
+
 @app.route('/create-checkout-session', methods=['POST'])
 @jwt_required()
 def create_checkout_session():
@@ -157,12 +180,13 @@ class School_Admin(db.Model):
         'school.id'), nullable=False)
     admin_email = db.Column(db.String, db.ForeignKey(
         'user.email'), primary_key=True, nullable=False)
+    admin_course = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return '<School_Admin{}: {} >'.format(self.school_id, self.admin_email)
+        return '<School_Admin{}: {} >'.format(self.school_id, self.admin_email, self.admin_course)
     
     def serialize(self):
-        return dict(school_id=self.school_id, admin_email=self.admin_email)
+        return dict(school_id=self.school_id, admin_email=self.admin_email, admin_course=self.admin_course)
 
 
 class Ticket(db.Model):
@@ -276,13 +300,13 @@ def sign_up_school():
 @app.route('/school_admin', methods =['POST', 'DELETE', 'GET'])
 @jwt_required()
 def school_admin():
-    school_id = get_jwt_identity['school']
-    school_id = request.get_json(force = True)["school_id"]
+    school_id = get_jwt_identity()['school']
     school = School.query.get(school_id)
     admin_email = request.get_json(force = True)["admin_email"]
+    admin_course = request.get_json(force = True)["admin_course"]
     if request.method == 'POST':
         if (school.max_admin > School_Admin.query.filter_by(school_id = school_id).count() ):
-            new_admin = School_Admin(school_id=school_id, admin_email=admin_email) 
+            new_admin = School_Admin(school_id=school_id, admin_email=admin_email, admin_course=admin_course) 
             db.session.add(new_admin)
             db.session.commit()
             return jsonify([new_admin.serialize()])

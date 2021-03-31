@@ -167,11 +167,40 @@
       </div>
     </template>
 
+    <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="admin-title">Add Admin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              
+              <div class="form-group" id="form-id">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp" placeholder="abc@student.se">
+              </div>
+              <div class="form-group" id="form-id">
+                <label for="exampleInputEmail1">Course/Courses</label>
+                <input type="email" class="form-control" id="inputcourse" aria-describedby="emailHelp" placeholder="TDDD83, TATA42, ...">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" id="close-modal" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="add-admin-modal" data-dismiss="modal">Add admin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <template id="customer-page">
       <section>
         <h2 id="pricing">Current admins:</h2>
         <div class="center_buttons">
-          <button type="submit" class="btn btn-primary " id="modify-admin">Change Admins</button></div>
+          <button type="submit" class="btn btn-primary " id="modify-admin" data-toggle="modal" data-target="#add-modal">Add Admins</button></div>
       </div>
       <br>
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
