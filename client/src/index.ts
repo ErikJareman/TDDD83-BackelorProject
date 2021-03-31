@@ -2,7 +2,7 @@
 import $ from 'jquery';
 import { createUser, logIn, createSchool, loginSchool } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
-import { initiateRouter } from './core/router';
+import { initiateRouter, navigateTo } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
 import env from './shared/env';
 
@@ -10,6 +10,7 @@ const price_p_plus = 'price_1IZul8C7I9l3XQtcLw7OrDIH';
 const price_p = 'price_1IZujvC7I9l3XQtc72Uq6LU0';
 const price_s_plus = 'price_1IZuj4C7I9l3XQtctx3PtUWs';
 const price_s = 'price_1IZuh5C7I9l3XQtcrkJwn759';
+
 
 async function createCheckoutSession(priceId: string) {
     const stripe = await loadStripe(
@@ -50,8 +51,6 @@ async function createCheckoutSession(priceId: string) {
 function customerPortal(e) {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('session_id');
- 
-
     // In production, this should check CSRF, and not pass the session ID.
     // The customer ID for the portal should be pulled from the
     // authenticated user on the server.
@@ -73,6 +72,8 @@ function customerPortal(e) {
         })
         .catch((error) => {
             console.error('Error:', error);
+            alert('You have no current collaboration plan');
+            navigateTo('/checkout');
         });
 }
 

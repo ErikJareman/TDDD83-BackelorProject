@@ -111,7 +111,11 @@ export async function loginSchool(event) {
             password,
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
-        navigateTo('/');
+        if (result.school.sub_id != null) {
+            navigateTo('/customer-page'); //om subscription
+        } else {
+            navigateTo('/checkout'); //om subscription
+        }
     } catch (e) {
         alert('Something went wrong. Try again!');
     }
