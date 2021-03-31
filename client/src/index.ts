@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
-import { createUser, logIn, createSchool, loginSchool } from './core/auth.service';
+import { createUser, logIn, createSchool, loginSchool, writeAdmins } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
@@ -79,19 +79,22 @@ function customerPortal(e) {
 
 function addAdmin() {
     const email = $<HTMLInputElement>('#inputemail').val();
-    const course = $<HTMLInputElement>('#inputcourse').val();
 
-    fetch(env.backendURL + 'school_admin', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
-        },
-        body: JSON.stringify({
-            admin_email: email,
-            admin_course: course,
-        }),
-    });
+    try {
+        const result = fetch(env.backendURL + 'school_admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
+            },
+            body: JSON.stringify({
+                admin_email: email,
+            }),
+        });
+        writeAdmins();
+    } catch (e) {
+        // TODO
+    }
 }
 
 const main = () => {

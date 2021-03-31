@@ -52,11 +52,7 @@ def customer_portal():
     checkout_session_id = school.sub_id
     checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
 
-    subscription = stripe.Subscription.retrieve(checkout_session.subscription)
-    print(subscription.plan.id)
-    
-   # subcription = stripe.SubscriptionItem.retrieve(checkout_session.subscription)
-    
+    subscription = stripe.Subscription.retrieve(checkout_session.subscription)    
 
     return_url = YOUR_DOMAIN
 
@@ -83,7 +79,6 @@ def update_school():
         setattr(school, 'max_admin', 500)
     elif subscription.plan.id=='price_1IZul8C7I9l3XQtcLw7OrDIH':
         setattr(school, 'max_admin', 1000)
-    print(school.max_admin)
     db.session.commit()
     resp = jsonify(Sucess=True)
     return resp
@@ -122,7 +117,6 @@ def create_checkout_session():
         db.session.commit()
         return jsonify({'sessionId': checkout_session['id']})
     except Exception as e:
-        print(str(e))
         return jsonify({'error': {'message': str(e)}}), 400
 
 
@@ -300,10 +294,10 @@ def sign_up_school():
 @jwt_required()
 def school_admin():
     school_id = get_jwt_identity()['school']
-    #school_id = request.get_json(force = True)["school_id"]
+#    school_id = request.get_json(force = True)["school_id"]
     school = School.query.get(school_id)
-    admin_email = request.get_json(force = True)["admin_email"]
     if request.method == 'POST':
+        admin_email = request.get_json(force = True)["admin_email"]
         if (school.max_admin > School_Admin.query.filter_by(school_id = school_id).count() ):
             new_admin = School_Admin(school_id=school_id, admin_email=admin_email) 
             db.session.add(new_admin)
@@ -311,6 +305,7 @@ def school_admin():
             return jsonify([new_admin.serialize()])
         else: abort(404)
     elif request.method == 'DELETE': 
+        admin_email = request.get_json(force = True)["admin_email"]
         if School_Admin.query.get(admin_email):
             admin = School_Admin.query.get(admin_email)
             db.session.delete(admin)
@@ -319,8 +314,9 @@ def school_admin():
             return resp
         else: abort(404)
     elif request.method == 'GET':
-        return jsonify([j.serialize() for j in School_Admin.query.all()])
-
+      #  print(School_Admin.query.filter_by(school_id = school_id))
+     #   return jsonify([j.serialize() for j in School_Admin.query.all()])
+        return jsonify([j.serialize() for j in School_Admin.query.filter_by(school_id = school_id)])
 
 
 @app.route('/users', methods=['GET'])

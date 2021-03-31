@@ -120,10 +120,11 @@ export async function loginSchool(event) {
     }
 }
 
-export function writeAdmins() {
+export async function writeAdmins() {
     checkSubscription();
+    $('#admins').empty();
     try {
-        const result = fetch('http://127.0.0.1:5000/school-admin', {
+        const result = await fetch('http://127.0.0.1:5000/school_admin', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -136,25 +137,30 @@ export function writeAdmins() {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Email</th>
-              <th scope="col">Course</th>
-              <th scope="col">Delete admin</th>
+              <th scope="col">Delete Admin</th>
             </tr>
           </thead>`);
-
-        result.forEach((School_Admin) => {
+        const admins = await result.json();
+        let number_of = 0;
+        console.log(admins);
+        admins.forEach((School_Admin) => {
+            number_of++;
             $('#admins').append(` <div class="table-wrapper-scroll-y my-custom-scrollbar">
         <table class="table table-bordered table-striped mb-0">
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>${School_Admin.email}</td>
-              <td>${School_Admin.course}</td>
+              <th scope="row">${number_of}</th>
+              <td>${School_Admin.admin_email}</td>
               <td> 
-              <button type="button" id="button-row" class="btn btn-outline-secondary btn-sm" onclick="deleteAdmin(${School_Admin.id})>Ta bort</button>
+              <button type="button" id="button-row" class="btn btn-outline-secondary btn-sm" onclick="deleteAdmin(${School_Admin.admin_email})>Delete</button>
               </td>
           </tbody>
         </table>
-      </div>`);
+      </div></div>
+      `);
+            $('#admins')
+                .append(`<button type="button" class="btn btn-primary btn-sm" onclick="deleteAdmin(${School_Admin.admin_email})>Delete</button>
+      `);
         });
         console.log('funkar');
     } catch (e) {
@@ -167,16 +173,17 @@ function deleteAdmin(result) {
     //  $('#admins').append(`<p>Do you want to delete admin with ID ${result}?</p>`);
     //  $('#transaction-modal').modal('show');
     // document.getElementById('save-deleted-transaction').addEventListener("click", function(){
-    fetch('http://127.0.0.1:5000/school-admin', {
+    fetch('http://127.0.0.1:5000/school_admin', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
         },
         body: JSON.stringify({
-            admin_email: result.email,
+            admin_email: result,
         }),
     });
+    writeAdmins();
 }
 
 export function checkSubscription() {
