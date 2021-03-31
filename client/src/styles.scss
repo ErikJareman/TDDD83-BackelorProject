@@ -4,7 +4,7 @@
 
 .my-custom-scrollbar {
     position: relative;
-    height: 300px;
+    height: 400px;
     overflow: auto;
 }
 
@@ -24,10 +24,19 @@
         color: white !important;
         border: 3px solid white;
         font-weight: lighter;
-        background: red;
+        background: rgba(235, 92, 92, 0.849);
         border-radius: 5em;
         margin-top: -0.2em;
     }
+}
+
+#delete-admin-button {
+    color: white !important;
+    border: 1px solid white;
+    font-weight: lighter;
+    background: rgba(235, 92, 92, 0.849);
+    border-radius: 5em;
+    margin-top: -0.2em;
 }
 
 #standard,

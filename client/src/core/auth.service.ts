@@ -17,9 +17,9 @@ export interface Identity {
 
 const tokenName = 'auth';
 
-export const authHeader = (token) => `Bearer ${token}`;
+export const authHeader = (token: any) => `Bearer ${token}`;
 
-export const saveToStorage = (data) => {
+export const saveToStorage = (data: any) => {
     sessionStorage.setItem(tokenName, JSON.stringify(data));
 };
 
@@ -33,7 +33,7 @@ export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;
 
 export const hasToken = () => !!getToken();
 
-export async function createUser(event) {
+export async function createUser(event: { preventDefault: () => void; }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmailRegister').val();
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
@@ -57,13 +57,13 @@ export function isSignedIn() {
     return signedIn != null;
 }
 
-export function logOut(event) {
+export function logOut(event: { preventDefault: () => void; }) {
     event.preventDefault();
     sessionStorage.removeItem(tokenName);
     navigateTo('/');
 }
 
-export async function logIn(event) {
+export async function logIn(event: { preventDefault: () => void; }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
@@ -82,7 +82,7 @@ export async function logIn(event) {
     }
 }
 
-export async function createSchool(event) {
+export async function createSchool(event: { preventDefault: () => void; }) {
     event.preventDefault();
     const name = $<HTMLInputElement>('#schoolName').val();
     const email = $<HTMLInputElement>('#contactEmail').val();
@@ -100,7 +100,7 @@ export async function createSchool(event) {
     }
 }
 
-export async function loginSchool(event) {
+export async function loginSchool(event: { preventDefault: () => void; }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#contactEmailLogin').val();
     const password = $<HTMLInputElement>('#schoolLoginP').val();
@@ -131,49 +131,29 @@ export async function writeAdmins() {
                 Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
             },
         });
-        $('#admins').append(`
-        <table class="table table-bordered table-striped mb-0">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Email</th>
-              <th scope="col">Delete Admin</th>
-            </tr>
-          </thead>`);
         const admins = await result.json();
         let number_of = 0;
         console.log(admins);
         admins.forEach((School_Admin) => {
             number_of++;
-            $('#admins').append(` <div class="table-wrapper-scroll-y my-custom-scrollbar">
-        <table class="table table-bordered table-striped mb-0">
-          <tbody>
+            $('#admin-admin').append(` 
             <tr>
               <th scope="row">${number_of}</th>
               <td>${School_Admin.admin_email}</td>
-              <td> 
-              <button type="button" id="button-row" class="btn btn-outline-secondary btn-sm" onclick="deleteAdmin(${School_Admin.admin_email})>Delete</button>
-              </td>
-          </tbody>
-        </table>
-      </div></div>
-      `);
-            $('#admins')
-                .append(`<button type="button" class="btn btn-primary btn-sm" onclick="deleteAdmin(${School_Admin.admin_email})>Delete</button>
-      `);
+              <td> <button type="button" class="btn btn-primary btn-sm" id="delete-admin-button" onclick="deleteAdmin(${School_Admin.admin_email})">Delete</button></td>
+              </tr>`);
         });
-        console.log('funkar');
     } catch (e) {
         // TODO
     }
 }
 
-function deleteAdmin(result) {
-    $('#admins').empty();
+export async function deleteAdmin(result) {
+    alert('hej');
     //  $('#admins').append(`<p>Do you want to delete admin with ID ${result}?</p>`);
     //  $('#transaction-modal').modal('show');
     // document.getElementById('save-deleted-transaction').addEventListener("click", function(){
-    fetch('http://127.0.0.1:5000/school_admin', {
+    await fetch('http://127.0.0.1:5000/school_admin', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -183,6 +163,7 @@ function deleteAdmin(result) {
             admin_email: result,
         }),
     });
+    alert(result);
     writeAdmins();
 }
 

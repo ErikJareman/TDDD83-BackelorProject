@@ -178,14 +178,9 @@
           </div>
           <div class="modal-body">
             <form>
-              
               <div class="form-group" id="form-id">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp" placeholder="abc@student.se">
-              </div>
-              <div class="form-group" id="form-id">
-                <label for="exampleInputEmail1">Course/Courses</label>
-                <input type="email" class="form-control" id="inputcourse" aria-describedby="emailHelp" placeholder="TDDD83, TATA42, ...">
               </div>
           </div>
           <div class="modal-footer">
@@ -203,10 +198,20 @@
           <button type="submit" class="btn btn-primary " id="modify-admin" data-toggle="modal" data-target="#add-modal">Add Admins</button></div>
       </div>
       <br>
-      <secion id="admins">
-
-
-      </secion>
+     
+        <div class="table-wrapper-scroll-y my-custom-scrollbar"> 
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Delete Admin</th>
+              </tr>
+            </thead>
+            <tbody id="admin-admin">
+              </tbody>
+          </table>
+        </div>
      
       </div>
     </section>
