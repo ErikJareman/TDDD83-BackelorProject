@@ -180,13 +180,12 @@ class School_Admin(db.Model):
         'school.id'), nullable=False)
     admin_email = db.Column(db.String, db.ForeignKey(
         'user.email'), primary_key=True, nullable=False)
-    admin_course = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return '<School_Admin{}: {} >'.format(self.school_id, self.admin_email, self.admin_course)
+        return '<School_Admin{}: {} >'.format(self.school_id, self.admin_email)
     
     def serialize(self):
-        return dict(school_id=self.school_id, admin_email=self.admin_email, admin_course=self.admin_course)
+        return dict(school_id=self.school_id, admin_email=self.admin_email)
 
 
 class Ticket(db.Model):
@@ -301,19 +300,19 @@ def sign_up_school():
 @jwt_required()
 def school_admin():
     school_id = get_jwt_identity()['school']
+    #school_id = request.get_json(force = True)["school_id"]
     school = School.query.get(school_id)
     admin_email = request.get_json(force = True)["admin_email"]
-    admin_course = request.get_json(force = True)["admin_course"]
     if request.method == 'POST':
         if (school.max_admin > School_Admin.query.filter_by(school_id = school_id).count() ):
-            new_admin = School_Admin(school_id=school_id, admin_email=admin_email, admin_course=admin_course) 
+            new_admin = School_Admin(school_id=school_id, admin_email=admin_email) 
             db.session.add(new_admin)
             db.session.commit()
             return jsonify([new_admin.serialize()])
         else: abort(404)
     elif request.method == 'DELETE': 
-        if School_Admin.query.filter_by(school_id=school_id, admin_email=admin_email).first():
-            admin = School_Admin.query.filter_by(school_id=school_id, admin_email=admin_email).first()
+        if School_Admin.query.get(admin_email):
+            admin = School_Admin.query.get(admin_email)
             db.session.delete(admin)
             db.session.commit()
             resp = jsonify(Sucess=True)

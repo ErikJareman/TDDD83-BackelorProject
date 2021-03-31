@@ -1,18 +1,16 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
-import * as bootstrap from 'bootstrap'; 
+
 import { createUser, logIn, createSchool, loginSchool } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
 import env from './shared/env';
 
-
 const price_p_plus = 'price_1IZul8C7I9l3XQtcLw7OrDIH';
 const price_p = 'price_1IZujvC7I9l3XQtc72Uq6LU0';
 const price_s_plus = 'price_1IZuj4C7I9l3XQtctx3PtUWs';
 const price_s = 'price_1IZuh5C7I9l3XQtcrkJwn759';
-
 
 async function createCheckoutSession(priceId: string) {
     const stripe = await loadStripe(
@@ -79,9 +77,7 @@ function customerPortal(e) {
         });
 }
 
-
-
-function addAdmin(){
+function addAdmin() {
     const email = $<HTMLInputElement>('#inputemail').val();
     const course = $<HTMLInputElement>('#inputcourse').val();
 
@@ -93,13 +89,10 @@ function addAdmin(){
         },
         body: JSON.stringify({
             admin_email: email,
-            admin_course: course
+            admin_course: course,
         }),
-    })
+    });
 }
-
-
-
 
 const main = () => {
     initiateRouter();
@@ -124,7 +117,6 @@ const main = () => {
     });
     $('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
-   
 
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
