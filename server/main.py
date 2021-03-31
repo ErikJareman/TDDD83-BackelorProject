@@ -79,6 +79,16 @@ def create_checkout_session():
         )
         school_id = get_jwt_identity()['school']
         school = School.query.get(school_id)
+
+        if data['priceId']=='price_1IZuh5C7I9l3XQtcrkJwn759':
+            setattr(school, 'max_admin', 50)
+        elif data['priceId']=='price_1IZuj4C7I9l3XQtctx3PtUWs':
+            setattr(school, 'max_admin', 200)
+        elif data['priceId']=='price_1IZujvC7I9l3XQtc72Uq6LU0':
+            setattr(school, 'max_admin', 500)
+        elif data['priceId']=='price_1IZul8C7I9l3XQtcLw7OrDIH':
+            setattr(school, 'max_admin', 1000)
+
         setattr(school, 'sub_id', checkout_session['id'])
         db.session.commit()
         return jsonify({'sessionId': checkout_session['id']})
@@ -120,13 +130,14 @@ class School(db.Model):
     email = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
     sub_id = db.Column(db.String, nullable=True)
+    max_admin = db.Column(db.Integer, default =0)
     
     def __repr__(self):
-        return '<School {}: {} {} >'.format(self.id, self.name, self.email, self.password_hash, self.sub_id)
+        return '<School {}: {} {} >'.format(self.id, self.name, self.email, self.password_hash, self.sub_id, self.max_admin)
 
     def serialize(self):
         sub_id=self.sub_id if self.sub_id else None
-        return dict(id=self.id, name=self.name, email=self.email, sub_id=sub_id)
+        return dict(id=self.id, name=self.name, email=self.email, sub_id=sub_id, max_admin=self.max_admin)
 
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
@@ -137,7 +148,7 @@ class School(db.Model):
 #SCHOOL/ADMIN RELATIONSHIP CLASS
 class School_Admin(db.Model):
     school_id = db.Column(db.Integer, db.ForeignKey(
-        'school.id'), primary_key=True, nullable=False)
+        'school.id'), nullable=False)
     admin_email = db.Column(db.String, db.ForeignKey(
         'user.email'), primary_key=True, nullable=False)
 
@@ -256,21 +267,30 @@ def sign_up_school():
         return jsonify([j.serialize() for j in School.query.all()])
 
 #set or delete admin
-@app.route('/school_admin', methods =['POST', 'DELETE'])
+@app.route('/school_admin', methods =['POST', 'DELETE', 'GET'])
+@jwt_required()
 def school_admin():
-    school_id = request.get_json(force=True)["school_id"]
+    school_id = get_jwt_identity['school']
+    school_id = request.get_json(force = True)["school_id"]
+    school = School.query.get(school_id)
     admin_email = request.get_json(force = True)["admin_email"]
     if request.method == 'POST':
-        if User.query.get(admin_email):
+        if (school.max_admin > School_Admin.query.filter_by(school_id = school_id).count() ):
             new_admin = School_Admin(school_id=school_id, admin_email=admin_email) 
             db.session.add(new_admin)
+            db.session.commit()
             return jsonify([new_admin.serialize()])
         else: abort(404)
-    elif request.method == 'DELETE': #Denna funkar inte än.
-        if School_Admin.query.get(school_id, admin_email):
-            admin = School_Admin.query.get(school_id, admin_email)
+    elif request.method == 'DELETE': 
+        if School_Admin.query.filter_by(school_id=school_id, admin_email=admin_email).first():
+            admin = School_Admin.query.filter_by(school_id=school_id, admin_email=admin_email).first()
             db.session.delete(admin)
             db.session.commit()
+            resp = jsonify(Sucess=True)
+            return resp
+        else: abort(404)
+    elif request.method == 'GET':
+        return jsonify([j.serialize() for j in School_Admin.query.all()])
 
 
 
