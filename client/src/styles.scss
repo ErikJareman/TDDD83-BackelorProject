@@ -216,7 +216,7 @@ body {
         h2 {
             color: colors.$secondary3;
         }
-        background: colors.$secondary2;
+        background: colors.$primary2;
         color: colors.$secondary1;
         text-align: center;
         padding: 2em 2em;
@@ -248,7 +248,7 @@ body {
         }
         a {
             width: 30%;
-            margin:auto;
+            margin-left: 25%;
             color: colors.$secondary3;
             text-decoration: underline;
 
@@ -261,7 +261,7 @@ body {
 
 .student-login-section,
 .student-register-section {
-    background:colors.$secondary2;
+    background:colors.$primary2;
     color: white;
     text-align: center;
     li {
@@ -273,7 +273,7 @@ body {
         text-align: center;
         padding: 2em 2em;
         width: 60%;
-        margin: -2em auto -2em auto;
+        margin: -2em auto 0em auto;
         border-radius: 50px;
         box-shadow: 3px 3px;
         list-style-type: none;
@@ -327,7 +327,7 @@ body {
             color: colors.$secondary3;
             font-size: 24px;
         }
-        background: colors.$secondary2;
+        background: colors.$primary2;
         color: colors.$secondary1;
         text-align: center;
         padding: 2em 2em;
@@ -370,6 +370,7 @@ body {
         a {
             width: 30%;
             margin:auto;
+            margin-left: 20%;
             color: colors.$secondary3;
             text-decoration: underline;
             &:hover {
@@ -393,7 +394,7 @@ body {
 }
 
 .buy_home_img {
-    width: 250px;
+    width: 80% !important;
 }
 
 #buy_home {
@@ -1113,7 +1114,6 @@ img {
 #ticketModal {
     color: #1e2124;
 }
-
 
 #login_reg_link {
      margin-left: 45% !important;
