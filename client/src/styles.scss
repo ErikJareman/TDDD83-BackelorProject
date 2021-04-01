@@ -234,7 +234,64 @@ a {
             }
         }
         a {
-            margin-left: 20%;
+            width: 30%;
+            margin:auto;
+            color: colors.$secondary3;
+            text-decoration: underline;
+
+            &:hover {
+                color: colors.$accent;
+            }
+        }
+    }
+}
+
+.student-login-section,
+.student-register-section {
+    background:colors.$secondary2;
+    color: white;
+    text-align: center;
+    li {
+        h2 {
+            color: colors.$secondary3;
+        }
+        background: white;
+        color: colors.$secondary1;
+        text-align: center;
+        padding: 2em 2em;
+        width: 60%;
+        margin: -2em auto -2em auto;
+        border-radius: 50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+    .form-check-input {
+        margin-left: -53%;
+    }
+
+    form {
+        text-align: left;
+        font-size: 14px;
+        margin: 3%;
+        ::placeholder {
+            color: rgb(192, 187, 187);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .btn {
+            color: white;
+            background-color: colors.$accent;
+            font-weight: lighter;
+            border-radius: 5em;
+            &:hover {
+                background: colors.$accenthover;
+                color: white;
+            }
+        }
+        a {
+            width: 30%;
+            margin:auto;
             color: colors.$secondary3;
             text-decoration: underline;
 
@@ -298,7 +355,8 @@ a {
             }
         }
         a {
-            margin-left: 15%;
+            width: 30%;
+            margin:auto;
             color: colors.$secondary3;
             text-decoration: underline;
             &:hover {
@@ -328,30 +386,6 @@ a {
 #buy_home {
     font-size: 20px;
     color: rgb(78, 78, 78);
-}
-
-#view-login {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15%;
-}
-#view-register {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30%;
-}
-
-#SendLogin,
-#SendRegister {
-    color: white !important;
-    border: 3px solid white;
-    font-weight: lighter;
-    border-radius: 5em;
-    margin-top: -0.2em;
 }
 
 ul {
@@ -760,10 +794,6 @@ header {
     background-color: colors.$primary1;
 }
 
-.view-login,
-.view-register {
-    background-color: colors.$primary1;
-}
 img {
     width: 50%;
 }
@@ -1036,23 +1066,11 @@ h5 {
     width: 40%;
 }
 
-#cardBox,
-#cardBox_register {
-    margin-top: 5%;
-    margin-bottom: 15%;
-    width: 40% !important;
-}
 
 #login_reg_link {
-    margin-left: 45% !important;
+     margin-left: 45% !important;
 }
 
-#loginForm,
-#registerForm {
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 20px;
-}
 
 .link {
     font-family: Inter;

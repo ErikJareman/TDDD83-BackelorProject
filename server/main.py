@@ -273,6 +273,7 @@ def login_school():
 
     # TODO, make token expire
     token = create_access_token({'school': school.id}, expires_delta=False)
+    print('kommer hit första ggn')
     return jsonify({"token": token, "school": school.serialize()})
 
 @app.route('/registerschool', methods=['POST', 'GET'])
@@ -285,6 +286,7 @@ def sign_up_school():
         new_school.set_password(password)
         db.session.add(new_school)
         db.session.commit()
+        print('kommer hit första regen')
         return jsonify([new_school.serialize()])
     elif request.method == 'GET':
         return jsonify([j.serialize() for j in School.query.all()])
