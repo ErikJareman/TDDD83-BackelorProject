@@ -142,14 +142,27 @@ html{
 body {
     /* html och height för att få till footern */
     height: 100%;
-    background: white !important;
-    margin: 0 !important;
-    font-family: 'Poppins' !important;
+    background: white;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+#router {
+    margin-bottom: 400px;
+    min-height: 700px;
+    
+
 }
 
 .navbar {
     background: colors.$secondary1;
     padding: 1em;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 
     .container {
         display: -webkit-box;
@@ -167,24 +180,20 @@ body {
             color: colors.$accent;
         }
     }
+    .mobile-menu {
+        cursor: pointer;
+        height: 15px;
+    }
     nav {
         display: none;
-
-        .mobile-menu {
-            cursor: pointer;
-        }
     }
+
 }
 
-#container {
-    height: 100%;
-    overflow: hidden;
-}
+
 
 //-------HERO--------------------------
-a {
-    color: black;
-}
+
 
 #login_instead_button {
     color: white;
@@ -392,59 +401,80 @@ a {
     color: rgb(78, 78, 78);
 }
 
-ul {
-    list-style-type: none;
-    margin: 0 !important;
-    padding: 0;
-}
-
-section {
-    padding: 5em 2em;
-}
 
 .hero {
+
     text-align: center;
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    a {
+        color: black;
+    }
+
+    img {
+        width: 40%;
+    }
+
+    section {
+        padding: 5em 2em;
+    }
+
+    .left-col {
+    
+        .subhead {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: gray;
+            letter-spacing: 0.3em;
+        }
+        h1 {
+            font-size: 2.5em;
+            line-height: 1.3em;
+            margin-top: 0.2em;
+        }
+        .primary-cta {
+            background: colors.$accent;
+            color: white;
+            text-decoration: none;
+            padding: 0.6em 1.3em;
+            font-size: 1.4em;
+            border-radius: 5em;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .instructions {
+            display: block;
+            margin-top: 1em;
+            position: absolute;
+        }
+    }
+
 }
 
-.left-col {
-    .subhead {
-        text-transform: uppercase;
-        font-weight: bold;
-        color: gray;
-        letter-spacing: 0.3em;
-    }
-    h1 {
-        font-size: 2.5em;
-        line-height: 1.3em;
-        margin-top: 0.2em;
-    }
-    .primary-cta {
-        background: colors.$accent;
-        color: white;
-        text-decoration: none;
-        padding: 0.6em 1.3em;
-        font-size: 1.4em;
-        border-radius: 5em;
-        font-weight: bold;
-        display: inline-block;
-    }
-    .instructions {
-        display: block;
-        margin-top: 1em;
-        position: absolute;
-    }
-}
 
-.hero-img {
-    width: 50% !important;
-}
+
 
 //--------FEATURE-----------------------------
 
 .features-section {
-    // min-height: 100%; /* Testar detta för att få till footern */
+    
     background: colors.$secondary1;
     color: white;
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+        
+    }
+    ul { 
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 ul.features-list {
@@ -460,7 +490,10 @@ ul.features-list {
     font-size: 1.1em;
     margin-bottom: 1em;
     margin-left: 2em;
+    margin-top: 20px;
     position: relative;
+
+
 
     li {
         font-size: 1.1em;
@@ -488,21 +521,28 @@ ul.features-list {
 .testimonials-section {
     background: colors.$secondary3;
     color: white;
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    ul { 
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
     li {
         background: #006bd6;
         text-align: center;
-        padding: 2em 1em;
+        padding: 3em 2em;
         width: 80%;
         margin: 0 auto 5em auto;
         border-radius: 1em;
+        margin-top: 20px;
+        font-size: 1.2em;
 
-        img {
-            width: 5em;
-            height: 5em;
-            border: 5px solid #006bd6;
-            border-radius: 50%;
-            margin-top: -4.5em;
-        }
     }
 }
 
@@ -555,11 +595,22 @@ nav {
     padding: 1em !important;
 
     ul.primary-nav {
-        margin-top: 4em !important;
+        margin: 0;
+    }
+    .mobile-menu-exit {
+        margin-top: 0;
+        float: right;
+        margin: 0,5em;
+        cursor: pointer;
+        height: 20px;
+        
+        
     }
     li {
+        
         a {
-            color: white !important;
+        
+            color: white;
             text-decoration: none;
             display: block;
             padding: 0, 5em;
@@ -570,13 +621,12 @@ nav {
             font-weight: bold;
         }
     }
+    .current {
+        margin-top: 30px;
+    }
 }
 
-.mobile-menu-exit {
-    float: right;
-    margin: 0.5em;
-    cursor: pointer;
-}
+
 
 //-------------768px-----------------------------
 @media only screen and (min-width: 768px) {
@@ -586,6 +636,7 @@ nav {
     }
 
     .navbar {
+
         .container {
             display: -ms-grid;
             display: grid;
@@ -608,19 +659,18 @@ nav {
             width: 100%;
             padding: 0;
 
+            .current {
+                margin-top: 0px;
+            }
             ul {
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
             }
             a {
-                color: black;
+                color: white;
                 font-size: 1.2em;
                 padding: 0.1em 1em;
-            }
-
-            ul.primary-nav {
-                margin: 0 !important;
             }
 
             li.current a {
@@ -662,10 +712,11 @@ nav {
     }
     .hero .container .left-col {
         margin: 3em 3em 0 5em;
+        
     }
     .hero .container .left-col h1 {
         font-size: 3em;
-        width: 90%;
+        width: 100%;
     }
     .hero-img {
         width: 30%;
@@ -696,7 +747,7 @@ nav {
     .features-section img {
         display: block;
         position: absolute;
-        right: 12em;
+        right: 1em;
         width: 500px;
         bottom: 8em;
     }
@@ -715,37 +766,50 @@ nav {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        height: fixed;
     }
 }
 
 @media only screen and (min-width: 1450px) {
-    .features-section:before {
-        content: '';
-        position: absolute;
-        width: 10%;
-        height: 20em;
-        background: colors.$accent;
-        left: 0;
-        top: -4em;
-    }
-    .features-section:after {
-        content: '';
-        position: absolute;
-        width: 200px;
-        height: 20em;
-        background: url('../assets/dots.svg') no-repeat;
-        left: 4.5em;
-        top: 2em;
+    .features-section{
+        &:before {
+            content: '';
+            position: absolute;
+            width: 10%;
+            height: 20em;
+            background: colors.$accent;
+            left: 0;
+            top: -4em;
+        }
+        
+        &:after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 20em;
+            background: url('../assets/dots.svg') no-repeat;
+            left: 4.5em;
+            top: 2em;
+        }
     }
 }
 
 /* Footer */
-
 .footer {
-    background: #303036;
+    background: colors.$secondary1;
     color: #d3d3d3;
     height: 400px;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .footer .footer-content {
@@ -789,14 +853,9 @@ nav {
 }
 
 //Ändrar färg på knappar och mörkare när vi har musen över
-.btn {
-    background-color: colors.$accent;
-    color: white;
-}
-
-header {
-    background-color: colors.$primary1;
-}
+//.btn {
+//    background-color: colors.$accent;
+//    color: white;}
 
 img {
     width: 50%;
@@ -807,37 +866,46 @@ img {
 }
 .left-div {
     height: auto;
-    background-color: #282b30;
+    background-color: colors.$primary2;
     padding-top: 6px;
     padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     //min-width: 200px;
+   
+}
+.container-fluid{
+    h5 {
+        color: #ffffff;
+        border-bottom: 2px solid #6c757d;
+        padding-top: 10px;
+        padding-bottom: 4px;
+        padding-left: 6px;
+    }
 }
 .center-div {
     height: 1000px;
-    background-color: #36393e;
+    background-color: colors.$primary3;
     align-items: center;
     text-align: left;
     padding-top: 6px;
+    h5 {
+        color: #6c757d;
+        
+    }
 }
 .right-div {
     height: 1000px;
-    background-color: #282b30;
+    background-color: colors.$primary2;
     align-items: center;
     text-align: left;
     padding-top: 15px;
     //min-width: 200px;
+    
 }
-h5 {
-    color: #ffffff;
-    border-bottom: 2px solid #6c757d;
-    padding-top: 10px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-}
-.left-button {
+
+.left-button { // VAD ÄR DETTA!?
     width: 98%;
     margin: 4px 2px;
     white-space: nowrap;
@@ -845,6 +913,7 @@ h5 {
     text-overflow: ellipsis;
     text-align: left;
 }
+
 .extend-button {
     width: 100%;
 }
@@ -865,6 +934,7 @@ h5 {
 }
 .special {
     padding-bottom: 10px;
+    color: #6c757d;
 }
 #ticket-list {
     text-align: center;
@@ -883,29 +953,14 @@ h5 {
 
 .primary-button {
     color: #ffffff;
-    background-color: #3376b4;
+    background-color:colors.$accent;
 }
 .bad-button {
     color: #ffffff;
     background-color: #c44a4a;
 }
 
-/*first header*/
-.first_header {
-    background-color: #1e2124;
-    display: flex;
-    flex-direction: row;
-    //padding: 10px 0px 10px 10px;
-    //padding-top: 10px;
-}
 
-#first_header_title {
-    width: 83.3333333333333333%;
-    //border-right: 2px solid #868e96;
-    padding: 0px;
-    color: #b3b3b4;
-    padding: 10px;
-}
 
 #drop_down {
     width: 16.6666666666666666%;
@@ -969,7 +1024,7 @@ h5 {
 
 //TICKET
 .ticket-ticket {
-    background-color: white;
+    background-color: colors.$primary1;
     //display: inline-block;
     display: flex;
     flex-direction: row;
@@ -1081,7 +1136,7 @@ h5 {
     transition: all 0.3s;
 }
 .footer .footer-content .links ul a {
-    color: colors.$primary1;
+    color: colors.$accent;
     text-decoration: underline;
     display: block;
     margin-bottom: 10px;

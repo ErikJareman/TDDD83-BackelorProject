@@ -28,8 +28,10 @@
           <li><a href="#">About us</a></li>
         </ul>
         <ul class="secondary-nav">
-          <li class="custombutton"><a href="/login">Login</a></li>
-          <li class="custombutton"><a href="/register">Register</a></li>
+          <li id="login-button" class="custombutton"><a href="/login">Login</a></li>
+          <li id="register-button" class="custombutton"><a href="/register">Register</a></li>
+          <li id="logout-button" class="custombutton"><a href="/">Logout</a></li>
+          <li id="room-button" class="custombutton"><a href="/r">Room</a></li>
         </ul>
       </nav>
     </div>
@@ -46,8 +48,8 @@
           TopQ is a queueing application made by students for students! And also tutors. Please buy!
         </p>
         <div class="contact">
-          <span><i class="fas fa-phone"></i> &#9742; &nbsp; 123-456</span>
-          <span><i class="fas fa-envelope"></i>&#128231; &nbsp; TopQ@mail.com</span>
+         <!-- <span><i class="fas fa-phone"></i> &#9742; &nbsp; 123-456</span>-->
+          <span><i class="fas fa-envelope"></i>&#128231; &nbsp; info.contact.topq@gmail.com</span>
         </div>
 
       </div>
@@ -72,6 +74,8 @@
         &copy; TopQ | Designed & developed by kandidatgrupp 3
       </div>
     </div>
+  </div>
+
 
 
     <template id="home">
@@ -572,32 +576,8 @@
       </div>
     </div>
 
-
-
-
-
-
     <template id="view-room">
-      <!--Top navigation bar-->
-      <!--<nav class="navbar navbar-top">
-            <div class="navbar-brand" href="#">
-                Top-Q
-            </div>-->
-      <header class=first_header>
-        <div id=first_header_title>
-          <h2>
-            Top-Q
-          </h2>
-        </div>
-        <div id=drop_down><a href="#">frans.nyrfors@outlook.com</a>
-          <ul>
-            <li><a href="">Change pw</a></li>
-            <li><a href="">Leave que</a></li>
-            <li><a href="">Sign out</a></li>
-          </ul>
-        </div>
-      </header>
-      </nav>
+      
       <!--Container for rest of page...-->
       <!--Divided into left, center, right-->
       <div class="container-fluid d-flex h-100 flex-column flex-shrink-0">
@@ -611,7 +591,7 @@
               </left-container>
             </div>
             <div>
-              <button class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create
+              <button id="create_room" class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create
                 room</button>
             </div>
           </div>

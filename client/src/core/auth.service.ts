@@ -52,6 +52,14 @@ export async function createUser(event: { preventDefault: () => void }) {
     }
 }
 
+export function toggleNavbar(){
+    const signedIn = isSignedIn();
+    $('#login-button').toggleClass('d-none', signedIn);
+    $('#register-button').toggleClass('d-none', signedIn);
+    $('#room-button').toggleClass('d-none', !signedIn);
+    $('#logout-button').toggleClass('d-none', !signedIn);
+}
+
 export function isSignedIn() {
     const signedIn = sessionStorage.getItem(tokenName);
     return signedIn != null;
@@ -60,6 +68,7 @@ export function isSignedIn() {
 export function logOut(event: { preventDefault: () => void }) {
     event.preventDefault();
     sessionStorage.removeItem(tokenName);
+    toggleNavbar();
     navigateTo('/');
 }
 
@@ -74,6 +83,7 @@ export async function logIn(event: { preventDefault: () => void }) {
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
         console.log(result);
+        toggleNavbar();
         navigateTo('/r');
 
         // TODO, navigate

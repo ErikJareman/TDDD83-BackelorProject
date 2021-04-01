@@ -119,6 +119,7 @@ function deleteAdmin() {
     }
 }
 
+
 const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
