@@ -294,7 +294,7 @@ def sign_up_school():
 @jwt_required()
 def school_admin():
     school_id = get_jwt_identity()['school']
-#    school_id = request.get_json(force = True)["school_id"]
+    #school_id = request.get_json(force = True)["school_id"]
     school = School.query.get(school_id)
     if request.method == 'POST':
         admin_email = request.get_json(force = True)["admin_email"]

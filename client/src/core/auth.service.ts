@@ -33,7 +33,7 @@ export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;
 
 export const hasToken = () => !!getToken();
 
-export async function createUser(event: { preventDefault: () => void; }) {
+export async function createUser(event: { preventDefault: () => void }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmailRegister').val();
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
@@ -57,13 +57,13 @@ export function isSignedIn() {
     return signedIn != null;
 }
 
-export function logOut(event: { preventDefault: () => void; }) {
+export function logOut(event: { preventDefault: () => void }) {
     event.preventDefault();
     sessionStorage.removeItem(tokenName);
     navigateTo('/');
 }
 
-export async function logIn(event: { preventDefault: () => void; }) {
+export async function logIn(event: { preventDefault: () => void }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
@@ -82,7 +82,7 @@ export async function logIn(event: { preventDefault: () => void; }) {
     }
 }
 
-export async function createSchool(event: { preventDefault: () => void; }) {
+export async function createSchool(event: { preventDefault: () => void }) {
     event.preventDefault();
     const name = $<HTMLInputElement>('#schoolName').val();
     const email = $<HTMLInputElement>('#contactEmail').val();
@@ -100,7 +100,7 @@ export async function createSchool(event: { preventDefault: () => void; }) {
     }
 }
 
-export async function loginSchool(event: { preventDefault: () => void; }) {
+export async function loginSchool(event: { preventDefault: () => void }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#contactEmailLogin').val();
     const password = $<HTMLInputElement>('#schoolLoginP').val();
@@ -122,7 +122,7 @@ export async function loginSchool(event: { preventDefault: () => void; }) {
 
 export async function writeAdmins() {
     checkSubscription();
-    $('#admins').empty();
+    $('#admin-admin').empty();
     try {
         const result = await fetch('http://127.0.0.1:5000/school_admin', {
             method: 'GET',
@@ -140,31 +140,14 @@ export async function writeAdmins() {
             <tr>
               <th scope="row">${number_of}</th>
               <td>${School_Admin.admin_email}</td>
-              <td> <button type="button" class="btn btn-primary btn-sm" id="delete-admin-button" onclick="deleteAdmin(${School_Admin.admin_email})">Delete</button></td>
+            
               </tr>`);
+
+            //<td> <button type="button" class="btn btn-primary btn-sm" id="delete-admin-button" onclick="deleteAdmin(${School_Admin.admin_email})">Delete</button></td>
         });
     } catch (e) {
         // TODO
     }
-}
-
-export async function deleteAdmin(result) {
-    alert('hej');
-    //  $('#admins').append(`<p>Do you want to delete admin with ID ${result}?</p>`);
-    //  $('#transaction-modal').modal('show');
-    // document.getElementById('save-deleted-transaction').addEventListener("click", function(){
-    await fetch('http://127.0.0.1:5000/school_admin', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
-        },
-        body: JSON.stringify({
-            admin_email: result,
-        }),
-    });
-    alert(result);
-    writeAdmins();
 }
 
 export function checkSubscription() {

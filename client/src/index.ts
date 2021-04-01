@@ -97,6 +97,28 @@ function addAdmin() {
     }
 }
 
+function deleteAdmin() {
+    //  $('#admins').append(`<p>Do you want to delete admin with ID ${result}?</p>`);
+    //  $('#transaction-modal').modal('show');
+    // document.getElementById('save-deleted-transaction').addEventListener("click", function(){
+    const email = $<HTMLInputElement>('#inputemail-delete').val();
+    try {
+        const result = fetch('http://127.0.0.1:5000/school_admin', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
+            },
+            body: JSON.stringify({
+                admin_email: email,
+            }),
+        });
+        writeAdmins();
+    } catch (e) {
+        alert('This is not one of your admins. Try again.');
+    }
+}
+
 const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
@@ -120,7 +142,7 @@ const main = () => {
     });
     $('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
-
+    $('#delete-admin-modal').on('click', deleteAdmin);
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
     const mobileBtnExit = document.getElementById('mobile-exit');

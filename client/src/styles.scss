@@ -10,6 +10,8 @@
 
 .table-wrapper-scroll-y {
     display: block;
+    width:75%;
+    margin:auto;
 }
 
 #add-modal {
@@ -45,10 +47,38 @@
 #premium_plus,
 #customer_portal,
 #modify-admin,
+#delete-admin-modal,
 #add-admin-modal {
     color: white !important;
     border: 3px solid white;
     font-weight: lighter;
+    border-radius: 5em;
+    margin-top: -0.2em;
+}
+
+#delete-modal {
+    .modal-title {
+        color: black;
+    }
+    .form-group {
+        color: #7f7f7f;
+        font-size: small;
+    }
+    #close-modal {
+        color: white !important;
+        border: 3px solid white;
+        font-weight: lighter;
+        background: rgba(235, 92, 92, 0.849);
+        border-radius: 5em;
+        margin-top: -0.2em;
+    }
+}
+
+#delete-admin {
+    color: white;
+    border: 3px solid white;
+    font-weight: lighter;
+    background: rgba(235, 92, 92, 0.849);
     border-radius: 5em;
     margin-top: -0.2em;
 }
