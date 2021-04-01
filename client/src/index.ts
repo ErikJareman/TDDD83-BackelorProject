@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
-import { createUser, logIn, createSchool, loginSchool, writeAdmins } from './core/auth.service';
+import { createUser, logIn, logOut, isSignedIn, toggleNavbar, createSchool, loginSchool, writeAdmins } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
@@ -128,6 +128,9 @@ const main = () => {
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
+    $('#logout-button').on('click', logOut);
+    toggleNavbar();
+
     $('#premium_plus').on('click', function () {
         createCheckoutSession(price_p_plus);
     });

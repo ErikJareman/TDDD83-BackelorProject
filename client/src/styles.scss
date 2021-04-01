@@ -134,7 +134,11 @@
     text-align: center;
 }
 
-html,
+html{
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     /* html och height för att få till footern */
     height: 100%;
@@ -439,7 +443,7 @@ section {
 
 .features-section {
     // min-height: 100%; /* Testar detta för att få till footern */
-    background: #20272e;
+    background: colors.$secondary1;
     color: white;
 }
 
@@ -631,7 +635,7 @@ nav {
                 margin-top: -0.2em;
 
                 &:hover {
-                    background: colors.$accenthover;
+                    background: colors.$accent;
                     color: white;
                 }
             }
