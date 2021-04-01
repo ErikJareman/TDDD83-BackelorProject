@@ -2,6 +2,138 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+.my-custom-scrollbar {
+    position: relative;
+    height: 400px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    width:75%;
+    margin:auto;
+}
+
+#add-modal {
+    .modal-title {
+        color: black;
+    }
+    .form-group {
+        color: #7f7f7f;
+        font-size: small;
+    }
+    #close-modal {
+        color: white !important;
+        border: 3px solid white;
+        font-weight: lighter;
+        background: rgba(235, 92, 92, 0.849);
+        border-radius: 5em;
+        margin-top: -0.2em;
+    }
+}
+
+#delete-admin-button {
+    color: white !important;
+    border: 1px solid white;
+    font-weight: lighter;
+    background: rgba(235, 92, 92, 0.849);
+    border-radius: 5em;
+    margin-top: -0.2em;
+}
+
+#standard,
+#standard_plus,
+#premium,
+#premium_plus,
+#customer_portal,
+#modify-admin,
+#delete-admin-modal,
+#add-admin-modal {
+    color: white !important;
+    border: 3px solid white;
+    font-weight: lighter;
+    border-radius: 5em;
+    margin-top: -0.2em;
+}
+
+#delete-modal {
+    .modal-title {
+        color: black;
+    }
+    .form-group {
+        color: #7f7f7f;
+        font-size: small;
+    }
+    #close-modal {
+        color: white !important;
+        border: 3px solid white;
+        font-weight: lighter;
+        background: rgba(235, 92, 92, 0.849);
+        border-radius: 5em;
+        margin-top: -0.2em;
+    }
+}
+
+#delete-admin {
+    color: white;
+    border: 3px solid white;
+    font-weight: lighter;
+    background: rgba(235, 92, 92, 0.849);
+    border-radius: 5em;
+    margin-top: -0.2em;
+}
+
+#pricing {
+    text-align: center;
+    margin-top: -70px;
+    margin-bottom: 20px;
+}
+
+.price-name {
+    color: #7f7f7f;
+    font-size: large;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.price-price {
+    color: #000000;
+    font-size: x-large;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.price-duration {
+    color: #969696;
+    font-size: smaller;
+    text-align: center;
+}
+
+.price-text {
+    color: #000000;
+    font-size: x-small;
+    text-align: center;
+}
+
+#price-plan {
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+}
+
+.card-img-top {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.center_buttons {
+    text-align: center;
+}
+
 html{
     position: relative;
     min-height: 100%;
@@ -63,35 +195,210 @@ body {
 //-------HERO--------------------------
 
 
-#view-login {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15%;
-}
-#view-register {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15%;
-}
-
-#SendLogin {
-    color: white !important;
-    border: 3px solid white;
+#login_instead_button {
+    color: white;
+    font-size: 20px;
+    background-color: colors.$accent;
     font-weight: lighter;
     border-radius: 5em;
-    margin-top: -0.2em;
+    margin-top: 4%;
+    &:hover {
+        background: colors.$accenthover;
+        color: white;
+    }
 }
 
-#SendRegister {
-    color: white !important;
-    border: 3px solid white;
-    font-weight: lighter;
-    border-radius: 5em;
-    margin-top: -0.2em;
+.login-section {
+    background: colors.$secondary3;
+    color: white;
+    text-align: center;
+    li {
+        h2 {
+            color: colors.$secondary3;
+        }
+        background: colors.$secondary2;
+        color: colors.$secondary1;
+        text-align: center;
+        padding: 2em 2em;
+        width: 60%;
+        margin: 0 auto 3em auto;
+        border-radius: 50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+    form {
+        text-align: left;
+        font-size: 14px;
+        margin: 3%;
+        ::placeholder {
+            color: rgb(192, 187, 187);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .btn {
+            color: white;
+            background-color: colors.$accent;
+            font-weight: lighter;
+            border-radius: 5em;
+            &:hover {
+                background: colors.$accenthover;
+                color: white;
+            }
+        }
+        a {
+            width: 30%;
+            margin:auto;
+            color: colors.$secondary3;
+            text-decoration: underline;
+
+            &:hover {
+                color: colors.$accent;
+            }
+        }
+    }
+}
+
+.student-login-section,
+.student-register-section {
+    background:colors.$secondary2;
+    color: white;
+    text-align: center;
+    li {
+        h2 {
+            color: colors.$secondary3;
+        }
+        background: white;
+        color: colors.$secondary1;
+        text-align: center;
+        padding: 2em 2em;
+        width: 60%;
+        margin: -2em auto -2em auto;
+        border-radius: 50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+    .form-check-input {
+        margin-left: -53%;
+    }
+
+    form {
+        text-align: left;
+        font-size: 14px;
+        margin: 3%;
+        ::placeholder {
+            color: rgb(192, 187, 187);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .btn {
+            color: white;
+            background-color: colors.$accent;
+            font-weight: lighter;
+            border-radius: 5em;
+            &:hover {
+                background: colors.$accenthover;
+                color: white;
+            }
+        }
+        a {
+            width: 30%;
+            margin:auto;
+            color: colors.$secondary3;
+            text-decoration: underline;
+
+            &:hover {
+                color: colors.$accent;
+            }
+        }
+    }
+}
+
+.subscription-section {
+    background: colors.$secondary3;
+    color: white;
+    text-align: center;
+    h2 {
+        font-size: 30px;
+    }
+    li {
+        h2 {
+            color: colors.$secondary3;
+            font-size: 24px;
+        }
+        background: colors.$secondary2;
+        color: colors.$secondary1;
+        text-align: center;
+        padding: 2em 2em;
+        width: 90%;
+        margin: 0 auto 3em auto;
+        border-radius: 50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+    #admin-info {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    p {
+        text-decoration: underline;
+        font-weight: 600;
+    }
+
+    form {
+        text-align: left;
+        font-size: 14px;
+        margin: 3%;
+        ::placeholder {
+            color: rgb(192, 187, 187);
+            font-style: italic;
+            font-size: 14px;
+        }
+        .btn {
+            color: white;
+            background-color: colors.$accent;
+            font-weight: lighter;
+            border-radius: 5em;
+            &:hover {
+                background: colors.$accenthover;
+                color: white;
+            }
+        }
+        a {
+            width: 30%;
+            margin:auto;
+            color: colors.$secondary3;
+            text-decoration: underline;
+            &:hover {
+                color: colors.$accent;
+            }
+        }
+    }
+    .form-check-input {
+        margin-left: -53%;
+    }
+}
+
+.subs_img {
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+.admins_img {
+    width: 40px;
+    margin-bottom: 2%;
+}
+
+.buy_home_img {
+    width: 250px;
+}
+
+#buy_home {
+    font-size: 20px;
+    color: rgb(78, 78, 78);
 }
 
 
@@ -550,16 +857,13 @@ nav {
 //    background-color: colors.$accent;
 //    color: white;}
 
-//.container-fluid {
-.view-login {
-    background-color: colors.$primary1;
-    height: 1000px;
-}
-.view-register {
-    background-color: colors.$primary1;
-    height: 1000px;
+img {
+    width: 50%;
 }
 
+.navbar-top {
+    background-color: #1e2124;
+}
 .left-div {
     height: auto;
     background-color: colors.$primary2;
@@ -810,54 +1114,11 @@ nav {
     color: #1e2124;
 }
 
-// //#868e96
-// //Ändrar färg på knappar och mörkare när vi har musen över
-// .btn{
-//     background-color: colors.$accent !important;
-//     color: white !important;
-// }
-// .btn:hover {
-//     background-color: colors.$accenthover !important;
-// }
 
-//Dessa är för login och register
-.card-reg {
-    position: absolute;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 40%;
+#login_reg_link {
+     margin-left: 45% !important;
 }
 
-#cardBox {
-    margin-top: 5%;
-    margin-bottom: 15%;
-    width: 40% !important;
-}
-#cardBox_register {
-    margin-top: 5%;
-    margin-bottom: 25%;
-    width: 40%;
-}
-
-
-#login_reg_link{
-    margin-left: 45% !important;
-}
-
-#loginForm {
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 20px;
-}
-
-#registerForm {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 20px;
-}
 
 .link {
     font-family: Inter;

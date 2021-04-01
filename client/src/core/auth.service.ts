@@ -17,9 +17,9 @@ export interface Identity {
 
 const tokenName = 'auth';
 
-export const authHeader = (token) => `Bearer ${token}`;
+export const authHeader = (token: any) => `Bearer ${token}`;
 
-export const saveToStorage = (data) => {
+export const saveToStorage = (data: any) => {
     sessionStorage.setItem(tokenName, JSON.stringify(data));
 };
 
@@ -33,7 +33,7 @@ export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;
 
 export const hasToken = () => !!getToken();
 
-export async function createUser(event) {
+export async function createUser(event: { preventDefault: () => void }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmailRegister').val();
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
@@ -65,19 +65,18 @@ export function isSignedIn() {
     return signedIn != null;
 }
 
-export function logOut(event) {
+export function logOut(event: { preventDefault: () => void }) {
     event.preventDefault();
     sessionStorage.removeItem(tokenName);
     toggleNavbar();
     navigateTo('/');
 }
 
-export async function logIn(event) {
+export async function logIn(event: { preventDefault: () => void }) {
     event.preventDefault();
     const email = $<HTMLInputElement>('#InputEmail').val();
     const password = $<HTMLInputElement>('#InputPassword').val();
     try {
-        console.log('hej');
         const result = await standardPost('/login', {
             email: email,
             password: password,
@@ -90,5 +89,87 @@ export async function logIn(event) {
         // TODO, navigate
     } catch (e) {
         alert('Felaktig email eller lösenord. Försök igen eller registrera dig.');
+    }
+}
+
+export async function createSchool(event: { preventDefault: () => void }) {
+    event.preventDefault();
+    const name = $<HTMLInputElement>('#schoolName').val();
+    const email = $<HTMLInputElement>('#contactEmail').val();
+    const password = $<HTMLInputElement>('#schoolPassword').val();
+    try {
+        const result = await standardPost('/registerschool', {
+            name,
+            email,
+            password,
+        });
+        navigateTo('/loginschool');
+    } catch (e) {
+        // TODO
+        // Kan det skapas en med samma mail?
+    }
+}
+
+export async function loginSchool(event: { preventDefault: () => void }) {
+    event.preventDefault();
+    const email = $<HTMLInputElement>('#contactEmailLogin').val();
+    const password = $<HTMLInputElement>('#schoolLoginP').val();
+    try {
+        const result = await standardPost('/loginschool', {
+            email,
+            password,
+        });
+        sessionStorage.setItem('auth', JSON.stringify(result));
+        if (result.school.sub_id != null) {
+            navigateTo('/customer-page'); //om subscription
+        } else {
+            navigateTo('/checkout'); //om subscription
+        }
+    } catch (e) {
+        alert('Something went wrong. Try again!');
+    }
+}
+
+export async function writeAdmins() {
+    checkSubscription();
+    $('#admin-admin').empty();
+    try {
+        const result = await fetch('http://127.0.0.1:5000/school_admin', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
+            },
+        });
+        const admins = await result.json();
+        let number_of = 0;
+        console.log(admins);
+        admins.forEach((School_Admin) => {
+            number_of++;
+            $('#admin-admin').append(` 
+            <tr>
+              <th scope="row">${number_of}</th>
+              <td>${School_Admin.admin_email}</td>
+            
+              </tr>`);
+
+            //<td> <button type="button" class="btn btn-primary btn-sm" id="delete-admin-button" onclick="deleteAdmin(${School_Admin.admin_email})">Delete</button></td>
+        });
+    } catch (e) {
+        // TODO
+    }
+}
+
+export function checkSubscription() {
+    try {
+        fetch('http://127.0.0.1:5000/update-school', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
+            },
+        });
+    } catch (e) {
+        // TODO
     }
 }
