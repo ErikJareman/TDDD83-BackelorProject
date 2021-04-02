@@ -1,9 +1,15 @@
+import { parseJSON } from 'jquery';
 import { getUser, getUserID } from './auth.service';
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
 import { getMultiple, getSingle, standardDelete, standardPost } from './server.service';
 import { User } from './User';
 import copy from 'copy-to-clipboard';
+
+//TODO
+//Lägg till isAdmin(userID) metod / liknande och använd där det behövs (TODO finns på dessa ställen)
+//Se till så att isAdmin fältet är uppdaterat på varje user (dvs user.email finns i "premiumdatabasen")
+//Delete-room knappen har fukkat ur(?)
 
 export interface Room {
     id: number;
@@ -16,6 +22,7 @@ export interface Room {
 export interface Ticket {
     id: number;
     ticket_info: string;
+    ticket_zoom: string;
     room: number;
     creator: User;
 }
@@ -24,32 +31,39 @@ export const getTickets = async () => {
     return getMultiple(EndPoints.Rooms);
 };
 
-function ticketTemplate(ticket: Ticket, position: number) {
-    return `<div class="ticket-ticket">
-    <div id=ticket_number>
-        ${position}.
-    </div>
-    <div id=ticket_creator>
-        ${ticket.creator.username}
-    </div> 
-    <div class="grid", id=ticket_tags>
-        <div class="tags_1">
-            <span class="badge badge-info tags-badge1">New</span>
-        </div>
-        <div class="tags_2">
-            <span class="badge badge-info tags-badge2">New</span>
-        </div>
-        <div class="tags_3">
-            <span class="badge badge-info tags-badge3">New</span>
-        </div>
-        <div class="tags_4">
-            <span class="badge badge-info tags-badge4">New</span>
-        </div>
-    </div>
-    <div id=ticket_meta_data>
-        dattaaaaaaa
-    </div>
-</div>`;
+function ticketTemplate(ticket: Ticket, position: number, room: Room) {
+    const userID = getUserID();
+    const selfAdmin = room.admins.findIndex((member) => member.id === userID);
+    if (selfAdmin !== -1 || ticket.creator.id == userID) {
+        return `<div class="ticket-ticket">
+                    <div id=ticket_number>
+                        ${position}.
+                    </div>
+                    <div id=ticket_creator>
+                        ${ticket.creator.username}
+                    </div> 
+                    <div id=ticket_info>
+                        ${ticket.ticket_info}
+                    </div>
+                        <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">ZOOM</a>
+                    <button type="button" class="btn close delete-ticket-button" data-id=${ticket.id}>
+                        x
+                    </button>
+                </div>`;
+    } else {
+        return `<div class="ticket-ticket">
+            <div id=ticket_number>
+                ${position}.
+            </div>
+            <div id=ticket_creator>
+                ${ticket.creator.username}
+            </div> 
+            <div id=ticket_info>
+                ${ticket.ticket_info}
+            </div>
+                <a href='${ticket.ticket_zoom}' id="ticket_zoom" target="_blank">ZOOM</a>
+            </div>`;
+    }
 }
 
 const noRoomSelected = async () => {
@@ -112,6 +126,10 @@ const ifNotAdmin = () => {
     $('#delete-room').addClass('d-none');
 };
 
+const createNewRoomButtonTemplate = () => {
+    return `<button id="create_room" class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create room</button>`;
+};
+
 const loadRoom = async (id: number) => {
     const hash = `#${id}`;
     if (history.pushState) {
@@ -122,6 +140,8 @@ const loadRoom = async (id: number) => {
     const buttons = $('button.left-button');
     buttons.removeClass('btn-secondary').addClass('btn-outline-secondary');
 
+    //TODO
+    //Fixa så att rums-knappen är "intryckt" på reload av page, inte bara efter varje funktion
     buttons
         .filter(function () {
             return $(this).data('id') == id;
@@ -145,10 +165,10 @@ const loadRoom = async (id: number) => {
     }
 
     $('h5.special').text(room.name);
-    // Add tickets
+
     const ticketListElement = $('#ticket-list');
     ticketListElement.empty();
-    room.tickets.forEach((ticket, index) => ticketListElement.append(ticketTemplate(ticket, index + 1)));
+    room.tickets.forEach((ticket, index) => ticketListElement.append(ticketTemplate(ticket, index + 1, room)));
 
     const memberListElement = $('#member-list');
     memberListElement.empty();
@@ -165,6 +185,18 @@ const loadRoom = async (id: number) => {
     const copyLinkButton = $<HTMLButtonElement>('#copy-link-button');
     copyLinkButton.off();
     copyLinkButton.on('click', copyRoomLink);
+
+    const promotebuttons = $<HTMLButtonElement>('.button-admin-promote');
+    promotebuttons.off();
+    promotebuttons.on('click', promoteMember);
+
+    const demotebuttons = $<HTMLButtonElement>('.button-admin-demote');
+    demotebuttons.off();
+    demotebuttons.on('click', demoteMember);
+
+    const deleteTicketButtons = $<HTMLButtonElement>('.delete-ticket-button');
+    deleteTicketButtons.off();
+    deleteTicketButtons.on('click', deleteTicket);
 
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
@@ -232,17 +264,13 @@ const getRoomIDFromURL = (): number | null => {
 
 export async function createTicket() {
     const roomID = getRoomIDFromURL();
-    const name = $<HTMLInputElement>('#name-ticket-ref').val();
-    const tag_1 = $<HTMLInputElement>('#modal-tag-1').val();
-    const tag_2 = $<HTMLInputElement>('#modal-tag-2').val();
-    const tag_3 = $<HTMLInputElement>('#modal-tag-3').val();
-    const tag_4 = $<HTMLInputElement>('#modal-tag-4').val();
-    const ticket_info = $<HTMLInputElement>('#ticket-descp').val();
-    console.log('test1');
+    const ticket_zoom = $<HTMLInputElement>('#modal-zoom').val() as string;
+    const ticket_info = $<HTMLInputElement>('#ticket-descp').val() as string;
 
     await standardPost(EndPoints.Tickets, {
         room: roomID,
         ticket_info,
+        ticket_zoom,
     });
     loadRoom(roomID);
 }

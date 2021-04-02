@@ -86,7 +86,6 @@ export async function logIn(event: { preventDefault: () => void }) {
             password: password,
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
-        console.log(result);
         toggleNavbar();
         navigateTo('/r');
 

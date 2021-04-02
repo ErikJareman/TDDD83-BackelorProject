@@ -190,14 +190,14 @@ class Ticket(db.Model):
         'room.id'), nullable=False)
     creator = db.Column(db.Integer, db.ForeignKey(
         'user.id'), nullable=False)
-
     ticket_info = db.Column(db.String, nullable=True)
+    ticket_zoom = db.Column(db.String, nullable=True)
 
     def __repr__(self):
-        return f'<Ticket {self.id}: {self.room} {self.creator} {self.ticket_info}>'
+        return f'<Ticket {self.id}: {self.room} {self.creator} {self.ticket_info} {self.ticket_zoom}>'
 
     def serialize(self):
-        d = dict(id=self.id, ticket_info=self.ticket_info, room=self.room)
+        d = dict(id=self.id, ticket_info=self.ticket_info, ticket_zoom=self.ticket_zoom, room=self.room)
         d['creator'] = User.query.get(self.creator).serialize()
         return d
 
@@ -353,7 +353,7 @@ def usersid(user_id):
 
  
 def add_ticket(data: dict, userID: int):
-    to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'])
+    to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'], ticket_zoom=data['ticket_zoom'])
     db.session.add(to_create)
     db.session.commit()
     return jsonify(to_create.serialize())
@@ -364,7 +364,7 @@ def add_ticket(data: dict, userID: int):
 def create_ticket():
     userID = get_jwt_identity()['user']
     if request.method == 'POST':
-       return add_ticket(request.get_json(), userID) 
+       return add_ticket(request.get_json(), userID)
 
 
 def join_room(room_id: int, user_id: int, role: Roles):
@@ -437,6 +437,62 @@ def leave_room(room_id: int):
             db.session.commit()
             return 'left room'
         return 'not member'
+
+
+
+@app.route('/promote-member', methods=['POST'])
+@jwt_required()
+def promoteMember():
+    if request.method == 'POST':
+        data = request.get_json()
+        roomID = data['room']
+        memberID = data['member']
+        
+        roomMemberToPromote = db.session.query(RoomMembers).filter(RoomMembers.user == memberID).filter(RoomMembers.room == roomID).first()
+        roomMemberToPromote.role = Roles.Admin.name
+        db.session.commit()
+        
+        return ''
+    return ''
+
+
+@app.route('/demote-member', methods=['POST'])
+@jwt_required()
+def demoteMember():
+    if request.method == 'POST':
+        data = request.get_json()
+        roomID = data['room']
+        memberID = data['member']
+        
+        roomMemberToDemote = db.session.query(RoomMembers).filter(RoomMembers.user == memberID).filter(RoomMembers.room == roomID).first()
+        roomMemberToDemote.role = Roles.Regular.name
+        db.session.commit()
+        
+        return ''
+    return ''
+
+
+@app.route('/delete-ticket', methods=['POST'])
+@jwt_required()
+def deleteTicket():
+    if request.method == 'POST':
+        data = request.get_json()
+        ticketID = data['ticket']
+        roomID = data['room']
+        
+        #nu ska vi alltså ta bort ticket med ticketID från rummet med id roomID
+        room = Room.query.get(roomID)
+
+        #delete_ticket = .delete().where(Ticket.room == room_id)
+        #db.session.execute(delete_ticket)
+        delete_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
+        db.session.delete(delete_ticket)
+        db.session.commit()
+        
+        return 'test'
+    return 'test'
+
+
 
 
 @app.route('/', methods=['GET'])
