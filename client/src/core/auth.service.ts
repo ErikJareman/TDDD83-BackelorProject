@@ -52,7 +52,7 @@ export async function createUser(event: { preventDefault: () => void }) {
     }
 }
 
-export function toggleNavbar(){
+export function toggleNavbar() {
     const signedIn = isSignedIn();
     $('#login-button').toggleClass('d-none', signedIn);
     $('#register-button').toggleClass('d-none', signedIn);
@@ -127,49 +127,5 @@ export async function loginSchool(event: { preventDefault: () => void }) {
         }
     } catch (e) {
         alert('Something went wrong. Try again!');
-    }
-}
-
-export async function writeAdmins() {
-    checkSubscription();
-    $('#admin-admin').empty();
-    try {
-        const result = await fetch('http://127.0.0.1:5000/school_admin', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
-            },
-        });
-        const admins = await result.json();
-        let number_of = 0;
-        console.log(admins);
-        admins.forEach((School_Admin) => {
-            number_of++;
-            $('#admin-admin').append(` 
-            <tr>
-              <th scope="row">${number_of}</th>
-              <td>${School_Admin.admin_email}</td>
-            
-              </tr>`);
-
-            //<td> <button type="button" class="btn btn-primary btn-sm" id="delete-admin-button" onclick="deleteAdmin(${School_Admin.admin_email})">Delete</button></td>
-        });
-    } catch (e) {
-        // TODO
-    }
-}
-
-export function checkSubscription() {
-    try {
-        fetch('http://127.0.0.1:5000/update-school', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
-            },
-        });
-    } catch (e) {
-        // TODO
     }
 }

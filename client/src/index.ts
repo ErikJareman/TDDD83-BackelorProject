@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
-import { createUser, logIn, logOut, isSignedIn, toggleNavbar, createSchool, loginSchool, writeAdmins } from './core/auth.service';
+import { createUser, logIn, logOut, isSignedIn, toggleNavbar, createSchool, loginSchool } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
+import { writeAdmins, addAdmin, deleteAdmin } from './core/subscription';
 import { loadStripe } from '@stripe/stripe-js';
 import env from './shared/env';
 
@@ -77,49 +78,6 @@ function customerPortal(e) {
         });
 }
 
-function addAdmin() {
-    const email = $<HTMLInputElement>('#inputemail').val();
-
-    try {
-        const result = fetch(env.backendURL + 'school_admin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
-            },
-            body: JSON.stringify({
-                admin_email: email,
-            }),
-        });
-        writeAdmins();
-    } catch (e) {
-        // TODO
-    }
-}
-
-function deleteAdmin() {
-    //  $('#admins').append(`<p>Do you want to delete admin with ID ${result}?</p>`);
-    //  $('#transaction-modal').modal('show');
-    // document.getElementById('save-deleted-transaction').addEventListener("click", function(){
-    const email = $<HTMLInputElement>('#inputemail-delete').val();
-    try {
-        const result = fetch('http://127.0.0.1:5000/school_admin', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
-            },
-            body: JSON.stringify({
-                admin_email: email,
-            }),
-        });
-        writeAdmins();
-    } catch (e) {
-        alert('This is not one of your admins. Try again.');
-    }
-}
-
-
 const main = () => {
     initiateRouter();
     $('#SendRegister').on('click', createUser);
@@ -129,7 +87,10 @@ const main = () => {
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
-    $('#logout-button').on('click', logOut);
+    $('#customer-page').on('click', function(){
+        navigateTo('/customer-page');
+        window.location.reload();
+    });
     toggleNavbar();
 
     $('#premium_plus').on('click', function () {
@@ -147,6 +108,7 @@ const main = () => {
     $('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
     $('#delete-admin-modal').on('click', deleteAdmin);
+
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
     const mobileBtnExit = document.getElementById('mobile-exit');

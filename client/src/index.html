@@ -150,16 +150,17 @@
     <template id="success">
       <section>
         <h2 id="pricing">Thanks for your order!</h2>
-        <p>
+        <br><br><br><br>
+        <h6 id="pricing">
           We appreciate your business! If you have any questions, please email
           <a href="info.contact.TopQ@gmail.com">info.contact.TopQ@gmail.com</a>.
-        </p>
+        </h6>
         <br>
         <br>
         <br>
-        <h6 id="pricing">Want to see your previous subscriptions?</h6>
+        <h6 id="pricing">Want to add admins?</h6>
         <div class="center_buttons">
-          <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
+          <button type="submit" class="btn btn-primary " id="customer-page">Customer page</button></div>
       </div>
       </div>
     </template>
@@ -206,10 +207,10 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group" id="form-id-delete">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="inputemail-delete" aria-describedby="emailHelp" placeholder="abc@student.se">
-              </div>
+                  <div class="form-group" id="form-id">
+                    <label for="email-delete">Email address</label>
+                    <select class="form-control" id="Admin-delete"></select>
+                  </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="close-modal" data-dismiss="modal">Close</button>
@@ -221,14 +222,16 @@
 
     <template id="customer-page">
       <section>
-        <h2 id="pricing">Current admins:</h2>
+        <br>
+        <div>
+        <h2 id="text-customer-page">Current admins:</h2>
         <div class="center_buttons">
           <button type="submit" class="btn btn-primary " id="modify-admin" data-toggle="modal" data-target="#add-modal">Add Admin</button>
           <button type="submit" class="btn btn-primary " id="delete-admin" data-toggle="modal" data-target="#delete-modal">Delete Admin</button>
         </div>
-      </div>
-      <br>
-     
+      </div>   
+      <div>
+        <br>
         <div class="table-wrapper-scroll-y my-custom-scrollbar"> 
           <table class="table table-bordered table-striped mb-0">
             <thead>
@@ -242,14 +245,14 @@
               </tbody>
           </table>
         </div>
-     
       </div>
-    </section>
-      <section>
-        <h6 id="pricing">Want to see your collaboration plan?</h6>
+      <div>
+        <br>
+        <h6 id="text-customer-page">Want to see your collaboration plan?</h6>
         <div class="center_buttons">
           <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
       </div>
+    </div>
  
       </section>
     </template>

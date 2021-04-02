@@ -51,14 +51,10 @@ def customer_portal():
     school = School.query.get(school_id)
     checkout_session_id = school.sub_id
     checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
-
     subscription = stripe.Subscription.retrieve(checkout_session.subscription)    
-
-    return_url = YOUR_DOMAIN
-
     session = stripe.billing_portal.Session.create(
         customer=checkout_session.customer,
-        return_url=return_url)
+        return_url=YOUR_DOMAIN + '/customer-page')
     return jsonify({'url': session.url})
 
 
@@ -79,9 +75,10 @@ def update_school():
         setattr(school, 'max_admin', 500)
     elif subscription.plan.id=='price_1IZul8C7I9l3XQtcLw7OrDIH':
         setattr(school, 'max_admin', 1000)
+    else:
+        setattr(school, 'max_admin', 0)
     db.session.commit()
-    resp = jsonify(Sucess=True)
-    return resp
+    return jsonify({'School': school.max_admin})
 
 @app.route('/create-checkout-session', methods=['POST'])
 @jwt_required()
@@ -90,7 +87,6 @@ def create_checkout_session():
     try:
         checkout_session = stripe.checkout.Session.create(
             success_url=YOUR_DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
-
             cancel_url=YOUR_DOMAIN + '/cancel',
             payment_method_types=["card"],
             mode="subscription",
@@ -112,7 +108,6 @@ def create_checkout_session():
             setattr(school, 'max_admin', 500)
         elif data['priceId']=='price_1IZul8C7I9l3XQtcLw7OrDIH':
             setattr(school, 'max_admin', 1000)
-
         setattr(school, 'sub_id', checkout_session['id'])
         db.session.commit()
         return jsonify({'sessionId': checkout_session['id']})

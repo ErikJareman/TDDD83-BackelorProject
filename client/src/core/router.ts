@@ -1,6 +1,7 @@
 import $ from 'jquery';
-import { authHeader, writeAdmins, checkSubscription } from './auth.service';
+import { authHeader } from './auth.service';
 import { enterRoomPage } from './rooms';
+import { writeAdmins } from './subscription';
 
 interface Route {
     url: string;
