@@ -1,8 +1,7 @@
 import $ from 'jquery';
 import { createUser, logIn, logOut, isSignedIn, toggleNavbar } from './core/auth.service';
-import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
+import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom, promoteMember } from './core/rooms';
 import { initiateRouter } from './core/router';
-
 
 const main = () => {
     initiateRouter();
