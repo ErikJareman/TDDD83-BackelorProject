@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-html{
+html {
     position: relative;
     min-height: 100%;
 }
@@ -18,8 +18,6 @@ body {
 #router {
     margin-bottom: 400px;
     min-height: 700px;
-    
-
 }
 
 .navbar {
@@ -55,13 +53,9 @@ body {
     nav {
         display: none;
     }
-
 }
 
-
-
 //-------HERO--------------------------
-
 
 #view-login {
     background-color: white;
@@ -94,9 +88,7 @@ body {
     margin-top: -0.2em;
 }
 
-
 .hero {
-
     text-align: center;
 
     .container {
@@ -117,7 +109,6 @@ body {
     }
 
     .left-col {
-    
         .subhead {
             text-transform: uppercase;
             font-weight: bold;
@@ -145,25 +136,19 @@ body {
             position: absolute;
         }
     }
-
 }
-
-
-
 
 //--------FEATURE-----------------------------
 
 .features-section {
-    
     background: colors.$secondary1;
     color: white;
 
     .container {
         height: 100%;
         overflow: hidden;
-        
     }
-    ul { 
+    ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -185,8 +170,6 @@ ul.features-list {
     margin-left: 2em;
     margin-top: 20px;
     position: relative;
-
-
 
     li {
         font-size: 1.1em;
@@ -219,8 +202,8 @@ ul.features-list {
         height: 100%;
         overflow: hidden;
     }
-    
-    ul { 
+
+    ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -235,7 +218,6 @@ ul.features-list {
         border-radius: 1em;
         margin-top: 20px;
         font-size: 1.2em;
-
     }
 }
 
@@ -293,16 +275,12 @@ nav {
     .mobile-menu-exit {
         margin-top: 0;
         float: right;
-        margin: 0,5em;
+        margin: 0, 5em;
         cursor: pointer;
         height: 20px;
-        
-        
     }
     li {
-        
         a {
-        
             color: white;
             text-decoration: none;
             display: block;
@@ -319,8 +297,6 @@ nav {
     }
 }
 
-
-
 //-------------768px-----------------------------
 @media only screen and (min-width: 768px) {
     .mobile-menu,
@@ -329,7 +305,6 @@ nav {
     }
 
     .navbar {
-
         .container {
             display: -ms-grid;
             display: grid;
@@ -405,7 +380,6 @@ nav {
     }
     .hero .container .left-col {
         margin: 3em 3em 0 5em;
-        
     }
     .hero .container .left-col h1 {
         font-size: 3em;
@@ -464,7 +438,7 @@ nav {
 }
 
 @media only screen and (min-width: 1450px) {
-    .features-section{
+    .features-section {
         &:before {
             content: '';
             position: absolute;
@@ -474,7 +448,7 @@ nav {
             left: 0;
             top: -4em;
         }
-        
+
         &:after {
             content: '';
             position: absolute;
@@ -497,7 +471,7 @@ nav {
     bottom: 0;
     left: 0;
     overflow: hidden;
-    
+
     ul {
         list-style-type: none;
         margin: 0;
@@ -569,9 +543,8 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     //min-width: 200px;
-   
 }
-.container-fluid{
+.container-fluid {
     h5 {
         color: #ffffff;
         border-bottom: 2px solid #6c757d;
@@ -588,7 +561,6 @@ nav {
     padding-top: 6px;
     h5 {
         color: #6c757d;
-        
     }
 }
 .right-div {
@@ -596,12 +568,11 @@ nav {
     background-color: colors.$primary2;
     align-items: center;
     text-align: left;
-    padding-top: 15px;
     //min-width: 200px;
-    
 }
 
-.left-button { // VAD ÄR DETTA!?
+.left-button {
+    // VAD ÄR DETTA!?
     width: 98%;
     margin: 4px 2px;
     white-space: nowrap;
@@ -617,6 +588,7 @@ nav {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-top: 8px;
 }
 .navbar-brand {
     color: #ffffff;
@@ -649,14 +621,12 @@ nav {
 
 .primary-button {
     color: #ffffff;
-    background-color:colors.$accent;
+    background-color: colors.$accent;
 }
 .bad-button {
     color: #ffffff;
     background-color: #c44a4a;
 }
-
-
 
 #drop_down {
     width: 16.6666666666666666%;
@@ -683,6 +653,15 @@ nav {
 
 #drop_down a:hover {
     color: white;
+}
+
+.dropdownMenuRightRoomSide {
+    width: 100%;
+    text-align: left;
+}
+
+.right-side-room-card {
+    padding: 6px;
 }
 
 #drop_down:hover ul {
@@ -720,33 +699,57 @@ nav {
 
 //TICKET
 .ticket-ticket {
-    background-color: colors.$primary1;
+    background-color: white;
     //display: inline-block;
     display: flex;
     flex-direction: row;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 24px;
     width: 96%;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 8px 8px 8px 8px;
+    border-style: solid;
+    border-width: 2px;
 }
 
 #ticket_number {
-    padding: 10px;
-    font-size: 50px;
+    padding: 20px;
+    font-size: 30px;
     width: 10%;
     border-right: 2px solid black;
 }
 
 #ticket_creator {
     font-size: 30px;
-    width: 20%;
+    width: 26%;
     border-right: 2px solid black;
-    padding-top: 25px;
+    padding: 20px;
+    overflow: hidden;
 }
 
-#ticket_tags {
-    width: 35%;
+#ticket_info {
+    font-size: 30px;
+    width: 32%;
     border-right: 2px solid black;
+    padding: 20px;
+    overflow: hidden;
+}
+#ticket_zoom {
+    font-size: 30px;
+    width: 32%;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#ticket-zoom-admin {
+    font-size: 30px;
+    width: 29%;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#delete-ticket-button {
+    color: black;
+    background-color: black;
 }
 
 .grid {
@@ -842,8 +845,7 @@ nav {
     width: 40%;
 }
 
-
-#login_reg_link{
+#login_reg_link {
     margin-left: 45% !important;
 }
 
@@ -854,9 +856,9 @@ nav {
 }
 
 #registerForm {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
 }
 
 .link {

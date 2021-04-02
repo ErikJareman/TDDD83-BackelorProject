@@ -26,7 +26,7 @@ export const saveToStorage = (data) => {
 export const getToken = () => JSON.parse(sessionStorage.getItem(tokenName))?.token;
 
 export const getUser = () => {
-    // TODO
+    //TODO
 };
 
 export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;
@@ -52,7 +52,7 @@ export async function createUser(event) {
     }
 }
 
-export function toggleNavbar(){
+export function toggleNavbar() {
     const signedIn = isSignedIn();
     $('#login-button').toggleClass('d-none', signedIn);
     $('#register-button').toggleClass('d-none', signedIn);
@@ -83,7 +83,6 @@ export async function logIn(event) {
             password: password,
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
-        console.log(result);
         toggleNavbar();
         navigateTo('/r');
 
