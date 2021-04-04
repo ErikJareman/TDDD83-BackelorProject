@@ -26,7 +26,10 @@ export const saveToStorage = (data) => {
 export const getToken = () => JSON.parse(sessionStorage.getItem(tokenName))?.token;
 
 export const getUser = () => {
-    //TODO
+    const auth = sessionStorage.getItem('auth');
+    if (auth) {
+        return JSON.parse(auth).user;
+    }
 };
 
 export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;

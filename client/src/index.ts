@@ -10,6 +10,7 @@ const main = () => {
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
+    //$('#delete-room').on('click', clickDeleteRoom); la till denna men funkar ändå inte :/
 
     $('#logout-button').on('click', logOut);
     toggleNavbar();

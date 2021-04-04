@@ -8,7 +8,7 @@ import { User } from './User';
 //TODO
 //Lägg till isAdmin(userID) metod / liknande och använd där det behövs (TODO finns på dessa ställen)
 //Se till så att isAdmin fältet är uppdaterat på varje user (dvs user.email finns i "premiumdatabasen")
-//Delete-room knappen har fukkat ur(?)
+//Delete-room knappen har fukkat ur(?) d-none reagerar inte.. och onClick funkar inte
 
 export interface Room {
     id: number;
@@ -35,20 +35,20 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
     if (selfAdmin !== -1 || ticket.creator.id == userID) {
         return `<div class="ticket-ticket">
-                    <div id=ticket_number>
-                        ${position}.
-                    </div>
-                    <div id=ticket_creator>
-                        ${ticket.creator.username}
-                    </div> 
-                    <div id=ticket_info>
-                        ${ticket.ticket_info}
-                    </div>
-                        <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">ZOOM</a>
-                    <button type="button" class="btn close delete-ticket-button" data-id=${ticket.id}>
-                        x
-                    </button>
-                </div>`;
+            <div id=ticket_number>
+                ${position}.
+            </div>
+            <div id=ticket_creator>
+                ${ticket.creator.username}
+            </div> 
+            <div id=ticket_info>
+                ${ticket.ticket_info}
+            </div>
+                <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">ZOOM</a>
+                <button type="button" class="btn close delete-ticket-button" data-id=${ticket.id}>
+                    x
+                </button>
+            </div>`;
     } else {
         return `<div class="ticket-ticket">
             <div id=ticket_number>
@@ -69,6 +69,11 @@ const noRoomSelected = async () => {
     const roomList = await listRooms();
     if (roomList.length !== 0) {
         loadRoom(roomList[0].id);
+    }
+    if (isPremiumUser) {
+        const createRoomButtonElement = $('#toggle-create-room-button-div');
+        createRoomButtonElement.empty();
+        createRoomButtonElement.append(createNewRoomButtonTemplate());
     }
 };
 
@@ -112,6 +117,10 @@ const adminTemplate = (member: User, room: Room) => {
     }
 };
 
+const isPremiumUser = () => {
+    return getUser().is_admin;
+};
+
 const ifIsAdmin = () => {
     $('#delete-room').removeClass('d-none');
 };
@@ -151,9 +160,7 @@ const loadRoom = async (id: number) => {
         loadRoomList();
     }
 
-    //TODO
-    //Lägg till en faktiskt check (premium-konto eller ej...)
-    if (true) {
+    if (isPremiumUser()) {
         const createRoomButtonElement = $('#toggle-create-room-button-div');
         createRoomButtonElement.empty();
         createRoomButtonElement.append(createNewRoomButtonTemplate());
