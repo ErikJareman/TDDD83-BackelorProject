@@ -22,7 +22,7 @@ body {
 
 .navbar {
     background: colors.$secondary1;
-    padding: 1em;
+    height: 6em;
 
     ul {
         list-style-type: none;
@@ -535,7 +535,8 @@ nav {
 }
 
 .left-div {
-    height: auto;
+    height: calc(100vh - 6em);
+    overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
     padding-bottom: 2rem;
@@ -554,7 +555,8 @@ nav {
     }
 }
 .center-div {
-    height: 1000px;
+    height: calc(100vh - 6em);
+    overflow: hidden;
     background-color: colors.$primary3;
     align-items: center;
     text-align: left;
@@ -564,10 +566,15 @@ nav {
     }
 }
 .right-div {
-    height: 1000px;
+    height: calc(100vh - 6em);
+    overflow: hidden;
     background-color: colors.$primary2;
-    align-items: center;
+    padding-top: 6px;
+    padding-bottom: 2rem;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     //min-width: 200px;
 }
 
@@ -579,6 +586,14 @@ nav {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
+}
+
+#join-room-by-id {
+    margin-top: 8px;
+}
+
+#room-link {
+    margin: 8px 0px;
 }
 
 .extend-button {
@@ -608,7 +623,7 @@ nav {
     text-align: center;
     height: 100%;
     position: absolute;
-    top: 50px;
+    top: 46px;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -657,8 +672,17 @@ nav {
 }
 
 .dropdownMenuRightRoomSide {
+    margin: 4px 2px;
     width: 100%;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdownMenuRightRoomSide::after {
+    float: right;
+    margin-top: 10px;
 }
 
 .right-side-room-card {
@@ -698,7 +722,6 @@ nav {
     color: #ffffff;
 }
 
-//TICKET
 .ticket-ticket {
     background-color: white;
     //display: inline-block;

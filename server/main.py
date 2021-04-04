@@ -29,19 +29,25 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
-    is_admin = db.Column(db.Boolean, default = False)
     
     def __repr__(self):
         return '<User {}: {} {} >'.format(self.id, self.email, self.username, self.password_hash, self.is_admin)
 
     def serialize(self):
-        return dict(id=self.id, email=self.email, username=self.username, is_admin=self.is_admin)
+        d =  dict(id=self.id, email=self.email, username=self.username)
+        d["is_premium"] = self.is_premium()
+        return d
 
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode("utf8")
     
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
+
+    def is_premium(self):
+        # TODO update later
+        # return PremiumUser.query.filter(email = self.email).exists
+        return True
 
 
 class Ticket(db.Model):
@@ -212,12 +218,13 @@ def room(room_id: int):
 
     elif request.method == 'DELETE':
         db.session.delete(targetRoom)
-        delete_q = Ticket.__table__.delete().where(Ticket.room == room_id)
-        db.session.execute(delete_q)
-        
+        delete_tickets = Ticket.__table__.delete().where(Ticket.room == room_id)
+        delete_roommembers = RoomMembers.__table__.delete().where(RoomMembers.room == room_id)
+        db.session.execute(delete_tickets)
+        db.session.execute(delete_roommembers)
         db.session.commit()
         return ''
-    
+        
 
 
 @app.route('/leave-room/<int:room_id>', methods=['POST'])
