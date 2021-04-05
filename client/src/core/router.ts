@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import { clickLogin, clickRegister } from './auth';
 import { enterRoomPage } from './rooms';
+import { writeAdmins } from './subscription';
 
 interface Route {
     url: string;
@@ -32,6 +33,12 @@ const routes: Route[] = [
     { url: '/404', templateSelector: '#404' },
     { url: '/', templateSelector: '#home' },
     { url: '/r', templateSelector: '#view-room', onLoad: () => enterRoomPage() },
+    { url: '/success', templateSelector: '#success' },
+    { url: '/cancel', templateSelector: '#cancel' },
+    { url: '/checkout', templateSelector: '#checkout' },
+    { url: '/buy', templateSelector: '#buy-topq-home' },
+    { url: '/loginschool', templateSelector: '#school-login' },
+    { url: '/customer-page', templateSelector: '#customer-page', onLoad: writeAdmins },
 ];
 
 // Programatic navigate
