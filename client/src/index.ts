@@ -2,9 +2,9 @@ import $ from 'jquery';
 import { clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { loadStripe } from '@stripe/stripe-js';
-import { createSchool, createUser, logIn, loginSchool, toggleNavbar } from './core/auth.service';
 import { addAdmin, deleteAdmin } from './core/subscription';
 import env from './shared/env';
+import { createSchool, loginSchool, logout, toggleNavbar } from './core/auth';
 
 const price_p_plus = 'price_1IZul8C7I9l3XQtcLw7OrDIH';
 const price_p = 'price_1IZujvC7I9l3XQtc72Uq6LU0';
@@ -77,13 +77,14 @@ function customerPortal(e) {
 }
 
 const setupEventListeners = () => {
-    $('#SendRegister').on('click', createUser);
     $('#schoolReg').on('click', createSchool);
     $('#schoolLogin').on('click', loginSchool);
-    $('#SendLogin').on('click', logIn);
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
+
+    $('#logout').on('click', logout);
+
     $('#customer-page').on('click', function () {
         navigateTo('/customer-page');
         window.location.reload();
