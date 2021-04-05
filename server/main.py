@@ -115,7 +115,7 @@ def sign_up():
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
-        return jsonify([new_user.serialize()])
+        return jsonify(new_user.serialize())
 
 
 @app.route('/users', methods=['GET'])

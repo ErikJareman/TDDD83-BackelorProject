@@ -1,26 +1,21 @@
 import $ from 'jquery';
-import { createUser, logIn } from './core/auth.service';
-import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
+import { clickLogin, clickRegister } from './core/auth';
+import { clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter } from './core/router';
 
-const main = () => {
-    initiateRouter();
-    $('#SendRegister').on('click', createUser);
-    $('#SendLogin').on('click', logIn);
+const setupEventListeners = () => {
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
-    const mobileBtn = document.getElementById('mobile-cta');
-    const nav = document.querySelector('nav');
-    const mobileBtnExit = document.getElementById('mobile-exit');
 
-    mobileBtn.addEventListener('click', () => {
-        nav.classList.add('menu-btn');
-    });
+    const nav = $('nav');
+    $('#mobile-cta').on('click', () => nav.addClass('menu-btn'));
+    $('#mobile-exit').on('click', () => nav.removeClass('menu-btn'));
+};
 
-    mobileBtnExit.addEventListener('click', () => {
-        nav.classList.remove('menu-btn');
-    });
+const main = () => {
+    initiateRouter();
+    setupEventListeners();
 };
 
 $(main);

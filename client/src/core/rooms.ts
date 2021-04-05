@@ -1,8 +1,8 @@
-import { getUser, getUserID } from './auth.service';
+import { getUserID } from './auth';
 import { EndPoints } from './endpoints';
-import { navigateTo } from './router';
-import { getMultiple, getSingle, standardDelete, standardPost } from './server.service';
+import { getMultiple, getSingle, standardDelete, standardPost } from './server';
 import { User } from './User';
+import $ from 'jquery';
 
 export interface Room {
     id: number;
@@ -132,7 +132,7 @@ const loadRoomList = async () => {
     buttons.on('click', clickLeftButton);
 };
 
-const loadRoomPage = async () => {
+export const loadRoomPage = async () => {
     loadRoomList();
     const selectedRoom = getRoomIDFromURL();
     if (!selectedRoom) {
@@ -200,7 +200,7 @@ export const clickDeleteRoom = async () => {
 };
 
 export const clickLeaveRoom = async () => {
-    await standardPost(`${EndPoints.LeaveRoom}/${getRoomIDFromURL()}`);
+    await standardPost(`/${EndPoints.LeaveRoom}/${getRoomIDFromURL()}`);
     noRoomSelected();
     loadRoomList();
 };

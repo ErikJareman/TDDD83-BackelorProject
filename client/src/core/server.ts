@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import env from '../shared/env';
-import { authHeader, getToken } from './auth.service';
+import { authHeader, getToken } from './auth';
 import { EndPoints } from './endpoints';
 
 export type Stringable = number | string;
@@ -17,7 +17,7 @@ const defaultHeaders = () => {
 };
 
 const addHost = (endpoint: string): string => {
-    return `${env.backendURL}/${endpoint}`;
+    return `${env.backendURL}${endpoint}`;
 };
 
 const addParameters = (baseURL: string, parameters?: Record<string, Stringable>) => {
@@ -45,7 +45,7 @@ export const getSingle = async <T>(
     return data;
 };
 
-export const standardPost = async (endpoint: EndPoints | string, data?: any) => {
+export const standardPost = async <T>(endpoint: EndPoints | string, data?: any): Promise<T> => {
     const requestSettings = {
         data: JSON.stringify(data),
         type: 'POST',

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { clickLogin, clickRegister } from './auth';
 import { enterRoomPage } from './rooms';
 
 interface Route {
@@ -10,11 +11,27 @@ interface Route {
 
 // Routes
 const routes: Route[] = [
-    { url: '/login', templateSelector: '#login', onLoad: () => console.log('Login laddad') },
-    { url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
+    {
+        url: '/login',
+        templateSelector: '#login',
+        onLoad: () => {
+            const form = $('#loginForm');
+            form.off();
+            form.on('submit', clickLogin);
+        },
+    },
+    {
+        url: '/register',
+        templateSelector: '#register',
+        onLoad: () => {
+            const form = $('#registerForm');
+            form.off();
+            form.on('submit', clickRegister);
+        },
+    },
     { url: '/404', templateSelector: '#404' },
     { url: '/', templateSelector: '#home' },
-    { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
+    { url: '/r', templateSelector: '#view-room', onLoad: () => enterRoomPage() },
 ];
 
 // Programatic navigate
