@@ -71,11 +71,6 @@ const noRoomSelected = async () => {
     if (roomList.length !== 0) {
         loadRoom(roomList[0].id);
     }
-    if (await isPremiumUser()) {
-        $('#create-room-modal-toggle-button').removeClass('d-none');
-    } else {
-        $('#create-room-modal-toggle-button').addClass('d-none');
-    }
 };
 
 const memberTemplate = (member: User, room: Room) => {
@@ -157,13 +152,6 @@ const loadRoom = async (id: number) => {
         loadRoomList();
     }
 
-    if (await isPremiumUser()) {
-        console.log(2);
-        $('#create-room-modal-toggle-button').removeClass('d-none');
-    } else {
-        $('#create-room-modal-toggle-button').addClass('d-none');
-    }
-
     $('h5.special').text(room.name);
 
     const ticketListElement = $('#ticket-list');
@@ -176,7 +164,7 @@ const loadRoom = async (id: number) => {
 
     const adminMemberListElement = $('#admin-list');
     adminMemberListElement.empty();
-    room.admins.forEach((member) => adminMemberListElement.append(memberTemplate(member, room)));
+    room.admins.forEach((member) => adminMemberListElement.append(adminTemplate(member, room)));
 
     const shareLinkButton = $<HTMLButtonElement>('#room-link');
     shareLinkButton.off();
@@ -278,6 +266,12 @@ export async function createTicket() {
 export const getRoom = async (id: number): Promise<{ room: Room; joined: boolean }> => getSingle(EndPoints.Rooms, id);
 
 export const enterRoomPage = async () => {
+    if (await isPremiumUser()) {
+        $('#create-room-modal-toggle-button').removeClass('d-none');
+    } else {
+        $('#create-room-modal-toggle-button').addClass('d-none');
+    }
+
     loadRoomPage();
 };
 
