@@ -1,7 +1,5 @@
 import $ from 'jquery';
-import { authHeader } from './auth.service';
 import { enterRoomPage } from './rooms';
-import { writeAdmins } from './subscription';
 
 interface Route {
     url: string;
@@ -16,13 +14,7 @@ const routes: Route[] = [
     { url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
     { url: '/404', templateSelector: '#404' },
     { url: '/', templateSelector: '#home' },
-    { url: '/success', templateSelector: '#success' },
-    { url: '/cancel', templateSelector: '#cancel' },
-    { url: '/checkout', templateSelector: '#checkout' },
     { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
-    { url: '/buy', templateSelector: '#buy-topq-home' },
-    { url: '/loginschool', templateSelector: '#school-login' },
-    { url: '/customer-page', templateSelector: '#customer-page', onLoad: writeAdmins },
 ];
 
 // Programatic navigate
