@@ -91,6 +91,8 @@ const main = () => {
         navigateTo('/customer-page');
         window.location.reload();
     });
+    $('#delete-room').on('click', clickDeleteRoom);
+    $('#logout-button').on('click', logOut);
     toggleNavbar();
 
     $('#premium_plus').on('click', function () {

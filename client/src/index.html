@@ -538,6 +538,26 @@
       </div>
     </div>
 
+    <div class="modal fade" id="shareRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4>Link: </h4>
+                <p class="col-form-label room-link-label">
+                </p>
+              <div class="btn-group extend-button">
+                <button type="button" class="btn primary-button right-button" id="copy-link-button" data-dismiss="modal">
+                  Copy Link
+                </button>
+                <button type="button" class="btn bad-button right-button" data-dismiss="modal">
+                  Close
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -591,11 +611,11 @@
                 Rooms
               </h5>
               <left-container class="test overflow-auto" id='roomList'>
-              </left-container>
+              </left-container id=room-list>
             </div>
-            <div>
-              <button id="create_room" class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create
-                room</button>
+            <div id="toggle-create-room-button-div">
+              <button id="create-room-modal-toggle-button" class="btn primary-button extend-button d-none" data-toggle="modal" data-target="#newRoomModal">Create room</button>
+              <button id="join-room-by-id" class="btn primary-button extend-button" data-toggle="modal" data-target="#join-by-id-modal">Join room</button>
             </div>
           </div>
           <div class="col-8 center-div">
@@ -609,7 +629,9 @@
             </center-container>
           </div>
           <div class="col-2 right-div">
-            <div class="btn-group extend-button">
+            <div id="right-internal-div-1">
+              <div id="right-side-buttons">
+              <div class="btn-group extend-button">
               <button type="button" class="btn primary-button right-button" data-toggle="modal"
                 data-target="#ticketModal" id="goto-queue-up">
                 Queue up
@@ -617,22 +639,21 @@
               <button type="button" class="btn bad-button right-button" id="leave-room">
                 Leave room
               </button>
-            </div>
+              </div>
+                <button id="room-link" class="btn primary-button extend-button" data-toggle="modal" data-target="#shareRoomModal">Share room</button>
+              </div>
             <h5 class="heading2">
               Admins
             </h5>
             <right-container id="admin-list">
-
-
             </right-container>
             <h5 class="heading2">
               Members
             </h5>
             <right-container id="member-list">
-
-
             </right-container>
-            <button type="button" class="btn bad-button right-button d-none" id="delete-room">
+            </div>
+            <button type="button" class="btn bad-button right-button d-none extend-button" id="delete-room">
               Delete room
             </button>
           </div>
