@@ -1,6 +1,7 @@
 import { navigateTo } from './router';
 import { standardPost } from './server.service';
 import jwt_decode from 'jwt-decode';
+import { User } from './User';
 
 export interface JWTData {
     fresh: boolean;
@@ -25,7 +26,7 @@ export const saveToStorage = (data) => {
 
 export const getToken = () => JSON.parse(sessionStorage.getItem(tokenName))?.token;
 
-export const getUser = () => {
+export const getUser = (): Promise<User> => {
     const auth = sessionStorage.getItem('auth');
     if (auth) {
         return JSON.parse(auth).user;

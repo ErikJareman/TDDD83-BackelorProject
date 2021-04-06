@@ -4,11 +4,7 @@ import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
 import { getMultiple, getSingle, standardDelete, standardPost } from './server.service';
 import { User } from './User';
-
-//TODO
-//Lägg till isAdmin(userID) metod / liknande och använd där det behövs (TODO finns på dessa ställen)
-//Se till så att isAdmin fältet är uppdaterat på varje user (dvs user.email finns i "premiumdatabasen")
-//Delete-room knappen har fukkat ur(?) d-none reagerar inte.. och onClick funkar inte
+import copy from 'copy-to-clipboard';
 
 export interface Room {
     id: number;
@@ -70,26 +66,24 @@ const noRoomSelected = async () => {
     if (roomList.length !== 0) {
         loadRoom(roomList[0].id);
     }
-    if (isPremiumUser) {
-        const createRoomButtonElement = $('#toggle-create-room-button-div');
-        createRoomButtonElement.empty();
-        createRoomButtonElement.append(createNewRoomButtonTemplate());
+    if (await isPremiumUser()) {
+        $('#create-room-modal-toggle-button').removeClass('d-none');
+    } else {
+        $('#create-room-modal-toggle-button').addClass('d-none');
     }
 };
 
 const memberTemplate = (member: User, room: Room) => {
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
-    //TODO
-    //Även check för ifall member.username är premium eller ej, om ej premium --> visa ej promote-knapp
-    if (selfAdmin == -1) {
+    if (selfAdmin == -1 || !member.is_premium) {
         return `<div class="card right-side-room-card">${member.username}</div>`;
     } else {
         return `<div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split dropdownMenuRightRoomSide" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ${member.username}
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuPromote">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuPromote">
                         <button class="dropdown-item button-admin-promote" type="button" data-id=${member.id}>Promote</button>
                         <button class="dropdown-item" type="button">Ban user</button>
                     </div>
@@ -100,16 +94,14 @@ const memberTemplate = (member: User, room: Room) => {
 const adminTemplate = (member: User, room: Room) => {
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
-    //TODO
-    //Visa ej drop-down på creator!
-    if (selfAdmin == -1) {
+    if (selfAdmin == -1 || room.admins.length === 1) {
         return `<div class="card right-side-room-card">${member.username}</div>`;
     } else {
         return `<div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split dropdownMenuRightRoomSide" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ${member.username}
+                        <span id="superSpan">${member.username}</span>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuDemote">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDemote">
                         <button class="dropdown-item button-admin-demote" type="button" data-id=${member.id}>Demote</button>
                         <button class="dropdown-item" type="button">Ban user</button>
                     </div>
@@ -117,8 +109,8 @@ const adminTemplate = (member: User, room: Room) => {
     }
 };
 
-const isPremiumUser = () => {
-    return getUser().is_admin;
+const isPremiumUser = async () => {
+    return (await getUser()).is_premium;
 };
 
 const ifIsAdmin = () => {
@@ -127,10 +119,6 @@ const ifIsAdmin = () => {
 
 const ifNotAdmin = () => {
     $('#delete-room').addClass('d-none');
-};
-
-const createNewRoomButtonTemplate = () => {
-    return `<button id="create_room" class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create room</button>`;
 };
 
 const loadRoom = async (id: number) => {
@@ -143,8 +131,6 @@ const loadRoom = async (id: number) => {
     const buttons = $('button.left-button');
     buttons.removeClass('btn-secondary').addClass('btn-outline-secondary');
 
-    //TODO
-    //Fixa så att rums-knappen är "intryckt" på reload av page, inte bara efter varje funktion
     buttons
         .filter(function () {
             return $(this).data('id') == id;
@@ -160,10 +146,11 @@ const loadRoom = async (id: number) => {
         loadRoomList();
     }
 
-    if (isPremiumUser()) {
-        const createRoomButtonElement = $('#toggle-create-room-button-div');
-        createRoomButtonElement.empty();
-        createRoomButtonElement.append(createNewRoomButtonTemplate());
+    if (await isPremiumUser()) {
+        console.log(2);
+        $('#create-room-modal-toggle-button').removeClass('d-none');
+    } else {
+        $('#create-room-modal-toggle-button').addClass('d-none');
     }
 
     $('h5.special').text(room.name);
@@ -192,6 +179,14 @@ const loadRoom = async (id: number) => {
     deleteTicketButtons.off();
     deleteTicketButtons.on('click', deleteTicket);
 
+    const shareLinkButton = $<HTMLButtonElement>('#room-link');
+    shareLinkButton.off();
+    shareLinkButton.on('click', onShareModalOpen);
+
+    const copyLinkButton = $<HTMLButtonElement>('#copy-link-button');
+    copyLinkButton.off();
+    copyLinkButton.on('click', copyRoomLink);
+
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
     if (selfAdmin !== -1) {
@@ -212,6 +207,14 @@ const loadRoomList = async () => {
     </button>`);
     }
     const buttons = $<HTMLButtonElement>('button.left-button');
+    buttons.removeClass('btn-secondary').addClass('btn-outline-secondary');
+
+    buttons
+        .filter(function () {
+            return $(this).data('id') == getRoomIDFromURL();
+        })
+        .addClass('btn-secondary')
+        .removeClass('btn-outline-secondary');
     buttons.off();
     buttons.on('click', clickLeftButton);
 };
@@ -283,6 +286,16 @@ export const clickLeaveRoom = async () => {
     await standardPost(`${EndPoints.LeaveRoom}/${getRoomIDFromURL()}`);
     noRoomSelected();
     loadRoomList();
+};
+
+export const onShareModalOpen = () => {
+    const url = window.location.href;
+    const element = $('.room-link-label');
+    element.text(url);
+};
+
+export const copyRoomLink = () => {
+    copy(window.location.href);
 };
 
 export async function promoteMember(event: JQuery.ClickEvent<HTMLButtonElement>) {

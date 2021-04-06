@@ -1,6 +1,13 @@
 import $ from 'jquery';
 import { createUser, logIn, logOut, isSignedIn, toggleNavbar } from './core/auth.service';
-import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom, promoteMember } from './core/rooms';
+import {
+    clickDeleteRoom,
+    clickLeaveRoom,
+    createTicket,
+    submitCreateRoom,
+    promoteMember,
+    onShareModalOpen,
+} from './core/rooms';
 import { initiateRouter } from './core/router';
 
 const main = () => {
@@ -10,8 +17,7 @@ const main = () => {
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
-    //$('#delete-room').on('click', clickDeleteRoom); la till denna men funkar ändå inte :/
-
+    $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
     toggleNavbar();
 
