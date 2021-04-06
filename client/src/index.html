@@ -59,7 +59,7 @@
         <ul>
 
           <li class="footer-links"><a href="/">Home</a></li>
-          <li class="footer-links"><a href="/">Buy TopQ</a></li>
+          <li class="footer-links"><a href="/buy">Buy TopQ</a></li>
           <li class="footer-links"><a href="/login">Login</a></li>
           <li class="footer-links"><a href="/register">Register</a></li>
           <li class="footer-links"><a href="/">About TopQ</a></li>
@@ -86,7 +86,7 @@
             <h1>Hold the line!</h1>
             <h2>Don't wait, buy TopQ now!</h2>
             <div class="hero-cta">
-              <a href="#" class="primary-cta">LET´S GO!</a>
+              <a href="/buy" class="primary-cta">LET´S GO!</a>
               <!--<a href="#" class="instructions">MyQueue</a>-->
             </div>
             </p>
@@ -147,77 +147,367 @@
 
     </template>
 
-    <template id="login">
-      <div class="w3-container" id="view-login">
-        <div class="d-flex justify-content-center" id="cardBox">
-          <div class="card card-reg">
-            <div class="card-body">
-              <form class="row g-3" id="loginForm">
-                <h2 class="card-title">Login</h2>
-                <div class="col-12">
-                  <label for="InputEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se"
-                    required>
-                </div>
-                <div class="col-12">
-                  <label for="InputPassword" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
-                </div>
-                <br>
-                <br>
-                <a href="/register" class="link" id="login_reg_link">Register instead</a>
-              </form>
-            </div>
-          </div>
-          <div>
-          </div>
+    <template id="success">
+      <section>
+        <h2 id="pricing">Thanks for your order!</h2>
+        <br><br><br><br>
+        <h6 id="pricing">
+          We appreciate your business! If you have any questions, please email
+          <a href="info.contact.TopQ@gmail.com">info.contact.TopQ@gmail.com</a>.
+        </h6>
+        <br>
+        <br>
+        <br>
+        <h6 id="pricing">Want to add admins?</h6>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="customer-page">Customer page</button></div>
+      </div>
+      </div>
     </template>
 
-    <template id="register">
-      <div class="w3-container" id="view-register">
-        <div class="d-flex justify-content-center" id="cardBox_register">
-          <div class="card card-reg">
-            <div class="card-body">
-              <form class="row g-3" id="registerForm">
-                <h2 class="card-title">Register</h2>
-                <div class="col-12">
-                  <label for="InputEmailRegister" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
-                    required>
-                </div>
-                <div class="col-12">
-                  <label for="InputPasswordRegister" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
-                </div>
-                <div class="col-12">
-                  <label for="InputUsernameRegister" class="form-label">Username</label>
-                  <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
-                </div>
-                <br>
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">
-                      Agree to terms and conditions
-                    </label>
-                  </div>
-                </div>
-                <br>
-                <br>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
-                </div>
-                <br>
-                <br>
-                <a href="/login" class="link" id="login_reg_link">Login instead</a>
-              </form>
-            </div>
+    <template id="cancel">
+      <section>
+        <h2 id="pricing">Checkout canceled</h2>
+          <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
+      </div>
+    </template>
+
+    <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="admin-title">Add Admin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group" id="form-id">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp" placeholder="abc@student.se">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close-modal" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="add-admin-modal" data-dismiss="modal">Add admin</button>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="admin-title">Delete Admin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+                  <div class="form-group" id="form-id">
+                    <label for="email-delete">Email address</label>
+                    <select class="form-control" id="Admin-delete"></select>
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close-modal" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="delete-admin-modal" data-dismiss="modal">Delete admin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template id="customer-page">
+      <section>
+        <br>
+        <div>
+        <h2 id="text-customer-page">Current admins:</h2>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="modify-admin" data-toggle="modal" data-target="#add-modal">Add Admin</button>
+          <button type="submit" class="btn btn-primary " id="delete-admin" data-toggle="modal" data-target="#delete-modal">Delete Admin</button>
+        </div>
+      </div>   
+      <div>
+        <br>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar"> 
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <!-- <th scope="col">Delete Admin</th> -->
+              </tr>
+            </thead>
+            <tbody id="admin-admin">
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <br>
+        <h6 id="text-customer-page">Want to see your collaboration plan?</h6>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
+      </div>
+    </div>
+ 
+      </section>
+    </template>
+
+
+    <template id="checkout">
+      <section>
+        <h2 id="pricing">Choose a collaboration plan</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img
+                src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body" id=>
+                <div class="price-name">Standard</div>
+                <div class="price-price">499.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 50 active admin accounts</div>
+                <br>    
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="standard">Select</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814050_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <div class="price-name">Standard+</div>
+                <div class="price-price">1,499.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 200 active admin accounts</div>
+                <br>    
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="standard_plus">Select</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935521_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <div class="price-name">Premium</div>
+                <div class="price-price">1,999.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 500 active admin accounts</div>
+                <br>
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="premium">Select</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img
+              src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935518_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+                <div class="card-body">
+              <div class="price-name">Premium+</div>
+              <div class="price-price">2,499.00 SEK</div>
+              <div class="price-duration">per month</div>
+              <br>
+              <div class="price-text">Up to 1000 active admin accounts</div>
+              <br>
+              <div class="center_buttons">
+              <button type="submit" class="btn btn-primary " id="premium_plus">Select</button></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    
+        <section>
+          <h6 id="pricing">Want to see your previous subscriptions?</h6>
+          <div class="center_buttons">
+            <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
+        </div>
+   
+        </section>
+
+    </template>
+
+    <template id="school-login">
+      <section class="hero">
+        <div class="container">
+          <div class="col-sm-12 col-md-12 col-lg-9">
+            <h1>TopQ for Schools and Universites!</h1>
+            <br>
+            <br>
+            <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
+            <div>
+              <a href='/login' class="btn btn-primary" id='login_instead_button'>Login as student or tutor</a>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <img src="assets/school.png" class="buy_home_img" alt="illustration">
+          </div>
+        </div>
+      </section>
+      <section class=login-section>
+        <li>
+          <form>
+              <h2>School-login:</h2>
+              <label for="contactEmailLogin">Contact-email:</label>
+              <input type="email" class="form-control" id="contactEmailLogin" aria-describedby="emailHelp" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+              <label for="schoolLoginP">Password:</label>
+              <input type="password" class="form-control" id="schoolLoginP" placeholder="Enter password" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id='schoolLogin'>Login</button>
+            <br>
+            <br>
+            <a href='/buy' id="school-reg-instead">Do not have an account yet? Register instead</a>
+          </form>
+        </li>
+      </section>
+
+    </template>
+
+    <template id="buy-topq-home">
+      <section class="hero">
+        <div class="container">
+          <div class="col-sm-12 col-md-12 col-lg-9">
+            <h1>TopQ for Schools and Universites!</h1>
+            <br>
+            <br>
+            <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
+            <div>
+              <a href='/login' class="btn btn-primary" id='login_instead_button'>Login as student or tutor</a>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <img src="assets/school.png" class="buy_home_img" alt="illustration">
+          </div>
+        </div>
+      </section>
+      <section class=subscription-section>
+        <div class=row>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h2>Our subscription-plans: </h2>
+            <br>
+            <img src="assets/subs.png" class="subs_img" alt="illustration">
+            <li id='admin-info'>
+              <img src="assets/admins.png" class="admins_img" alt="illustration">
+              <b>Admin-accounts:</b><br>
+              The admin-accounts are meant for the teachers and tutors. Having an admin-account gives the possibilty to create and manage the rooms. 
+                Furthermore the admins can manage and change the queue. The number of using students is unlimited.</li>
+          </div>  
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h2>Register and start using Top-Q: </h2>
+            <br>
+            <li>
+              <form>
+                <div class="form-group">
+                  <h2>School-registration:</h2>
+                  <label for="schoolName">Name:</label>
+                  <input type="text" class="form-control" id="schoolName" placeholder="Enter name of school" required>
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Contact-email:</label>
+                  <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                  <label for="schoolPassword">Password:</label>
+                  <input type="password" class="form-control" id="schoolPassword" placeholder="Enter password" required>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                  <label class="form-check-label" for="exampleCheck1">Agree to terms and conditions.</label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" id='schoolReg'>Register</button>
+                <br>
+                <br>
+                <a href='/loginschool' id='school-login-instead'>Aldready have an account? Login instead</a>
+              </form>
+            </li>
+          </div>  
+        </div>
+      </section>
+    </template>
+
+
+    <template id="login">
+      <section class=student-login-section>
+        <li>
+          <form>
+            <div class="form-group">
+              <h2>Login:</h2>
+              <label for="InputEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se"
+                    required>
+            </div>
+            <div class="form-group">
+              <label for="InputPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id="SendLogin">Login</button>
+            <br>
+            <br>
+            <a href="/register" class="link" id="login_reg_link">Register instead</a>
+          </form>
+        </li>
+      </section>
+    </template>
+
+    <template id="register">
+      <section class=student-register-section>
+        <li>
+          <form>
+            <div class="form-group">
+              <h2>Register:</h2>
+              <label for="InputEmailRegister" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
+                    required>
+            </div>
+            <div class="form-group">
+              <label for="InputPasswordRegister" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
+            </div>
+            <div class="form-group">
+              <label for="InputUsernameRegister" class="form-label">Username</label>
+                  <input type="username" class="form-control" id="InputUsernameRegister" placeholder="*****" required>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+              <label class="form-check-label" for="exampleCheck1">Agree to terms and conditions.</label>
+            </div>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary" id="SendRegister">Send</button>
+            <br>
+            <br>
+            <a href="/login" class="link" id="login_reg_link">Login instead</a>
+            </form>
+        </li>
+      </section>    
     </template>
 
 
@@ -248,44 +538,31 @@
       </div>
     </div>
 
-    <div class="modal fade" id="shareRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h4>Link: </h4>
-                <p class="col-form-label room-link-label">
-                </p>
-              <div class="btn-group extend-button">
-                <button type="button" class="btn primary-button right-button" id="copy-link-button" data-dismiss="modal">
-                  Copy Link
-                </button>
-                <button type="button" class="btn bad-button right-button" data-dismiss="modal">
-                  Close
-                </button>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create ticket</h5>
+          <!--<div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">test</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
+                </div>-->
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="customer_id" class="col-form-label">Description:</label>
-                <input class="form-control" id="ticket-descp"></input>
+                <label for="make" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name-ticket-ref">
               </div>
               <div class="form-group">
-                <label for="model" class="col-form-label">ZOOM-link:</label>
-                <input class="form-control tag-modal" id="modal-zoom"></input>
+                <label for="model" class="col-form-label">Tags:</label>
+                <input class="form-control tag-modal" id="modal-tag-1"></input>
+                <input class="form-control tag-modal" id="modal-tag-2"></input>
+                <input class="form-control tag-modal" id="modal-tag-3"></input>
+                <input class="form-control tag-modal" id="modal-tag-4"></input>
+              </div>
+              <div class="form-group">
+                <label for="customer_id" class="col-form-label">Description:</label>
+                <input class="form-control" id="ticket-descp"></input>
               </div>
           </div>
           </form>
@@ -314,11 +591,11 @@
                 Rooms
               </h5>
               <left-container class="test overflow-auto" id='roomList'>
-              </left-container id=room-list>
+              </left-container>
             </div>
-            <div id="toggle-create-room-button-div">
-              <button id="create-room-modal-toggle-button" class="btn primary-button extend-button d-none" data-toggle="modal" data-target="#newRoomModal">Create room</button>
-              <button id="join-room-by-id" class="btn primary-button extend-button" data-toggle="modal" data-target="#join-by-id-modal">Join room</button>
+            <div>
+              <button id="create_room" class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create
+                room</button>
             </div>
           </div>
           <div class="col-8 center-div">
@@ -332,9 +609,7 @@
             </center-container>
           </div>
           <div class="col-2 right-div">
-            <div id="right-internal-div-1">
-              <div id="right-side-buttons">
-              <div class="btn-group extend-button">
+            <div class="btn-group extend-button">
               <button type="button" class="btn primary-button right-button" data-toggle="modal"
                 data-target="#ticketModal" id="goto-queue-up">
                 Queue up
@@ -342,21 +617,22 @@
               <button type="button" class="btn bad-button right-button" id="leave-room">
                 Leave room
               </button>
-              </div>
-                <button id="room-link" class="btn primary-button extend-button" data-toggle="modal" data-target="#shareRoomModal">Share room</button>
-              </div>
+            </div>
             <h5 class="heading2">
               Admins
             </h5>
             <right-container id="admin-list">
+
+
             </right-container>
             <h5 class="heading2">
               Members
             </h5>
             <right-container id="member-list">
+
+
             </right-container>
-            </div>
-            <button type="button" class="btn bad-button right-button d-none extend-button" id="delete-room">
+            <button type="button" class="btn bad-button right-button d-none" id="delete-room">
               Delete room
             </button>
           </div>
@@ -374,7 +650,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="index.js" ></script>
+
 </body>
 
 
