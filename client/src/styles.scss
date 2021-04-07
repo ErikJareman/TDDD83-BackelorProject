@@ -524,17 +524,25 @@ ul.features-list {
         list-style-type: none;
         margin: 0;
         padding: 0;
-    }
+    
 
-    li {
-        background: #006bd6;
-        text-align: center;
-        padding: 3em 2em;
-        width: 80%;
-        margin: 0 auto 5em auto;
-        border-radius: 1em;
-        margin-top: 20px;
-        font-size: 1.2em;
+        #first {
+            background: #006bd6;
+            text-align: center;
+            padding: 3em 2em;
+            width: 80%;
+            margin: 0 auto 5em auto;
+            border-radius: 1em;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+            
+        img{
+            margin: 0;
+            width: 100%;
+
+        }
+    
     }
 }
 
