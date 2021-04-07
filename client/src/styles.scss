@@ -394,7 +394,8 @@ body {
 }
 
 .buy_home_img {
-    width: 80% !important;
+    width: 130% !important;
+    height: 130%;
 }
 
 #buy_home {
@@ -524,7 +525,6 @@ ul.features-list {
         list-style-type: none;
         margin: 0;
         padding: 0;
-    
 
         #first {
             background: #006bd6;
@@ -536,13 +536,11 @@ ul.features-list {
             margin-top: 20px;
             font-size: 1.2em;
         }
-            
-        img{
+
+        img {
             margin: 0;
             width: 100%;
-
         }
-    
     }
 }
 
@@ -712,7 +710,8 @@ nav {
     }
     .hero-img {
         width: 30%;
-        margin-right: 8em;
+        margin-right: 4em;
+        border-radius: 15px;
     }
     .hero-cta {
         display: -webkit-box;
