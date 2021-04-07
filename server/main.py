@@ -60,7 +60,7 @@ def customer_portal():
 
 @app.route('/update-school', methods=['POST'])
 @jwt_required()
-def update_school():
+def update_school():         
     school_id = get_jwt_identity()['school']
     school = School.query.get(school_id)
     checkout_session_id = school.sub_id
@@ -78,6 +78,17 @@ def update_school():
     else:
         setattr(school, 'max_admin', 0)
     db.session.commit()
+
+    if (school.max_admin < School_Admin.query.filter_by(school_id = school_id).count() ):
+        diff = School_Admin.query.filter_by(school_id = school_id).count() - schoo.max_admin
+        const = 0
+        for admin in School_Admin.query.filter_by(school_id = school_id):
+            if const < diff:
+                db.session.delete(admin)
+                db.session.commit()
+                const=const+1
+            else:
+                break
     return jsonify({'School': school.max_admin})
 
 @app.route('/create-checkout-session', methods=['POST'])
