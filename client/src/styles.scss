@@ -513,11 +513,11 @@ ul.features-list {
 
 //--------------TESTIMONIAL------------------------------
 .testimonials-section {
-    background: colors.$secondary3;
+    background: white;
     color: white;
 
     .container {
-        height: 100%;
+        height: 70%;
         overflow: hidden;
     }
 
@@ -530,11 +530,11 @@ ul.features-list {
             background: #006bd6;
             text-align: center;
             padding: 3em 2em;
-            width: 80%;
+            width: 90%;
             margin: 0 auto 5em auto;
             border-radius: 1em;
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1.4em;
         }
 
         img {
@@ -685,9 +685,10 @@ nav {
 }
 
 @media only screen and (min-width: 1080px) {
+    
     .container {
         width: 1080px;
-        margin: 0 auto;
+    //    margin: 0 auto;
     }
     section {
         padding: 10em 4em;
@@ -742,26 +743,27 @@ nav {
         width: 500px;
         bottom: 8em;
     }
-    .testimonials-section ul {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
+    .testimonials-section{
+        .container{
+        //   height: 30em; 
+        }
+        
+        ul {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
     }
     .testimonials-section ul li {
         margin: 0 1em;
     }
-    .contact-section {
-        position: relative;
-    }
-    .contact-section .container {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        height: fixed;
-    }
 }
 
 @media only screen and (min-width: 1450px) {
+    .navbar .container{
+        width: 1450;
+    }
+
     .features-section {
         &:before {
             content: '';
@@ -852,9 +854,6 @@ img {
     width: 50%;
 }
 
-.navbar-top {
-    background-color: #1e2124;
-}
 .left-div {
     height: calc(100vh - 6em);
     overflow: hidden;

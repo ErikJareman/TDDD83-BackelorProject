@@ -58,10 +58,32 @@ export async function createUser(event: { preventDefault: () => void }) {
 
 export function toggleNavbar() {
     const signedIn = isSignedIn();
+
     $('#login-button').toggleClass('d-none', signedIn);
     $('#register-button').toggleClass('d-none', signedIn);
-    $('#room-button').toggleClass('d-none', !signedIn);
     $('#logout-button').toggleClass('d-none', !signedIn);
+    $('#room-button').toggleClass('d-none', !isStudent());
+    $('#buying-button').toggleClass('d-none', isStudent());
+    $('#checkout-button').toggleClass('d-none', !isSchool());
+
+}
+
+export function isSchool() {
+    const typeOfAccount = sessionStorage.getItem(tokenName);
+    if (!typeOfAccount) {
+        return false;
+    }
+    const data = JSON.parse(typeOfAccount);
+    return data.school != null;
+}
+
+export function isStudent() {
+    const typeOfAccount = sessionStorage.getItem(tokenName);
+    if (!typeOfAccount) {
+        return false;
+    }
+    const data = JSON.parse(typeOfAccount);
+    return data.user != null;
 }
 
 export function isSignedIn() {
@@ -131,4 +153,5 @@ export async function loginSchool(event: { preventDefault: () => void }) {
     } catch (e) {
         alert('Something went wrong. Try again!');
     }
+    toggleNavbar();
 }

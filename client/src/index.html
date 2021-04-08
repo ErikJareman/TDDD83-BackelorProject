@@ -19,19 +19,21 @@
 <body>
   <div class="navbar">
     <div class="container">
-      <a class="logo" href="/">Top<span>Q</span></a>
+      <a class="logo goHome" href="/">Top<span>Q</span></a>
       <img id="mobile-cta" class="mobile-menu" src="assets/menu.svg" alt="Open navigation">
       <nav>
         <img id="mobile-exit" class="mobile-menu-exit" src="assets/exit.svg" alt="">
         <ul class="primary-nav">
-          <li class="current"><a href="/">Home</a></li>
-          <li><a href="#">About us</a></li>
+          <li id='home-button' class="current goHome"><a href="/">Home</a></li>
+          <li id='buying-button'><a href="/buy">Buy TopQ</a></li>
+
         </ul>
         <ul class="secondary-nav">
           <li id="login-button" class="custombutton"><a href="/login">Login</a></li>
           <li id="register-button" class="custombutton"><a href="/register">Register</a></li>
           <li id="logout-button" class="custombutton"><a href="/">Logout</a></li>
           <li id="room-button" class="custombutton"><a href="/r">Room</a></li>
+          <li id="checkout-button" class="custombutton"><a href="/checkout">Checkout</a></li>
         </ul>
       </nav>
     </div>
@@ -62,7 +64,6 @@
           <li class="footer-links"><a href="/buy">Buy TopQ</a></li>
           <li class="footer-links"><a href="/login">Login</a></li>
           <li class="footer-links"><a href="/register">Register</a></li>
-          <li class="footer-links"><a href="/">About TopQ</a></li>
 
         </ul>
       </div>
@@ -86,7 +87,7 @@
             <h1>Hold the line!</h1>
             <h2>Don't wait, buy TopQ now!</h2>
             <div class="hero-cta">
-              <a href="/buy" class="primary-cta">Buy TopQ</a>
+              <a class="primary-cta" id='hero-button' href="/buy" >Buy TopQ</a>
               <!--<a href="#" class="instructions">MyQueue</a>-->
             </div>
             </p>
@@ -114,20 +115,19 @@
           <ul>
             <li id="first">
               <p>TopQ is a web-based queuing application for lab and tutor sessions. Designed to offer an
-                easy-to-navigate
-                user interface to help the users, both students and tutors, on how to use it for their own purposes</p>
+                easy-to-navigate user interface to help students and tutors.</p>
             </li>
             <li>
-              <img src="assets/Room_TopQ.JPG" alt="roompage">
+              <img src="assets/dator.png" alt="roompage">
               <!--<p>TopQ focuses on education on a higher level. Universities can sign a monthly subscription which gives
                 access
                 to the application. <br><br> </p>-->
             </li>
-
           </ul>
         </div>
       </section>
 
+<!--
       <section class="contact-section">
         <div class="container">
           <div class="contact-left">
@@ -144,7 +144,7 @@
             </form>
           </div>
         </div>
-      </section>
+      </section>-->
 
     </template>
 

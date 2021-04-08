@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
-import { createUser, logIn, logOut, isSignedIn, toggleNavbar, createSchool, loginSchool } from './core/auth.service';
+import { createUser, logIn, logOut, toggleNavbar, createSchool, loginSchool, isStudent } from './core/auth.service';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { writeAdmins, addAdmin, deleteAdmin } from './core/subscription';
@@ -93,8 +93,7 @@ const main = () => {
     });
     $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
-    toggleNavbar();
-
+    
     $('#premium_plus').on('click', function () {
         createCheckoutSession(price_p_plus);
     });
@@ -110,6 +109,13 @@ const main = () => {
     $('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
     $('#delete-admin-modal').on('click', deleteAdmin);
+    
+    $('.goHome').on('click', function(){
+        $('#hero-button').toggleClass('d-none', isStudent());
+    });
+    $('#hero-button').toggleClass('d-none', isStudent());
+    toggleNavbar();
+    
 
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');
