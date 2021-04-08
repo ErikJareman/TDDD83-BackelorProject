@@ -394,8 +394,9 @@ body {
 }
 
 .buy_home_img {
-    width: 130% !important;
-    height: 130%;
+    width: 150% !important;
+    margin-left: -25%;
+    //height: 130%;
 }
 
 #buy_home {
@@ -711,7 +712,7 @@ nav {
     }
     .hero-img {
         width: 30%;
-        margin-right: 4em;
+        margin:auto;
         border-radius: 15px;
     }
     .hero-cta {
