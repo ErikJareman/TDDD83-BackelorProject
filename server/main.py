@@ -31,7 +31,7 @@ class User(db.Model):
     password_hash = db.Column(db.String, nullable=False)
     
     def __repr__(self):
-        return '<User {}: {} {} >'.format(self.id, self.email, self.username, self.password_hash, self.is_admin)
+        return '<User {}: {} {} >'.format(self.id, self.email, self.username, self.password_hash)
 
     def serialize(self):
         d =  dict(id=self.id, email=self.email, username=self.username)
@@ -45,9 +45,7 @@ class User(db.Model):
         return bcrypt.check_password_hash(self.password_hash, password)
 
     def is_premium(self):
-        # TODO update later
-        # return PremiumUser.query.filter(email = self.email).exists
-        return True
+        return bool(School_Admin.query.filter_by(admin_email = self.email).first())
 
 
 class Ticket(db.Model):
@@ -122,6 +120,67 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
         return jsonify([new_user.serialize()])
+
+
+#login/register schools
+@app.route('/loginschool', methods=['POST'])
+def login_school():
+    data = request.get_json()
+    if not 'email' in data or not 'password' in data:
+        abort(401)
+
+    email = data['email']
+    password = data['password']
+
+    school = School.query.filter_by(email=email).first()
+
+    if school is None or not school.check_password(password):
+        abort(401)
+
+    # TODO, make token expire
+    token = create_access_token({'school': school.id}, expires_delta=False)
+    return jsonify({"token": token, "school": school.serialize()})
+
+@app.route('/registerschool', methods=['POST', 'GET'])
+def sign_up_school():
+    if request.method == 'POST':
+        name = request.get_json(force=True)["name"]
+        email = request.get_json(force = True)["email"]
+        password = request.get_json(force=True)["password"]
+        new_school = School(name=name, email=email, password_hash=password)
+        new_school.set_password(password)
+        db.session.add(new_school)
+        db.session.commit()
+        return jsonify([new_school.serialize()])
+    elif request.method == 'GET':
+        return jsonify([j.serialize() for j in School.query.all()])
+
+#set or delete admin
+@app.route('/school_admin', methods =['POST', 'DELETE', 'GET'])
+@jwt_required()
+def school_admin():
+    school_id = get_jwt_identity()['school']
+    #school_id = request.get_json(force = True)["school_id"]
+    school = School.query.get(school_id)
+    if request.method == 'POST':
+        admin_email = request.get_json(force = True)["admin_email"]
+        if (school.max_admin > School_Admin.query.filter_by(school_id = school_id).count() ):
+            new_admin = School_Admin(school_id=school_id, admin_email=admin_email) 
+            db.session.add(new_admin)
+            db.session.commit()
+            return jsonify([new_admin.serialize()])
+        else: abort(404)
+    elif request.method == 'DELETE': 
+        admin_email = request.get_json(force = True)["admin_email"]
+        if School_Admin.query.get(admin_email):
+            admin = School_Admin.query.get(admin_email)
+            db.session.delete(admin)
+            db.session.commit()
+            resp = jsonify(Sucess=True)
+            return resp
+        else: abort(404)
+    elif request.method == 'GET':
+        return jsonify([j.serialize() for j in School_Admin.query.filter_by(school_id = school_id)])
 
 
 @app.route('/users', methods=['GET'])

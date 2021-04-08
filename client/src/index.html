@@ -147,25 +147,168 @@
 
     </template>
 
-    <template id="login">
-      <div class="w3-container" id="view-login">
-        <div class="d-flex justify-content-center" id="cardBox">
-          <div class="card card-reg">
-            <div class="card-body">
-              <form class="row g-3" id="loginForm">
-                <h2 class="card-title">Login</h2>
-                <div class="col-12">
-                  <label for="InputEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se"
-                    required>
-                </div>
-                <div class="col-12">
-                  <label for="InputPassword" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary" id="SendLogin">Send</button>
-                </div>
+    <template id="success">
+      <section>
+        <h2 id="pricing">Thanks for your order!</h2>
+        <br><br><br><br>
+        <h6 id="pricing">
+          We appreciate your business! If you have any questions, please email
+          <a href="info.contact.TopQ@gmail.com">info.contact.TopQ@gmail.com</a>.
+        </h6>
+        <br>
+        <br>
+        <br>
+        <h6 id="pricing">Want to add admins?</h6>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="customer-page">Customer page</button></div>
+      </div>
+      </div>
+    </template>
+
+    <template id="cancel">
+      <section>
+        <h2 id="pricing">Checkout canceled</h2>
+          <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
+      </div>
+    </template>
+
+    <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="admin-title">Add Admin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group" id="form-id">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp" placeholder="abc@student.se">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close-modal" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="add-admin-modal" data-dismiss="modal">Add admin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="admin-title">Delete Admin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+                  <div class="form-group" id="form-id">
+                    <label for="email-delete">Email address</label>
+                    <select class="form-control" id="Admin-delete"></select>
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="delete-admin-modal" data-dismiss="modal">Delete admin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template id="customer-page">
+      <section>
+        <br>
+        <div>
+        <h2 id="text-customer-page">Current admins:</h2>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="modify-admin" data-toggle="modal" data-target="#add-modal">Add Admin</button>
+          <button type="submit" class="btn btn-primary " id="delete-admin" data-toggle="modal" data-target="#delete-modal">Delete Admin</button>
+        </div>
+      </div>   
+      <div>
+        <br>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar"> 
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <!-- <th scope="col">Delete Admin</th> -->
+              </tr>
+            </thead>
+            <tbody id="admin-admin">
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <br>
+        <h6 id="text-customer-page">Want to see your collaboration plan?</h6>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button></div>
+      </div>
+    </div>
+ 
+      </section>
+    </template>
+
+
+    <template id="checkout">
+      <section>
+        <h2 id="pricing">Choose a collaboration plan</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img
+                src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body" id=>
+                <div class="price-name">Standard</div>
+                <div class="price-price">499.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 50 active admin accounts</div>
+                <br>    
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="standard">Select</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814050_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <div class="price-name">Standard+</div>
+                <div class="price-price">1,499.00 SEK</div>
+                <div class="price-duration">per month</div>
+                <br>
+                <div class="price-text">Up to 200 active admin accounts</div>
+                <br>    
+                <div class="center_buttons">
+                  <button type="submit" class="btn btn-primary " id="standard_plus">Select</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100" id="price-plan">
+              <img src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935521_1280.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <div class="price-name">Premium</div>
+                <div class="price-price">1,999.00 SEK</div>
+                <div class="price-duration">per month</div>
                 <br>
                 <br>
                 <a href="/register" class="link" id="login_reg_link">Register instead</a>
@@ -302,6 +445,31 @@
       </div>
     </div>
 
+    <div class="modal fade" id="join-by-id-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Join room</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label class="col-form-label">Room ID:</label>
+            <input class="form-control" id="room-id-to-join"></input>
+          </div>
+          <div class="btn-group extend-button">
+            <button type="button" class="btn primary-button right-button" id="join-room" data-dismiss="modal">
+              Join
+            </button>
+            <button type="button" class="btn bad-button right-button" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <template id="view-room">
       
       <!--Container for rest of page...-->
@@ -317,8 +485,8 @@
               </left-container id=room-list>
             </div>
             <div id="toggle-create-room-button-div">
-              <button id="create-room-modal-toggle-button" class="btn primary-button extend-button d-none" data-toggle="modal" data-target="#newRoomModal">Create room</button>
               <button id="join-room-by-id" class="btn primary-button extend-button" data-toggle="modal" data-target="#join-by-id-modal">Join room</button>
+              <button id="create-room-modal-toggle-button" class="btn primary-button extend-button d-none" data-toggle="modal" data-target="#newRoomModal">Create room</button>
             </div>
           </div>
           <div class="col-8 center-div">
@@ -333,16 +501,14 @@
           </div>
           <div class="col-2 right-div">
             <div id="right-internal-div-1">
+              <h5 class="heading2">
+                Commands
+              </h5>
               <div id="right-side-buttons">
-              <div class="btn-group extend-button">
-              <button type="button" class="btn primary-button right-button" data-toggle="modal"
+              <button type="button" class="btn primary-button right-button extend-button" data-toggle="modal"
                 data-target="#ticketModal" id="goto-queue-up">
                 Queue up
               </button>
-              <button type="button" class="btn bad-button right-button" id="leave-room">
-                Leave room
-              </button>
-              </div>
                 <button id="room-link" class="btn primary-button extend-button" data-toggle="modal" data-target="#shareRoomModal">Share room</button>
               </div>
             <h5 class="heading2">
@@ -356,9 +522,14 @@
             <right-container id="member-list">
             </right-container>
             </div>
+            <div>
+            <button type="button" class="btn bad-button right-button extend-button" id="leave-room">
+                Leave room
+              </button>
             <button type="button" class="btn bad-button right-button d-none extend-button" id="delete-room">
               Delete room
             </button>
+            </div>
           </div>
         </div>
     </template>
