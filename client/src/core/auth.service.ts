@@ -58,14 +58,14 @@ export async function createUser(event: { preventDefault: () => void }) {
 
 export function toggleNavbar() {
     const signedIn = isSignedIn();
+    const student = isStudent();
 
     $('#login-button').toggleClass('d-none', signedIn);
     $('#register-button').toggleClass('d-none', signedIn);
     $('#logout-button').toggleClass('d-none', !signedIn);
-    $('#room-button').toggleClass('d-none', !isStudent());
-    $('#buying-button').toggleClass('d-none', isStudent());
+    $('#room-button').toggleClass('d-none', !student);
+    $('#buying-button').toggleClass('d-none', student);
     $('#checkout-button').toggleClass('d-none', !isSchool());
-
 }
 
 export function isSchool() {
