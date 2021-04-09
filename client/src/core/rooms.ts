@@ -68,11 +68,6 @@ const noRoomSelected = async () => {
     } else {
         $('#join-by-id-modal').modal('show');
     }
-    if (await isPremiumUser()) {
-        $('#create-room-modal-toggle-button').removeClass('d-none');
-    } else {
-        $('#create-room-modal-toggle-button').addClass('d-none');
-    }
 };
 
 const notLoggedIn = async () => {
@@ -152,13 +147,6 @@ const loadRoom = async (id: number) => {
         loadRoomList();
     }
 
-    if (await isPremiumUser()) {
-        console.log(2);
-        $('#create-room-modal-toggle-button').removeClass('d-none');
-    } else {
-        $('#create-room-modal-toggle-button').addClass('d-none');
-    }
-
     $('h5.special').text(room.name);
 
     const ticketListElement = $('#ticket-list');
@@ -228,6 +216,11 @@ const loadRoomList = async () => {
 const loadRoomPage = async () => {
     loadRoomList();
     const selectedRoom = getRoomIDFromURL();
+    if (await isPremiumUser()) {
+        $('#create-room-modal-toggle-button').removeClass('d-none');
+    } else {
+        $('#create-room-modal-toggle-button').addClass('d-none');
+    }
     if (!selectedRoom) {
         noRoomSelected();
     } else {
@@ -281,11 +274,6 @@ export const getRoom = async (id: number): Promise<{ room: Room; joined: boolean
 export const enterRoomPage = async () => {
     if (!hasToken()) {
         await notLoggedIn();
-    }
-    if (await isPremiumUser()) {
-        $('#create-room-modal-toggle-button').removeClass('d-none');
-    } else {
-        $('#create-room-modal-toggle-button').addClass('d-none');
     }
 
     loadRoomPage();
