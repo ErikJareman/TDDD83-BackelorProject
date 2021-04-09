@@ -1,6 +1,7 @@
 import $ from 'jquery';
-import { authHeader } from './auth.service';
-import { enterRoomPage } from './rooms';
+import { addEventListener } from '../index';
+import { authHeader, createSchool, createUser, logIn, loginSchool } from './auth.service';
+import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from './rooms';
 import { writeAdmins } from './subscription';
 
 interface Route {
@@ -12,17 +13,74 @@ interface Route {
 
 // Routes
 const routes: Route[] = [
-    { url: '/login', templateSelector: '#login', onLoad: () => console.log('Login laddad') },
-    { url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
+    {
+        url: '/login',
+        templateSelector: '#login',
+        onLoad: () => {
+            const form = $('#loginForm');
+            form.off();
+            form.on('submit', logIn);
+        },
+    },
+    {
+        url: '/register',
+        templateSelector: '#register',
+        onLoad: () => {
+            const form = $('#registerForm');
+            form.off();
+            form.on('submit', createUser);
+        },
+    },
+
+    // { url: '/login', templateSelector: '#login', onLoad: () => console.log('Login laddad') },
+    //{ url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
     { url: '/404', templateSelector: '#404' },
     { url: '/', templateSelector: '#home' },
     { url: '/success', templateSelector: '#success' },
     { url: '/cancel', templateSelector: '#cancel' },
-    { url: '/checkout', templateSelector: '#checkout' },
-    { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
-    { url: '/buy', templateSelector: '#buy-topq-home' },
-    { url: '/loginschool', templateSelector: '#school-login' },
-    { url: '/customer-page', templateSelector: '#customer-page', onLoad: writeAdmins },
+    {
+        url: '/checkout',
+        templateSelector: '#checkout',
+        onLoad: () => {
+            addEventListener();
+            console.log('efter addEventListener');
+        },
+    },
+    // { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
+    {
+        url: '/r',
+        templateSelector: '#view-room',
+        onLoad: () => {
+            enterRoomPage();
+            $('#leave-room').on('click', clickLeaveRoom);
+            $('#delete-room').on('click', clickDeleteRoom);
+        },
+    },
+    {
+        url: '/buy',
+        templateSelector: '#buy-topq-home',
+        onLoad: () => {
+            const form = $('#school-registerForm');
+            form.off();
+            form.on('submit', createSchool);
+        },
+    },
+    {
+        url: '/loginschool',
+        templateSelector: '#school-login',
+        onLoad: () => {
+            const form = $('#school-loginForm');
+            form.off();
+            form.on('submit', loginSchool);
+        },
+    },
+    {
+        url: '/customer-page',
+        templateSelector: '#customer-page',
+        onLoad: () => {
+            writeAdmins();
+        },
+    },
 ];
 
 // Programatic navigate

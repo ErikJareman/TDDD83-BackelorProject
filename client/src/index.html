@@ -371,7 +371,7 @@
       </section>
       <section class=login-section>
         <li>
-          <form>
+          <form id="school-loginForm">
               <h2>School-login:</h2>
               <label for="contactEmailLogin">Contact-email:</label>
               <input type="email" class="form-control" id="contactEmailLogin" aria-describedby="emailHelp" placeholder="Enter email" required>
@@ -424,7 +424,7 @@
             <h2>Register and start using Top-Q: </h2>
             <br>
             <li>
-              <form>
+              <form id="school-registerForm">
                 <div class="form-group">
                   <h2>School-registration:</h2>
                   <label for="schoolName">Name:</label>
@@ -458,7 +458,7 @@
     <template id="login">
       <section class=student-login-section>
         <li>
-          <form>
+          <form id="loginForm">
             <div class="form-group">
               <h2>Login:</h2>
               <label for="InputEmail" class="form-label">Email</label>
@@ -475,6 +475,7 @@
             <br>
             <a href="/register" class="link" id="login_reg_link">Register instead</a>
           </form>
+          <a href="/loginschool" class="btn btn-primary" id="login_instead_button">Login as school</a>
         </li>
       </section>
     </template>
@@ -482,7 +483,7 @@
     <template id="register">
       <section class=student-register-section>
         <li>
-          <form>
+          <form id="registerForm">
             <div class="form-group">
               <h2>Register:</h2>
               <label for="InputEmailRegister" class="form-label">Email</label>

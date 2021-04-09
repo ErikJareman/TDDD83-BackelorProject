@@ -13,7 +13,7 @@ const price_p = 'price_1IZujvC7I9l3XQtc72Uq6LU0';
 const price_s_plus = 'price_1IZuj4C7I9l3XQtctx3PtUWs';
 const price_s = 'price_1IZuh5C7I9l3XQtcrkJwn759';
 
-async function createCheckoutSession(priceId: string) {
+export async function createCheckoutSession(priceId: string) {
     const stripe = await loadStripe(
         'pk_test_51IZucCC7I9l3XQtcR3FGS1YEe7UL8EKRsjyToCtFDD8RRQscOLlcoYbFHuIiTieCyj0K0rtLLPU6x74rLtqbzOlo00ODxOZOmn',
     );
@@ -49,6 +49,29 @@ async function createCheckoutSession(priceId: string) {
         });
 }
 
+export function addEventListener() {
+    $('#premium_plus').off();
+    $('#premium').off();
+    $('#standard_plus').off();
+    $('#standard').off();
+
+    $('#premium_plus').on('click', function () {
+        createCheckoutSession(price_p_plus);
+    });
+    $('#premium').on('click', function () {
+        createCheckoutSession(price_p);
+    });
+    $('#standard_plus').on('click', function () {
+        createCheckoutSession(price_s_plus);
+    });
+    $('#standard').on('click', function () {
+        createCheckoutSession(price_s);
+    });
+
+    $('#customer_portal').on('click', customerPortal);
+    console.log('lagt till alla köpknappar');
+}
+
 function customerPortal(e) {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get('session_id');
@@ -80,20 +103,20 @@ function customerPortal(e) {
 
 const main = () => {
     initiateRouter();
-    $('#SendRegister').on('click', createUser);
-    $('#schoolReg').on('click', createSchool);
-    $('#schoolLogin').on('click', loginSchool);
-    $('#SendLogin').on('click', logIn);
+    //$('#SendRegister').on('click', createUser);
+    //$('#schoolReg').on('click', createSchool);
+    //$('#schoolLogin').on('click', loginSchool);
+    //$('#SendLogin').on('click', logIn);
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
-    $('#customer-page').on('click', function(){
+    $('#customer-page').on('click', function () {
         navigateTo('/customer-page');
         window.location.reload();
     });
     $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
-    
+
     $('#premium_plus').on('click', function () {
         createCheckoutSession(price_p_plus);
     });
@@ -109,13 +132,12 @@ const main = () => {
     $('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
     $('#delete-admin-modal').on('click', deleteAdmin);
-    
-    $('.goHome').on('click', function(){
+
+    $('.goHome').on('click', function () {
         $('#hero-button').toggleClass('d-none', isStudent());
     });
     $('#hero-button').toggleClass('d-none', isStudent());
     toggleNavbar();
-    
 
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');

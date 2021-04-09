@@ -122,6 +122,7 @@ export async function createSchool(event: { preventDefault: () => void }) {
     const name = $<HTMLInputElement>('#schoolName').val();
     const email = $<HTMLInputElement>('#contactEmail').val();
     const password = $<HTMLInputElement>('#schoolPassword').val();
+    console.log(name, email, password);
     try {
         const result = await standardPost('/registerschool', {
             name,
