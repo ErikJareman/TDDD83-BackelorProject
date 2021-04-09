@@ -245,6 +245,53 @@ def login():
 
     # TODO, make token expire
     token = create_access_token({'user': user.id}, expires_delta=False)
+
+    #fyller databasen inför användartest här
+    #Rooms
+    rum1 = Room(name='TSEA52 Digitalteknik')
+    rum2 = Room(name='TATA69 Flervariabelanalys')
+    db.session.add(rum1)
+    db.session.add(rum2)
+    db.session.commit()
+    #Users
+    user1 = User(email='per@per.per', username='Per',  password_hash='1')
+    user2 = User(email='per@per.kalle', username='Kalle',  password_hash='1')
+    user3 = User(email='per@per.ursula', username='Ursula',  password_hash='1')
+    user4 = User(email='per@per.ming', username='Ming',  password_hash='1')
+    user5 = User(email='per@per.fatima', username='Fatima',  password_hash='1')
+    user6 = User(email='per@per.anna', username='Anna',  password_hash='1')
+    user7 = User(email='per@per.findus', username='Findus',  password_hash='1')
+    db.session.add(user1)
+    db.session.add(user2)
+    db.session.add(user3)
+    db.session.add(user4)
+    db.session.add(user5)
+    db.session.add(user6)
+    db.session.add(user7)
+    db.session.commit()
+    #RoomMembers
+    roomMember1 = RoomMembers(user=user1.id, room=rum1.id, role=Roles.Regular.name)
+    roomMember2 = RoomMembers(user=user2.id, room=rum1.id, role=Roles.Admin.name)
+    roomMember3 = RoomMembers(user=user3.id, room=rum1.id, role=Roles.Regular.name)
+    roomMember4 = RoomMembers(user=user4.id, room=rum2.id, role=Roles.Regular.name)
+    roomMember5 = RoomMembers(user=user5.id, room=rum2.id, role=Roles.Admin.name)
+    roomMember6 = RoomMembers(user=user6.id, room=rum2.id, role=Roles.Regular.name)
+    roomMember7 = RoomMembers(user=user7.id, room=rum2.id, role=Roles.Admin.name)
+    db.session.add(roomMember1)
+    db.session.add(roomMember2)
+    db.session.add(roomMember3)
+    db.session.add(roomMember4)
+    db.session.add(roomMember5)
+    db.session.add(roomMember6)
+    db.session.add(roomMember7)
+    #Tickets
+    #to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'], ticket_zoom=data['ticket_zoom'])
+    #Add to sesh
+    db.session.commit()
+    # TODO
+    # fixa admin@topq.se isPremium=TRUE + Lägg till några tickets
+
+
     return jsonify({"token": token, "user": user.serialize()})
 
 
@@ -258,6 +305,7 @@ def sign_up():
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
+
         return jsonify([new_user.serialize()])
 
 
@@ -484,6 +532,9 @@ def deleteTicket():
         db.session.commit()
         return ''
     return ''
+
+
+
 
 
 
