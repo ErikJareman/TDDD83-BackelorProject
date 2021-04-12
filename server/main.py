@@ -510,15 +510,14 @@ def deleteTicket():
         roomID = data['room']
         
         #nu ska vi alltså ta bort ticket med ticketID från rummet med id roomID
-        room = Room.query.get(roomID)
 
         #delete_ticket = .delete().where(Ticket.room == room_id)
         #db.session.execute(delete_ticket)
         delete_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
-        db.session.delete(delete_ticket)
-        db.session.commit()
+        if delete_ticket is not None:
+            db.session.delete(delete_ticket)
+            db.session.commit()
         
-        return 'test'
     return 'test'
 
 
