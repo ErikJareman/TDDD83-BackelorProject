@@ -1,3 +1,5 @@
+import env from '../shared/env';
+
 export interface JWTData {
     fresh: boolean;
     iat: number;
@@ -9,7 +11,7 @@ export interface JWTData {
 export function addAdmin() {
     const email = $<HTMLInputElement>('#inputemail').val();
     try {
-        const result = fetch('http://127.0.0.1:5000/school_admin', {
+        const result = fetch('env.backendURL/school_admin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +30,7 @@ export function addAdmin() {
 export function deleteAdmin() {
     const email = $<HTMLInputElement>('#Admin-delete').val();
     try {
-        const result = fetch('http://127.0.0.1:5000/school_admin', {
+        const result = fetch('env.backendURL/school_admin', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +48,7 @@ export function deleteAdmin() {
 
 export async function modalDelete() {
     try {
-        const result = await fetch('http://127.0.0.1:5000/school_admin', {
+        const result = await fetch('env.backendURL/school_admin', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,17 +72,17 @@ export async function writeAdmins() {
     $('#admin-admin').empty();
     if (max_admin > 0) {
         try {
-            const result = await fetch('http://127.0.0.1:5000/school_admin', {
+            const result = await fetch('env.backendURL/school_admin', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('auth')).token,
                 },
             });
-        //    console.log(max_admin);
+            //    console.log(max_admin);
             const admins = await result.json();
             let number_of = 0;
-           // console.log(admins);
+            // console.log(admins);
             admins.forEach((School_Admin) => {
                 number_of++;
                 $('#admin-admin').append(` 
@@ -99,7 +101,7 @@ export async function writeAdmins() {
 
 export async function checkSubscription() {
     try {
-        const result = await fetch('http://127.0.0.1:5000/update-school', {
+        const result = await fetch('env.backendURL/update-school', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

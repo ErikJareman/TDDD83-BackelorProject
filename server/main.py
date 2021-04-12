@@ -2,6 +2,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import abort
+from flask.helpers import send_from_directory
 from flask_jwt_extended.utils import get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
@@ -14,8 +15,8 @@ import stripe
 import json
 from sqlalchemy.orm.session import Session
 
-app = Flask(__name__, static_folder='../client/build')
-CORS(app)
+app = Flask(__name__, static_folder='../client/build', static_url_path="/")
+CORS(app, support_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'kiejfuheirgyuhvbnjmwpejn'
@@ -42,95 +43,6 @@ configuration = stripe.billing_portal.Configuration.create(
     },
   },
 )
-
-@app.route('/customer-portal', methods=['POST'])
-@jwt_required()
-def customer_portal():
-    data = json.loads(request.data)
-    school_id = get_jwt_identity()['school']
-    school = School.query.get(school_id)
-    checkout_session_id = school.sub_id
-    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
-    subscription = stripe.Subscription.retrieve(checkout_session.subscription)    
-    session = stripe.billing_portal.Session.create(
-        customer=checkout_session.customer,
-        return_url=YOUR_DOMAIN + '/customer-page')
-    return jsonify({'url': session.url})
-
-
-@app.route('/update-school', methods=['POST'])
-@jwt_required()
-def update_school():         
-    school_id = get_jwt_identity()['school']
-    school = School.query.get(school_id)
-    checkout_session_id = school.sub_id
-    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
-    subscription = stripe.Subscription.retrieve(checkout_session.subscription)
-
-    if subscription.plan.id=='price_1IZuh5C7I9l3XQtcrkJwn759':
-        setattr(school, 'max_admin', 50)
-    elif subscription.plan.id=='price_1IZuj4C7I9l3XQtctx3PtUWs':
-        setattr(school, 'max_admin', 200)
-    elif subscription.plan.id=='price_1IZujvC7I9l3XQtc72Uq6LU0':
-        setattr(school, 'max_admin', 500)
-    elif subscription.plan.id=='price_1IZul8C7I9l3XQtcLw7OrDIH':
-        setattr(school, 'max_admin', 1000)
-    else:
-        setattr(school, 'max_admin', 0)
-    db.session.commit()
-
-    if (school.max_admin < School_Admin.query.filter_by(school_id = school_id).count() ):
-        diff = School_Admin.query.filter_by(school_id = school_id).count() - school.max_admin
-        const = 0
-        for admin in School_Admin.query.filter_by(school_id = school_id):
-            if const < diff:
-                db.session.delete(admin)
-                db.session.commit()
-                const=const+1
-            else:
-                break
-    return jsonify({'School': school.max_admin})
-
-@app.route('/create-checkout-session', methods=['POST'])
-@jwt_required()
-def create_checkout_session():
-    data = json.loads(request.data)
-    try:
-        checkout_session = stripe.checkout.Session.create(
-            success_url=YOUR_DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url=YOUR_DOMAIN + '/cancel',
-            payment_method_types=["card"],
-            mode="subscription",
-            line_items=[
-                {
-                    "price": data['priceId'],
-                    "quantity": 1
-                }
-            ],
-        )
-        school_id = get_jwt_identity()['school']
-        school = School.query.get(school_id)
-
-        if data['priceId']=='price_1IZuh5C7I9l3XQtcrkJwn759':
-            setattr(school, 'max_admin', 50)
-        elif data['priceId']=='price_1IZuj4C7I9l3XQtctx3PtUWs':
-            setattr(school, 'max_admin', 200)
-        elif data['priceId']=='price_1IZujvC7I9l3XQtc72Uq6LU0':
-            setattr(school, 'max_admin', 500)
-        elif data['priceId']=='price_1IZul8C7I9l3XQtcLw7OrDIH':
-            setattr(school, 'max_admin', 1000)
-        setattr(school, 'sub_id', checkout_session['id'])
-        db.session.commit()
-        return jsonify({'sessionId': checkout_session['id']})
-    except Exception as e:
-        return jsonify({'error': {'message': str(e)}}), 400
-
-
-
-
-
-
-Roles = Enum('Roles', 'Admin Regular')
 
 #USER CLASS
 class User(db.Model):
@@ -239,6 +151,108 @@ class Room(db.Model):
         d['admins'] = [ user.serialize() for user in db.session.query(User).join(RoomMembers).filter(RoomMembers.user == User.id).filter(RoomMembers.room == self.id).filter(RoomMembers.role == Roles.Admin.name).all()]
 
         return d
+
+
+
+
+@app.route('/', defaults={'path': 'index.html'})
+@app.route('/<path>')
+def catch_all(path):
+    print(path)
+    try:
+        return app.send_static_file(path)
+    except:
+        return app.send_static_file("index.html")
+
+
+
+@app.route('/customer-portal', methods=['POST'])
+@jwt_required()
+def customer_portal():
+    data = json.loads(request.data)
+    school_id = get_jwt_identity()['school']
+    school = School.query.get(school_id)
+    checkout_session_id = school.sub_id
+    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
+    subscription = stripe.Subscription.retrieve(checkout_session.subscription)    
+    session = stripe.billing_portal.Session.create(
+        customer=checkout_session.customer,
+        return_url=YOUR_DOMAIN + '/customer-page')
+    return jsonify({'url': session.url})
+
+
+@app.route('/update-school', methods=['POST'])
+@jwt_required()
+def update_school():         
+    school_id = get_jwt_identity()['school']
+    school = School.query.get(school_id)
+    checkout_session_id = school.sub_id
+    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
+    subscription = stripe.Subscription.retrieve(checkout_session.subscription)
+
+    if subscription.plan.id=='price_1IZuh5C7I9l3XQtcrkJwn759':
+        setattr(school, 'max_admin', 50)
+    elif subscription.plan.id=='price_1IZuj4C7I9l3XQtctx3PtUWs':
+        setattr(school, 'max_admin', 200)
+    elif subscription.plan.id=='price_1IZujvC7I9l3XQtc72Uq6LU0':
+        setattr(school, 'max_admin', 500)
+    elif subscription.plan.id=='price_1IZul8C7I9l3XQtcLw7OrDIH':
+        setattr(school, 'max_admin', 1000)
+    else:
+        setattr(school, 'max_admin', 0)
+    db.session.commit()
+
+    if (school.max_admin < School_Admin.query.filter_by(school_id = school_id).count() ):
+        diff = School_Admin.query.filter_by(school_id = school_id).count() - school.max_admin
+        const = 0
+        for admin in School_Admin.query.filter_by(school_id = school_id):
+            if const < diff:
+                db.session.delete(admin)
+                db.session.commit()
+                const=const+1
+            else:
+                break
+    return jsonify({'School': school.max_admin})
+
+@app.route('/create-checkout-session', methods=['POST'])
+@jwt_required()
+def create_checkout_session():
+    data = json.loads(request.data)
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            success_url=YOUR_DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url=YOUR_DOMAIN + '/cancel',
+            payment_method_types=["card"],
+            mode="subscription",
+            line_items=[
+                {
+                    "price": data['priceId'],
+                    "quantity": 1
+                }
+            ],
+        )
+        school_id = get_jwt_identity()['school']
+        school = School.query.get(school_id)
+
+        if data['priceId']=='price_1IZuh5C7I9l3XQtcrkJwn759':
+            setattr(school, 'max_admin', 50)
+        elif data['priceId']=='price_1IZuj4C7I9l3XQtctx3PtUWs':
+            setattr(school, 'max_admin', 200)
+        elif data['priceId']=='price_1IZujvC7I9l3XQtc72Uq6LU0':
+            setattr(school, 'max_admin', 500)
+        elif data['priceId']=='price_1IZul8C7I9l3XQtcLw7OrDIH':
+            setattr(school, 'max_admin', 1000)
+        setattr(school, 'sub_id', checkout_session['id'])
+        db.session.commit()
+        return jsonify({'sessionId': checkout_session['id']})
+    except Exception as e:
+        return jsonify({'error': {'message': str(e)}}), 400
+
+
+
+
+
+Roles = Enum('Roles', 'Admin Regular')
 
 
 @app.route('/login', methods=['POST'])
@@ -509,10 +523,6 @@ def deleteTicket():
 
 
 
-
-@app.route('/', methods=['GET'])
-def client():
-    return app.send_static_file("index.html")
 
 
 def user_test_db():

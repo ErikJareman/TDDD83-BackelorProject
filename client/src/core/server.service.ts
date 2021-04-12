@@ -17,7 +17,7 @@ const defaultHeaders = () => {
 };
 
 const addHost = (endpoint: string): string => {
-    return `${env.backendURL}/${endpoint}`;
+    return `${env.backendURL}${endpoint}`;
 };
 
 const addParameters = (baseURL: string, parameters?: Record<string, Stringable>) => {

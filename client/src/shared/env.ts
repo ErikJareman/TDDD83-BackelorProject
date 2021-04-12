@@ -1,3 +1,5 @@
+const production = false;
+
 export default {
-    backendURL: 'http://127.0.0.1:5000/',
+    backendURL: production ? '' : 'http://127.0.0.1:5000',
 };
