@@ -302,6 +302,7 @@ export const clickDeleteRoom = async () => {
 
 export const clickLeaveRoom = async () => {
     await standardPost(`${EndPoints.LeaveRoom}/${getRoomIDFromURL()}`);
+    await navigateTo('/r');
     noRoomSelected();
     loadRoomList();
 };
