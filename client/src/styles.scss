@@ -145,7 +145,7 @@ body {
 
 #router {
     margin-bottom: 400px;
-    min-height: 700px;
+    //min-height: 700px;
 }
 
 .navbar {
@@ -184,11 +184,23 @@ body {
 }
 
 //-------HERO--------------------------
-
 #login_instead_button {
     color: white;
     font-size: 20px;
     background-color: colors.$accent;
+    font-weight: lighter;
+    border-radius: 5em;
+    margin-top: 4%;
+    &:hover {
+        background: colors.$accenthover;
+        color: white;
+    }
+}
+
+#login_instead_button_special {
+    color: white;
+    font-size: 20px;
+    background-color: #7f7f7f;
     font-weight: lighter;
     border-radius: 5em;
     margin-top: 4%;
