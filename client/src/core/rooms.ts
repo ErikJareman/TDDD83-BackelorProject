@@ -127,10 +127,6 @@ const ifNotAdmin = () => {
     $('#delete-room').addClass('d-none');
 };
 
-const createNewRoomButtonTemplate = () => {
-    return `<button id="create_room" class="btn primary-button" data-toggle="modal" data-target="#newRoomModal">Create room</button>`;
-};
-
 const loadRoom = async (id: number) => {
     const hash = `#${id}`;
     if (history.pushState) {
@@ -302,6 +298,7 @@ export const clickDeleteRoom = async () => {
 
 export const clickLeaveRoom = async () => {
     await standardPost(`${EndPoints.LeaveRoom}/${getRoomIDFromURL()}`);
+    await navigateTo('/r');
     noRoomSelected();
     loadRoomList();
 };
