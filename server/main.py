@@ -140,7 +140,7 @@ class User(db.Model):
     password_hash = db.Column(db.String, nullable=False)
     
     def __repr__(self):
-        return '<User {}: {} {} >'.format(self.id, self.email, self.username, self.password_hash, self.is_admin)
+        return '<User {}: {} {} >'.format(self.id, self.email, self.username, self.password_hash)
 
     def serialize(self):
         d =  dict(id=self.id, email=self.email, username=self.username)
@@ -154,9 +154,12 @@ class User(db.Model):
         return bcrypt.check_password_hash(self.password_hash, password)
 
     def is_premium(self):
-        # TODO update later
-        # return PremiumUser.query.filter(email = self.email).exists
-        return True
+        # TODO
+        #if sats för premium/admin inför användartest
+        if (self.email == 'admin@topq.se' or self.email == 'per@per.kalle'):
+            return True
+
+        return bool(School_Admin.query.filter_by(admin_email = self.email).first())
 
 #SCHOOL CLASS
 class School(db.Model):
@@ -237,7 +240,7 @@ class Room(db.Model):
 
         return d
 
-#login/register student and tutor  
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -254,6 +257,7 @@ def login():
 
     # TODO, make token expire
     token = create_access_token({'user': user.id}, expires_delta=False)
+
     return jsonify({"token": token, "user": user.serialize()})
 
 @app.route('/register', methods=['POST'])
@@ -509,6 +513,71 @@ def deleteTicket():
 @app.route('/', methods=['GET'])
 def client():
     return app.send_static_file("index.html")
+
+
+def userTestDB():
+    if (not User.query.first()):
+        #fyller databasen inför användartest här
+        #Rooms
+        rum1 = Room(name='TSEA52 Digitalteknik')
+        rum2 = Room(name='TATA69 Flervariabelanalys')
+        db.session.add(rum1)
+        db.session.add(rum2)
+        db.session.commit()
+        #Users
+        user1 = User(email='per@per.per', username='Per',  password_hash='1')
+        user2 = User(email='per@per.kalle', username='Kalle',  password_hash='1')
+        user3 = User(email='per@per.ursula', username='Ursula',  password_hash='1')
+        user4 = User(email='per@per.ming', username='Ming',  password_hash='1')
+        user5 = User(email='per@per.fatima', username='Fatima',  password_hash='1')
+        user6 = User(email='per@per.anna', username='Anna',  password_hash='1')
+        user7 = User(email='per@per.findus', username='Findus',  password_hash='1')
+        password_hash = bcrypt.generate_password_hash('admin').decode("utf8")
+        testUserAdmin = User(email='admin@topq.se', username='Admin',  password_hash=password_hash)
+        db.session.add(user1)
+        db.session.add(user2)
+        db.session.add(user3)
+        db.session.add(user4)
+        db.session.add(user5)
+        db.session.add(user6)
+        db.session.add(user7)
+        db.session.add(testUserAdmin)
+        db.session.commit()
+        #RoomMembers
+        roomMember1 = RoomMembers(user=user1.id, room=rum1.id, role=Roles.Regular.name)
+        roomMember2 = RoomMembers(user=user2.id, room=rum1.id, role=Roles.Admin.name)
+        roomMember3 = RoomMembers(user=user3.id, room=rum1.id, role=Roles.Regular.name)
+        roomMember4 = RoomMembers(user=user4.id, room=rum2.id, role=Roles.Regular.name)
+        roomMember5 = RoomMembers(user=user5.id, room=rum2.id, role=Roles.Admin.name)
+        roomMember6 = RoomMembers(user=user6.id, room=rum2.id, role=Roles.Regular.name)
+        roomMember7 = RoomMembers(user=user7.id, room=rum2.id, role=Roles.Admin.name)
+        roomAdmin = RoomMembers(user=testUserAdmin.id, room=rum1.id, role=Roles.Admin.name)
+        db.session.add(roomMember1)
+        db.session.add(roomMember2)
+        db.session.add(roomMember3)
+        db.session.add(roomMember4)
+        db.session.add(roomMember5)
+        db.session.add(roomMember6)
+        db.session.add(roomMember7)
+        db.session.add(roomAdmin)
+        #Tickets
+        ticket1 = Ticket(creator=2, room=1, ticket_info='Help me!', ticket_zoom='https://zoom.us/')
+        ticket2 = Ticket(creator=4, room=1, ticket_info='Task 3 problem', ticket_zoom='https://zoom.us/')
+        ticket4 = Ticket(creator=4, room=2, ticket_info='Major struggle on 4b', ticket_zoom='https://zoom.us/')
+        ticket5 = Ticket(creator=7, room=2, ticket_info='Help on #2', ticket_zoom='https://zoom.us/')
+        ticket6 = Ticket(creator=7, room=1, ticket_info='Help me now!', ticket_zoom='https://zoom.us/')
+        db.session.add(ticket1)
+        db.session.add(ticket2)
+        db.session.add(ticket4)
+        db.session.add(ticket5)
+        db.session.add(ticket6)
+        #Lägg till adminkonto admin@topq.se
+
+        #Add to sesh
+        db.session.commit()
+        # TODO
+        # fixa admin@topq.se isPremium=TRUE + Lägg till några tickets
+userTestDB()
 
 if __name__ == "__main__":
     app.run(debug=True)

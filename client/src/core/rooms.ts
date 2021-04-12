@@ -1,8 +1,8 @@
 import { parseJSON } from 'jquery';
-import { getUser, getUserID } from './auth.service';
+import { getUser, getUserID, hasToken } from './auth.service';
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
-import { getMultiple, getSingle, standardDelete, standardPost } from './server.service';
+import { getMultiple, getSingle, standardDelete, standardGet, standardPost } from './server.service';
 import { User } from './User';
 import copy from 'copy-to-clipboard';
 
@@ -70,7 +70,13 @@ const noRoomSelected = async () => {
     const roomList = await listRooms();
     if (roomList.length !== 0) {
         loadRoom(roomList[0].id);
+    } else {
+        $('#join-by-id-modal').modal('show');
     }
+};
+
+const notLoggedIn = async () => {
+    return await navigateTo('/login');
 };
 
 const memberTemplate = (member: User, room: Room) => {
@@ -135,8 +141,6 @@ const loadRoom = async (id: number) => {
     const buttons = $('button.left-button');
     buttons.removeClass('btn-secondary').addClass('btn-outline-secondary');
 
-    //TODO
-    //Fixa så att rums-knappen är "intryckt" på reload av page, inte bara efter varje funktion
     buttons
         .filter(function () {
             return $(this).data('id') == id;
@@ -220,6 +224,11 @@ const loadRoomList = async () => {
 
 const loadRoomPage = async () => {
     loadRoomList();
+    if (await isPremiumUser()) {
+        $('#create-room-modal-toggle-button').removeClass('d-none');
+    } else {
+        $('#create-room-modal-toggle-button').addClass('d-none');
+    }
     const selectedRoom = getRoomIDFromURL();
     if (!selectedRoom) {
         noRoomSelected();
@@ -228,7 +237,7 @@ const loadRoomPage = async () => {
     }
 };
 
-export const submitCreateRoom = async (event: JQuery.ClickEvent) => {
+export const submitCreateRoom = async () => {
     const name = $<HTMLInputElement>('#room-name-input').val() as string;
 
     const res = await createRoom({ name });
@@ -250,6 +259,12 @@ const getRoomIDFromURL = (): number | null => {
     return parseInt(hash.substring(1));
 };
 
+export async function joinRoomByID() {
+    await standardGet(`${EndPoints.Rooms}/${$<HTMLInputElement>('#room-id-to-join').val() as number}`);
+    loadRoom($<HTMLInputElement>('#room-id-to-join').val() as number);
+    loadRoomPage();
+}
+
 export async function createTicket() {
     const roomID = getRoomIDFromURL();
     const ticket_zoom = $<HTMLInputElement>('#modal-zoom').val() as string;
@@ -266,10 +281,8 @@ export async function createTicket() {
 export const getRoom = async (id: number): Promise<{ room: Room; joined: boolean }> => getSingle(EndPoints.Rooms, id);
 
 export const enterRoomPage = async () => {
-    if (await isPremiumUser()) {
-        $('#create-room-modal-toggle-button').removeClass('d-none');
-    } else {
-        $('#create-room-modal-toggle-button').addClass('d-none');
+    if (!hasToken()) {
+        await notLoggedIn();
     }
 
     loadRoomPage();
