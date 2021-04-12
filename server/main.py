@@ -14,7 +14,7 @@ import stripe
 import json
 from sqlalchemy.orm.session import Session
 
-app = Flask(__name__, static_folder='../client/build', static_url_path='/')
+app = Flask(__name__, static_folder='../client/build')
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -80,7 +80,7 @@ def update_school():
     db.session.commit()
 
     if (school.max_admin < School_Admin.query.filter_by(school_id = school_id).count() ):
-        diff = School_Admin.query.filter_by(school_id = school_id).count() - schoo.max_admin
+        diff = School_Admin.query.filter_by(school_id = school_id).count() - school.max_admin
         const = 0
         for admin in School_Admin.query.filter_by(school_id = school_id):
             if const < diff:
