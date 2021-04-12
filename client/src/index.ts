@@ -2,7 +2,15 @@
 import $ from 'jquery';
 
 import { createUser, logIn, logOut, toggleNavbar, createSchool, loginSchool, isStudent } from './core/auth.service';
-import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom } from './core/rooms';
+import {
+    clickDeleteRoom,
+    clickLeaveRoom,
+    createTicket,
+    submitCreateRoom,
+    joinRoomByID,
+    promoteMember,
+    onShareModalOpen,
+} from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { writeAdmins, addAdmin, deleteAdmin } from './core/subscription';
 import { loadStripe } from '@stripe/stripe-js';
@@ -50,6 +58,7 @@ export async function createCheckoutSession(priceId: string) {
 }
 
 export function addEventListener() {
+    // TODO denna fanns ej med i git-compare..oklart om den ska va med?
     $('#premium_plus').off();
     $('#premium').off();
     $('#standard_plus').off();
@@ -102,11 +111,13 @@ function customerPortal(e) {
 }
 
 const main = () => {
+    // TODO lite oklart vilka grejer som ska ligga här eller i addEventListener
     initiateRouter();
     //$('#SendRegister').on('click', createUser);
     //$('#schoolReg').on('click', createSchool);
     //$('#schoolLogin').on('click', loginSchool);
     //$('#SendLogin').on('click', logIn);
+    $('#join-room').on('click', joinRoomByID);
     $('#skapa-ticket').on('click', createTicket);
     $('#create-room').on('click', submitCreateRoom);
     $('#leave-room').on('click', clickLeaveRoom);
@@ -117,19 +128,19 @@ const main = () => {
     $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
 
-    $('#premium_plus').on('click', function () {
-        createCheckoutSession(price_p_plus);
-    });
-    $('#premium').on('click', function () {
-        createCheckoutSession(price_p);
-    });
-    $('#standard_plus').on('click', function () {
-        createCheckoutSession(price_s_plus);
-    });
-    $('#standard').on('click', function () {
-        createCheckoutSession(price_s);
-    });
-    $('#customer_portal').on('click', customerPortal);
+    //$('#premium_plus').on('click', function () {
+    //    createCheckoutSession(price_p_plus);
+    //});
+    //$('#premium').on('click', function () {
+    //    createCheckoutSession(price_p);
+    //});
+    //$('#standard_plus').on('click', function () {
+    //    createCheckoutSession(price_s_plus);
+    //});
+    //$('#standard').on('click', function () {
+    //    createCheckoutSession(price_s);
+    //});
+    //$('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
     $('#delete-admin-modal').on('click', deleteAdmin);
 
