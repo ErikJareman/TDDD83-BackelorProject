@@ -109,7 +109,15 @@ export async function logIn(event: { preventDefault: () => void }) {
         });
         sessionStorage.setItem('auth', JSON.stringify(result));
         toggleNavbar();
-        navigateTo('/r');
+        if (isStudent()) {
+            navigateTo('/r');
+        } else if (isSchool()) {
+            if (result.school.sub_id != null) {
+                navigateTo('/customer-page'); //om subscription
+            } else {
+                navigateTo('/checkout'); //om subscription
+            }
+        }
 
         // TODO, navigate
     } catch (e) {
@@ -134,25 +142,4 @@ export async function createSchool(event: { preventDefault: () => void }) {
         // TODO
         // Kan det skapas en med samma mail?
     }
-}
-
-export async function loginSchool(event: { preventDefault: () => void }) {
-    event.preventDefault();
-    const email = $<HTMLInputElement>('#contactEmailLogin').val();
-    const password = $<HTMLInputElement>('#schoolLoginP').val();
-    try {
-        const result = await standardPost('/loginschool', {
-            email,
-            password,
-        });
-        sessionStorage.setItem('auth', JSON.stringify(result));
-        if (result.school.sub_id != null) {
-            navigateTo('/customer-page'); //om subscription
-        } else {
-            navigateTo('/checkout'); //om subscription
-        }
-    } catch (e) {
-        alert('Something went wrong. Try again!');
-    }
-    toggleNavbar();
 }

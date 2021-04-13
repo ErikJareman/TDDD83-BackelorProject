@@ -65,15 +65,15 @@ const routes: Route[] = [
             form.on('submit', createSchool);
         },
     },
-    {
-        url: '/loginschool',
-        templateSelector: '#school-login',
-        onLoad: () => {
-            const form = $('#school-loginForm');
-            form.off();
-            form.on('submit', loginSchool);
-        },
-    },
+    // {
+    //     url: '/loginschool',
+    //     templateSelector: '#school-login',
+    //     onLoad: () => {
+    //         const form = $('#school-loginForm');
+    //         form.off();
+    //         form.on('submit', loginSchool);
+    //     },
+    // },
     {
         url: '/customer-page',
         templateSelector: '#customer-page',

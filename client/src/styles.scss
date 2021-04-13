@@ -281,6 +281,22 @@ body {
         list-style-type: none;
     }
 
+    h5{
+        color: colors.$secondary1;
+    }
+
+    #school_instead_button{
+        color: white;
+            background-color: colors.$primary1;
+            font-weight: lighter;
+            border-radius: 5em;
+            border: 1px solid colors.$secondary3;
+            &:hover {
+                background: colors.$accenthover;
+                color: white;
+            }
+    }
+
     .form-check-input {
         margin-left: -53%;
     }
@@ -402,7 +418,7 @@ body {
 
 .admins_img {
     width: 40px;
-    margin-bottom: 2%;
+    margin-bottom: -2%;
 }
 
 .buy_home_img {
@@ -1208,6 +1224,7 @@ img {
 
 #login_reg_link {
     margin-left: 45% !important;
+    font-family: 'Poppins'
 }
 
 #loginForm {

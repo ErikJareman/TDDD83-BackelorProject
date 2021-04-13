@@ -254,7 +254,7 @@ def create_checkout_session():
 
 Roles = Enum('Roles', 'Admin Regular')
 
-
+#Login for Schools and Students/Tutors
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -265,15 +265,24 @@ def login():
     password = data['password']
 
     user = User.query.filter_by(email=email).first()
+    school = School.query.filter_by(email=email).first()
 
-    if user is None or not user.check_password(password):
+    if user is None and school is None:
         abort(401)
 
-    # TODO, make token expire
-    token = create_access_token({'user': user.id}, expires_delta=False)
+    if user is not None:
+        if not user.check_password(password):
+            abort(401)
+        token = create_access_token({'user': user.id}, expires_delta=False)
+        return jsonify({"token": token, "user": user.serialize()})
 
-    return jsonify({"token": token, "user": user.serialize()})
+    elif school is not None:
+        if not school.check_password(password):
+            abort(401)
+        token = create_access_token({'school': school.id}, expires_delta=False)
+        return jsonify({"token": token, "school": school.serialize()})
 
+#Register for Students/Tutors
 @app.route('/register', methods=['POST'])
 def sign_up():
     if request.method == 'POST':
@@ -286,27 +295,7 @@ def sign_up():
         db.session.commit()
         return jsonify([new_user.serialize()])
 
-
-#login/register schools
-@app.route('/loginschool', methods=['POST'])
-def login_school():
-    data = request.get_json()
-    if not 'email' in data or not 'password' in data:
-        abort(401)
-
-    email = data['email']
-    password = data['password']
-
-    school = School.query.filter_by(email=email).first()
-
-    if school is None or not school.check_password(password):
-        abort(401)
-
-    # TODO, make token expire
-    token = create_access_token({'school': school.id}, expires_delta=False)
-    print('kommer hit första ggn')
-    return jsonify({"token": token, "school": school.serialize()})
-
+#Register for Schools
 @app.route('/registerschool', methods=['POST', 'GET'])
 def sign_up_school():
     if request.method == 'POST':

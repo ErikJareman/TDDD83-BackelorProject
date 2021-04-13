@@ -352,45 +352,6 @@
 
     </template>
 
-    <template id="school-login">
-      <section class="hero">
-        <div class="container">
-          <div class="col-sm-12 col-md-12 col-lg-9">
-            <h1>TopQ for Schools and Universites!</h1>
-            <br>
-            <br>
-            <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
-            <div>
-              <a href='/login' class="btn btn-primary" id='login_instead_button'>Login as student or tutor</a>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-12 col-lg-3">
-            <img src="https://i.pinimg.com/originals/8b/6a/bb/8b6abbc5da89aad526d931f59f549b30.gif" class="buy_home_img" alt="illustration">
-          </div>
-        </div>
-      </section>
-      <section class=login-section>
-        <li>
-          <form id="school-loginForm">
-              <h2>School-login:</h2>
-              <label for="contactEmailLogin">Contact-email:</label>
-              <input type="email" class="form-control" id="contactEmailLogin" aria-describedby="emailHelp" placeholder="Enter email" required>
-            </div>
-            <div class="form-group">
-              <label for="schoolLoginP">Password:</label>
-              <input type="password" class="form-control" id="schoolLoginP" placeholder="Enter password" required>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary" id='schoolLogin'>Login</button>
-            <br>
-            <br>
-            <a href='/buy' id="school-reg-instead">Do not have an account yet? Register instead</a>
-          </form>
-        </li>
-      </section>
-
-    </template>
-
     <template id="buy-topq-home">
       <section class="hero">
         <div class="container">
@@ -400,7 +361,7 @@
             <br>
             <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
             <div>
-              <a href='/login' class="btn btn-primary" id='login_instead_button'>Login as student or tutor</a>
+              <a href='/login' class="btn btn-primary" id='login_instead_button'>Log in to TopQ</a>
             </div>
           </div>
           <div class="col-sm-12 col-md-12 col-lg-3">
@@ -412,7 +373,6 @@
         <div class=row>
           <div class="col-sm-6 col-md-6 col-lg-6">
             <h2>Our subscription-plans: </h2>
-            <br>
             <img src="assets/subs.png" class="subs_img" alt="illustration">
             <li id='admin-info'>
               <img src="assets/admins.png" class="admins_img" alt="illustration">
@@ -446,7 +406,7 @@
                 <button type="submit" class="btn btn-primary" id='schoolReg'>Register</button>
                 <br>
                 <br>
-                <a href='/loginschool' id='school-login-instead'>Aldready have an account? Login instead</a>
+                <a href='/login' id='school-login-instead'>Aldready have an account? Login instead</a>
               </form>
             </li>
           </div>  
@@ -475,7 +435,6 @@
             <br>
             <a href="/register" class="link" id="login_reg_link">Register instead</a>
           </form>
-          <a href="/loginschool" class="btn btn-primary" id="login_instead_button">Login as school</a>
         </li>
       </section>
     </template>
@@ -486,6 +445,9 @@
           <form id="registerForm">
             <div class="form-group">
               <h2>Register:</h2>
+              <h8>For students and tutors</h8>
+              <br>
+              <br>
               <label for="InputEmailRegister" class="form-label">Email</label>
                   <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
                     required>
@@ -510,6 +472,10 @@
             <a href="/login" class="link" id="login_reg_link">Login instead</a>
             </form>
         </li>
+        <br>
+        <br>
+        <h5>Are you a school who wants to start using TopQ? Click the button below!</h5>
+        <a href="/buy" class="btn btn-primary" id="school_instead_button">Buy TopQ</a>
       </section>    
     </template>
 
