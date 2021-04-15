@@ -108,7 +108,8 @@ const adminTemplate = (member: User, room: Room) => {
                         <span id="superSpan">${member.username}</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDemote">
-                        <button class="dropdown-item button-admin-demote" type="button" data-id=${member.id}>Demote</button>
+                        <button class="dropdown-item button-admin-demote" type="button" data-toggle="modal" data-target="#demoteModal" data-id=${member.id}>Demote</button>
+
                         <button class="dropdown-item" type="button">Ban user</button>
                     </div>
                 </div>`;
@@ -120,11 +121,11 @@ const isPremiumUser = async () => {
 };
 
 const ifIsAdmin = () => {
-    $('#delete-room').removeClass('d-none');
+    $('#show-delete-room').removeClass('d-none');
 };
 
 const ifNotAdmin = () => {
-    $('#delete-room').addClass('d-none');
+    $('#show-delete-room').addClass('d-none');
 };
 
 const loadRoom = async (id: number) => {
@@ -178,13 +179,17 @@ const loadRoom = async (id: number) => {
     promotebuttons.off();
     promotebuttons.on('click', promoteMember);
 
-    const demotebuttons = $<HTMLButtonElement>('.button-admin-demote');
-    demotebuttons.off();
-    demotebuttons.on('click', demoteMember);
+    // const demotebuttons = $<HTMLButtonElement>('.button-admin-demote');
+    // demotebuttons.off();
+    // demotebuttons.on('click', demoteModal);
 
     const deleteTicketButtons = $<HTMLButtonElement>('.delete-ticket-button');
     deleteTicketButtons.off();
     deleteTicketButtons.on('click', deleteTicket);
+
+    const demotecheckbutton = $<HTMLButtonElement>('#checkDemote');
+    demotecheckbutton.off();
+    demotecheckbutton.on('click', demoteMember);
 
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
@@ -327,6 +332,7 @@ export async function promoteMember(event: JQuery.ClickEvent<HTMLButtonElement>)
 export async function demoteMember(event: JQuery.ClickEvent<HTMLButtonElement>) {
     event.preventDefault();
     const memberID = $(this).data('id');
+    console.log(memberID);
     const roomID = getRoomIDFromURL();
     await standardPost(EndPoints.DemoteMember, {
         room: roomID,
