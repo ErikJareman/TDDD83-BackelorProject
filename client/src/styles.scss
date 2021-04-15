@@ -1091,7 +1091,18 @@ img {
     border-radius: 8px 8px 8px 8px;
     border-style: solid;
     border-width: 2px;
+
 }
+
+#change-desc-button{
+    background-color: white;
+    border: 0px;
+
+    &:hover{
+        background-color: colors.$primary2;
+    }
+}
+
 
 #ticket_number {
     padding: 20px;
