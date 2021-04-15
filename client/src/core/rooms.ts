@@ -71,7 +71,7 @@ const noRoomSelected = async () => {
     if (roomList.length !== 0) {
         loadRoom(roomList[0].id);
     } else {
-        $('#join-by-id-modal').modal('show');
+        $('.special').html('Join a room!');
     }
 };
 

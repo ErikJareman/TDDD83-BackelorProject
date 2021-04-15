@@ -149,8 +149,9 @@ body {
 
 #goto-queue-up-dummy {
     margin-top: 8px;
-    background-color: #007bffaf;
-    border-color: #007bffaf;
+
+    background-color: colors.$accent;
+    border-color: colors.$accent;
 }
 
 #router {
@@ -270,7 +271,6 @@ body {
         }
     }
 }
- 
 
 .student-login-section,
 .student-register-section {
@@ -898,12 +898,16 @@ img {
     overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    //justify-content: space-between;
     //min-width: 200px;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
+
 .container-fluid {
     h5 {
         color: #ffffff;
@@ -929,22 +933,64 @@ img {
     overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     //min-width: 200px;
+    div,
+    .dropdown {
+        .btn:focus {
+            border-color: #25252528;
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    //overflow-y: auto;
+}
+
+#scrollable-right-div {
+    overflow-y: scroll;
 }
 
 .left-button {
-    // VAD ÄR DETTA!?
     width: 98%;
     margin: 4px 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
+    border-color: #2525253f;
+}
+
+#roomList {
+    .btn-secondary {
+        background-color: #25252528;
+        color: #6c757d;
+    }
+
+    .btn:focus {
+        border-color: #25252528;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .btn:hover {
+        color: #6c757d;
+        background-color: #25252528;
+        border-color: #25252528; /*set the color you want here*/
+    }
+    overflow-y: auto;
+    //padding-right: 30px; //detta täcker scrollbaren... 17px bör räcka för typ alla browsers (ikke-clean lösning)
+    //box-sizing: content-box;
+}
+
+#toggle-create-room-button-div {
+    .btn:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
 
 #create-room-modal-toggle-button {
@@ -997,10 +1043,13 @@ img {
     box-sizing: content-box;
 }
 
+
+
 .primary-button {
     color: #ffffff;
     background-color: colors.$accent;
 }
+
 .bad-button {
     color: #ffffff;
     background-color: #c44a4a;
@@ -1050,6 +1099,9 @@ img {
 
 .right-side-room-card {
     padding: 6px;
+    background-color: #f1f1f1;
+    color: #6c757d;
+    margin-top: 8px;
 }
 
 #drop_down:hover ul {
@@ -1262,11 +1314,11 @@ img {
     margin-right: 20px;
 }
 
-#terms-link{
+#terms-link {
     margin-left: 0%;
 }
 
-.form-check-label{
+.form-check-label {
     font-size: small;
     font-style: italic;
 }
@@ -1304,4 +1356,18 @@ img {
     bottom: 0px;
     left: 0px;
     padding-top: 20px;
+}
+
+.medium-priority-settings-button {
+    background-color: #25252528;
+    border-color: #25252528;
+    color: #6c757d;
+}
+
+#right-side-buttons {
+    .btn:focus {
+        border-color: #25252528;
+        outline: none;
+        box-shadow: none;
+    }
 }
