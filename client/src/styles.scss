@@ -48,6 +48,10 @@
         background: rgba(219, 66, 66, 0.849);
     }
 }
+#about-section {
+    margin-top: -5px;
+    color: colors.$secondary1;
+}
 
 #standard,
 #standard_plus,
@@ -281,20 +285,20 @@ body {
         list-style-type: none;
     }
 
-    h5{
+    h5 {
         color: colors.$secondary1;
     }
 
-    #school_instead_button{
+    #school_instead_button {
         color: white;
-            background-color: colors.$primary1;
-            font-weight: lighter;
-            border-radius: 5em;
-            border: 1px solid colors.$secondary3;
-            &:hover {
-                background: colors.$accenthover;
-                color: white;
-            }
+        background-color: colors.$primary1;
+        font-weight: lighter;
+        border-radius: 5em;
+        border: 1px solid colors.$secondary3;
+        &:hover {
+            background: colors.$accenthover;
+            color: white;
+        }
     }
 
     .form-check-input {
@@ -418,7 +422,7 @@ body {
 
 .admins_img {
     width: 40px;
-    margin-bottom: -2%;
+    margin-bottom: 2%;
 }
 
 .buy_home_img {
@@ -562,7 +566,7 @@ ul.features-list {
             width: 90%;
             margin: 0 auto 5em auto;
             border-radius: 1em;
-            margin-top: 20px;
+            margin-top: 5px;
             font-size: 1.4em;
         }
 
@@ -1224,7 +1228,7 @@ img {
 
 #login_reg_link {
     margin-left: 45% !important;
-    font-family: 'Poppins'
+    font-family: 'Poppins';
 }
 
 #loginForm {
