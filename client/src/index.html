@@ -641,9 +641,11 @@
           </div>
           <div class="col-8 center-div">
             <h5 class="special">
-              TCBB32 - Lektionspass
+              
             </h5>
-            <div id="modaldemote"></div>
+            <div id="modaldemote"></div> <!--TODO Gör denna nånting?-->
+            <div id="queue-up-button-div"></div>
+            
             <center-container id=ticket-list>
 
 
@@ -656,11 +658,12 @@
                 Commands
               </h5>
               <div id="right-side-buttons">
-              <button type="button" class="btn primary-button right-button extend-button" data-toggle="modal"
+              <button id="goto-queue-up-dummy" class="btn btn-primary extend-button d-none" disabled>Queue up</button>
+              <button type="button" class="btn primary-button right-button extend-button d-none" data-toggle="modal"
                 data-target="#ticketModal" id="goto-queue-up">
                 Queue up
               </button>
-              <button id="room-link" class="btn primary-button extend-button" data-toggle="modal" data-target="#shareRoomModal">Share room</button>
+              <button id="room-link" class="btn btn-outline-secondary extend-button" data-toggle="modal" data-target="#shareRoomModal">Share room</button>
               </div>
             <h5 class="heading2">
               Admins <button type="button" class="btn btn-default btn-sm" id="question-admin" data-toggle="modal" data-target="#about-admin-modal">
