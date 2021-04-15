@@ -136,6 +136,16 @@ const ifNotAdmin = () => {
     $('#show-delete-room').addClass('d-none');
 };
 
+const hasTicket = (userID: number, room: Room) => {
+    const tickets = room.tickets;
+    for (const ticket of tickets) {
+        if (ticket.creator.id == userID) {
+            return true;
+        }
+    }
+    return false;
+};
+
 const loadRoom = async (id: number) => {
     const hash = `#${id}`;
     if (history.pushState) {
@@ -156,6 +166,16 @@ const loadRoom = async (id: number) => {
     const res = await getRoom(id);
 
     const room = res.room;
+
+    if (hasTicket(getUserID(), room)) {
+        //Visa dummyknapp
+        $('#goto-queue-up-dummy').removeClass('d-none');
+        $('#goto-queue-up').addClass('d-none');
+    } else {
+        //visa riktig knapp
+        $('#goto-queue-up').removeClass('d-none');
+        $('#goto-queue-up-dummy').addClass('d-none');
+    }
 
     if (res.joined) {
         loadRoomList();

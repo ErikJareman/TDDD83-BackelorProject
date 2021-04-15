@@ -147,6 +147,12 @@ body {
     font-family: 'Poppins';
 }
 
+#goto-queue-up-dummy {
+    margin-top: 8px;
+    background-color: #007bffaf;
+    border-color: #007bffaf;
+}
+
 #router {
     margin-bottom: 400px;
     //min-height: 700px;
@@ -925,7 +931,6 @@ img {
     padding-top: 6px;
     padding-bottom: 2rem;
     text-align: left;
-    padding-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
