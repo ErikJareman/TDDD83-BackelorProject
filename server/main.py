@@ -288,7 +288,12 @@ def sign_up():
     if request.method == 'POST':
         email = request.get_json(force=True)["email"]
         password = request.get_json(force = True)["password"]
+        confirmedPassword = request.get_json(force = True)["confirmedPassword"]
         username = request.get_json(force=True)["username"]
+
+        if not password == confirmedPassword:
+            abort(401)
+
         new_user = User(email=email, username=username, password_hash=password)
         new_user.set_password(password)
         db.session.add(new_user)
@@ -302,6 +307,11 @@ def sign_up_school():
         name = request.get_json(force=True)["name"]
         email = request.get_json(force = True)["email"]
         password = request.get_json(force=True)["password"]
+        confirmedPassword = request.get_json(force = True)["confirmedPassword"]
+
+        if not password == confirmedPassword:
+            abort(401)
+            
         new_school = School(name=name, email=email, password_hash=password)
         new_school.set_password(password)
         db.session.add(new_school)

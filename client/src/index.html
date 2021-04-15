@@ -60,7 +60,7 @@
         <ul>
 
           <li class="footer-links"><a href="/">Home</a></li>
-          <li class="footer-links"><a href="/buy">Buy TopQ</a></li>
+          <li id='buying-button-footer' class="footer-links"><a href="/buy">Buy TopQ</a></li>
           <li class="footer-links"><a href="/login">Login</a></li>
           <li class="footer-links"><a href="/register">Register</a></li>
 
@@ -392,19 +392,23 @@
                 <div class="form-group">
                   <h2>School-registration:</h2>
                   <label for="schoolName">Name:</label>
-                  <input type="text" class="form-control" id="schoolName" placeholder="Enter name of school" required>
+                  <input type="text" class="form-control" id="schoolName" placeholder="Linköpings Universitet" required>
                 </div>
                 <div class="form-group">
                   <label for="contactEmail">Contact-email:</label>
-                  <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                  <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp" placeholder="liu@liu.se" required>
                 </div>
                 <div class="form-group">
                   <label for="schoolPassword">Password:</label>
-                  <input type="password" class="form-control" id="schoolPassword" placeholder="Enter password" required>
+                  <input type="password" class="form-control" id="schoolPassword" placeholder="*******" required>
+                </div>
+                <div class="form-group">
+                  <label for="schoolPassword">Confirm password:</label>
+                  <input type="password" class="form-control" id="schoolPasswordConfirm" placeholder="*******" required>
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                  <label class="form-check-label" for="exampleCheck1">Agree to terms and conditions.</label>
+                  <label class="form-check-label" for="exampleCheck1">Agree to <a data-toggle="modal" data-target="#terms-modal" id='terms-link'>terms and conditions.</a></label>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary" id='schoolReg'>Register</button>
@@ -452,21 +456,25 @@
               <h8>For students and tutors</h8>
               <br>
               <br>
+              <div class="form-group">
+                <label for="InputUsernameRegister" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="InputUsernameRegister" placeholder="John Doe" required>
+              </div>
               <label for="InputEmailRegister" class="form-label">Email</label>
                   <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
                     required>
             </div>
             <div class="form-group">
               <label for="InputPasswordRegister" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
+                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="******" required>
             </div>
             <div class="form-group">
-              <label for="InputUsernameRegister" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="InputUsernameRegister" placeholder="John Doe" required>
+              <label for="InputPasswordRegister" class="form-label">Confirm password</label>
+                  <input type="password" class="form-control" id="InputPasswordRegisterConfirm" placeholder="******" required>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-              <label class="form-check-label" for="exampleCheck1">Agree to terms and conditions.</label>
+              <label class="form-check-label" for="exampleCheck1">Agree to <a data-toggle="modal" data-target="#terms-modal" id='terms-link'>terms and conditions.</a></label>
             </div>
             <br>
             <br>
@@ -505,7 +513,6 @@
                 <button type="button" class="btn primary-button right-button" id="create-room" data-dismiss="modal">
                   Create
                 </button>
-               
               </div>
             </form>
           </div>
@@ -740,6 +747,29 @@
       </div>
     </div>
 
+    <div id="terms-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Terms & Conditions:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p> Your data will be used on TopQ only with the purpose of creating the best user experience for you.
+              <br>
+              <br>
+              We are following the GDPR legislation and will of course never share your personal data with anyone else. 
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button id="close-terms-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="about-admin-modal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -755,7 +785,7 @@
               <br>
               <br>
               When creating a room, you automatically become admin of that room and then you can promote other 
-              members with admin-accounts admin of the room aswell. Furthermore you can also demote 
+              members with admin-accounts to make them admin of the room aswell. Furthermore you can also demote 
               one of the currents admins in a room where you are admin. 
               <br>
               <br>

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { addEventListener } from '../index';
-import { authHeader, createSchool, createUser, logIn, loginSchool } from './auth.service';
+import { authHeader, createSchool, createUser, logIn, loginSchool, toggleNavbar } from './auth.service';
 import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from './rooms';
 import { writeAdmins } from './subscription';
 
@@ -35,7 +35,13 @@ const routes: Route[] = [
     // { url: '/login', templateSelector: '#login', onLoad: () => console.log('Login laddad') },
     //{ url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
     { url: '/404', templateSelector: '#404' },
-    { url: '/', templateSelector: '#home' },
+    {
+        url: '/',
+        templateSelector: '#home',
+        onLoad: () => {
+            toggleNavbar();
+        },
+    },
     { url: '/success', templateSelector: '#success' },
     { url: '/cancel', templateSelector: '#cancel' },
     {
@@ -54,6 +60,7 @@ const routes: Route[] = [
             enterRoomPage();
             $('#leave-room').on('click', clickLeaveRoom);
             $('#delete-room').on('click', clickDeleteRoom);
+            $('#room-button').toggleClass('d-none');
         },
     },
     {
