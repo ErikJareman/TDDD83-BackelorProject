@@ -392,15 +392,19 @@
                 <div class="form-group">
                   <h2>School-registration:</h2>
                   <label for="schoolName">Name:</label>
-                  <input type="text" class="form-control" id="schoolName" placeholder="Enter name of school" required>
+                  <input type="text" class="form-control" id="schoolName" placeholder="Linköpings Universitet" required>
                 </div>
                 <div class="form-group">
                   <label for="contactEmail">Contact-email:</label>
-                  <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                  <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp" placeholder="liu@liu.se" required>
                 </div>
                 <div class="form-group">
                   <label for="schoolPassword">Password:</label>
-                  <input type="password" class="form-control" id="schoolPassword" placeholder="Enter password" required>
+                  <input type="password" class="form-control" id="schoolPassword" placeholder="*******" required>
+                </div>
+                <div class="form-group">
+                  <label for="schoolPassword">Confirm password:</label>
+                  <input type="password" class="form-control" id="schoolPasswordConfirm" placeholder="*******" required>
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
@@ -452,17 +456,21 @@
               <h8>For students and tutors</h8>
               <br>
               <br>
+              <div class="form-group">
+                <label for="InputUsernameRegister" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="InputUsernameRegister" placeholder="John Doe" required>
+              </div>
               <label for="InputEmailRegister" class="form-label">Email</label>
                   <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
                     required>
             </div>
             <div class="form-group">
               <label for="InputPasswordRegister" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="*****" required>
+                  <input type="password" class="form-control" id="InputPasswordRegister" placeholder="******" required>
             </div>
             <div class="form-group">
-              <label for="InputUsernameRegister" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="InputUsernameRegister" placeholder="John Doe" required>
+              <label for="InputPasswordRegister" class="form-label">Confirm password</label>
+                  <input type="password" class="form-control" id="InputPasswordRegisterConfirm" placeholder="******" required>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" required>

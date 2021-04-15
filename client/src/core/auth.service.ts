@@ -42,17 +42,18 @@ export async function createUser(event: { preventDefault: () => void }) {
     const email = $<HTMLInputElement>('#InputEmailRegister').val();
     const password = $<HTMLInputElement>('#InputPasswordRegister').val();
     const username = $<HTMLInputElement>('#InputUsernameRegister').val();
+    const confirmedPassword = $<HTMLInputElement>('#InputPasswordRegisterConfirm').val();
     const checked = $<HTMLInputElement>('#invalidCheck2').val();
     try {
         const result = await standardPost('/register', {
             username,
             email,
             password,
+            confirmedPassword,
         });
         navigateTo('/login');
     } catch (e) {
-        // TODO
-        // Kan det skapas en med samma mail?
+        alert('The passwords did not match. Try again!');
     }
 }
 
@@ -130,16 +131,17 @@ export async function createSchool(event: { preventDefault: () => void }) {
     const name = $<HTMLInputElement>('#schoolName').val();
     const email = $<HTMLInputElement>('#contactEmail').val();
     const password = $<HTMLInputElement>('#schoolPassword').val();
+    const confirmedPassword = $<HTMLInputElement>('#schoolPasswordConfirm').val();
     console.log(name, email, password);
     try {
         const result = await standardPost('/registerschool', {
             name,
             email,
             password,
+            confirmedPassword,
         });
         navigateTo('/loginschool');
     } catch (e) {
-        // TODO
-        // Kan det skapas en med samma mail?
+        alert('The passwords did not match. Try again!');
     }
 }
