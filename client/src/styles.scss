@@ -264,6 +264,7 @@ body {
         }
     }
 }
+ 
 
 .student-login-section,
 .student-register-section {
@@ -1235,6 +1236,18 @@ img {
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 20px;
+}
+
+#close-admin-modal {
+    color: white !important;
+    border: 3px solid white;
+    font-weight: lighter;
+    background: rgba(235, 92, 92, 0.849);
+    border-radius: 5em;
+    margin-top: -0.2em;
+    &:hover {
+        background: rgba(219, 66, 66, 0.849);
+    }
 }
 
 #registerForm {
