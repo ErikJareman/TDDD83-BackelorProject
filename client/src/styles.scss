@@ -1238,6 +1238,7 @@ img {
     margin-right: 20px;
 }
 
+#close-terms-modal,
 #close-admin-modal {
     color: white !important;
     border: 3px solid white;
@@ -1254,6 +1255,15 @@ img {
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 20px;
+}
+
+#terms-link{
+    margin-left: 0%;
+}
+
+.form-check-label{
+    font-size: small;
+    font-style: italic;
 }
 
 .link {
