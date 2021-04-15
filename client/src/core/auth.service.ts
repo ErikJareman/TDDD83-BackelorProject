@@ -65,6 +65,7 @@ export function toggleNavbar() {
     $('#logout-button').toggleClass('d-none', !signedIn);
     $('#room-button').toggleClass('d-none', !student);
     $('#buying-button').toggleClass('d-none', student);
+    $('#buying-button-footer').toggleClass('d-none', student);
     $('#checkout-button').toggleClass('d-none', !isSchool());
 }
 
