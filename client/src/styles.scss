@@ -185,6 +185,38 @@ body {
     nav {
         display: none;
     }
+    
+#drop_down {
+    a {
+        font-weight: lighter;
+    }
+    ul {
+        z-index: 5000;
+        display: none;
+        width: fit-content;
+       
+        border: 3px solid white;
+        font-weight: lighter;
+        margin-top: -0.2em;
+
+        li a {
+            text-align: left;
+            padding: 12px 14px;
+        }
+
+    }
+
+    &:hover ul {
+        display: block;
+        position: absolute;
+        background-color: colors.$secondary1;
+        padding: 15px;
+        
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+    }
+}
+
 }
 
 //-------HERO--------------------------
@@ -1000,32 +1032,6 @@ img {
     background-color: #c44a4a;
 }
 
-#drop_down {
-    width: 16.6666666666666666%;
-    position: relative;
-}
-
-#drop_down a {
-    text-align: left;
-    color: #868e96;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 20px;
-    display: block;
-}
-
-#drop_down ul {
-    z-index: 5000;
-    display: none;
-    //position: absolute;
-    //background-color: #6c757d;
-    //padding: 20px 20px 20px 20px;
-    width: 100%;
-}
-
-#drop_down a:hover {
-    color: white;
-}
 
 .dropdownMenuRightRoomSide {
     margin: 4px 2px;
@@ -1057,38 +1063,6 @@ img {
     padding: 6px;
 }
 
-#drop_down:hover ul {
-    display: block;
-    position: absolute;
-    background-color: #1e2124;
-    padding: 10px;
-    width: 100%;
-    //border-radius: 0px 0px 5px 5px;
-    //outline-color: #868e96;
-    //outline-style: solid;
-    //border-left: 2px solid #868e96;
-    //border-bottom: 2px solid #868e96;
-    //border-right: 2px solid #868e96;
-    border-bottom: 2px solid #868e96;
-    border-top: 2px solid #868e96;
-}
-
-#drop_down ul li {
-    display: block;
-    background-color: #1e2124;
-}
-
-#drop_down ul li a {
-    text-align: left;
-    padding: 12px 14px;
-    color: #868e96;
-}
-
-#drop_down ul li a:hover {
-    padding: 12px;
-    background-color: #1e2124;
-    color: #ffffff;
-}
 
 .ticket-ticket {
     background-color: white;
