@@ -36,41 +36,6 @@
     }
 }
 
-#change-desc-modal{
-
-    form{
-        ::placeholder {
-            color: rgb(192, 187, 187);
-            font-style: italic;
-            font-size: 14px;
-        }
-    }
-
-    #submit-new-desc{
-        color: white !important;
-        border: 3px solid white;
-        font-weight: lighter;
-        background: colors.$accent;
-        border-radius: 5em;
-        margin-top: -0.2em;
-        &:hover {
-            background: colors.$accenthover;
-        }
-    }
-
-    #close-new-desc{
-        color: white !important;
-        border: 3px solid white;
-        font-weight: lighter;
-        background: rgba(235, 92, 92, 0.849);
-        border-radius: 5em;
-        margin-top: -0.2em;
-        &:hover {
-            background: rgba(219, 66, 66, 0.849);
-        }
-    }
-}
-
 #delete-admin {
     color: white !important;
     border: 1px solid white;
@@ -180,13 +145,6 @@ body {
     background: white;
     margin: 0;
     font-family: 'Poppins';
-}
-
-#goto-queue-up-dummy {
-    margin-top: 8px;
-
-    background-color: colors.$accent;
-    border-color: colors.$accent;
 }
 
 #router {
@@ -933,16 +891,12 @@ img {
     overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    //justify-content: space-between;
+    justify-content: space-between;
     //min-width: 200px;
-    ::-webkit-scrollbar {
-        display: none;
-    }
 }
-
 .container-fluid {
     h5 {
         color: #ffffff;
@@ -968,64 +922,23 @@ img {
     overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     text-align: left;
+    padding-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     //min-width: 200px;
-    div,
-    .dropdown {
-        .btn:focus {
-            border-color: #25252528;
-            outline: none;
-            box-shadow: none;
-        }
-    }
-    //overflow-y: auto;
-}
-
-#scrollable-right-div {
-    overflow-y: scroll;
 }
 
 .left-button {
+    // VAD ÄR DETTA!?
     width: 98%;
     margin: 4px 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
-    border-color: #2525253f;
-}
-
-#roomList {
-    .btn-secondary {
-        background-color: #25252528;
-        color: #6c757d;
-    }
-
-    .btn:focus {
-        border-color: #25252528;
-        outline: none;
-        box-shadow: none;
-    }
-
-    .btn:hover {
-        color: #6c757d;
-        background-color: #25252528;
-        border-color: #25252528; /*set the color you want here*/
-    }
-    overflow-y: auto;
-    //padding-right: 30px; //detta täcker scrollbaren... 17px bör räcka för typ alla browsers (ikke-clean lösning)
-    //box-sizing: content-box;
-}
-
-#toggle-create-room-button-div {
-    .btn:focus {
-        outline: none;
-        box-shadow: none;
-    }
 }
 
 #create-room-modal-toggle-button {
@@ -1078,13 +991,10 @@ img {
     box-sizing: content-box;
 }
 
-
-
 .primary-button {
     color: #ffffff;
     background-color: colors.$accent;
 }
-
 .bad-button {
     color: #ffffff;
     background-color: #c44a4a;
@@ -1126,6 +1036,17 @@ img {
     text-overflow: ellipsis;
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
+#gear-symbol {
+    height: 15px;
+    position: absolute;
+    left: 66%;
+    top: 34%;
+}
+
 .dropdownMenuRightRoomSide::after {
     float: right;
     margin-top: 10px;
@@ -1134,9 +1055,6 @@ img {
 
 .right-side-room-card {
     padding: 6px;
-    background-color: #f1f1f1;
-    color: #6c757d;
-    margin-top: 8px;
 }
 
 #drop_down:hover ul {
@@ -1183,18 +1101,7 @@ img {
     border-radius: 8px 8px 8px 8px;
     border-style: solid;
     border-width: 2px;
-
 }
-
-#change-desc-button{
-    background-color: white;
-    border: 0px;
-
-    &:hover{
-        background-color: colors.$primary2;
-    }
-}
-
 
 #ticket_number {
     padding: 20px;
@@ -1341,32 +1248,10 @@ img {
     margin-right: 20px;
 }
 
-#close-terms-modal,
-#close-admin-modal {
-    color: white !important;
-    border: 3px solid white;
-    font-weight: lighter;
-    background: rgba(235, 92, 92, 0.849);
-    border-radius: 5em;
-    margin-top: -0.2em;
-    &:hover {
-        background: rgba(219, 66, 66, 0.849);
-    }
-}
-
 #registerForm {
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 20px;
-}
-
-#terms-link {
-    margin-left: 0%;
-}
-
-.form-check-label {
-    font-size: small;
-    font-style: italic;
 }
 
 .link {
@@ -1402,18 +1287,4 @@ img {
     bottom: 0px;
     left: 0px;
     padding-top: 20px;
-}
-
-.medium-priority-settings-button {
-    background-color: #25252528;
-    border-color: #25252528;
-    color: #6c757d;
-}
-
-#right-side-buttons {
-    .btn:focus {
-        border-color: #25252528;
-        outline: none;
-        box-shadow: none;
-    }
 }
