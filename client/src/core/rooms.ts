@@ -115,6 +115,7 @@ const memberTemplate = (member: User, room: Room) => {
         return `<div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split dropdownMenuRightRoomSide" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ${member.username}
+                        <img id="gear-symbol" src="assets/gear.svg">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuPromote">
                         <button class="dropdown-item button-admin-promote" type="button" data-id=${member.id}>Promote</button>
@@ -127,16 +128,21 @@ const memberTemplate = (member: User, room: Room) => {
 const adminTemplate = (member: User, room: Room) => {
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
+
     if (selfAdmin == -1 || room.admins.length === 1) {
         return `<div class="card right-side-room-card">${member.username}</div>`;
     } else {
+        $('#demoteModal').off();
+        $('#demoteModal').on('show.bs.modal', function (event: any) {
+            $('#checkDemote').data('id', $(event.relatedTarget).data('id'));
+        });
         return `<div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split dropdownMenuRightRoomSide" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span id="superSpan">${member.username}</span>
+                        <img id="gear-symbol" src="assets/gear.svg">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDemote">
                         <button class="dropdown-item button-admin-demote" type="button" data-toggle="modal" data-target="#demoteModal" data-id=${member.id}>Demote</button>
-
                     </div>
                 </div>`;
     }

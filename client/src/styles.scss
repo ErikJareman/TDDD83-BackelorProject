@@ -177,13 +177,6 @@ body {
     font-family: 'Poppins';
 }
 
-#goto-queue-up-dummy {
-    margin-top: 8px;
-
-    background-color: colors.$accent;
-    border-color: colors.$accent;
-}
-
 #router {
     margin-bottom: 400px;
     //min-height: 700px;
@@ -221,6 +214,36 @@ body {
     }
     nav {
         display: none;
+    }
+
+    #drop_down {
+        a {
+            font-weight: lighter;
+        }
+        ul {
+            z-index: 5000;
+            display: none;
+            width: fit-content;
+
+            border: 3px solid white;
+            font-weight: lighter;
+            margin-top: -0.2em;
+
+            li a {
+                text-align: left;
+                padding: 12px 14px;
+            }
+        }
+
+        &:hover ul {
+            display: block;
+            position: absolute;
+            background-color: colors.$secondary1;
+            padding: 15px;
+
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+        }
     }
 }
 
@@ -928,16 +951,12 @@ img {
     overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    //justify-content: space-between;
+    justify-content: space-between;
     //min-width: 200px;
-    ::-webkit-scrollbar {
-        display: none;
-    }
 }
-
 .container-fluid {
     h5 {
         color: #ffffff;
@@ -963,64 +982,23 @@ img {
     overflow: hidden;
     background-color: colors.$primary2;
     padding-top: 6px;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     text-align: left;
+    padding-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     //min-width: 200px;
-    div,
-    .dropdown {
-        .btn:focus {
-            border-color: #25252528;
-            outline: none;
-            box-shadow: none;
-        }
-    }
-    //overflow-y: auto;
-}
-
-#scrollable-right-div {
-    overflow-y: scroll;
 }
 
 .left-button {
+    // VAD ÄR DETTA!?
     width: 98%;
     margin: 4px 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
-    border-color: #2525253f;
-}
-
-#roomList {
-    .btn-secondary {
-        background-color: #25252528;
-        color: #6c757d;
-    }
-
-    .btn:focus {
-        border-color: #25252528;
-        outline: none;
-        box-shadow: none;
-    }
-
-    .btn:hover {
-        color: #6c757d;
-        background-color: #25252528;
-        border-color: #25252528; /*set the color you want here*/
-    }
-    overflow-y: auto;
-    //padding-right: 30px; //detta täcker scrollbaren... 17px bör räcka för typ alla browsers (ikke-clean lösning)
-    //box-sizing: content-box;
-}
-
-#toggle-create-room-button-div {
-    .btn:focus {
-        outline: none;
-        box-shadow: none;
-    }
 }
 
 #create-room-modal-toggle-button {
@@ -1077,37 +1055,9 @@ img {
     color: #ffffff;
     background-color: colors.$accent;
 }
-
 .bad-button {
     color: #ffffff;
     background-color: #c44a4a;
-}
-
-#drop_down {
-    width: 16.6666666666666666%;
-    position: relative;
-}
-
-#drop_down a {
-    text-align: left;
-    color: #868e96;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 20px;
-    display: block;
-}
-
-#drop_down ul {
-    z-index: 5000;
-    display: none;
-    //position: absolute;
-    //background-color: #6c757d;
-    //padding: 20px 20px 20px 20px;
-    width: 100%;
-}
-
-#drop_down a:hover {
-    color: white;
 }
 
 .dropdownMenuRightRoomSide {
@@ -1119,6 +1069,17 @@ img {
     text-overflow: ellipsis;
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
+#gear-symbol {
+    height: 15px;
+    position: absolute;
+    left: 66%;
+    top: 34%;
+}
+
 .dropdownMenuRightRoomSide::after {
     float: right;
     margin-top: 10px;
@@ -1127,42 +1088,6 @@ img {
 
 .right-side-room-card {
     padding: 6px;
-    background-color: #f1f1f1;
-    color: #6c757d;
-    margin-top: 8px;
-}
-
-#drop_down:hover ul {
-    display: block;
-    position: absolute;
-    background-color: #1e2124;
-    padding: 10px;
-    width: 100%;
-    //border-radius: 0px 0px 5px 5px;
-    //outline-color: #868e96;
-    //outline-style: solid;
-    //border-left: 2px solid #868e96;
-    //border-bottom: 2px solid #868e96;
-    //border-right: 2px solid #868e96;
-    border-bottom: 2px solid #868e96;
-    border-top: 2px solid #868e96;
-}
-
-#drop_down ul li {
-    display: block;
-    background-color: #1e2124;
-}
-
-#drop_down ul li a {
-    text-align: left;
-    padding: 12px 14px;
-    color: #868e96;
-}
-
-#drop_down ul li a:hover {
-    padding: 12px;
-    background-color: #1e2124;
-    color: #ffffff;
 }
 
 .ticket-ticket {
@@ -1322,32 +1247,10 @@ img {
     margin-right: 20px;
 }
 
-#close-terms-modal,
-#close-admin-modal {
-    color: white !important;
-    border: 3px solid white;
-    font-weight: lighter;
-    background: rgba(235, 92, 92, 0.849);
-    border-radius: 5em;
-    margin-top: -0.2em;
-    &:hover {
-        background: rgba(219, 66, 66, 0.849);
-    }
-}
-
 #registerForm {
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 20px;
-}
-
-#terms-link {
-    margin-left: 0%;
-}
-
-.form-check-label {
-    font-size: small;
-    font-style: italic;
 }
 
 .link {
@@ -1383,18 +1286,4 @@ img {
     bottom: 0px;
     left: 0px;
     padding-top: 20px;
-}
-
-.medium-priority-settings-button {
-    background-color: #25252528;
-    border-color: #25252528;
-    color: #6c757d;
-}
-
-#right-side-buttons {
-    .btn:focus {
-        border-color: #25252528;
-        outline: none;
-        box-shadow: none;
-    }
 }

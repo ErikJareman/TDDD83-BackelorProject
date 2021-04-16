@@ -1,7 +1,16 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
-import { createUser, logIn, logOut, toggleNavbar, createSchool, loginSchool, isStudent } from './core/auth.service';
+import {
+    createUser,
+    logIn,
+    logOut,
+    toggleNavbar,
+    createSchool,
+    loginSchool,
+    isStudent,
+    isSignedIn,
+} from './core/auth.service';
 import {
     clickDeleteRoom,
     clickLeaveRoom,
@@ -112,7 +121,9 @@ function customerPortal(e) {
 
 const main = () => {
     // TODO lite oklart vilka grejer som ska ligga här eller i addEventListener
+    toggleNavbar();
     initiateRouter();
+
     //$('#SendRegister').on('click', createUser);
     //$('#schoolReg').on('click', createSchool);
     //$('#schoolLogin').on('click', loginSchool);
@@ -127,7 +138,6 @@ const main = () => {
     });
     $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
-
     //$('#premium_plus').on('click', function () {
     //    createCheckoutSession(price_p_plus);
     //});
@@ -148,7 +158,6 @@ const main = () => {
         $('#hero-button').toggleClass('d-none', isStudent());
     });
     $('#hero-button').toggleClass('d-none', isStudent());
-    toggleNavbar();
 
     const mobileBtn = document.getElementById('mobile-cta');
     const nav = document.querySelector('nav');

@@ -63,6 +63,7 @@ export function toggleNavbar() {
 
     $('#login-button').toggleClass('d-none', signedIn);
     $('#register-button').toggleClass('d-none', signedIn);
+    $('#drop_down').toggleClass('d-none', !signedIn);
     $('#logout-button').toggleClass('d-none', !signedIn);
     $('#room-button').toggleClass('d-none', !student);
     $('#buying-button').toggleClass('d-none', student);

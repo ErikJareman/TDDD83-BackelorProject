@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { addEventListener } from '../index';
-import { authHeader, createSchool, createUser, logIn, loginSchool, toggleNavbar } from './auth.service';
+import { authHeader, createSchool, createUser, isStudent, logIn, loginSchool, toggleNavbar } from './auth.service';
 import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from './rooms';
 import { writeAdmins } from './subscription';
 
@@ -31,9 +31,6 @@ const routes: Route[] = [
             form.on('submit', createUser);
         },
     },
-
-    // { url: '/login', templateSelector: '#login', onLoad: () => console.log('Login laddad') },
-    //{ url: '/register', templateSelector: '#register', onLoad: () => console.log('Register laddad') },
     { url: '/404', templateSelector: '#404' },
     {
         url: '/',
@@ -52,7 +49,6 @@ const routes: Route[] = [
             console.log('efter addEventListener');
         },
     },
-    // { url: '/r', templateSelector: '#view-room', onLoad: enterRoomPage },
     {
         url: '/r',
         templateSelector: '#view-room',
@@ -60,7 +56,7 @@ const routes: Route[] = [
             enterRoomPage();
             $('#leave-room').on('click', clickLeaveRoom);
             $('#delete-room').on('click', clickDeleteRoom);
-            $('#room-button').toggleClass('d-none');
+            $('#room-button').toggleClass('d-none', !!isStudent);
         },
     },
     {
@@ -72,15 +68,6 @@ const routes: Route[] = [
             form.on('submit', createSchool);
         },
     },
-    // {
-    //     url: '/loginschool',
-    //     templateSelector: '#school-login',
-    //     onLoad: () => {
-    //         const form = $('#school-loginForm');
-    //         form.off();
-    //         form.on('submit', loginSchool);
-    //     },
-    // },
     {
         url: '/customer-page',
         templateSelector: '#customer-page',
