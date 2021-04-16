@@ -51,7 +51,8 @@
 #join-room,
 #create-room,
 #submit-new-desc,
-#skapa-ticket {
+#skapa-ticket,
+#checkDemote {
     &:hover {
         background: colors.$accenthover;
         color: white !important;
