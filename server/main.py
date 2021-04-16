@@ -13,6 +13,7 @@ from enum import Enum
 import os
 import stripe
 import json
+from datetime import datetime
 from sqlalchemy.orm.session import Session
 
 app = Flask(__name__, static_folder='../client/build', static_url_path="/")
@@ -118,12 +119,13 @@ class Ticket(db.Model):
         'user.id'), nullable=False)
     ticket_info = db.Column(db.String, nullable=True)
     ticket_zoom = db.Column(db.String, nullable=True)
+    date_created = db.Column(db.DateTime,default=datetime.now, nullable=False)
 
     def __repr__(self):
-        return f'<Ticket {self.id}: {self.room} {self.creator} {self.ticket_info} {self.ticket_zoom}>'
+        return f'<Ticket {self.id}: {self.room} {self.creator} {self.ticket_info} {self.ticket_zoom} {self.date_created} >'
 
     def serialize(self):
-        d = dict(id=self.id, ticket_info=self.ticket_info, ticket_zoom=self.ticket_zoom, room=self.room)
+        d = dict(id=self.id, ticket_info=self.ticket_info, ticket_zoom=self.ticket_zoom, room=self.room, date_created=self.date_created.strftime("%H:%M:%S"))
         d['creator'] = User.query.get(self.creator).serialize()
         return d
 

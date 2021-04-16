@@ -20,6 +20,7 @@ export interface Room {
 }
 
 export interface Ticket {
+    date_created: any;
     id: number;
     ticket_info: string;
     ticket_zoom: string;
@@ -34,10 +35,14 @@ export const getTickets = async () => {
 function ticketTemplate(ticket: Ticket, position: number, room: Room) {
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
+    console.log(ticket.date_created);
     if (selfAdmin !== -1) {
         return `<div class="ticket-ticket">
         <div id=ticket_number>
             ${position}.
+        <div id="date_created">
+            ${ticket.date_created}
+        </div>
         </div>
         <div id=ticket_creator>
             ${ticket.creator.username}
@@ -60,6 +65,9 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
         return `<div class="ticket-ticket" id="myTicket">
                     <div id=ticket_number>
                         ${position}.
+                        <div id="date_created">
+            ${ticket.date_created}
+        </div>
                     </div>
                     <div id=ticket_creator>
                         ${ticket.creator.username}
@@ -74,7 +82,7 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
                         </svg>
                     </button></div>
                     </div>
-                        <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">HELP STUDENT</a>
+                   <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">HELP STUDENT</a>
                     <button type="button" class="btn close delete-ticket-button" id="deleteticketbutton" data-id=${ticket.id}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -85,6 +93,9 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
         return `<div class="ticket-ticket">
             <div id=ticket_number>
                 ${position}.
+                <div id="date_created">
+            ${ticket.date_created}
+        </div>
             </div>
             <div id=ticket_creator>
                 ${ticket.creator.username}
@@ -92,7 +103,7 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
             <div id=ticket_info>
                 ${ticket.ticket_info}
             </div>
-                <a href='${ticket.ticket_zoom}' id="ticket_zoom" target="_blank">HELP STUDENT</a>
+                <a href='${ticket.ticket_zoom}' id="ticket_zoom" target="_blank">HELP STUDENT</a><p>&nbsp;&nbsp;&nbsp;</p>
             </div>`;
     }
 }
