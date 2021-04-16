@@ -36,38 +36,33 @@
     }
 }
 
-#change-desc-modal{
-
-    form{
-        ::placeholder {
-            color: rgb(192, 187, 187);
-            font-style: italic;
-            font-size: 14px;
-        }
-    }
-
-    #submit-new-desc{
+#show-delete-room,
+#redbutton,
+#close-new-desc {
+    &:hover {
+        background: rgba(136, 27, 27, 0.849);
         color: white !important;
-        border: 3px solid white;
-        font-weight: lighter;
-        background: colors.$accent;
-        border-radius: 5em;
-        margin-top: -0.2em;
-        &:hover {
-            background: colors.$accenthover;
-        }
     }
+}
 
-    #close-new-desc{
+#copy-link-button,
+#leave-room,
+#delete-room,
+#join-room,
+#create-room,
+#submit-new-desc,
+#skapa-ticket {
+    &:hover {
+        background: colors.$accenthover;
         color: white !important;
-        border: 3px solid white;
-        font-weight: lighter;
-        background: rgba(235, 92, 92, 0.849);
-        border-radius: 5em;
-        margin-top: -0.2em;
-        &:hover {
-            background: rgba(219, 66, 66, 0.849);
-        }
+    }
+}
+
+form {
+    ::placeholder {
+        color: rgb(192, 187, 187);
+        font-style: italic;
+        font-size: 14px;
     }
 }
 
@@ -1078,8 +1073,6 @@ img {
     box-sizing: content-box;
 }
 
-
-
 .primary-button {
     color: #ffffff;
     background-color: colors.$accent;
@@ -1173,68 +1166,78 @@ img {
 }
 
 .ticket-ticket {
-    background-color: white;
+    background-color: colors.$primary2;
     //display: inline-block;
     display: flex;
     flex-direction: row;
     margin: auto;
     margin-top: 24px;
     width: 96%;
+    border-color: colors.$secondary1;
     border-radius: 8px 8px 8px 8px;
     border-style: solid;
-    border-width: 2px;
-
+    border-width: 1px;
 }
 
-#change-desc-button{
-    background-color: white;
-    border: 0px;
+#myTicket {
+    background-color: #b6b6b6;
+}
 
-    &:hover{
-        background-color: colors.$primary2;
+#change-desc-button {
+    background-color: #b6b6b6;
+    border: 0px;
+    margin-right: -95%;
+
+    &:hover {
+        background-color: #a19f9f;
     }
 }
 
+#changebutton {
+    margin-bottom: -10px;
+}
 
 #ticket_number {
     padding: 20px;
-    font-size: 30px;
+    font-size: 15px;
+
     width: 10%;
-    border-right: 2px solid black;
+    border-right: 1px solid colors.$secondary1;
 }
 
 #ticket_creator {
-    font-size: 30px;
+    font-size: 15px;
     width: 26%;
-    border-right: 2px solid black;
+    border-right: 1px solid colors.$secondary1;
     padding: 20px;
     overflow: hidden;
 }
 
 #ticket_info {
-    font-size: 30px;
+    font-size: 15px;
     width: 32%;
-    border-right: 2px solid black;
+    border-right: 1px solid colors.$secondary1;
     padding: 20px;
     overflow: hidden;
 }
+
 #ticket_zoom {
-    font-size: 30px;
+    font-size: 15px;
     width: 32%;
     padding: 20px;
     overflow: hidden;
 }
 
 #ticket-zoom-admin {
-    font-size: 30px;
+    font-size: 15px;
+    margin: auto;
     width: 29%;
     padding: 20px;
     overflow: hidden;
 }
 
-#delete-ticket-button {
-    color: black;
-    background-color: black;
+#deleteticketbutton {
+    margin-right: 5px;
 }
 
 .grid {
@@ -1244,15 +1247,6 @@ img {
     grid-template-areas:
         'tags_1 tags_2'
         'tags_3 tags_4';
-}
-
-.tags_1 {
-}
-.tags_2 {
-}
-.tags_3 {
-}
-.tags_4 {
 }
 
 .badge {
@@ -1289,8 +1283,6 @@ img {
     margin-top: 5px;
 }
 
-#ticket_meta_data {
-}
 .tag-modal {
     margin-bottom: 12px;
 }
@@ -1298,17 +1290,6 @@ img {
     color: #1e2124;
 }
 
-// //#868e96
-// //Ändrar färg på knappar och mörkare när vi har musen över
-// .btn{
-//     background-color: colors.$accent !important;
-//     color: white !important;
-// }
-// .btn:hover {
-//     background-color: colors.$accenthover !important;
-// }
-
-//Dessa är för login och register
 .card-reg {
     position: absolute;
     align-items: center;
