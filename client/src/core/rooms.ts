@@ -53,6 +53,10 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
             </button>
     </div>`;
     } else if (ticket.creator.id == userID) {
+        $('#change-desc-modal').off();
+        $('#change-desc-modal').on('show.bs.modal', function (event: any) {
+            $('#submit-new-desc').data('id', $(event.relatedTarget).data('id'));
+        });
         return `<div class="ticket-ticket" id="myTicket">
                     <div id=ticket_number>
                         ${position}.
@@ -63,7 +67,7 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
                     <div id=ticket_info>
                         ${ticket.ticket_info} 
                         <div id="changebutton">
-                        <button type=button id="change-desc-button" data-toggle="modal" data-target="#change-desc-modal">
+                        <button type=button id="change-desc-button" data-toggle="modal" data-target="#change-desc-modal" data-id=${ticket.id}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -246,6 +250,10 @@ const loadRoom = async (id: number) => {
     demotecheckbutton.off();
     demotecheckbutton.on('click', demoteMember);
 
+    const changedescbutton = $<HTMLButtonElement>('#submit-new-desc');
+    changedescbutton.off();
+    changedescbutton.on('click', editTicket);
+
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
     if (selfAdmin !== -1) {
@@ -404,6 +412,20 @@ export async function deleteTicket(event: JQuery.ClickEvent<HTMLButtonElement>) 
     await standardPost(EndPoints.DeleteTicket, {
         ticket: ticketID,
         room: roomID,
+    });
+    loadRoom(roomID);
+}
+
+export async function editTicket(event: JQuery.ClickEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    const ticketID = $(this).data('id');
+    const roomID = getRoomIDFromURL();
+    const ticket_info = $<HTMLInputElement>('#new-desc').val() as string;
+
+    await standardPost(EndPoints.EditTicket, {
+        ticket: ticketID,
+        room: roomID,
+        info: ticket_info,
     });
     loadRoom(roomID);
 }

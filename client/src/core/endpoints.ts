@@ -5,4 +5,5 @@ export enum EndPoints {
     PromoteMember = '/promote-member',
     DemoteMember = '/demote-member',
     DeleteTicket = '/delete-ticket',
+    EditTicket = '/edit-ticket',
 }

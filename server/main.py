@@ -519,6 +519,20 @@ def deleteTicket():
         
     return 'test'
 
+@app.route('/edit-ticket', methods=['POST'])
+@jwt_required()
+def editTicket():
+    if request.method == 'POST':
+        data = request.get_json()
+        ticketID = data['ticket']
+        roomID = data['room']
+        ticket_info = data['info']
+        edit_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
+        if edit_ticket is not None:
+            setattr(edit_ticket, 'ticket_info', ticket_info)
+            db.session.commit()
+        
+    return 'test'
 
 
 
