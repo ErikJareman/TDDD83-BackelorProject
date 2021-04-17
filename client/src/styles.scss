@@ -52,7 +52,8 @@
 #create-room,
 #submit-new-desc,
 #skapa-ticket,
-#checkDemote {
+#checkDemote,
+#delete-ticket {
     &:hover {
         background: colors.$accenthover;
         color: white !important;
@@ -355,9 +356,9 @@ body {
         background-color: colors.$primary1;
         font-weight: lighter;
         border-radius: 5em;
-        border: 1px solid colors.$secondary3;
+        border: 1px solid #706f6f;
         &:hover {
-            background: colors.$accenthover;
+            background: #706f6f;
             color: white;
         }
     }
@@ -396,6 +397,10 @@ body {
             }
         }
     }
+}
+
+.checkout-page {
+    padding: 2%;
 }
 
 //-------HERO--------------------------

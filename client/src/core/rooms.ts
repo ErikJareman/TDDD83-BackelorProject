@@ -35,8 +35,10 @@ export const getTickets = async () => {
 function ticketTemplate(ticket: Ticket, position: number, room: Room) {
     const userID = getUserID();
     const selfAdmin = room.admins.findIndex((member) => member.id === userID);
-    console.log(ticket.date_created);
     if (selfAdmin !== -1) {
+        $('#deleteTicketModal').on('show.bs.modal', function (event: any) {
+            $('#delete-ticket').data('id', $(event.relatedTarget).data('id'));
+        });
         return `<div class="ticket-ticket">
         <div id=ticket_number>
             ${position}.
@@ -51,16 +53,19 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
             ${ticket.ticket_info} 
         </div>
             <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">HELP STUDENT</a>
-            <button type="button" class="btn close delete-ticket-button" id="deleteticketbutton" data-id=${ticket.id}>
+            <button type="button" class="btn close delete-ticket-button" id="deleteticketbutton"  data-toggle="modal" data-target="#deleteTicketModal"  data-id=${ticket.id}>
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
 </svg>
             </button>
     </div>`;
     } else if (ticket.creator.id == userID) {
-        $('#change-desc-modal').off();
         $('#change-desc-modal').on('show.bs.modal', function (event: any) {
             $('#submit-new-desc').data('id', $(event.relatedTarget).data('id'));
+        });
+        $('#deleteTicketModal').on('show.bs.modal', function (event: any) {
+            console.log(event.relatedTarget);
+            $('#delete-ticket').data('id', $(event.relatedTarget).data('id'));
         });
         return `<div class="ticket-ticket" id="myTicket">
                     <div id=ticket_number>
@@ -83,7 +88,7 @@ function ticketTemplate(ticket: Ticket, position: number, room: Room) {
                     </button></div>
                     </div>
                    <a href='${ticket.ticket_zoom}' id="ticket-zoom-admin" target="_blank">HELP STUDENT</a>
-                    <button type="button" class="btn close delete-ticket-button" id="deleteticketbutton" data-id=${ticket.id}>
+                    <button type="button" class="btn close delete-ticket-button" id="deleteticketbutton"  data-toggle="modal" data-target="#deleteTicketModal"  data data-id=${ticket.id}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
 </svg>
@@ -249,11 +254,7 @@ const loadRoom = async (id: number) => {
     promotebuttons.off();
     promotebuttons.on('click', promoteMember);
 
-    // const demotebuttons = $<HTMLButtonElement>('.button-admin-demote');
-    // demotebuttons.off();
-    // demotebuttons.on('click', demoteModal);
-
-    const deleteTicketButtons = $<HTMLButtonElement>('.delete-ticket-button');
+    const deleteTicketButtons = $<HTMLButtonElement>('#delete-ticket');
     deleteTicketButtons.off();
     deleteTicketButtons.on('click', deleteTicket);
 
@@ -405,9 +406,7 @@ export async function promoteMember(event: JQuery.ClickEvent<HTMLButtonElement>)
 
 export async function demoteMember(event: JQuery.ClickEvent<HTMLButtonElement>) {
     event.preventDefault();
-    console.log('i demote');
     const memberID = $(this).data('id');
-    console.log(memberID);
     const roomID = getRoomIDFromURL();
     await standardPost(EndPoints.DemoteMember, {
         room: roomID,
