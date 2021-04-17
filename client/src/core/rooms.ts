@@ -278,7 +278,6 @@ const loadRoom = async (id: number) => {
 const loadRoomList = async () => {
     const roomList = await listRooms();
     const list = $('#roomList').first();
-
     list.empty();
     for (const room of roomList) {
         list.append(`<button type="button" class="btn btn-outline-secondary left-button" data-id=${room.id}>
@@ -315,13 +314,15 @@ const loadRoomPage = async () => {
 
 export const submitCreateRoom = async () => {
     const name = $<HTMLInputElement>('#room-name-input').val() as string;
-
     const res = await createRoom({ name });
     loadRoom(res.id);
     loadRoomList();
 };
 
 export const createRoom = (room: Partial<Room>): Promise<Room> => {
+    //Denna fungerar inte av någon konstig anledning trots att den körs
+    console.log('kör');
+    $('#createRoomForm').trigger('reset');
     return standardPost(EndPoints.Rooms, room);
 };
 
@@ -339,12 +340,15 @@ export async function joinRoomByID() {
     await standardGet(`${EndPoints.Rooms}/${$<HTMLInputElement>('#room-id-to-join').val() as number}`);
     loadRoom($<HTMLInputElement>('#room-id-to-join').val() as number);
     loadRoomPage();
+    $('#joinRoomForm').trigger('reset');
 }
 
 export async function createTicket() {
     const roomID = getRoomIDFromURL();
     const ticket_zoom = $<HTMLInputElement>('#modal-zoom').val() as string;
     const ticket_info = $<HTMLInputElement>('#ticket-descp').val() as string;
+
+    $('#queueUpForm').trigger('reset');
 
     await standardPost(EndPoints.Tickets, {
         room: roomID,
@@ -431,6 +435,8 @@ export async function editTicket(event: JQuery.ClickEvent<HTMLButtonElement>) {
     const ticketID = $(this).data('id');
     const roomID = getRoomIDFromURL();
     const ticket_info = $<HTMLInputElement>('#new-desc').val() as string;
+
+    $('#changeForm').trigger('reset');
 
     await standardPost(EndPoints.EditTicket, {
         ticket: ticketID,

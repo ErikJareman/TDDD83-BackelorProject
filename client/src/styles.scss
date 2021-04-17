@@ -60,12 +60,10 @@
     }
 }
 
-form {
-    ::placeholder {
-        color: rgb(192, 187, 187);
-        font-style: italic;
-        font-size: 14px;
-    }
+::placeholder {
+    color: rgb(192, 187, 187);
+    font-style: italic;
+    font-size: 14px;
 }
 
 #delete-admin {
