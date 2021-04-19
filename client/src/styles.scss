@@ -83,11 +83,15 @@
     color: colors.$secondary1;
 }
 
-#this-is-section{
+#this-is-section {
     text-align: center;
     background-color: colors.$primary2;
-    .logo-this-is{
-        width:15%;
+    .logo-this-is {
+        width: 10%;
+    }
+    .about-us-img {
+        width: 55%;
+        margin-top: -15%;
     }
     li {
         opacity: 55%;
@@ -100,14 +104,13 @@
         border-radius: 40px;
         box-shadow: 10px 10px 8px #888888;
         list-style-type: none;
-        p{
+        p {
             font-size: 14px;
         }
-        h2{
+        h2 {
             font-size: 20px;
         }
     }
-
 }
 
 #standard,
@@ -244,13 +247,14 @@ body {
     }
 
     #drop_down {
-        p,a {
+        p,
+        a {
             font-weight: lighter;
             color: white;
             font-size: 1.2em;
             padding: 0.1em 1em;
         }
-        
+
         ul {
             z-index: 5000;
             display: none;
@@ -259,9 +263,9 @@ body {
             border: 3px solid white;
             font-weight: lighter;
             margin-top: -0.2em;
-           
 
-            li p,a {
+            li p,
+            a {
                 text-align: left;
                 padding: 12px 14px;
             }
@@ -509,8 +513,8 @@ body {
     .form-check-input {
         margin-left: -53%;
     }
-    #school-login-instead{
-        margin-left:20%;
+    #school-login-instead {
+        margin-left: 20%;
     }
 }
 
@@ -665,7 +669,7 @@ ul.features-list {
             width: 90%;
             margin: 0 auto 5em auto;
             border-radius: 1em;
-            margin-top: 5px;
+            margin-top: -4px;
             font-size: 1.4em;
         }
 
@@ -1200,7 +1204,6 @@ img {
         box-shadow: none;
     }
 }
-
 
 #date_created {
     color: rgb(121, 120, 120);
