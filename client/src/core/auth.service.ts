@@ -154,7 +154,7 @@ export async function createSchool(event: { preventDefault: () => void }) {
             password,
             confirmedPassword,
         });
-        navigateTo('/loginschool');
+        navigateTo('/login');
     } catch (e) {
         alert('The passwords did not match. Try again!');
     }
