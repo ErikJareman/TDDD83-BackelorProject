@@ -16,7 +16,7 @@ import json
 from datetime import datetime
 from sqlalchemy.orm.session import Session
 from random import randint 
-
+from flask import escape
 
 app = Flask(__name__, static_folder='../client/build', static_url_path="/")
 CORS(app, support_credentials=True)
@@ -295,12 +295,12 @@ def login():
 @app.route('/register', methods=['POST'])
 def sign_up():
     if request.method == 'POST':
-        email = request.get_json(force=True)["email"]
+        email = escape(request.get_json(force=True)["email"])
         password = request.get_json(force = True)["password"]
         confirmedPassword = request.get_json(force = True)["confirmedPassword"]
-        username = request.get_json(force=True)["username"]
+        username = escape(request.get_json(force=True)["username"])
 
-        if not password == confirmedPassword:
+        if password != confirmedPassword:
             abort(401)
 
         new_user = User(email=email, username=username, password_hash=password)
@@ -313,8 +313,8 @@ def sign_up():
 @app.route('/registerschool', methods=['POST', 'GET'])
 def sign_up_school():
     if request.method == 'POST':
-        name = request.get_json(force=True)["name"]
-        email = request.get_json(force = True)["email"]
+        name = escape(request.get_json(force=True)["name"])
+        email = escape(request.get_json(force = True)["email"])
         password = request.get_json(force=True)["password"]
         confirmedPassword = request.get_json(force = True)["confirmedPassword"]
 
@@ -390,7 +390,7 @@ def usersid(user_id):
 
  
 def add_ticket(data: dict, userID: int):
-    to_create = Ticket(creator=userID, room=data['room'], ticket_info=data['ticket_info'], ticket_zoom=data['ticket_zoom'])
+    to_create = Ticket(creator=userID, room=data['room'], ticket_info=escape(data['ticket_info']), ticket_zoom=data['ticket_zoom'])
     db.session.add(to_create)
     db.session.commit()
     return jsonify(to_create.serialize())
@@ -410,7 +410,7 @@ def join_room(room_id: int, user_id: int, role: Roles):
     db.session.commit()
 
 def create_room(data: dict, creator: int):
-    new_room = Room(name=data['name'])
+    new_room = Room(name=escape(data['name']))
     db.session.add(new_room)
     db.session.commit()
 
@@ -535,7 +535,7 @@ def editTicket():
         data = request.get_json()
         ticketID = data['ticket']
         roomID = data['room']
-        ticket_info = data['info']
+        ticket_info = escape(data['info'])
         edit_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
         if edit_ticket is not None:
             setattr(edit_ticket, 'ticket_info', ticket_info)
@@ -594,11 +594,11 @@ def user_test_db():
     db.session.add(roomMember7)
     db.session.add(roomAdmin)
     #Tickets
-    ticket1 = Ticket(creator=2, room=1, ticket_info='Help me!', ticket_zoom='https://zoom.us/')
-    ticket2 = Ticket(creator=4, room=1, ticket_info='Task 3 problem', ticket_zoom='https://zoom.us/')
-    ticket4 = Ticket(creator=4, room=2, ticket_info='Major struggle on 4b', ticket_zoom='https://zoom.us/')
-    ticket5 = Ticket(creator=7, room=2, ticket_info='Help on #2', ticket_zoom='https://zoom.us/')
-    ticket6 = Ticket(creator=7, room=1, ticket_info='Help me now!', ticket_zoom='https://zoom.us/')
+    ticket1 = Ticket(creator=2, room=rum1.id, ticket_info='Help me!', ticket_zoom='https://zoom.us/')
+    ticket2 = Ticket(creator=4, room=rum1.id, ticket_info='Task 3 problem', ticket_zoom='https://zoom.us/')
+    ticket4 = Ticket(creator=4, room=rum2.id, ticket_info='Major struggle on 4b', ticket_zoom='https://zoom.us/')
+    ticket5 = Ticket(creator=7, room=rum2.id, ticket_info='Help on #2', ticket_zoom='https://zoom.us/')
+    ticket6 = Ticket(creator=7, room=rum1.id, ticket_info='Help me now!', ticket_zoom='https://zoom.us/')
     db.session.add(ticket1)
     db.session.add(ticket2)
     db.session.add(ticket4)

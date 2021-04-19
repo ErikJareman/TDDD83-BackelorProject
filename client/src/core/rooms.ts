@@ -1,4 +1,3 @@
-import { parseJSON } from 'jquery';
 import { getUser, getUserID, hasToken } from './auth.service';
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
