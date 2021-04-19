@@ -217,9 +217,13 @@ body {
     }
 
     #drop_down {
-        a {
+        p,a {
             font-weight: lighter;
+            color: white;
+            font-size: 1.2em;
+            padding: 0.1em 1em;
         }
+        
         ul {
             z-index: 5000;
             display: none;
@@ -228,8 +232,9 @@ body {
             border: 3px solid white;
             font-weight: lighter;
             margin-top: -0.2em;
+           
 
-            li a {
+            li p,a {
                 text-align: left;
                 padding: 12px 14px;
             }
@@ -239,7 +244,7 @@ body {
             display: block;
             position: absolute;
             background-color: colors.$secondary1;
-            padding: 15px;
+            padding: 10px;
 
             border-bottom: 2px solid black;
             border-top: 2px solid black;
