@@ -26,12 +26,23 @@ export const saveToStorage = (data: any) => {
 
 export const getToken = () => JSON.parse(sessionStorage.getItem(tokenName))?.token;
 
-export const getUser = (): Promise<User> => {
+export const getUser = (): Promise<User | null> => {
     const auth = sessionStorage.getItem('auth');
     if (auth) {
         return JSON.parse(auth).user;
     }
 };
+
+async function getUserEmail(): Promise<string> {
+    const email = (await getUser())?.email;
+    return email;
+}
+
+async function fillEmail() {
+    if (isSignedIn()) {
+        $('#fillemail').html(await getUserEmail());
+    }
+}
 
 export const getUserID = () => jwt_decode<JWTData>(getToken()).sub.user;
 
@@ -69,6 +80,7 @@ export function toggleNavbar() {
     $('#buying-button').toggleClass('d-none', student);
     $('#buying-button-footer').toggleClass('d-none', student);
     $('#checkout-button').toggleClass('d-none', !isSchool());
+    fillEmail();
 }
 
 export function isSchool() {
