@@ -374,7 +374,7 @@ export function clickLeftButton(event: JQuery.ClickEvent<HTMLButtonElement>) {
 }
 
 export const clickDeleteRoom = async () => {
-    await standardDelete(EndPoints.Rooms, getRoomIDFromURL());
+    await standardDelete(`${EndPoints.Rooms}/${getRoomIDFromURL()}`);
     noRoomSelected();
     loadRoomList();
 };

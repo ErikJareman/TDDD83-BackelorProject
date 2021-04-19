@@ -74,11 +74,12 @@ export const standardGet = async (endpoint: EndPoints | string, parameters?: Rec
     return $.ajax(requestSettings);
 };
 
-export const standardDelete = async (endpoint: string, id: Stringable) => {
+export const standardDelete = async (endpoint: string, data?: any) => {
     const requestSettings = {
-        url: `${addHost(endpoint)}/${id}`,
+        url: addHost(endpoint),
         type: 'DELETE',
         headers: defaultHeaders(),
+        data: JSON.stringify(data),
     };
     return $.ajax(requestSettings);
 };
