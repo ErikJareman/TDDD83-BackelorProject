@@ -2,14 +2,9 @@
 import $ from 'jquery';
 
 import {
-    createUser,
-    logIn,
     logOut,
     toggleNavbar,
-    createSchool,
-    loginSchool,
     isStudent,
-    isSignedIn,
 } from './core/auth.service';
 import {
     clickDeleteRoom,
@@ -17,11 +12,9 @@ import {
     createTicket,
     submitCreateRoom,
     joinRoomByID,
-    promoteMember,
-    onShareModalOpen,
 } from './core/rooms';
 import { initiateRouter, navigateTo } from './core/router';
-import { writeAdmins, addAdmin, deleteAdmin } from './core/subscription';
+import { addAdmin, deleteAdmin } from './core/subscription';
 import { loadStripe } from '@stripe/stripe-js';
 import env from './shared/env';
 
