@@ -86,16 +86,26 @@
 #this-is-section{
     text-align: center;
     background-color: colors.$primary2;
+    .logo-this-is{
+        width:15%;
+    }
     li {
+        opacity: 55%;
         background: colors.$secondary3;
         color: colors.$primary3;
         text-align: center;
         padding: 2em 2em;
-        width: 60%;
+        width: 90%;
         margin: 0 auto 3em auto;
-        border-radius: 50px;
-        box-shadow: 3px 3px;
+        border-radius: 40px;
+        box-shadow: 10px 10px 8px #888888;
         list-style-type: none;
+        p{
+            font-size: 14px;
+        }
+        h2{
+            font-size: 20px;
+        }
     }
 
 }
