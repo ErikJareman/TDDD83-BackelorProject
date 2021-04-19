@@ -83,6 +83,23 @@
     color: colors.$secondary1;
 }
 
+#this-is-section{
+    text-align: center;
+    background-color: colors.$primary2;
+    li {
+        background: colors.$secondary3;
+        color: colors.$primary3;
+        text-align: center;
+        padding: 2em 2em;
+        width: 60%;
+        margin: 0 auto 3em auto;
+        border-radius: 50px;
+        box-shadow: 3px 3px;
+        list-style-type: none;
+    }
+
+}
+
 #standard,
 #standard_plus,
 #premium,
