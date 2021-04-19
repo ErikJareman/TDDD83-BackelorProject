@@ -999,6 +999,19 @@ img {
     justify-content: space-between;
 }
 
+#right-internal-div-1 {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+#scrollable-right-div {
+    overflow-y: auto;
+}
+
 .left-button {
     width: 98%;
     margin: 4px 2px;
