@@ -544,8 +544,6 @@ def editTicket():
     return 'test'
 
 
-
-
 def user_test_db():
     db.drop_all()
     db.create_all()   
