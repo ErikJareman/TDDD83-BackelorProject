@@ -15,6 +15,8 @@ import stripe
 import json
 from datetime import datetime
 from sqlalchemy.orm.session import Session
+from random import randint 
+
 
 app = Flask(__name__, static_folder='../client/build', static_url_path="/")
 CORS(app, support_credentials=True)
@@ -140,8 +142,13 @@ class RoomMembers(db.Model):
         return f'<RoomMembers {self.user} {self.room} {self.role}>'
 
 
+
+def random_id():
+    # 6 letter id
+    return randint(100000, 999999)
+
 class Room(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, default=random_id)
     name = db.Column(db.String, nullable=False)
     tickets = db.relationship('Ticket', backref=db.backref(
         "Room"))
