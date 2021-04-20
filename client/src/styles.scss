@@ -263,12 +263,11 @@ body {
     }
 
     #drop_down {
-        #fillemail{
             font-weight: lighter;
             color: white;
             font-size: 1.2em;
-            margin-right: 0;
-        }
+            margin-bottom: 0;
+            text-align: right;
     }
 }
 
@@ -812,8 +811,9 @@ nav {
                 p {
                     font-weight: lighter;
                     color: white;
-                    font-size: 1.2em;
+                    font-size: 1.1em;
                     padding: 0.1em 1em;
+                    margin-bottom: 0;        
                 }
             }
         }
