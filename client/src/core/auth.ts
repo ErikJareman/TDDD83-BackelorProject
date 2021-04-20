@@ -1,5 +1,5 @@
 import { navigateTo } from './router';
-import { standardPost } from './server.service';
+import { standardPost } from './server';
 import jwt_decode from 'jwt-decode';
 import { User } from './User';
 

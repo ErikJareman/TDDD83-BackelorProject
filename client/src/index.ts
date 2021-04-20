@@ -5,7 +5,7 @@ import {
     logOut,
     toggleNavbar,
     isStudent,
-} from './core/auth.service';
+} from './core/auth';
 import {
     clickDeleteRoom,
     clickLeaveRoom,

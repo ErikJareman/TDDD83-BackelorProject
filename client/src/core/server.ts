@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import env from '../shared/env';
-import { authHeader, getToken } from './auth.service';
+import { authHeader, getToken } from './auth';
 import { EndPoints } from './endpoints';
 
 export type Stringable = number | string;

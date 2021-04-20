@@ -1,7 +1,7 @@
-import { getUser, getUserID, hasToken } from './auth.service';
+import { getUser, getUserID, hasToken } from './auth';
 import { EndPoints } from './endpoints';
 import { navigateTo } from './router';
-import { getMultiple, getSingle, standardDelete, standardGet, standardPost } from './server.service';
+import { getMultiple, getSingle, standardDelete, standardGet, standardPost } from './server';
 import { User } from './User';
 import copy from 'copy-to-clipboard';
 

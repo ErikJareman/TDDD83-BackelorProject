@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { addEventListener } from '../index';
-import { authHeader, createSchool, createUser, isStudent, logIn, loginSchool, toggleNavbar } from './auth.service';
+import { authHeader, createSchool, createUser, isStudent, logIn, loginSchool, toggleNavbar } from './auth';
 import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from './rooms';
 import { writeAdmins } from './subscription';
 
