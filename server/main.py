@@ -29,11 +29,7 @@ jwt = JWTManager(app)
 
 
 YOUR_DOMAIN = 'http://localhost:8080'
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/account/apikeys
 stripe.api_key = 'sk_test_51IZucCC7I9l3XQtcbsm4nCGHg8byGU3YitOj6xxVY80wqxeJHNQHAzPx1w9wH9w2cNeLUk98dAEjYQPsZCkqekrv00lBBCQd9r'
-
-
 
 configuration = stripe.billing_portal.Configuration.create(
   business_profile={
@@ -111,8 +107,7 @@ class School_Admin(db.Model):
     def serialize(self):
         return dict(school_id=self.school_id, admin_email=self.admin_email)
 
-
-
+#TICKET CLASS
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room = db.Column(db.Integer, db.ForeignKey(
@@ -141,12 +136,11 @@ class RoomMembers(db.Model):
     def __repr__(self):
         return f'<RoomMembers {self.user} {self.room} {self.role}>'
 
-
-
 def random_id():
     # 6 letter id
     return randint(100000, 999999)
 
+#ROOM CLASS
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True, default=random_id)
     name = db.Column(db.String, nullable=False)
@@ -162,8 +156,6 @@ class Room(db.Model):
         return d
 
 
-
-
 @app.route('/', defaults={'path': 'index.html'})
 @app.route('/<path>')
 def catch_all(path):
@@ -173,8 +165,7 @@ def catch_all(path):
     except:
         return app.send_static_file("index.html")
 
-
-
+#Subscription functions
 @app.route('/customer-portal', methods=['POST'])
 @jwt_required()
 def customer_portal():
@@ -258,9 +249,6 @@ def create_checkout_session():
         return jsonify({'error': {'message': str(e)}}), 400
 
 
-
-
-
 Roles = Enum('Roles', 'Admin Regular')
 
 #Login for Schools and Students/Tutors
@@ -330,12 +318,11 @@ def sign_up_school():
     elif request.method == 'GET':
         return jsonify([j.serialize() for j in School.query.all()])
 
-#set or delete admin
+#Set or delete admin
 @app.route('/school_admin', methods =['POST', 'DELETE', 'GET'])
 @jwt_required()
 def school_admin():
     school_id = get_jwt_identity()['school']
-    #school_id = request.get_json(force = True)["school_id"]
     school = School.query.get(school_id)
     if request.method == 'POST':
         admin_email = request.get_json(force = True)["admin_email"]
@@ -355,8 +342,6 @@ def school_admin():
             return resp
         else: abort(404)
     elif request.method == 'GET':
-      #  print(School_Admin.query.filter_by(school_id = school_id))
-     #   return jsonify([j.serialize() for j in School_Admin.query.all()])
         return jsonify([j.serialize() for j in School_Admin.query.filter_by(school_id = school_id)])
 
 
@@ -388,7 +373,7 @@ def usersid(user_id):
         resp = jsonify(Sucess=True)
         return resp
 
- 
+ #Ticket functions
 def add_ticket(data: dict, userID: int):
     to_create = Ticket(creator=userID, room=data['room'], ticket_info=escape(data['ticket_info']), ticket_zoom=data['ticket_zoom'])
     db.session.add(to_create)
@@ -418,7 +403,38 @@ def create_room(data: dict, creator: int):
     
     return jsonify(new_room.serialize())
 
+@app.route('/delete-ticket', methods=['POST'])
+@jwt_required()
+def deleteTicket():
+    if request.method == 'POST':
+        data = request.get_json()
+        ticketID = data['ticket']
+        roomID = data['room']
 
+        delete_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
+        if delete_ticket is not None:
+            db.session.delete(delete_ticket)
+            db.session.commit()
+        
+    return 'test'
+
+@app.route('/edit-ticket', methods=['POST'])
+@jwt_required()
+def editTicket():
+    if request.method == 'POST':
+        data = request.get_json()
+        ticketID = data['ticket']
+        roomID = data['room']
+        ticket_info = escape(data['info'])
+
+        edit_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
+        if edit_ticket is not None:
+            setattr(edit_ticket, 'ticket_info', ticket_info)
+            db.session.commit()
+        
+    return 'test'
+
+#Room functions
 @app.route('/rooms', methods=['GET', 'POST'])
 @jwt_required()
 def rooms():
@@ -460,8 +476,6 @@ def room(room_id: int):
         db.session.execute(delete_roommembers)
         db.session.commit()
         return ''
-        
-
 
 @app.route('/leave-room/<int:room_id>', methods=['POST'])
 @jwt_required()
@@ -474,7 +488,6 @@ def leave_room(room_id: int):
             db.session.commit()
             return 'left room'
         return 'not member'
-
 
 
 @app.route('/promote-member', methods=['POST'])
@@ -507,42 +520,6 @@ def demoteMember():
         
         return ''
     return ''
-
-
-@app.route('/delete-ticket', methods=['POST'])
-@jwt_required()
-def deleteTicket():
-    if request.method == 'POST':
-        data = request.get_json()
-        ticketID = data['ticket']
-        roomID = data['room']
-        
-        #nu ska vi alltså ta bort ticket med ticketID från rummet med id roomID
-
-        #delete_ticket = .delete().where(Ticket.room == room_id)
-        #db.session.execute(delete_ticket)
-        delete_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
-        if delete_ticket is not None:
-            db.session.delete(delete_ticket)
-            db.session.commit()
-        
-    return 'test'
-
-@app.route('/edit-ticket', methods=['POST'])
-@jwt_required()
-def editTicket():
-    if request.method == 'POST':
-        data = request.get_json()
-        ticketID = data['ticket']
-        roomID = data['room']
-        ticket_info = escape(data['info'])
-        edit_ticket = db.session.query(Ticket).filter(Ticket.id == ticketID).filter(Ticket.room == roomID).first()
-        if edit_ticket is not None:
-            setattr(edit_ticket, 'ticket_info', ticket_info)
-            db.session.commit()
-        
-    return 'test'
-
 
 def user_test_db():
     db.drop_all()
