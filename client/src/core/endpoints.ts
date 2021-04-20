@@ -8,4 +8,6 @@ export enum EndPoints {
     EditTicket = '/edit-ticket',
     SchoolAdmin = '/school_admin',
     UpdateSchool = '/update-school',
+    CreateCheckout = '/create-checkout-session',
+    CustomerPortal = '/customer-portal',
 }

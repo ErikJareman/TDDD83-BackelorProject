@@ -1,4 +1,6 @@
+import { loadStripe } from '@stripe/stripe-js';
 import { EndPoints } from '../core/endpoints';
+import { navigateTo } from '../core/router';
 import { standardDelete, standardGet, standardPost } from '../core/server';
 
 export interface JWTData {
@@ -9,17 +11,17 @@ export interface JWTData {
     type: string;
 }
 
-export function addAdmin() {
+export async function addAdmin() {
     const email = $<HTMLInputElement>('#inputemail').val();
 
-    standardPost(EndPoints.SchoolAdmin, { admin_email: email });
+    await standardPost(EndPoints.SchoolAdmin, { admin_email: email });
     writeAdmins();
 }
 
-export function deleteAdmin() {
+export async function deleteAdmin() {
     const email = $<HTMLInputElement>('#Admin-delete').val();
     try {
-        standardDelete(EndPoints.SchoolAdmin, { admin_email: email });
+        await standardDelete(EndPoints.SchoolAdmin, { admin_email: email });
         writeAdmins();
     } catch (e) {
         alert('This is not one of your admins. Try again.');
@@ -35,6 +37,9 @@ export async function modalDelete() {
 }
 
 export async function writeAdmins() {
+    $('#customer_portal').off();
+    $('#customer_portal').on('click', customerPortal);
+
     document.getElementById('delete-admin').addEventListener('click', modalDelete, true);
 
     const max_admin = await checkSubscription();
@@ -69,4 +74,71 @@ export async function checkSubscription() {
     } catch (e) {
         // TODO
     }
+}
+
+const price_p_plus = 'price_1IZul8C7I9l3XQtcLw7OrDIH';
+const price_p = 'price_1IZujvC7I9l3XQtc72Uq6LU0';
+const price_s_plus = 'price_1IZuj4C7I9l3XQtctx3PtUWs';
+const price_s = 'price_1IZuh5C7I9l3XQtcrkJwn759';
+
+export async function createCheckoutSession(priceId: string) {
+    try {
+        const stripe = await loadStripe(
+            'pk_test_51IZucCC7I9l3XQtcR3FGS1YEe7UL8EKRsjyToCtFDD8RRQscOLlcoYbFHuIiTieCyj0K0rtLLPU6x74rLtqbzOlo00ODxOZOmn',
+        );
+        const session = await standardPost(EndPoints.CreateCheckout, {
+            priceId: priceId,
+        });
+        const result = await stripe.redirectToCheckout({ sessionId: session.sessionId });
+        if (result.error) {
+            alert(result.error.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+export function addEventListeners() {
+    // TODO denna fanns ej med i git-compare..oklart om den ska va med?
+    $('#premium_plus').off();
+    $('#premium').off();
+    $('#standard_plus').off();
+    $('#standard').off();
+
+    $('#premium_plus').on('click', function () {
+        createCheckoutSession(price_p_plus);
+    });
+    $('#premium').on('click', function () {
+        createCheckoutSession(price_p);
+    });
+    $('#standard_plus').on('click', function () {
+        createCheckoutSession(price_s_plus);
+    });
+    $('#standard').on('click', function () {
+        createCheckoutSession(price_s);
+    });
+
+    $('#customer_portal').on('click', customerPortal);
+    console.log('lagt till alla köpknappar');
+}
+
+function customerPortal(e) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    // In production, this should check CSRF, and not pass the session ID.
+    // The customer ID for the portal should be pulled from the
+    // authenticated user on the server.
+
+    e.preventDefault();
+    standardPost(EndPoints.CustomerPortal, {
+        sessionId: sessionId,
+    })
+        .then((data) => {
+            window.location.href = data.url;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('You have no current collaboration plan');
+            navigateTo('/checkout');
+        });
 }

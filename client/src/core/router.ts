@@ -1,8 +1,7 @@
 import $ from 'jquery';
-import { addEventListener } from '../index';
-import { authHeader, createSchool, createUser, isStudent, logIn, loginSchool, toggleNavbar } from './auth';
+import { authHeader, createSchool, createUser, isStudent, logIn, toggleNavbar } from './auth';
 import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from '../features/rooms';
-import { writeAdmins } from '../features/subscription';
+import { addEventListeners, writeAdmins } from '../features/subscription';
 
 interface Route {
     url: string;
@@ -46,7 +45,7 @@ const routes: Route[] = [
         url: '/checkout',
         templateSelector: '#checkout',
         onLoad: () => {
-            addEventListener();
+            addEventListeners();
             console.log('efter addEventListener');
         },
     },
