@@ -1,8 +1,8 @@
-import { getUser, getUserID, hasToken } from './auth';
-import { EndPoints } from './endpoints';
-import { navigateTo } from './router';
-import { getMultiple, getSingle, standardDelete, standardGet, standardPost } from './server';
-import { User } from './User';
+import { getUser, getUserID, hasToken } from '../core/auth';
+import { EndPoints } from '../core/endpoints';
+import { navigateTo } from '../core/router';
+import { getMultiple, getSingle, standardDelete, standardGet, standardPost } from '../core/server';
+import { User } from '../core/User';
 import copy from 'copy-to-clipboard';
 
 //TODO

@@ -12,9 +12,9 @@ import {
     createTicket,
     submitCreateRoom,
     joinRoomByID,
-} from './core/rooms';
+} from './features/rooms';
 import { initiateRouter, navigateTo } from './core/router';
-import { addAdmin, deleteAdmin } from './core/subscription';
+import { addAdmin, deleteAdmin } from './features/subscription';
 import { loadStripe } from '@stripe/stripe-js';
 import env from './shared/env';
 

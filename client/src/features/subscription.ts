@@ -1,5 +1,5 @@
-import { EndPoints } from './endpoints';
-import { standardDelete, standardGet, standardPost } from './server';
+import { EndPoints } from '../core/endpoints';
+import { standardDelete, standardGet, standardPost } from '../core/server';
 
 export interface JWTData {
     fresh: boolean;

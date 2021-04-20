@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import { addEventListener } from '../index';
 import { authHeader, createSchool, createUser, isStudent, logIn, loginSchool, toggleNavbar } from './auth';
-import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from './rooms';
-import { writeAdmins } from './subscription';
+import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from '../features/rooms';
+import { writeAdmins } from '../features/subscription';
 
 interface Route {
     url: string;
