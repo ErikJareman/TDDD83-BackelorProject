@@ -216,13 +216,29 @@ body {
     background: colors.$secondary1;
     height: 6em;
 
+    .myMenu{
+        div {
+            width: 35px;
+            height: 5px;
+            background-color: white
+            ;
+            margin: 6px 0;
+          }
+    }
+
+    .mobile-menu{
+        width: fit-content;
+        color: white;
+        
+    }
+
     ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
     }
 
-    .container {
+    .container-fluid {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -247,38 +263,11 @@ body {
     }
 
     #drop_down {
-        p,
-        a {
+        #fillemail{
             font-weight: lighter;
             color: white;
             font-size: 1.2em;
-            padding: 0.1em 1em;
-        }
-
-        ul {
-            z-index: 5000;
-            display: none;
-            width: fit-content;
-
-            border: 3px solid white;
-            font-weight: lighter;
-            margin-top: -0.2em;
-
-            li p,
-            a {
-                text-align: left;
-                padding: 12px 14px;
-            }
-        }
-
-        &:hover ul {
-            display: block;
-            position: absolute;
-            background-color: colors.$secondary1;
-            padding: 10px;
-
-            border-bottom: 2px solid black;
-            border-top: 2px solid black;
+            margin-right: 0;
         }
     }
 }
@@ -757,14 +746,17 @@ nav {
 }
 
 //-------------768px-----------------------------
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 909px) {
     .mobile-menu,
     .mobile-menu-exit {
         display: none;
+
     }
 
+
+
     .navbar {
-        .container {
+        .container-fluid {
             display: -ms-grid;
             display: grid;
             -ms-grid-columns: 180px auto;
@@ -814,6 +806,14 @@ nav {
                 &:hover {
                     background: colors.$accent;
                     color: white;
+                }
+            }
+            #drop_down {
+                p {
+                    font-weight: lighter;
+                    color: white;
+                    font-size: 1.2em;
+                    padding: 0.1em 1em;
                 }
             }
         }
@@ -895,9 +895,6 @@ nav {
 }
 
 @media only screen and (min-width: 1450px) {
-    .navbar .container {
-        width: 1450;
-    }
 
     .features-section {
         &:before {

@@ -12,9 +12,15 @@
 
 <body>
   <div class="navbar">
-    <div class="container">
+    <div class="container-fluid">
       <a class="logo goHome" href="/">Top<span>Q</span></a>
-      <img id="mobile-cta" class="mobile-menu" src="assets/menu.svg" alt="Open navigation">
+      <a id="mobile-cta" class="mobile-menu myMenu" alt="Open navigation">
+        <div></div>
+        <div></div>
+        <div></div>
+      </a>
+      <!--<a id="mobile-cta" class="mobile-menu" alt="Open navigation">MENU</a>
+      <img id="mobile-cta" class="mobile-menu" src="assets/menu.svg" alt="Open navigation">-->
       <nav>
         <img id="mobile-exit" class="mobile-menu-exit" src="assets/exit.svg" alt="">
         <ul class="primary-nav">
@@ -26,7 +32,7 @@
           <li id="login-button" class="custombutton"><a href="/login">Login</a></li>
           <li id="register-button" class="custombutton"><a href="/register">Register</a></li>
 
-          <li id="drop_down" ><p id="fillemail"></p>
+          <li id="drop_down"><p id="fillemail"></p>
             <!--<ul>
                 <li id="logout-button"><a href="/">Logout</a></li>
             </ul>-->
@@ -105,7 +111,6 @@
       <section class="testimonials-section">
         <div class="container">
           <ul class="features-list" id="about-section">
-            <h2>What is TopQ?</h2>
           </ul>
           <br>
           <ul>
