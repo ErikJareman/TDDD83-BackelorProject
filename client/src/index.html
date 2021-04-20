@@ -373,12 +373,12 @@
       <div class="container">
         <div class="col-sm-12 col-md-12 col-lg-9">
           <h1>TopQ for Schools and Universites!</h1>
+          <h2 id='buy_home'>Increases the quality of your education. Register and start today!</h2>
           <br>
-          <br>
-          <h2 id='buy_home'>Student or tutor? Click the button below.</h2>
-          <div>
-            <a href='/login' class="btn btn-primary" id='login_instead_button'>Log in to TopQ</a>
-          </div>
+          <p>Click the arrow to register!</p>
+          <a href="#register-school-div" class="btn btn-primary" id='login_instead_button'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+          </svg></a>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-3">
           <img src="https://i.pinimg.com/originals/8b/6a/bb/8b6abbc5da89aad526d931f59f549b30.gif" class="buy_home_img"
@@ -404,7 +404,7 @@
           <br>
           <li>
             <form id="school-registerForm">
-              <div class="form-group">
+              <div class="form-group" id="register-school-div">
                 <h2>School-registration:</h2>
                 <label for="schoolName">Name:</label>
                 <input type="text" class="form-control" id="schoolName" placeholder="Linköpings Universitet" required>

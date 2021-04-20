@@ -1,18 +1,8 @@
 /* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
-import {
-    logOut,
-    toggleNavbar,
-    isStudent,
-} from './core/auth';
-import {
-    clickDeleteRoom,
-    clickLeaveRoom,
-    createTicket,
-    submitCreateRoom,
-    joinRoomByID,
-} from './features/rooms';
+import { logOut, toggleNavbar, isStudent } from './core/auth';
+import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom, joinRoomByID } from './features/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { addAdmin, deleteAdmin } from './features/subscription';
 import { loadStripe } from '@stripe/stripe-js';
@@ -131,19 +121,6 @@ const main = () => {
     });
     $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
-    //$('#premium_plus').on('click', function () {
-    //    createCheckoutSession(price_p_plus);
-    //});
-    //$('#premium').on('click', function () {
-    //    createCheckoutSession(price_p);
-    //});
-    //$('#standard_plus').on('click', function () {
-    //    createCheckoutSession(price_s_plus);
-    //});
-    //$('#standard').on('click', function () {
-    //    createCheckoutSession(price_s);
-    //});
-    //$('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
     $('#delete-admin-modal').on('click', deleteAdmin);
 
