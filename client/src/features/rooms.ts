@@ -8,7 +8,6 @@ import copy from 'copy-to-clipboard';
 //TODO
 //Lägg till isAdmin(userID) metod / liknande och använd där det behövs (TODO finns på dessa ställen)
 //Se till så att isAdmin fältet är uppdaterat på varje user (dvs user.email finns i "premiumdatabasen")
-//Delete-room knappen har fukkat ur(?)
 
 export interface Room {
     id: number;

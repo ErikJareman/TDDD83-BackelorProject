@@ -27,19 +27,6 @@ const main = () => {
     });
     $('#delete-room').on('click', clickDeleteRoom);
     $('#logout-button').on('click', logOut);
-    //$('#premium_plus').on('click', function () {
-    //    createCheckoutSession(price_p_plus);
-    //});
-    //$('#premium').on('click', function () {
-    //    createCheckoutSession(price_p);
-    //});
-    //$('#standard_plus').on('click', function () {
-    //    createCheckoutSession(price_s_plus);
-    //});
-    //$('#standard').on('click', function () {
-    //    createCheckoutSession(price_s);
-    //});
-    //$('#customer_portal').on('click', customerPortal);
     $('#add-admin-modal').on('click', addAdmin);
     $('#delete-admin-modal').on('click', deleteAdmin);
 

@@ -128,12 +128,11 @@ export async function logIn(event: { preventDefault: () => void }) {
             navigateTo('/r');
         } else if (isSchool()) {
             if (result.school.sub_id != null) {
-                navigateTo('/customer-page'); //om subscription
+                navigateTo('/customer-page');
             } else {
-                navigateTo('/checkout'); //om subscription
+                navigateTo('/checkout');
             }
         }
-
         // TODO, navigate
     } catch (e) {
         alert('Felaktig email eller lösenord. Försök igen eller registrera dig.');
