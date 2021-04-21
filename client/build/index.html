@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html>
+<!--Built 210421.-->
+
+<head>
+  <title>TopQ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="container-fluid">
+      <a class="logo goHome" href="/">Top<span>Q</span></a>
+      <a id="mobile-cta" class="mobile-menu myMenu" alt="Open navigation">
+        <div></div>
+        <div></div>
+        <div></div>
+      </a>
+      <!--<a id="mobile-cta" class="mobile-menu" alt="Open navigation">MENU</a>
+      <img id="mobile-cta" class="mobile-menu" src="assets/menu.svg" alt="Open navigation">-->
+      <nav>
+        <img id="mobile-exit" class="mobile-menu-exit" src="assets/exit.svg" alt="">
+        <ul class="primary-nav">
+          <li id='home-button' class="current goHome"><a href="/">Home</a></li>
+          <li id='aboutus-button'><a href="/about">About us</a></li>
+          <li id='buying-button'><a href="/buy">Buy TopQ</a></li>
+        </ul>
+        <ul class="secondary-nav">
+          <li id="login-button" class="custombutton"><a href="/login">Login</a></li>
+          <li id="register-button" class="custombutton"><a href="/register">Register</a></li>
+
+          <li id="drop_down">
+            <p id="fillemail"></p>
+            <!--<ul>
+                <li id="logout-button"><a href="/">Logout</a></li>
+            </ul>-->
+          </li>
+          <li id="logout-button" class="custombutton"><a href="/">Logout</a></li>
+          <li id="room-button" class="custombutton"><a href="/r">Room</a></li>
+          <li id="checkout-button" class="custombutton"><a href="/checkout">Checkout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div id="router"></div>
+
+  <!--footer -->
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h1 class="logo-text">Top<span>Q</span></h1>
+        <p>
+          TopQ is a queueing application made by students for students! And also tutors. Please buy!
+        </p>
+        <div class="contact">
+          <span><i class="fas fa-envelope"></i>&#128231; &nbsp; info.contact.topq@gmail.com</span>
+        </div>
+
+      </div>
+      <div class="footer-section links">
+        <h2>Quick Links</h2>
+        <br>
+        <ul>
+          <li class="footer-links"><a href="/">Home</a></li>
+          <li class="footer-links"><a href="/about">About us</a></li>
+          <li id='buying-button-footer' class="footer-links"><a href="/buy">Buy TopQ</a></li>
+          <li class="footer-links"><a href="/login">Login</a></li>
+          <li class="footer-links"><a href="/register">Register</a></li>
+        </ul>
+      </div>
+      <div id="router">
+      </div>
+      <div class="footer-bottom">
+        &copy; TopQ | Designed & Developed by Kandidatgrupp 3
+      </div>
+    </div>
+  </div>
+
+  <template id="home">
+    <section class="hero">
+      <div class="container">
+        <div class="left-col">
+          <p class="subhead">Time waits for no one</p>
+          <h1>Hold the line!</h1>
+          <h2>Don't wait, buy TopQ now!</h2>
+          <div class="hero-cta">
+            <a class="primary-cta" id='hero-button' href="/buy">Buy TopQ</a>
+          </div>
+          </p>
+        </div>
+        <img src="https://i.pinimg.com/originals/22/0f/aa/220faabfd51a83ab3e70da699f2a8fed.gif" class="hero-img"
+          alt="illustration">
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <ul class="features-list">
+          <li>Online queueing application</li>
+          <li>Developed for labs and lectures</li>
+          <li>Compatible on multiple platforms</li>
+          <li>For students and tutors</li>
+          <li>Easy to navigate</li>
+        </ul>
+        <img src="assets/vector.svg" alt="illustration">
+      </div>
+    </section>
+
+    <section class="testimonials-section">
+      <div class="container">
+        <ul>
+          <li id="first">
+            <p>TopQ is a web-based queuing application for lab and tutor sessions. Designed to offer an
+              easy-to-navigate user interface to help students and tutors.</p>
+          </li>
+          <li>
+            <img src="assets/dator.png" alt="roompage">
+          </li>
+        </ul>
+      </div>
+    </section>
+  </template>
+
+  <template id="about-us">
+    <section id="this-is-section">
+      <img src="assets/About_us.png" class="about-us-img" alt="illustration">
+      <br>
+      <img src="assets/Logo_black.png" class="logo-this-is" alt="illustration">
+      <br>
+      <br>
+      <div class=row>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <li id="first">
+            <h2>Who are we?</h2>
+            <p>The faces behind TopQ is a group of seven students from Linköping University. Right now we are writing
+              our bachelor thesis and
+              as part of that project we have developed TopQ - an easy to use and navigate web-application for queuing,
+              to be used in educational
+              purposes. </p>
+          </li>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <li id="first">
+            <h2>Why TopQ?</h2>
+            <p> As the use of digital-tools in educational purposes is increasning, especially during the outbreak of
+              the corona-virus, we noticed that schools today do not have an effiecent tool for queuing-purposes. And
+              from this the idea
+              to develop TopQ was born.
+            </p>
+          </li>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="success">
+    <section>
+      <h2 id="pricing">Thanks for your order!</h2>
+      <br><br><br><br>
+      <h6 id="pricing">
+        We appreciate your business! If you have any questions, please email
+        <a href="info.contact.TopQ@gmail.com">info.contact.TopQ@gmail.com</a>.
+      </h6>
+      <br>
+      <br>
+      <br>
+      <h6 id="pricing">Want to add admins?</h6>
+      <div class="center_buttons">
+        <button type="submit" class="btn btn-primary " id="customer-page">Customer Page</button>
+      </div>
+      </div>
+      </div>
+  </template>
+
+  <template id="cancel">
+    <section>
+      <h2 id="pricing">Checkout canceled</h2>
+      <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
+      </div>
+  </template>
+
+  <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="admin-title">Add Admin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group" id="form-id">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp"
+                placeholder="abc@student.se">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="close-modal" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="add-admin-modal" data-dismiss="modal">Add admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="admin-title">Delete Admin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group" id="form-id">
+              <label for="email-delete">Email address</label>
+              <select class="form-control" id="Admin-delete"></select>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="close-modal" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="delete-admin-modal" data-dismiss="modal">Delete
+            admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="customer-page">
+    <section class="checkout-page">
+      <div>
+        <h2 id="text-customer-page">Current admins:</h2>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="modify-admin" data-toggle="modal"
+            data-target="#add-modal">Add Admin</button>
+          <button type="submit" class="btn btn-primary " id="delete-admin" data-toggle="modal"
+            data-target="#delete-modal">Delete Admin</button>
+        </div>
+      </div>
+      <div>
+        <br>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody id="admin-admin">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h6 id="text-customer-page">Want to see your collaboration plan?</h6>
+        <div class="center_buttons">
+          <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button>
+        </div>
+      </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="checkout">
+    <section class="checkout-page">
+      <h2 id="text-customer-page">Choose a collaboration plan</h2>
+    </section>
+    <section class="checkout-page">
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+          <div class="card h-100" id="price-plan">
+            <img src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_1280.png" class="card-img-top"
+              alt="..." />
+            <div class="card-body" id=>
+              <div class="price-name">Standard</div>
+              <div class="price-price">499.00 SEK</div>
+              <div class="price-duration">per month</div>
+              <br>
+              <div class="price-text">Up to 50 active admin accounts</div>
+              <br>
+              <div class="center_buttons">
+                <button type="submit" class="btn btn-primary " id="standard">Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100" id="price-plan">
+            <img src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814050_1280.png" class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <div class="price-name">Standard+</div>
+              <div class="price-price">1,499.00 SEK</div>
+              <div class="price-duration">per month</div>
+              <br>
+              <div class="price-text">Up to 200 active admin accounts</div>
+              <br>
+              <div class="center_buttons">
+                <button type="submit" class="btn btn-primary " id="standard_plus">Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100" id="price-plan">
+            <img src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935521_1280.png" class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <div class="price-name">Premium</div>
+              <div class="price-price">1,999.00 SEK</div>
+              <div class="price-duration">per month</div>
+              <br>
+              <div class="price-text">Up to 500 active admin accounts</div>
+              <br>
+              <div class="center_buttons">
+                <button type="submit" class="btn btn-primary " id="premium">Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100" id="price-plan">
+            <img src="https://cdn.pixabay.com/photo/2017/11/10/05/46/group-2935518_1280.png" class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <div class="price-name">Premium+</div>
+              <div class="price-price">2,499.00 SEK</div>
+              <div class="price-duration">per month</div>
+              <br>
+              <div class="price-text">Up to 1000 active admin accounts</div>
+              <br>
+              <div class="center_buttons">
+                <button type="submit" class="btn btn-primary " id="premium_plus">Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="checkout-page">
+      <h6 id="text-customer-page">Want to see your previous subscriptions?</h6>
+      <div class="center_buttons">
+        <button type="submit" class="btn btn-primary " id="customer_portal">Customer Portal</button>
+      </div>
+      </div>
+    </section>
+  </template>
+  <template id="404">
+    <section>
+      <h1>404 - Sidan hittades inte.</h1>
+      <p>Klicka <a href="/">här</a> för att återgå till startsidan.</p>
+    </section>
+  </template>
+
+  <template id="buy-topq-home">
+    <section class="hero">
+      <div class="container">
+        <div class="col-sm-12 col-md-12 col-lg-9">
+          <h1>TopQ for Schools and Universites!</h1>
+          <h2 id='buy_home'>Increases the quality of your education. Register and start today!</h2>
+          <br>
+          <p>Click the arrow to register!</p>
+          <a href="#register-school-div" class="btn btn-primary" id='login_instead_button'><svg
+              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+            </svg></a>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-3">
+          <img src="https://i.pinimg.com/originals/8b/6a/bb/8b6abbc5da89aad526d931f59f549b30.gif" class="buy_home_img"
+            alt="illustration">
+        </div>
+      </div>
+    </section>
+    <section class=subscription-section>
+      <div class=row>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <h2>Our subscription-plans: </h2>
+          <img src="assets/subs.png" class="subs_img" alt="illustration">
+          <li id='admin-info'>
+            <img src="assets/admins.png" class="admins_img" alt="illustration">
+            <b>Admin-accounts:</b><br>
+            The admin-accounts are meant for the teachers and tutors. Having an admin-account gives the possibilty to
+            create and manage the rooms.
+            Furthermore the admins can manage and change the queue. The number of using students is unlimited.
+          </li>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <h2>Register and start using TopQ: </h2>
+          <br>
+          <li>
+            <form id="school-registerForm">
+              <div class="form-group" id="register-school-div">
+                <h2>School-registration:</h2>
+                <label for="schoolName">Name:</label>
+                <input type="text" class="form-control" id="schoolName" placeholder="Linköpings Universitet" required>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Contact-email:</label>
+                <input type="email" class="form-control" id="contactEmail" aria-describedby="emailHelp"
+                  placeholder="liu@liu.se" required>
+              </div>
+              <div class="form-group">
+                <label for="schoolPassword">Password:</label>
+                <input type="password" class="form-control" id="schoolPassword" placeholder="*******" required>
+              </div>
+              <div class="form-group">
+                <label for="schoolPassword">Confirm password:</label>
+                <input type="password" class="form-control" id="schoolPasswordConfirm" placeholder="*******" required>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                <label class="form-check-label" for="exampleCheck1">Agree to <a data-toggle="modal"
+                    data-target="#terms-modal" id='terms-link'>terms and conditions.</a></label>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary" id='schoolReg'>Register</button>
+              <br>
+              <br>
+              <a href='/login' id='school-login-instead'>Aldready have an account? Login instead</a>
+            </form>
+          </li>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="login">
+    <section class=student-login-section>
+      <li>
+        <form id="loginForm">
+          <div class="form-group">
+            <h2>Login:</h2>
+            <label for="InputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="InputEmail" placeholder="abcde123@student.liu.se" required>
+          </div>
+          <div class="form-group">
+            <label for="InputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="InputPassword" placeholder="*****" required>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary" id="SendLogin">Login</button>
+          <br>
+          <br>
+          <a href="/register" class="link" id="login_reg_link">Register instead</a>
+        </form>
+      </li>
+    </section>
+  </template>
+
+  <template id="register">
+    <section class=student-register-section>
+      <li>
+        <form id="registerForm">
+          <div class="form-group">
+            <h2>Register:</h2>
+            <h8>For students and tutors</h8>
+            <br><br>
+            <div class="form-group">
+              <label for="InputUsernameRegister" class="form-label">Username</label>
+              <input type="text" class="form-control" id="InputUsernameRegister" placeholder="John Doe" required>
+            </div>
+            <label for="InputEmailRegister" class="form-label">Email</label>
+            <input type="email" class="form-control" id="InputEmailRegister" placeholder="abcde123@student.liu.se"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="InputPasswordRegister" class="form-label">Password</label>
+            <input type="password" class="form-control" id="InputPasswordRegister" placeholder="******" required>
+          </div>
+          <div class="form-group">
+            <label for="InputPasswordRegister" class="form-label">Confirm password</label>
+            <input type="password" class="form-control" id="InputPasswordRegisterConfirm" placeholder="******" required>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+            <label class="form-check-label" for="exampleCheck1">Agree to <a data-toggle="modal"
+                data-target="#terms-modal" id='terms-link'>terms and conditions.</a></label>
+          </div>
+          <br><br>
+          <button type="submit" class="btn btn-primary" id="SendRegister">Register</button>
+          <br><br>
+          <a href="/login" class="link" id="login_reg_link">Login instead</a>
+        </form>
+      </li>
+      <br><br>
+      <h5>Are you a school who wants to start using TopQ? Click the button below!</h5>
+      <a href="/buy" class="btn btn-primary" id="school_instead_button">Buy TopQ</a>
+    </section>
+  </template>
+
+  <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create room</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="createRoomForm">
+            <div class="form-group">
+              <label for="customer_id" class="col-form-label">Course code and name:</label>
+              <input class="form-control" id="room-name-input" placeholder="XXXXYY Name of course"></input>
+            </div>
+          </form>
+        </div>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="create-room" data-dismiss="modal">
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="shareRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Link: </h4>
+          <p>You can share this room by sending the link below to other students.</p>
+          <p class="col-form-label room-link-label">
+          </p>
+        </div>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="copy-link-button" data-dismiss="modal">
+            Copy Link
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal fade" id="demoteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Demote Member</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to demote this member?</p>
+        </div>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="checkDemote" data-dismiss="modal">
+            Demote Member
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Queue up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="queueUpForm">
+            <div class="form-group">
+              <label for="customer_id" class="col-form-label">Describe your problem:</label>
+              <input class="form-control" id="ticket-descp" placeholder="Help with task 4b"></input>
+            </div>
+            <div class="form-group">
+              <label for="model" class="col-form-label">Enter your meeting-link:</label>
+              <input class="form-control tag-modal" id="modal-zoom" placeholder="https://zoom.us/XXXX"></input>
+            </div>
+        </div>
+        </form>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="skapa-ticket" data-dismiss="modal">
+            Queue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="join-by-id-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Join room</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="joinRoomForm">
+            <label class="col-form-label">Room ID:</label>
+            <input class="form-control" id="room-id-to-join" placeholder="XXXXXX"></input>
+        </div>
+        </form>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="join-room" data-dismiss="modal">
+            Join
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="view-room">
+    <!--Container for rest of page...-->
+    <!--Divided into left, center, right-->
+    <div class="container-fluid d-flex h-100 flex-column flex-shrink-0">
+      <div class="row h-100">
+        <div class="col-2 left-div">
+          <div>
+            <h5 class="heading2">
+              TopQ
+            </h5>
+            <div id="toggle-create-room-button-div">
+              <button id="join-room-by-id" class="btn btn-primary right-button extend-button " data-toggle="modal"
+                data-target="#join-by-id-modal">Join room</button>
+              <button id="create-room-modal-toggle-button" class="btn btn-primary right-button extend-button d-none "
+                data-toggle="modal" data-target="#newRoomModal">Create room</button>
+            </div>
+            <h5 class="heading2">
+              Your rooms
+            </h5>
+          </div>
+          <left-container class="test" id='roomList'>
+          </left-container>
+        </div>
+        <div class="col-8 center-div">
+          <h5 class="special">
+          </h5>
+          <div id="modaldemote">
+          </div>
+          <!--TODO Gör denna nånting?-->
+          <div id="queue-up-button-div">
+          </div>
+          <center-container id=ticket-list>
+          </center-container>
+        </div>
+        <div class="col-2 right-div">
+          <div id="right-internal-div-1">
+            <h5 class="heading2">
+              Commands
+            </h5>
+            <div id="right-side-buttons">
+              <button id="goto-queue-up-dummy" class="btn primary-button right-button extend-button d-none"
+                disabled>Queue up
+              </button>
+              <button type="button" class="btn primary-button right-button extend-button d-none" data-toggle="modal"
+                data-target="#ticketModal" id="goto-queue-up">
+                Queue up
+              </button>
+              <button type="button" class="btn btn-primary right-button d-none extend-button" id="shareRoom"
+                data-toggle="modal" data-target="#shareRoomModal">Share Room
+              </button>
+            </div>
+            <scrollable-right-container id="scrollable-right-div">
+              <h5 class="heading2">
+                Admins <button type="button" class="btn btn-default btn-sm" id="question-admin" data-toggle="modal"
+                  data-target="#about-admin-modal">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+                  </svg>
+                </button>
+              </h5>
+              <right-container id="admin-list">
+              </right-container>
+              <h5 class="heading2">
+                Members
+              </h5>
+              <right-container id="member-list">
+              </right-container>
+            </scrollable-right-container>
+          </div>
+          <div>
+            <button type="button" class="btn bad-button right-button extend-button" data-toggle="modal" id="redbutton"
+              data-target="#leaveRoomModal">
+              Leave room
+            </button>
+            <button type="button" class="btn bad-button right-button d-none extend-button" id="show-delete-room"
+              data-toggle="modal" data-target="#deleteRoomModal">
+              Delete room
+            </button>
+          </div>
+        </div>
+      </div>
+  </template>
+
+  <div class="modal fade" id="leaveRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Leave Room</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to leave this room?</p>
+        </div>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="leave-room" data-dismiss="modal">
+            Leave Room
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Room</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this room? You can not undo this action.</p>
+        </div>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="delete-room" data-dismiss="modal">
+            Delete Room
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteTicketModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Ticket</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this ticket? You can not undo this action.</p>
+        </div>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="delete-ticket" data-dismiss="modal">
+            Delete Ticket
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="change-desc-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Describe your new problem:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="changeForm">
+            <div class="form-group" id="form-id">
+              <input type="text" class="form-control" id="new-desc" placeholder="Help with task 3">
+            </div>
+        </div>
+        </form>
+        <div class="btn-group extend-button">
+          <button type="button" class="btn bad-button right-button" id="redbutton" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn primary-button right-button" id="submit-new-desc" data-dismiss="modal">
+            Change
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="terms-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Terms & Conditions:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p> Your data will be used on TopQ only with the purpose of creating the best user experience for you.
+            <br>
+            <br>
+            We are following the GDPR legislation and will of course never share your personal data with anyone else.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="close-terms-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="about-admin-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">About admins:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>If you are a teacher or tutor your school may have upgraded you to having an admin-account. This
+            means that you have the possibility to create- and manage rooms.
+            <br> <br>
+            When creating a room, you automatically become admin of that room and then you can promote other
+            members with admin-accounts to make them admin of the room aswell. Furthermore you can also demote
+            one of the currents admins in a room where you are admin.
+            <br> <br>
+            To manage the admins, use the gear next to their names. If a member does
+            not have a gear, it means that they do not have an admin-account.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="close-admin-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script type="module" src="index.js"></script>
+
+</body>
+
+</html>
