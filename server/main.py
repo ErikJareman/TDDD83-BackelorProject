@@ -532,6 +532,7 @@ def user_test_db():
     db.session.add(rum1)
     db.session.add(rum2)
     db.session.commit()
+    print(Room.query.all())
     #Users
     user1 = User(email='per@per.per', username='Per',  password_hash='1')
     user2 = User(email='per@per.kalle', username='Kalle',  password_hash='1')
