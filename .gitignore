@@ -5,3 +5,5 @@
 venv/
 ngrok
 env/
+
+.DS_Store
