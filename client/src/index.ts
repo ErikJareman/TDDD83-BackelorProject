@@ -1,12 +1,9 @@
-/* eslint-disable prettier/prettier */
 import $ from 'jquery';
 
 import { logOut, toggleNavbar, isStudent } from './core/auth';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom, joinRoomByID } from './features/rooms';
 import { initiateRouter, navigateTo } from './core/router';
 import { addAdmin, deleteAdmin } from './features/subscription';
-
-
 
 const main = () => {
     // TODO lite oklart vilka grejer som ska ligga här eller i addEventListener

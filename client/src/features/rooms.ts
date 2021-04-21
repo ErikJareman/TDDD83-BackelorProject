@@ -4,6 +4,7 @@ import { navigateTo } from '../core/router';
 import { getMultiple, getSingle, standardDelete, standardGet, standardPost } from '../core/server';
 import { User } from '../core/User';
 import copy from 'copy-to-clipboard';
+import $ from 'jquery';
 
 //TODO
 //Lägg till isAdmin(userID) metod / liknande och använd där det behövs (TODO finns på dessa ställen)
@@ -240,7 +241,7 @@ const loadRoom = async (id: number) => {
     adminMemberListElement.empty();
     room.admins.forEach((member) => adminMemberListElement.append(adminTemplate(member, room)));
 
-    const shareLinkButton = $<HTMLButtonElement>('#room-link');
+    const shareLinkButton = $<HTMLButtonElement>('#shareRoom');
     shareLinkButton.off();
     shareLinkButton.on('click', onShareModalOpen);
 
