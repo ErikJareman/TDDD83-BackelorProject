@@ -1,4 +1,3 @@
-import $ from "./_snowpack/pkg/jquery.js";
 import {logOut, toggleNavbar, isStudent} from "./core/auth.js";
 import {clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom, joinRoomByID} from "./features/rooms.js";
 import {initiateRouter, navigateTo} from "./core/router.js";

@@ -1,4 +1,3 @@
-import $ from "../_snowpack/pkg/jquery.js";
 import env from "../shared/env.js";
 import {authHeader, getToken} from "./auth.js";
 const defaultHeaders = () => {

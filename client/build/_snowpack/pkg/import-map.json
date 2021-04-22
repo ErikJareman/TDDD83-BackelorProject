@@ -2,7 +2,6 @@
   "imports": {
     "@stripe/stripe-js": "./@stripe/stripe-js.js",
     "copy-to-clipboard": "./copy-to-clipboard.js",
-    "jquery": "./jquery.js",
     "jwt-decode": "./jwt-decode.js"
   }
 }

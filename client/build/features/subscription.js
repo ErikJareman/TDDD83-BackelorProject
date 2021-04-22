@@ -2,7 +2,6 @@ import {loadStripe} from "../_snowpack/pkg/@stripe/stripe-js.js";
 import {EndPoints} from "../core/endpoints.js";
 import {navigateTo} from "../core/router.js";
 import {standardDelete, standardGet, standardPost} from "../core/server.js";
-import $ from "../_snowpack/pkg/jquery.js";
 export async function addAdmin() {
   const email = $("#inputemail").val();
   await standardPost(EndPoints.SchoolAdmin, {admin_email: email});

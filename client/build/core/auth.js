@@ -1,4 +1,3 @@
-import $ from "../_snowpack/pkg/jquery.js";
 import {navigateTo} from "./router.js";
 import {standardPost} from "./server.js";
 import jwt_decode from "../_snowpack/pkg/jwt-decode.js";

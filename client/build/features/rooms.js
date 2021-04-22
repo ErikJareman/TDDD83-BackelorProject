@@ -3,7 +3,6 @@ import {EndPoints} from "../core/endpoints.js";
 import {navigateTo} from "../core/router.js";
 import {getMultiple, getSingle, standardDelete, standardGet, standardPost} from "../core/server.js";
 import copy from "../_snowpack/pkg/copy-to-clipboard.js";
-import $ from "../_snowpack/pkg/jquery.js";
 export const getTickets = async () => {
   return getMultiple(EndPoints.Rooms);
 };

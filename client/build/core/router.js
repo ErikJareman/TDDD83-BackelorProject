@@ -1,4 +1,3 @@
-import $ from "../_snowpack/pkg/jquery.js";
 import {createSchool, createUser, isStudent, logIn, toggleNavbar} from "./auth.js";
 import {clickDeleteRoom, clickLeaveRoom, enterRoomPage} from "../features/rooms.js";
 import {addEventListeners, writeAdmins} from "../features/subscription.js";
@@ -31,7 +30,13 @@ const routes = [
   },
   {url: "/success", templateSelector: "#success"},
   {url: "/cancel", templateSelector: "#cancel"},
-  {url: "/about", templateSelector: "#about-us"},
+  {
+    url: "/about",
+    templateSelector: "#about-us",
+    onLoad: () => {
+      toggleNavbar();
+    }
+  },
   {
     url: "/checkout",
     templateSelector: "#checkout",
