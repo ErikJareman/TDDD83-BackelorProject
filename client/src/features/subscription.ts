@@ -2,7 +2,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { EndPoints } from '../core/endpoints';
 import { navigateTo } from '../core/router';
 import { standardDelete, standardGet, standardPost } from '../core/server';
-import $ from 'jquery';
 
 export interface JWTData {
     fresh: boolean;

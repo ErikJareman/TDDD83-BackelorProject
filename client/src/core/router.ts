@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { createSchool, createUser, isStudent, logIn, toggleNavbar } from './auth';
 import { clickDeleteRoom, clickLeaveRoom, enterRoomPage } from '../features/rooms';
 import { addEventListeners, writeAdmins } from '../features/subscription';

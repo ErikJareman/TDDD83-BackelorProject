@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 import { logOut, toggleNavbar, isStudent } from './core/auth';
 import { clickDeleteRoom, clickLeaveRoom, createTicket, submitCreateRoom, joinRoomByID } from './features/rooms';
 import { initiateRouter, navigateTo } from './core/router';

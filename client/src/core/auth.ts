@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 import { navigateTo } from './router';
 import { standardPost } from './server';
 import jwt_decode from 'jwt-decode';
