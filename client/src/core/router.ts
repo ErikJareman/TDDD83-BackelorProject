@@ -40,7 +40,13 @@ const routes: Route[] = [
     },
     { url: '/success', templateSelector: '#success' },
     { url: '/cancel', templateSelector: '#cancel' },
-    { url: '/about', templateSelector: '#about-us' },
+    {
+        url: '/about',
+        templateSelector: '#about-us',
+        onLoad: () => {
+            toggleNavbar();
+        },
+    },
     {
         url: '/checkout',
         templateSelector: '#checkout',
