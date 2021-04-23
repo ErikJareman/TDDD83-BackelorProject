@@ -27,8 +27,8 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-
-YOUR_DOMAIN = 'http://localhost:8080'
+# TODO: make sure to update this domain
+YOUR_DOMAIN = 'http://localhost:5000/'
 stripe.api_key = 'sk_test_51IZucCC7I9l3XQtcbsm4nCGHg8byGU3YitOj6xxVY80wqxeJHNQHAzPx1w9wH9w2cNeLUk98dAEjYQPsZCkqekrv00lBBCQd9r'
 
 configuration = stripe.billing_portal.Configuration.create(
